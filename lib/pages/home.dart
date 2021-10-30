@@ -63,8 +63,8 @@ class _HomeState extends State<Home>{
               label: "Todo",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.build_outlined),
-              activeIcon: Icon(Icons.build),
+              icon: Icon(Icons.construction_outlined),
+              activeIcon: Icon(Icons.construction),
               label: "Doing"
           ),
           BottomNavigationBarItem(

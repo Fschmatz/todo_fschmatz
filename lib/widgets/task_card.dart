@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/task.dart';
+import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/pages/edit_task.dart';
 
 class TaskCard extends StatefulWidget {
@@ -7,25 +8,23 @@ class TaskCard extends StatefulWidget {
   _TaskCardState createState() => _TaskCardState();
 
   Task task;
-  /*Function() refreshHome;
-  Function(int, String, String) createNotification;
+  Function() refreshHome;
+
+  /*Function(int, String, String) createNotification;
   Function(int) dismissNotification;*/
 
-  TaskCard(
-      {Key? key,required this.task})
-      : super(key: key);
+  TaskCard({Key? key, required this.task, required this.refreshHome}) : super(key: key);
 }
 
 class _TaskCardState extends State<TaskCard> {
 
   Future<void> _delete() async {
-  /*  final dbDayNotes = NoteDao.instance;
-    final deleted = await dbDayNotes.delete(widget.note.id!);*/
+    final tasks = TaskDao.instance;
+    final deleted = await tasks.delete(widget.task.id);
   }
 
-
   Future<void> _changeState() async {
-   /* final dbNotes = NoteDao.instance;
+    /* final dbNotes = NoteDao.instance;
     Map<String, dynamic> row = {
       NoteDao.columnId: widget.note.id,
       NoteDao.columnPinned: widget.note.pinned == 0 ? 1 : 0,
@@ -51,7 +50,7 @@ class _TaskCardState extends State<TaskCard> {
                     leading: Icon(Icons.edit_outlined,
                         color: Theme.of(context).hintColor),
                     title: const Text(
-                      "Edit note",
+                      "Edit",
                       style: TextStyle(fontSize: 16),
                     ),
                     onTap: () {
@@ -59,9 +58,7 @@ class _TaskCardState extends State<TaskCard> {
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) => EditTask(
-
-                            ),
+                            builder: (BuildContext context) => const EditTask(),
                             fullscreenDialog: true,
                           ));
                     },
@@ -71,7 +68,7 @@ class _TaskCardState extends State<TaskCard> {
                     leading: Icon(Icons.delete_outline_outlined,
                         color: Theme.of(context).hintColor),
                     title: const Text(
-                      "Delete note",
+                      "Delete",
                       style: TextStyle(fontSize: 16),
                     ),
                     onTap: () {
@@ -95,10 +92,10 @@ class _TaskCardState extends State<TaskCard> {
             color: Theme.of(context).colorScheme.secondary),
       ),
       onPressed: () {
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
         _delete();
-
+        widget.refreshHome();
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
       },
     );
 
@@ -128,67 +125,41 @@ class _TaskCardState extends State<TaskCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: openBottomMenu,
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
-                title: Text(widget.task.title!,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    )),
-                trailing: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                  child: SizedBox(
-                    width: 55,
-                    child: TextButton(
-                      onPressed: () {
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: openBottomMenu,
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: Text(widget.task.title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  )),
+            ),
+            Visibility(
+              visible: widget.task.note.isNotEmpty,
+              child: ListTile(
 
-                      },
-                      child: const Icon(
-                        Icons.push_pin_outlined,
-
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-
-                        onPrimary: Theme.of(context).accentColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
+                title: Text(
+                  widget.task.note,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .color!
+                        .withOpacity(0.8),
                   ),
                 ),
               ),
-              Visibility(
-                visible: widget.task.note!.isNotEmpty,
-                child: ListTile(
-                  contentPadding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
-                  title: Text(
-                    widget.task.note,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .color!
-                          .withOpacity(0.8),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

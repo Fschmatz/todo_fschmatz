@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_note.dart';
 
 class TaskList extends StatefulWidget {
-
   int state;
 
-  TaskList({Key? key,required this.state}) : super(key: key);
+  TaskList({Key? key, required this.state}) : super(key: key);
 
   @override
   _TaskListState createState() => _TaskListState();
@@ -22,17 +22,16 @@ class _TaskListState extends State<TaskList> {
   @override
   void initState() {
     super.initState();
-    getAll();
+    getAllState();
   }
 
-  Future<void> getAll() async {
-    var resp = await tasks.queryAllRowsDesc();
+  Future<void> getAllState() async {
+    var resp = await tasks.queryAllState(widget.state);
     setState(() {
       tasksList = resp;
       loading = false;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,22 +41,29 @@ class _TaskListState extends State<TaskList> {
         child: loading
             ? const Center(child: SizedBox.shrink())
             : ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            children: [
-              ListView.builder(
-                physics: const ScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: tasksList.length,
-                itemBuilder: (context, index) {
-                  return const Card(
-                    child: Text('Hey Hey People!'),
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 100,
-              ),
-            ]),
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [
+                    ListView.builder(
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: tasksList.length,
+                      itemBuilder: (context, index) {
+                        return TaskCard(
+                          key: UniqueKey(),
+                          task: Task(
+                            tasksList[index]['id'],
+                            tasksList[index]['title'],
+                            tasksList[index]['note'],
+                            tasksList[index]['state'],
+                          ),
+                          refreshHome: getAllState,
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      height: 100,
+                    ),
+                  ]),
       ),
       floatingActionButton: FloatingActionButton(
         shape: const RoundedRectangleBorder(
@@ -67,9 +73,11 @@ class _TaskListState extends State<TaskList> {
           Navigator.push(
               context,
               MaterialPageRoute<void>(
-                builder: (BuildContext context) => NewTask(state: widget.state,),
+                builder: (BuildContext context) => NewTask(
+                  state: widget.state,
+                ),
                 fullscreenDialog: true,
-              )).then((value) => getAll());
+              )).then((value) => getAllState());
         },
         child: Icon(
           Icons.add,

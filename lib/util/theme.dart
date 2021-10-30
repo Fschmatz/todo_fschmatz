@@ -9,7 +9,6 @@ ThemeData light = ThemeData(
       secondary: Colors.green.shade800,
       secondaryVariant: Colors.green.shade600,
     ),
-    canvasColor: Colors.black,
     appBarTheme: const AppBarTheme(
         color: Color(0xFFFFFFFF),
         elevation: 0,
@@ -22,7 +21,8 @@ ThemeData light = ThemeData(
             color: Color(0xFF000000))),
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     cardTheme: const CardTheme(
-      color: Color(0xFFF3F3F3), //0xFFFAFAFC
+      color: Color(0xFFF0F0F0), //0xFFFAFAFC
+      elevation: 0
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFFFFFFFF),
@@ -32,28 +32,28 @@ ThemeData light = ThemeData(
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFFFFFF),
-        focusColor: Colors.green[800],
+        focusColor: Colors.green.shade800,
         contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.green[800]!,
+            color: Colors.green.shade800,
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey[800]!,
+              color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(10.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey[800]!,
+              color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(10.0))),
     bottomAppBarColor: const Color(0xFFE0E0E0),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedIconTheme: IconThemeData(color: Colors.green[800]),
-      selectedLabelStyle: TextStyle(color: Colors.green[800]),
+      selectedIconTheme: IconThemeData(color: Colors.green.shade800),
+      selectedLabelStyle: TextStyle(color: Colors.green.shade800),
       showSelectedLabels: true,
       showUnselectedLabels: false,
       backgroundColor: const Color(0xFFE0E0E0),
@@ -78,7 +78,8 @@ ThemeData dark = ThemeData(
             fontWeight: FontWeight.w600,
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
-      color: Color(0xFF2A2A2C),
+      color: Color(0xFF303032),
+      elevation: 0
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFF303032),
@@ -95,12 +96,12 @@ ThemeData dark = ThemeData(
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey[800]!,
+              color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(10.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey[800]!,
+              color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(10.0))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
