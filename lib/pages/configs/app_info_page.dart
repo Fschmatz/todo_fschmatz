@@ -5,16 +5,15 @@ import 'package:url_launcher/url_launcher.dart';
 class AppInfoPage extends StatelessWidget {
   const AppInfoPage({Key? key}) : super(key: key);
 
-
   _launchGithub()  {
-    const url = '';
+    const url = 'https://github.com/Fschmatz/todo_fschmatz';
     launch(url);
   }
 
   @override
   Widget build(BuildContext context) {
 
-    Color? themeColorApp = Theme.of(context).accentColor;
+    Color? themeColorApp = Theme.of(context).colorScheme.secondary;
 
     return Scaffold(
         appBar: AppBar(

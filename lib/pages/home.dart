@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-
+import 'package:todo_fschmatz/pages/task_list.dart';
 import 'configs/settings_page.dart';
 
 class Home extends StatefulWidget {
@@ -13,23 +12,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home>{
 
-  //final dbQuestion = QuestionDao.instance;
-  //List<Map<String, dynamic>> questionsList = [];
-  TextStyle styloRasc = TextStyle(fontSize: 18,fontWeight: FontWeight.bold);
-
   int _currentIndex = 0;
   final List<Widget> _tabs = [
-    const SizedBox(child: Center(child: Text('Será q ficara melhor sem o Gnav ?, quando Google irá atualizar a nova BottomBar',textAlign: TextAlign.center,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),),),
-    const SizedBox(child: Center(child: Text('Olá',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),),),
-    const SizedBox(child: Center(child: Text('Higher, Faster than anyone!!',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),),),
+    TaskList(key: UniqueKey(),state: 0,),
+    TaskList(key: UniqueKey(),state: 1,),
+    TaskList(key: UniqueKey(),state: 2,),
   ];
 
 
   @override
   Widget build(BuildContext context) {
-
-    TextStyle styleFontNavBar =
-    TextStyle(fontSize: 14.5, fontWeight: FontWeight.w600, color: Theme.of(context).accentColor);
 
     return Scaffold(
       appBar: AppBar(
@@ -57,52 +49,30 @@ class _HomeState extends State<Home>{
 
       body: _tabs[_currentIndex],
 
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12),
-            child: GNav(
-              rippleColor: Theme.of(context).accentColor.withOpacity(0.4),
-              hoverColor: Theme.of(context).accentColor.withOpacity(0.4),
-              color:
-              Theme.of(context).textTheme.headline6!.color!.withOpacity(0.8),
-              gap: 8,
-              activeColor: Theme.of(context).accentColor,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              duration: const Duration(milliseconds: 500),
-              tabBackgroundColor:
-              Theme.of(context).cardTheme.color!,
-              backgroundColor:
-              Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
-              tabs: [
-                GButton(
-                  icon: Icons.list_outlined,
-                  text: 'Todo',
-                  textStyle: styleFontNavBar,
-                ),
-                GButton(
-                  icon: Icons.build_outlined,
-                  text: 'Doing',
-                  textStyle: styleFontNavBar,
-                ),
-                GButton(
-                  icon: Icons.checklist_outlined,
-                  text: 'Done',
-                  textStyle: styleFontNavBar,
-                ),
-              ],
-              selectedIndex: _currentIndex,
-              onTabChange: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.list_outlined),
+              activeIcon: Icon(Icons.list),
+              label: "Todo",
           ),
-        ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.build_outlined),
+              activeIcon: Icon(Icons.build),
+              label: "Doing"
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.checklist_outlined),
+              activeIcon: Icon(Icons.checklist),
+              label: "Done"
+          ),
+        ],
       ),
     );
   }

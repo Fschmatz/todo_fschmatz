@@ -5,7 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColor: const Color(0xFFFFFFFF),
-    accentColor: Colors.green[800],
+    colorScheme: ColorScheme.light(
+      secondary: Colors.green.shade800,
+      secondaryVariant: Colors.green.shade600,
+    ),
     canvasColor: Colors.black,
     appBarTheme: const AppBarTheme(
         color: Color(0xFFFFFFFF),
@@ -51,7 +54,7 @@ ThemeData light = ThemeData(
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Colors.green[800]),
       selectedLabelStyle: TextStyle(color: Colors.green[800]),
-      showSelectedLabels: false,
+      showSelectedLabels: true,
       showUnselectedLabels: false,
       backgroundColor: const Color(0xFFE0E0E0),
     ),
@@ -62,9 +65,11 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: const Color(0xFF202022),
-    accentColor: const Color(0xFF66BF72),
     scaffoldBackgroundColor: const Color(0xFF202022),
-    canvasColor: Colors.black,
+    colorScheme: const ColorScheme.dark(
+        secondary: Color(0xFF66BF72),
+        secondaryVariant: Color(0xFF66BF72)
+    ),
     appBarTheme: const AppBarTheme(
         color: Color(0xFF202022),
         elevation: 0,
@@ -101,7 +106,7 @@ ThemeData dark = ThemeData(
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Color(0xFF66BF72)),
       selectedLabelStyle: TextStyle(color: Color(0xFF66BF72)),
-      showSelectedLabels: false,
+      showSelectedLabels: true,
       showUnselectedLabels: false,
       backgroundColor: Color(0xFF151517),
     ),

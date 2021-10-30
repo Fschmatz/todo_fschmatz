@@ -15,7 +15,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    Color? themeColorApp = Theme.of(context).accentColor;
+    Color? themeColorApp = Theme.of(context).colorScheme.secondary;
 
     return Scaffold(
         appBar: AppBar(
@@ -26,9 +26,9 @@ class _SettingsPageState extends State<SettingsPage> {
         Card(
           elevation: 1,
           margin: const EdgeInsets.fromLTRB(16, 20, 16, 25),
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
           child: ListTile(
             title: Text(
