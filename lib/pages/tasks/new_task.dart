@@ -12,11 +12,12 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
+
   final tasks = TaskDao.instance;
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
 
-  void _saveNote() async {
+  void _saveTask() async {
     Map<String, dynamic> row = {
       TaskDao.columnTitle: customControllerTitle.text,
       TaskDao.columnNote: customControllerNote.text,
@@ -80,7 +81,7 @@ class _NewTaskState extends State<NewTask> {
                 tooltip: 'Save',
                 onPressed: () {
                   if (checkProblems().isEmpty) {
-                    _saveNote();
+                    _saveTask();
                     Navigator.of(context).pop();
                   } else {
                     showAlertDialogErrors(context);
@@ -111,6 +112,7 @@ class _NewTaskState extends State<NewTask> {
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerTitle,
               decoration: InputDecoration(
+
                 focusColor: Theme.of(context).colorScheme.secondary,
                 helperText: "* Required",
               ),
@@ -130,7 +132,7 @@ class _NewTaskState extends State<NewTask> {
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            leading: const Icon(Icons.article_outlined),
+            leading:const Icon(Icons.article_outlined),
             title: TextField(
               minLines: 1,
               maxLines: 12,

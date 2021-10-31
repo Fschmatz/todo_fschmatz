@@ -117,6 +117,7 @@ class _EditTaskState extends State<EditTask> {
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerTitle,
               decoration: InputDecoration(
+
                 focusColor: Theme.of(context).colorScheme.secondary,
                 helperText: "* Required",
               ),
@@ -144,6 +145,7 @@ class _EditTaskState extends State<EditTask> {
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerNote,
               decoration: InputDecoration(
+
                 focusColor: Theme.of(context).colorScheme.secondary,
               ),
               style: const TextStyle(

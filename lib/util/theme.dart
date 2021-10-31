@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//CLARO
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColor: const Color(0xFFFFFFFF),
     colorScheme: ColorScheme.light(
+      primary: Colors.green.shade800,
       secondary: Colors.green.shade800,
       secondaryVariant: Colors.green.shade600,
     ),
@@ -38,18 +38,18 @@ ThemeData light = ThemeData(
           borderSide: BorderSide(
             color: Colors.green.shade800,
           ),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey.shade800,
             ),
-            borderRadius: BorderRadius.circular(10.0)),
+            borderRadius: BorderRadius.circular(12.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey.shade800,
             ),
-            borderRadius: BorderRadius.circular(10.0))),
+            borderRadius: BorderRadius.circular(12.0))),
     bottomAppBarColor: const Color(0xFFE0E0E0),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Colors.green.shade800),
@@ -61,12 +61,12 @@ ThemeData light = ThemeData(
     bottomSheetTheme:
     const BottomSheetThemeData(modalBackgroundColor: Color(0xFFFFFFFF)));
 
-//ESCURO
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: const Color(0xFF202022),
     scaffoldBackgroundColor: const Color(0xFF202022),
     colorScheme: const ColorScheme.dark(
+        primary:  Color(0xFF66BF72),
         secondary: Color(0xFF66BF72),
         secondaryVariant: Color(0xFF66BF72)
     ),
@@ -78,7 +78,7 @@ ThemeData dark = ThemeData(
             fontWeight: FontWeight.w600,
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
-      color: Color(0xFF303032),
+      color: Color(0xFF2B2B2D),
       elevation: 0
     ),
     dialogTheme: const DialogTheme(
@@ -92,18 +92,18 @@ ThemeData dark = ThemeData(
           borderSide: const BorderSide(
             color: Color(0xFF66BF72),
           ),
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey.shade800,
             ),
-            borderRadius: BorderRadius.circular(10.0)),
+            borderRadius: BorderRadius.circular(12.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey.shade800,
             ),
-            borderRadius: BorderRadius.circular(10.0))),
+            borderRadius: BorderRadius.circular(12.0))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Color(0xFF66BF72)),
       selectedLabelStyle: TextStyle(color: Color(0xFF66BF72)),

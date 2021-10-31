@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
-import 'package:todo_fschmatz/pages/edit_task.dart';
+import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
+import 'package:todo_fschmatz/pages/tasks/edit_task.dart';
 
 class TaskCard extends StatefulWidget {
   @override
@@ -10,13 +11,28 @@ class TaskCard extends StatefulWidget {
   Task task;
   Function() refreshHome;
 
-  /*Function(int, String, String) createNotification;
-  Function(int) dismissNotification;*/
-
   TaskCard({Key? key, required this.task, required this.refreshHome}) : super(key: key);
 }
 
 class _TaskCardState extends State<TaskCard> {
+
+  List<Map<String, dynamic>> tagsList = [];
+  final tags = TasksTagsDao.instance;
+  bool loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    //getTags();
+  }
+
+  Future<void> getTags() async {
+    var resp = await tags.queryAllRows();
+    setState(() {
+      tagsList = resp;
+      loading = false;
+    });
+  }
 
   Future<void> _delete() async {
     final tasks = TaskDao.instance;
@@ -126,7 +142,7 @@ class _TaskCardState extends State<TaskCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
+      margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -145,7 +161,6 @@ class _TaskCardState extends State<TaskCard> {
             Visibility(
               visible: widget.task.note.isNotEmpty,
               child: ListTile(
-
                 title: Text(
                   widget.task.note,
                   style: TextStyle(
@@ -159,6 +174,25 @@ class _TaskCardState extends State<TaskCard> {
                 ),
               ),
             ),
+            Visibility(
+              visible: tagsList.isEmpty,
+              child: GridView.builder(
+                  physics: const ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 5,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    childAspectRatio: 3,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Chip(
+                      label: Text('Tag '+index.toString()),
+                    );
+                  }),
+            ),
+            const SizedBox(height: 15,)
           ],
         ),
       ),

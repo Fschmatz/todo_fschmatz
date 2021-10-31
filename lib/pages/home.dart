@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_fschmatz/pages/task_list.dart';
+import 'package:todo_fschmatz/pages/tags/new_tag.dart';
+import 'package:todo_fschmatz/pages/tasks/task_list.dart';
 import 'configs/settings_page.dart';
 
 class Home extends StatefulWidget {
@@ -28,7 +29,27 @@ class _HomeState extends State<Home>{
         title: const Text(
           'Todo Fschmatz',
         ),
-        actions: [IconButton(
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.label_outline_rounded,
+                size: 28,
+                color: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .color!
+                    .withOpacity(0.8),
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => NewTag(),
+                      fullscreenDialog: true,
+                    ));
+              }),
+          const SizedBox(width: 10,),
+          IconButton(
             icon: Icon(
               Icons.settings_outlined,
               color: Theme.of(context)
@@ -44,7 +65,8 @@ class _HomeState extends State<Home>{
                     builder: (BuildContext context) => const SettingsPage(),
                     fullscreenDialog: true,
                   ));
-            }),],
+            }),
+        ],
       ),
 
       body: _tabs[_currentIndex],

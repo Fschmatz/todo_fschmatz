@@ -1,15 +1,19 @@
 class Changelog{
 
-  static String appVersion = "0.4.0";
+  static String appVersion = "0.5.0";
   static String appName = "Todo Fschmatz";
 
   static String changelogCurrent = '''
-0.4.0
-- Save Tasks
-- Delete Tasks
+0.5.0
+- Tags
+- Color Picker
 ''';
 
   static String changelogsOld = '''
+0.4.0
+- Save Tasks
+- Delete Tasks
+
 0.3.0
 - Pages  
 - New Task

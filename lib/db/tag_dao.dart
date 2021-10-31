@@ -3,25 +3,24 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
-class TaskDao {
+class TagDao {
 
   static const _databaseName = 'Todo.db';
   static const _databaseVersion = 1;
 
-  static const table = 'tasks';
-  static const columnId = 'id_task';
-  static const columnTitle = 'title';
-  static const columnNote = 'note';
-  static const columnState = 'state';
+  static const table = 'tags';
+  static const columnId = 'id_tag';
+  static const columnName = 'name';
+  static const columnColor = 'color';
 
   static Database? _database;
   Future<Database> get database async =>
-      _database ??= await _initDatabase();
+      _database ??= await initDatabase();
 
-  TaskDao._privateConstructor();
-  static final TaskDao instance = TaskDao._privateConstructor();
+  TagDao._privateConstructor();
+  static final TagDao instance = TagDao._privateConstructor();
 
-  Future<Database> _initDatabase() async {
+  Future<Database> initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
@@ -41,11 +40,6 @@ class TaskDao {
   Future<List<Map<String, dynamic>>> queryAllRowsDesc() async {
     Database db = await instance.database;
     return await db.rawQuery('SELECT * FROM $table ORDER BY id DESC');
-  }
-
-  Future<List<Map<String, dynamic>>> queryAllState(int state) async {
-    Database db = await instance.database;
-    return await db.rawQuery('SELECT * FROM $table WHERE $columnState = $state');
   }
 
   Future<int> update(Map<String, dynamic> row) async {

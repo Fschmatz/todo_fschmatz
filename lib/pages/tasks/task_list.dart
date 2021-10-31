@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
-import 'new_note.dart';
+import 'new_task.dart';
 
 class TaskList extends StatefulWidget {
   int state;
@@ -22,10 +22,10 @@ class _TaskListState extends State<TaskList> {
   @override
   void initState() {
     super.initState();
-    getAllState();
+    getAllByState();
   }
 
-  Future<void> getAllState() async {
+  Future<void> getAllByState() async {
     var resp = await tasks.queryAllState(widget.state);
     setState(() {
       tasksList = resp;
@@ -40,30 +40,32 @@ class _TaskListState extends State<TaskList> {
         duration: const Duration(milliseconds: 600),
         child: loading
             ? const Center(child: SizedBox.shrink())
-            : ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
-                    ListView.builder(
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: tasksList.length,
-                      itemBuilder: (context, index) {
-                        return TaskCard(
-                          key: UniqueKey(),
-                          task: Task(
-                            tasksList[index]['id'],
-                            tasksList[index]['title'],
-                            tasksList[index]['note'],
-                            tasksList[index]['state'],
-                          ),
-                          refreshHome: getAllState,
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                  ]),
+            : tasksList.isEmpty
+                ? const Center(child: Text('Let the Games Begin!'))
+                : ListView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                        ListView.builder(
+                          physics: const ScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: tasksList.length,
+                          itemBuilder: (context, index) {
+                            return TaskCard(
+                              key: UniqueKey(),
+                              task: Task(
+                                tasksList[index]['id_task'],
+                                tasksList[index]['title'],
+                                tasksList[index]['note'],
+                                tasksList[index]['state'],
+                              ),
+                              refreshHome: getAllByState,
+                            );
+                          },
+                        ),
+                        const SizedBox(
+                          height: 100,
+                        ),
+                      ]),
       ),
       floatingActionButton: FloatingActionButton(
         shape: const RoundedRectangleBorder(
@@ -77,7 +79,7 @@ class _TaskListState extends State<TaskList> {
                   state: widget.state,
                 ),
                 fullscreenDialog: true,
-              )).then((value) => getAllState());
+              )).then((value) => getAllByState());
         },
         child: Icon(
           Icons.add,
