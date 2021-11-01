@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/task.dart';
+import 'package:todo_fschmatz/db/tag_dao.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
-import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/pages/tasks/edit_task.dart';
 
 class TaskCard extends StatefulWidget {
@@ -17,20 +17,20 @@ class TaskCard extends StatefulWidget {
 class _TaskCardState extends State<TaskCard> {
 
   List<Map<String, dynamic>> tagsList = [];
-  final tags = TasksTagsDao.instance;
-  bool loading = true;
+  final tags = TagDao.instance;
+  bool loadingTags = true;
 
   @override
   void initState() {
     super.initState();
-    //getTags();
+    getTags();
   }
 
   Future<void> getTags() async {
-    var resp = await tags.queryAllRows();
+    var resp = await tags.getTags(widget.task.id);
     setState(() {
       tagsList = resp;
-      loading = false;
+      loadingTags = false;
     });
   }
 
@@ -174,25 +174,26 @@ class _TaskCardState extends State<TaskCard> {
                 ),
               ),
             ),
-            Visibility(
-              visible: tagsList.isEmpty,
+            tagsList.isEmpty ? const SizedBox.shrink() : Align(
+              alignment: FractionalOffset.topCenter,
               child: GridView.builder(
-                  physics: const ScrollPhysics(),
+                padding: const EdgeInsets.fromLTRB(10, 0, 16, 10),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount: tagsList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
-                    childAspectRatio: 3,
+                    childAspectRatio: 1.5,
                     mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
+                    crossAxisSpacing: 30,
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return Chip(
-                      label: Text('Tag '+index.toString()),
+                      label: Text(tagsList[index]['name']),
+                      backgroundColor: Color(int.parse(tagsList[index]['color'].substring(6, 16))),
                     );
                   }),
             ),
-            const SizedBox(height: 15,)
           ],
         ),
       ),

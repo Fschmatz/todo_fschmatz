@@ -53,4 +53,12 @@ class TagDao {
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  Future<List<Map<String, dynamic>>> getTags(int idTask) async {
+    Database db = await instance.database;
+    return await db.rawQuery('''    
+        SELECT tg.id_tag, tg.name, tg.color FROM tags tg,tasks_tags tt WHERE tt.id_task = $idTask;        
+        ''');
+  }
+
+
 }
