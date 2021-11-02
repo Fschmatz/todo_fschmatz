@@ -130,7 +130,7 @@ class DbCreator {
     });
 
     batch.insert('tasks_tags', {
-      'id_task': 1,
+      'id_task': 2,
       'id_tag': 4
     });
 

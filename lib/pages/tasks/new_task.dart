@@ -15,14 +15,13 @@ class NewTask extends StatefulWidget {
 
 class _NewTaskState extends State<NewTask> {
 
-  final tasks = TaskDao.instance;
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
-
-  List<Map<String, dynamic>> tagsList = [];
+  final tasks = TaskDao.instance;
   final tags = TagDao.instance;
   final tasksTags = TasksTagsDao.instance;
   bool loadingTags = true;
+  List<Map<String, dynamic>> tagsList = [];
   List<int> selectedTags = [];
 
   @override
@@ -33,12 +32,10 @@ class _NewTaskState extends State<NewTask> {
 
   Future<void> getTags() async {
     var resp = await tags.queryAllRows();
-
       setState(() {
         tagsList = resp;
         loadingTags = false;
       });
-
   }
 
   void _saveTask() async {
@@ -50,7 +47,7 @@ class _NewTaskState extends State<NewTask> {
     final idTask = await tasks.insert(row);
 
     if (selectedTags.isNotEmpty) {
-      for (var i = 0; i < selectedTags.length; i++){
+      for (int i = 0; i < selectedTags.length; i++){
         Map<String, dynamic> rowsTaskTags = {
           TasksTagsDao.columnIdTask: idTask,
           TasksTagsDao.columnIdTag: selectedTags[i],
@@ -216,6 +213,7 @@ class _NewTaskState extends State<NewTask> {
                               selectedTags.add(tagsList[index]['id_tag']);
                             }
                             print(tagsList[index]['id_tag'].toString());
+                            print(selectedTags.toString());
                           },
                           label: Text(tagsList[index]['name']),
                           labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600),
