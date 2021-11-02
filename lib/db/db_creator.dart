@@ -87,31 +87,31 @@ class DbCreator {
     batch.insert('tags', {
       'id_tag': 1,
       'name': 'Teste',
-      'color': 'Color(0xFF607D8B)'
+      'color': 'Color(0xFF64CC17)'
     });
 
     batch.insert('tags', {
       'id_tag': 2,
       'name': 'Melindres',
-      'color': 'Color(0xFFFF9090)'
+      'color': 'Color(0xFF3792fa)'
     });
 
     batch.insert('tags', {
       'id_tag': 3,
       'name': 'Cavalo',
-      'color': 'Color(0xFFAADD90)'
+      'color': 'Color(0xFFFF6E40)'
     });
 
     batch.insert('tags', {
       'id_tag': 4,
       'name': 'Teste 2',
-      'color': 'Color(0xFFFF90BB)'
+      'color': 'Color(0xFFFF5252)'
     });
 
     batch.insert('tags', {
       'id_tag': 5,
       'name': 'Trambiques',
-      'color': 'Color(0xFF90CC90)'
+      'color': 'Color(0xFFDD5C82)'
     });
 
     batch.insert('tasks_tags', {
