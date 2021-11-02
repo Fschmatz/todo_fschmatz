@@ -96,6 +96,24 @@ class DbCreator {
       'color': 'Color(0xFFFF9090)'
     });
 
+    batch.insert('tags', {
+      'id_tag': 3,
+      'name': 'Cavalo',
+      'color': 'Color(0xFFAADD90)'
+    });
+
+    batch.insert('tags', {
+      'id_tag': 4,
+      'name': 'Teste 2',
+      'color': 'Color(0xFFFF90BB)'
+    });
+
+    batch.insert('tags', {
+      'id_tag': 5,
+      'name': 'Trambiques',
+      'color': 'Color(0xFF90CC90)'
+    });
+
     batch.insert('tasks_tags', {
       'id_task': 1,
       'id_tag': 2
@@ -104,6 +122,21 @@ class DbCreator {
     batch.insert('tasks_tags', {
       'id_task': 1,
       'id_tag': 1
+    });
+
+    batch.insert('tasks_tags', {
+      'id_task': 1,
+      'id_tag': 3
+    });
+
+    batch.insert('tasks_tags', {
+      'id_task': 1,
+      'id_tag': 4
+    });
+
+    batch.insert('tasks_tags', {
+      'id_task': 1,
+      'id_tag': 5
     });
 
     await batch.commit(noResult: true);

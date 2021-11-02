@@ -11,11 +11,11 @@ class TaskCard extends StatefulWidget {
   Task task;
   Function() refreshHome;
 
-  TaskCard({Key? key, required this.task, required this.refreshHome}) : super(key: key);
+  TaskCard({Key? key, required this.task, required this.refreshHome})
+      : super(key: key);
 }
 
 class _TaskCardState extends State<TaskCard> {
-
   List<Map<String, dynamic>> tagsList = [];
   final tags = TagDao.instance;
   bool loadingTags = true;
@@ -28,10 +28,12 @@ class _TaskCardState extends State<TaskCard> {
 
   Future<void> getTags() async {
     var resp = await tags.getTags(widget.task.id);
-    setState(() {
-      tagsList = resp;
-      loadingTags = false;
-    });
+    if (mounted) {
+      setState(() {
+        tagsList = resp;
+        loadingTags = false;
+      });
+    }
   }
 
   Future<void> _delete() async {
@@ -174,26 +176,30 @@ class _TaskCardState extends State<TaskCard> {
                 ),
               ),
             ),
-            tagsList.isEmpty ? const SizedBox.shrink() : Align(
-              alignment: FractionalOffset.topCenter,
-              child: GridView.builder(
-                padding: const EdgeInsets.fromLTRB(10, 0, 16, 10),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: tagsList.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 1.5,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 30,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Chip(
-                      label: Text(tagsList[index]['name']),
-                      backgroundColor: Color(int.parse(tagsList[index]['color'].substring(6, 16))),
-                    );
-                  }),
-            ),
+            tagsList.isEmpty
+                ? const SizedBox.shrink()
+                : Align(
+              alignment: Alignment.topLeft,
+              child: Wrap(
+                      spacing: 0.0,
+                      runSpacing: 0.0,
+                      alignment:  WrapAlignment.start,
+                      children: List<Widget>.generate(
+                          tagsList.length,
+                          (int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 16,right: 10),
+                          child: Chip(
+                            label: Text(tagsList[index]['name']),
+                              labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600),
+                            backgroundColor: Color(int.parse(
+                                tagsList[index]['color'].substring(6, 16))),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                ),
+            SizedBox(height: tagsList.isEmpty ? 0 : 12)
           ],
         ),
       ),

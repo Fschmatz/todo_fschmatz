@@ -44,7 +44,7 @@ class _HomeState extends State<Home>{
                 Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                      builder: (BuildContext context) => NewTag(),
+                      builder: (BuildContext context) => const NewTag(),
                       fullscreenDialog: true,
                     ));
               }),

@@ -8,11 +8,9 @@ class TasksTagsDao {
   static const _databaseName = 'Todo.db';
   static const _databaseVersion = 1;
 
-  static const table = 'tasks';
-  static const columnId = 'id_task';
-  static const columnTitle = 'title';
-  static const columnNote = 'note';
-  static const columnState = 'state';
+  static const table = 'tasks_tags';
+  static const columnIdTask = 'id_task';
+  static const columnIdTag = 'id_tag';
 
   static Database? _database;
   Future<Database> get database async =>
@@ -38,15 +36,5 @@ class TasksTagsDao {
     return await db.query(table);
   }
 
-  Future<int> update(Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    int id = row[columnId];
-    return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
-  }
-
-  Future<int> delete(int id) async {
-    Database db = await instance.database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
-  }
 
 }

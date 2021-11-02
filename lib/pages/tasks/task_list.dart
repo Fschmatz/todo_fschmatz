@@ -27,10 +27,12 @@ class _TaskListState extends State<TaskList> {
 
   Future<void> getAllByState() async {
     var resp = await tasks.queryAllState(widget.state);
-    setState(() {
-      tasksList = resp;
-      loading = false;
-    });
+    if(mounted){
+      setState(() {
+        tasksList = resp;
+        loading = false;
+      });
+    }
   }
 
   @override
