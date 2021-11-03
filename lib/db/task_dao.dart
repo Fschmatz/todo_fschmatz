@@ -43,9 +43,14 @@ class TaskDao {
     return await db.rawQuery('SELECT * FROM $table ORDER BY id DESC');
   }
 
-  Future<List<Map<String, dynamic>>> queryAllState(int state) async {
+  Future<List<Map<String, dynamic>>> queryAllByState(int state) async {
     Database db = await instance.database;
     return await db.rawQuery('SELECT * FROM $table WHERE $columnState = $state');
+  }
+
+  Future<List<Map<String, dynamic>>> queryAllByStateDesc(int state) async {
+    Database db = await instance.database;
+    return await db.rawQuery('SELECT * FROM $table WHERE $columnState = $state ORDER BY id_task DESC');
   }
 
   Future<int> update(Map<String, dynamic> row) async {

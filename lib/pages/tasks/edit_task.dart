@@ -1,77 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:todo_fschmatz/classes/task.dart';
+import 'package:todo_fschmatz/db/tag_dao.dart';
+import 'package:todo_fschmatz/db/task_dao.dart';
+import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
+import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 
 class EditTask extends StatefulWidget {
 
-
-  const EditTask(
-      {Key? key})
-      : super(key: key);
+  Task task;
+  Function() refreshHome;
+  EditTask({Key? key, required this.task,required this.refreshHome}) : super(key: key);
 
   @override
   _EditTaskState createState() => _EditTaskState();
 }
 
 class _EditTaskState extends State<EditTask> {
-  //final dbNotes = NoteDao.instance;
+
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
+  final tasks = TaskDao.instance;
+  final tags = TagDao.instance;
+  final tasksTags = TasksTagsDao.instance;
+  bool loadingTags = true;
+  List<Map<String, dynamic>> tagsList = [];
+  List<int> selectedTags = [];
 
   @override
   void initState() {
     super.initState();
+    customControllerTitle.text = widget.task.title;
+    customControllerNote.text = widget.task.note;
+    getTags();
   }
 
-  void _updateNote() async {
+  Future<void> getTags() async {
+    var resp = await tags.queryAllRows();
+    setState(() {
+      tagsList = resp;
+      loadingTags = false;
+    });
+  }
+
+  void _updateTask() async {
     Map<String, dynamic> row = {
-     /* NoteDao.columnId: widget.noteEdit.id,
-      NoteDao.columnTitle: customControllerTitle.text,
-      NoteDao.columnText: customControllerText.text,
-      NoteDao.columnPinned: widget.noteEdit.pinned*/
+      TaskDao.columnId: widget.task.id,
+      TaskDao.columnTitle: customControllerTitle.text,
+      TaskDao.columnNote: customControllerNote.text,
     };
-    //final update = await dbNotes.update(row);
+    final update = await tasks.update(row);
+
+    if (selectedTags.isNotEmpty) {
+      for (int i = 0; i < selectedTags.length; i++){
+        Map<String, dynamic> rowsTaskTags = {
+          TasksTagsDao.columnIdTask: update,
+          TasksTagsDao.columnIdTag: selectedTags[i],
+        };
+        final idsTaskTags = await tasksTags.insert(rowsTaskTags);
+      }
+    }
   }
 
-  String checkProblems() {
+  String checkForErrors() {
     String errors = "";
     if (customControllerTitle.text.isEmpty) {
       errors += "Note is empty\n";
     }
     return errors;
-  }
-
-  showAlertDialogErrors(BuildContext context) {
-    Widget okButton = TextButton(
-      child: const Text(
-        "Ok",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: const Text(
-        "Error",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      content: Text(
-        checkProblems(),
-        style: const TextStyle(
-          fontSize: 18,
-        ),
-      ),
-      actions: [
-        okButton,
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
   }
 
   @override
@@ -86,11 +82,18 @@ class _EditTaskState extends State<EditTask> {
                 icon: const Icon(Icons.save_outlined),
                 tooltip: 'Save',
                 onPressed: () {
-                  if (checkProblems().isEmpty) {
-                    _updateNote();
+                  String errors = checkForErrors();
+                  if (errors.isEmpty) {
+                    _updateTask();
+                    widget.refreshHome();
                     Navigator.of(context).pop();
                   } else {
-                    showAlertDialogErrors(context);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return  dialogAlertErrors(errors,context);
+                      },
+                    );
                   }
                 },
               ),
@@ -111,13 +114,13 @@ class _EditTaskState extends State<EditTask> {
           ListTile(
             leading: const Icon(Icons.notes_outlined),
             title: TextField(
+              autofocus: true,
               minLines: 1,
               maxLines: 2,
               maxLength: 200,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerTitle,
               decoration: InputDecoration(
-
                 focusColor: Theme.of(context).colorScheme.secondary,
                 helperText: "* Required",
               ),
@@ -137,7 +140,7 @@ class _EditTaskState extends State<EditTask> {
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            leading: const Icon(Icons.article_outlined),
+            leading:const Icon(Icons.article_outlined),
             title: TextField(
               minLines: 1,
               maxLines: 12,
@@ -145,11 +148,58 @@ class _EditTaskState extends State<EditTask> {
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerNote,
               decoration: InputDecoration(
-
                 focusColor: Theme.of(context).colorScheme.secondary,
               ),
               style: const TextStyle(
                 fontSize: 17,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const SizedBox(
+              height: 0.1,
+            ),
+            title: Text("Tags".toUpperCase(),
+                style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).colorScheme.secondary)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 55),
+            child: tagsList.isEmpty
+                ? const SizedBox.shrink()
+                : Align(
+              alignment: Alignment.topLeft,
+              child: Wrap(
+                spacing: 0.0,
+                runSpacing: 0.0,
+                alignment:  WrapAlignment.start,
+                children: List<Widget>.generate(
+                    tagsList.length,
+                        (int index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 16,right: 10),
+                        child: ChoiceChip(
+                          key: UniqueKey(),
+                          selected: false,
+                          onSelected: (bool selected) {
+                            if(selectedTags.contains(tagsList[index]['id_tag'])){
+                              selectedTags.remove(tagsList[index]['id_tag']);
+                            }
+                            else {
+                              selectedTags.add(tagsList[index]['id_tag']);
+                            }
+                            print(tagsList[index]['id_tag'].toString());
+                            print(selectedTags.toString());
+                          },
+                          label: Text(tagsList[index]['name']),
+                          labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600),
+                          backgroundColor: Color(int.parse(
+                              tagsList[index]['color'].substring(6, 16))),
+                        ),
+                      );
+                    }).toList(),
               ),
             ),
           ),

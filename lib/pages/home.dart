@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_fschmatz/pages/tags/new_tag.dart';
 import 'package:todo_fschmatz/pages/tasks/task_list.dart';
 import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
 import 'configs/settings_page.dart';
@@ -42,19 +41,11 @@ class _HomeState extends State<Home>{
                     .withOpacity(0.8),
               ),
               onPressed: () {
-
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return DialogTagsList();
                     });
-
-                /*Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const NewTag(),
-                      fullscreenDialog: true,
-                    ));*/
               }),
           const SizedBox(width: 10,),
           IconButton(

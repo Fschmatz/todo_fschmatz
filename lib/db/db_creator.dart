@@ -24,19 +24,16 @@ class DbCreator {
 
   Future _onCreate(Database db, int version) async {
 
-    await db.execute('''
-    
+    await db.execute('''    
            CREATE TABLE tasks (
              id_task INTEGER PRIMARY KEY,
              title TEXT NOT NULL,
              note TEXT,
              state INTEGER NOT NULL
-          )
-          
+          )          
           ''');
 
-    await db.execute('''   
-    
+    await db.execute('''       
           CREATE TABLE tags (
             id_tag INTEGER PRIMARY KEY,
             name TEXT NOT NULL,
@@ -44,16 +41,14 @@ class DbCreator {
           )
           ''');
 
-    await db.execute('''   
-    
+    await db.execute(''' 
           CREATE TABLE tasks_tags (
             id_task INTEGER NOT NULL,
             id_tag INTEGER NOT NULL
           )
           ''');
 
-
-    //direct inserts
+    //direct inserts for tests
     Batch batch = db.batch();
 
     batch.insert('tasks', {

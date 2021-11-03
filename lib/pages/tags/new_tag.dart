@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/db/tag_dao.dart';
+import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../util/block_picker_alt.dart';
 
 class NewTag extends StatefulWidget {
@@ -19,8 +20,6 @@ class _NewTagState extends State<NewTag> {
   Color currentColor = const Color(0xFFFF5252);
 
   void _saveTag() async {
-
-    print (customControllerName.text+'  ' +corAtual.toString());
     Map<String, dynamic> row = {
       TagDao.columnName: customControllerName.text,
       TagDao.columnColor: corAtual.toString(),
@@ -28,7 +27,7 @@ class _NewTagState extends State<NewTag> {
     final id = await tags.insert(row);
   }
 
-  String checkProblems() {
+  String checkForErrors() {
     String errors = "";
     if (customControllerName.text.isEmpty) {
       errors += "Name is empty\n";
@@ -36,40 +35,8 @@ class _NewTagState extends State<NewTag> {
     return errors;
   }
 
-  showAlertDialogErrors(BuildContext context) {
-    Widget okButton = TextButton(
-      child: const Text(
-        "Ok",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
 
-    AlertDialog alert = AlertDialog(
-      title: const Text(
-        "Error",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      content: Text(
-        checkProblems(),
-        style: const TextStyle(
-          fontSize: 18,
-        ),
-      ),
-      actions: [
-        okButton,
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
+  //COLORS
   void changeColor(Color color) {
     setState(() => pickerColor = color);
   }
@@ -123,11 +90,17 @@ class _NewTagState extends State<NewTag> {
                 Icons.save_outlined,
               ),
               onPressed: () async {
-                if (checkProblems().isEmpty) {
+                String errors = checkForErrors();
+                if (errors.isEmpty) {
                   _saveTag();
                   Navigator.of(context).pop();
                 } else {
-                  showAlertDialogErrors(context);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return  dialogAlertErrors(errors,context);
+                    },
+                  );
                 }
               },
             ),

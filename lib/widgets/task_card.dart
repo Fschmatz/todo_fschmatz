@@ -41,13 +41,13 @@ class _TaskCardState extends State<TaskCard> {
     final deleted = await tasks.delete(widget.task.id);
   }
 
-  Future<void> _changeState() async {
-    /* final dbNotes = NoteDao.instance;
+  Future<void> _changeTaskState(int state) async {
+    final tasks = TaskDao.instance;
     Map<String, dynamic> row = {
-      NoteDao.columnId: widget.note.id,
-      NoteDao.columnPinned: widget.note.pinned == 0 ? 1 : 0,
+      TaskDao.columnId: widget.task.id,
+      TaskDao.columnState: state,
     };
-    final update = await dbNotes.update(row);*/
+    final update = await tasks.update(row);
   }
 
   void openBottomMenu() {
@@ -64,6 +64,67 @@ class _TaskCardState extends State<TaskCard> {
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Wrap(
                 children: <Widget>[
+
+                  Visibility(
+                    visible: widget.task.state != 0,
+                    child: ListTile(
+                      leading: Icon(Icons.list_outlined,
+                          color: Theme.of(context).hintColor),
+                      title: const Text(
+                        "Mark as todo",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      onTap: () {
+                        _changeTaskState(0);
+                        widget.refreshHome();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: widget.task.state != 0,
+                    child: const Divider(),
+                  ),
+                  Visibility(
+                    visible: widget.task.state != 1,
+                    child: ListTile(
+                      leading: Icon(Icons.construction_outlined,
+                          color: Theme.of(context).hintColor),
+                      title: const Text(
+                        "Mark as doing",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      onTap: () {
+                        _changeTaskState(1);
+                        widget.refreshHome();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: widget.task.state != 1,
+                    child: const Divider(),
+                  ),
+                  Visibility(
+                    visible: widget.task.state != 2,
+                    child: ListTile(
+                      leading: Icon(Icons.checklist_outlined,
+                          color: Theme.of(context).hintColor),
+                      title: const Text(
+                        "Mark as done",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      onTap: () {
+                        _changeTaskState(2);
+                        widget.refreshHome();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: widget.task.state != 2,
+                    child: const Divider(),
+                  ),
                   ListTile(
                     leading: Icon(Icons.edit_outlined,
                         color: Theme.of(context).hintColor),
@@ -76,7 +137,7 @@ class _TaskCardState extends State<TaskCard> {
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const EditTask(),
+                            builder: (BuildContext context) => EditTask(task: widget.task, refreshHome: widget.refreshHome,),
                             fullscreenDialog: true,
                           ));
                     },

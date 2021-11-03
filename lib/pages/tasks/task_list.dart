@@ -26,7 +26,7 @@ class _TaskListState extends State<TaskList> {
   }
 
   Future<void> getAllByState() async {
-    var resp = await tasks.queryAllState(widget.state);
+    var resp = await tasks.queryAllByStateDesc(widget.state);
     if(mounted){
       setState(() {
         tasksList = resp;

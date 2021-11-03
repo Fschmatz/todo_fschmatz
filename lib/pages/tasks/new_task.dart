@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/db/tag_dao.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
+import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 
 class NewTask extends StatefulWidget {
 
@@ -57,46 +58,12 @@ class _NewTaskState extends State<NewTask> {
     }
   }
 
-  String checkProblems() {
+  String checkForErrors() {
     String errors = "";
     if (customControllerTitle.text.isEmpty) {
       errors += "Note is empty\n";
     }
     return errors;
-  }
-
-  showAlertDialogErrors(BuildContext context) {
-    Widget okButton = TextButton(
-      child: const Text(
-        "Ok",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: const Text(
-        "Error",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      content: Text(
-        checkProblems(),
-        style: const TextStyle(
-          fontSize: 18,
-        ),
-      ),
-      actions: [
-        okButton,
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
   }
 
   @override
@@ -111,11 +78,17 @@ class _NewTaskState extends State<NewTask> {
                 icon: const Icon(Icons.save_outlined),
                 tooltip: 'Save',
                 onPressed: () {
-                  if (checkProblems().isEmpty) {
+                  String errors = checkForErrors();
+                  if (errors.isEmpty) {
                     _saveTask();
                     Navigator.of(context).pop();
                   } else {
-                    showAlertDialogErrors(context);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return  dialogAlertErrors(errors,context);
+                      },
+                    );
                   }
                 },
               ),

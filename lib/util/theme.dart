@@ -78,7 +78,7 @@ ThemeData dark = ThemeData(
             fontWeight: FontWeight.w600,
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
-      color: Color(0xFF272729),
+      color: Color(0xFF2A2A2C),
       elevation: 0
     ),
     dialogTheme: const DialogTheme(
