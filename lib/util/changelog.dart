@@ -1,9 +1,16 @@
 class Changelog{
 
-  static String appVersion = "0.7.3";
+  static String appVersion = "0.8.0";
   static String appName = "Todo Fschmatz";
 
   static String changelogCurrent = '''
+0.8.0
+- Edit Tags
+- Bug Fixes
+- Theme Changes
+''';
+
+  static String changelogsOld = '''
 0.7.3
 - Save Tags
 - Tags Layout
@@ -11,9 +18,7 @@ class Changelog{
 - Tags Dialog
 - Edit Task
 - Change Task State
-''';
 
-  static String changelogsOld = '''
 0.6.0
 - Show Tags + Colors on Card
 - Fixes

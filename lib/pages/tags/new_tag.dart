@@ -15,14 +15,13 @@ class _NewTagState extends State<NewTag> {
 
   final tags = TagDao.instance;
   TextEditingController customControllerName = TextEditingController();
-  String corAtual = "Color(0xFFFF5252)";
   Color pickerColor = const Color(0xFFFF5252);
   Color currentColor = const Color(0xFFFF5252);
 
   void _saveTag() async {
     Map<String, dynamic> row = {
       TagDao.columnName: customControllerName.text,
-      TagDao.columnColor: corAtual.toString(),
+      TagDao.columnColor: currentColor.toString(),
     };
     final id = await tags.insert(row);
   }
@@ -49,7 +48,7 @@ class _NewTagState extends State<NewTag> {
       ),
       onPressed: () {
         setState(() =>
-            {currentColor = pickerColor, corAtual = pickerColor.toString()});
+            {currentColor = pickerColor});
         Navigator.of(context).pop();
       },
     );

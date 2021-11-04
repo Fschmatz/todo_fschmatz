@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:todo_fschmatz/classes/tag.dart';
 import 'package:todo_fschmatz/db/tag_dao.dart';
+import 'package:todo_fschmatz/pages/tags/edit_tag.dart';
 import 'package:todo_fschmatz/pages/tags/new_tag.dart';
 
 class DialogTagsList extends StatefulWidget {
-  DialogTagsList({Key? key}) : super(key: key);
+  const DialogTagsList({Key? key}) : super(key: key);
 
   @override
   _DialogTagsListState createState() => _DialogTagsListState();
@@ -90,9 +92,15 @@ class _DialogTagsListState extends State<DialogTagsList> {
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) => const NewTag(),
+                            builder: (BuildContext context) => EditTag(
+                              tag: Tag(
+                                  tagsList[index]['id_tag'],
+                                  tagsList[index]['name'],
+                                  tagsList[index]['color'],
+                              ),
+                            ),
                             fullscreenDialog: true,
-                          ));
+                          )).then((value) => getTags());
                     }),
             );
 
