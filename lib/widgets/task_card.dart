@@ -208,10 +208,6 @@ class _TaskCardState extends State<TaskCard> {
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side:  BorderSide(
-          color: Colors.grey.shade800,
-          width: 1,
-        ),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -263,7 +259,7 @@ class _TaskCardState extends State<TaskCard> {
                       }).toList(),
                     ),
                 ),
-            SizedBox(height: tagsList.isEmpty ? 0 : 12)
+            SizedBox(height: tagsList.isEmpty ? 8 : 12)
           ],
         ),
       ),

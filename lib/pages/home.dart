@@ -70,30 +70,35 @@ class _HomeState extends State<Home>{
 
       body: _tabs[_currentIndex],
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list_outlined),
-              activeIcon: Icon(Icons.list),
-              label: "Todo",
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.construction_outlined),
-              activeIcon: Icon(Icons.construction),
-              label: "Doing"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.checklist_outlined),
-              activeIcon: Icon(Icons.checklist),
-              label: "Done"
-          ),
-        ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: Colors.grey.shade800,))
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.list_outlined),
+                activeIcon: Icon(Icons.list),
+                label: "Todo",
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.construction_outlined),
+                activeIcon: Icon(Icons.construction),
+                label: "Doing"
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.checklist_outlined),
+                activeIcon: Icon(Icons.checklist),
+                label: "Done"
+            ),
+          ],
+        ),
       ),
     );
   }

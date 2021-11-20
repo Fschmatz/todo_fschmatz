@@ -21,8 +21,8 @@ ThemeData light = ThemeData(
             color: Color(0xFF000000))),
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     cardTheme: const CardTheme(
-      color: Color(0xFFFFFFFF), //0xFFFAFAFC
-      elevation: 0
+        color: Color(0xFFF8F8F8), //0xFFFAFAFC
+        elevation: 0
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFFFFFFFF),
@@ -50,36 +50,38 @@ ThemeData light = ThemeData(
               color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(12.0))),
-    bottomAppBarColor: const Color(0xFFEBEBEB),
+    bottomAppBarColor: const Color(0xFFFFFFFF),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Colors.green.shade800),
       selectedLabelStyle: TextStyle(color: Colors.green.shade800),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: const Color(0xFFEBEBEB),
+      backgroundColor: const Color(0xFFFFFFFF),
     ),
     bottomSheetTheme:
     const BottomSheetThemeData(modalBackgroundColor: Color(0xFFFFFFFF)));
 
+
+
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: const Color(0xFF1B1B1D),//0xFF1B1B1D
-    scaffoldBackgroundColor: const Color(0xFF1B1B1D),
+    primaryColor: const Color(0xFF151517),//0xFF151517
+    scaffoldBackgroundColor: const Color(0xFF151517),
     colorScheme: const ColorScheme.dark(
         primary:  Color(0xFF66BF72),
         secondary: Color(0xFF66BF72),
         secondaryVariant: Color(0xFF66BF72)
     ),
     appBarTheme: const AppBarTheme(
-        color: Color(0xFF1B1B1D),
+        color: Color(0xFF151517),
         elevation: 0,
         titleTextStyle: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
-      color: Color(0xFF1B1B1D),
-      elevation: 0
+        color: Color(0xFF272729),
+        elevation: 0
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFF303032),
@@ -109,12 +111,12 @@ ThemeData dark = ThemeData(
       selectedLabelStyle: TextStyle(color: Color(0xFF66BF72)),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: Color(0xFF222224),
+      backgroundColor: Color(0xFF151517),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF66BF72),
     ),
-    bottomAppBarColor: const Color(0xFF222224),
+    bottomAppBarColor: const Color(0xFF151517),
     bottomSheetTheme:
     const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1D1D1F)));
 
