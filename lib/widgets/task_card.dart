@@ -208,30 +208,37 @@ class _TaskCardState extends State<TaskCard> {
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
+        side:  BorderSide(
+          color: Colors.grey.shade800,
+          width: 1,
+        ),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: openBottomMenu,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            ListTile(
-              title: Text(widget.task.title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  )),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(widget.task.title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    )),
             ),
             Visibility(
               visible: widget.task.note.isNotEmpty,
-              child: ListTile(
-                contentPadding:  const EdgeInsets.fromLTRB(16, 0, 16, 5),
-                title: Text(
-                  widget.task.note,
-                  style: const TextStyle(
-                    fontSize: 15,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: Text(
+                    widget.task.note,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
                   ),
-                ),
               ),
+
             ),
             tagsList.isEmpty
                 ? const SizedBox.shrink()
@@ -248,9 +255,9 @@ class _TaskCardState extends State<TaskCard> {
                           padding: const EdgeInsets.only(left: 16,right: 10),
                           child: Chip(
                             label: Text(tagsList[index]['name']),
-                              labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: Colors.black87),
+                              labelStyle: const TextStyle(fontSize: 13,fontWeight: FontWeight.w500,color: Colors.black87),
                             backgroundColor: Color(int.parse(
-                                tagsList[index]['color'].substring(6, 16))),
+                                tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
                           ),
                         );
                       }).toList(),

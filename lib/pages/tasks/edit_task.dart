@@ -193,9 +193,9 @@ class _EditTaskState extends State<EditTask> {
                             print(selectedTags.toString());
                           },
                           label: Text(tagsList[index]['name']),
-                          labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600),
+                          labelStyle: const TextStyle(fontSize: 13,fontWeight: FontWeight.w500,color: Colors.black87),
                           backgroundColor: Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))),
+                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
                         ),
                       );
                     }).toList(),

@@ -22,6 +22,10 @@ class _DialogTagsListState extends State<DialogTagsList> {
     getTags();
   }
 
+  Future<void> _delete(int id_tag) async {
+    final deleted = await tags.delete(id_tag);
+  }
+
   Future<void> getTags() async {
     var resp = await tags.queryAllRows();
     setState(() {
@@ -79,29 +83,47 @@ class _DialogTagsListState extends State<DialogTagsList> {
                         int.parse(tagsList[index]['color'].substring(6, 16)))),
                 title: Text(tagsList[index]['name']),
                 trailing:
-                IconButton(
-                    icon: Icon(
-                      Icons.edit_outlined,
-                      color: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .color!
-                          .withOpacity(0.8),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => EditTag(
-                              tag: Tag(
-                                  tagsList[index]['id_tag'],
-                                  tagsList[index]['name'],
-                                  tagsList[index]['color'],
-                              ),
-                            ),
-                            fullscreenDialog: true,
-                          )).then((value) => getTags());
-                    }),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                        icon: Icon(
+                          Icons.delete_outlined,
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .color!
+                              .withOpacity(0.8),
+                        ),
+                        onPressed: () {
+                          _delete(tagsList[index]['id_tag']).then((value) => getTags());
+                        }),
+                    const SizedBox(width: 5,),
+                    IconButton(
+                        icon: Icon(
+                          Icons.edit_outlined,
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .color!
+                              .withOpacity(0.8),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) => EditTag(
+                                  tag: Tag(
+                                      tagsList[index]['id_tag'],
+                                      tagsList[index]['name'],
+                                      tagsList[index]['color'],
+                                  ),
+                                ),
+                                fullscreenDialog: true,
+                              )).then((value) => getTags());
+                        }),
+                  ],
+                ),
             );
 
 
