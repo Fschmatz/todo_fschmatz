@@ -218,21 +218,17 @@ class _TaskCardState extends State<TaskCard> {
               title: Text(widget.task.title,
                   style: const TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w500,
                   )),
             ),
             Visibility(
               visible: widget.task.note.isNotEmpty,
               child: ListTile(
+                contentPadding:  const EdgeInsets.fromLTRB(16, 0, 16, 5),
                 title: Text(
                   widget.task.note,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context)
-                        .textTheme
-                        .headline6!
-                        .color!
-                        .withOpacity(0.8),
+                  style: const TextStyle(
+                    fontSize: 15,
                   ),
                 ),
               ),
@@ -252,7 +248,7 @@ class _TaskCardState extends State<TaskCard> {
                           padding: const EdgeInsets.only(left: 16,right: 10),
                           child: Chip(
                             label: Text(tagsList[index]['name']),
-                              labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600),
+                              labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w600,color: Colors.black87),
                             backgroundColor: Color(int.parse(
                                 tagsList[index]['color'].substring(6, 16))),
                           ),

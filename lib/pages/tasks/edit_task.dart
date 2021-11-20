@@ -114,7 +114,6 @@ class _EditTaskState extends State<EditTask> {
           ListTile(
             leading: const Icon(Icons.notes_outlined),
             title: TextField(
-              autofocus: true,
               minLines: 1,
               maxLines: 2,
               maxLength: 200,

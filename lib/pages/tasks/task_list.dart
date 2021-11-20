@@ -43,7 +43,7 @@ class _TaskListState extends State<TaskList> {
         child: loading
             ? const Center(child: SizedBox.shrink())
             : tasksList.isEmpty
-                ? const Center(child: Text('Let the Games Begin!'))
+                ? const Center(child: Text('Higher!\nFurther!\nFaster than anyone!'))
                 : ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
@@ -83,9 +83,9 @@ class _TaskListState extends State<TaskList> {
                 fullscreenDialog: true,
               )).then((value) => getAllByState());
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
-          color: Theme.of(context).colorScheme.secondary,
+          color: Colors.black87,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

@@ -78,7 +78,7 @@ ThemeData dark = ThemeData(
             fontWeight: FontWeight.w600,
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
-      color: Color(0xFF272729),
+      color: Color(0xFF262628),
       elevation: 0
     ),
     dialogTheme: const DialogTheme(
@@ -112,7 +112,7 @@ ThemeData dark = ThemeData(
       backgroundColor: Color(0xFF1D1D1F),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFF353537),
+      backgroundColor: Color(0xFF66BF72),
     ),
     bottomAppBarColor: const Color(0xFF1D1D1F),
     bottomSheetTheme:

@@ -137,7 +137,6 @@ class _EditTagState extends State<EditTag> {
               Icons.notes_outlined,
             ),
             title: TextField(
-              autofocus: false,
               minLines: 1,
               maxLength: 30,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,

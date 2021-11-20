@@ -44,7 +44,7 @@ class _HomeState extends State<Home>{
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return DialogTagsList();
+                      return const DialogTagsList();
                     });
               }),
           const SizedBox(width: 10,),
