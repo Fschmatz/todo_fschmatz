@@ -69,9 +69,9 @@ class _TaskListState extends State<TaskList> {
                         ),
                       ]),
       ),
-      floatingActionButton: FloatingActionButton.small(
+      floatingActionButton: FloatingActionButton(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         onPressed: () {
           Navigator.push(
