@@ -1,16 +1,19 @@
 class Changelog{
 
-  static String appVersion = "0.8.2";
+  static String appVersion = "0.9.0";
   static String appName = "Todo Fschmatz";
 
   static String changelogCurrent = '''
-0.8.2
-- Edit Tags
+0.9.0
 - Bug Fixes
 - Theme Changes
 ''';
 
   static String changelogsOld = '''
+0.8.2
+- Edit Tags
+- Bug Fixes
+
 0.7.3
 - Save Tags
 - Tags Layout

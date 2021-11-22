@@ -191,7 +191,7 @@ class _NewTaskState extends State<NewTask> {
                           label: Text(tagsList[index]['name']),
                           labelStyle: const TextStyle(fontSize: 13,fontWeight: FontWeight.w500,color: Colors.black87),
                           backgroundColor: Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
+                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.8),
                         ),
                       );
                     }).toList(),

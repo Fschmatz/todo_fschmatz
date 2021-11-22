@@ -38,12 +38,13 @@ class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 600),
         child: loading
             ? const Center(child: SizedBox.shrink())
             : tasksList.isEmpty
-                ? const Center(child: Text('Higher!\nFurther!\nFaster than anyone!'))
+                ? const Center(child: Text('Higher!\nFurther!\nFaster than anyone!',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
                 : ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
