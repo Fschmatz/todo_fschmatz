@@ -7,7 +7,7 @@ ThemeData light = ThemeData(
     colorScheme: ColorScheme.light(
       background: const Color(0xFFFFFFFF),
       primary: Colors.green.shade800,
-      secondary: Colors.green.shade800,
+      secondary: Colors.green.shade600,
       secondaryVariant: Colors.green.shade600,
     ),
     appBarTheme: const AppBarTheme(
@@ -22,14 +22,14 @@ ThemeData light = ThemeData(
             color: Color(0xFF000000))),
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     cardTheme: const CardTheme(
-        color: Color(0xFFF4F8F8),
+        color: Color(0xFFFAFBFB),
         elevation: 2
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFFFFFFFF),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.green.shade600,
+      backgroundColor: Colors.green.shade500,
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFFFFFF),
