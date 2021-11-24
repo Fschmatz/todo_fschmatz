@@ -7,18 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/src/utils.dart';
 
 const List<Color> _defaultColors = [
-  Color(0xFFFF5252),
-  Color(0xFFDD5C82),
-  Color(0xFF9575CD),
-  Color(0xFFFF6E40),
-  Color(0xFFFF9907),
-  Color(0xFFFFD610),
-  Color(0xFF64CC17),
-  Color(0xFF00C853),
-  Color(0xFF01A173),
-  Color(0xFF20cbfa),
-  Color(0xFF448ee3),
-  Color(0xFF607D8B),
+  Color(0xFFe35b5b),
+  Color(0xFFdb6e8e),
+  Color(0xFFa28bc9),
+  Color(0xFFf2825e),
+  Color(0xFFf5ba67),
+  Color(0xFFedd353),
+  Color(0xFF8dd15a),
+  Color(0xFF55c985),
+  Color(0xFF54c4a4),
+  Color(0xFF64c4de),
+  Color(0xFF67a0e0),
+  Color(0xFF6d848f),
 ];
 
 typedef PickerLayoutBuilder = Widget Function(
@@ -46,7 +46,7 @@ class BlockPicker extends StatefulWidget {
       BuildContext context, List<Color> colors, PickerItem child) {
     Orientation orientation = MediaQuery.of(context).orientation;
 
-    return Container(
+    return SizedBox(
       width: orientation == Orientation.portrait ? 300.0 : 300.0,
       height: orientation == Orientation.portrait ? 220.0 : 200.0,
       child: GridView.count(

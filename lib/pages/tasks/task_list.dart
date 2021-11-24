@@ -48,7 +48,8 @@ class _TaskListState extends State<TaskList> {
                 : ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
-                        ListView.builder(
+                        ListView.separated(
+                          separatorBuilder: (BuildContext context, int index) => const Divider(height: 0,),
                           physics: const ScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: tasksList.length,

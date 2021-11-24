@@ -204,19 +204,15 @@ class _TaskCardState extends State<TaskCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: openBottomMenu,
+    return InkWell(
+      onTap: openBottomMenu,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(0, 8, 0, 10),
               child: Text(widget.task.title,
                     style: const TextStyle(
                       fontSize: 16,
@@ -226,7 +222,7 @@ class _TaskCardState extends State<TaskCard> {
             Visibility(
               visible: widget.task.note.isNotEmpty,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Text(
                     widget.task.note,
                     style: const TextStyle(
@@ -248,18 +244,21 @@ class _TaskCardState extends State<TaskCard> {
                           tagsList.length,
                           (int index) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 16,right: 10),
+                          padding: const EdgeInsets.only(left: 0,right: 16),
                           child: Chip(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                             label: Text(tagsList[index]['name']),
-                              labelStyle: const TextStyle(fontSize: 12.5,fontWeight: FontWeight.w700,color: Colors.black87),
+                              labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.black87),
                             backgroundColor: Color(int.parse(
-                                tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
+                                tagsList[index]['color'].substring(6, 16))),
                           ),
                         );
                       }).toList(),
                     ),
                 ),
-            SizedBox(height: tagsList.isEmpty ? 8 : 12)
+            const SizedBox(height: 8)
           ],
         ),
       ),

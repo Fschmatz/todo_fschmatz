@@ -23,7 +23,6 @@ ThemeData light = ThemeData(
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     cardTheme: const CardTheme(
         color: Color(0xFFFAFBFB),
-        elevation: 2
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFFFFFFFF),
@@ -63,19 +62,18 @@ ThemeData light = ThemeData(
     const BottomSheetThemeData(modalBackgroundColor: Color(0xFFFFFFFF)));
 
 
-
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: const Color(0xFF19191B),//0xFF111113
-    scaffoldBackgroundColor: const Color(0xFF19191B),
+    primaryColor: const Color(0xFF1D1D1F),//0xFF111113
+    scaffoldBackgroundColor: const Color(0xFF1D1D1F),
     colorScheme: const ColorScheme.dark(
-        background: Color(0xFF111113),
+        background: Color(0xFF1D1D1F),
         primary:  Color(0xFF66BF72),
         secondary: Color(0xFF66BF72),
         secondaryVariant: Color(0xFF66BF72)
     ),
     appBarTheme: const AppBarTheme(
-        color: Color(0xFF19191B),
+        color: Color(0xFF1D1D1F),
         elevation: 0,
         titleTextStyle: TextStyle(
             fontSize: 20,
@@ -83,7 +81,6 @@ ThemeData dark = ThemeData(
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
         color: Color(0xFF262628),
-        elevation: 1
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFF272729),
@@ -113,12 +110,12 @@ ThemeData dark = ThemeData(
       selectedLabelStyle: TextStyle(color: Color(0xFF66BF72)),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: Color(0xFF19191B),
+      backgroundColor: Color(0xFF151517),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF66BF72),
     ),
-    bottomAppBarColor: const Color(0xFF19191B),
+    bottomAppBarColor: const Color(0xFF151517),
     bottomSheetTheme:
     const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1D1D1F)));
 

@@ -192,10 +192,13 @@ class _EditTaskState extends State<EditTask> {
                             print(tagsList[index]['id_tag'].toString());
                             print(selectedTags.toString());
                           },
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                           label: Text(tagsList[index]['name']),
                           labelStyle: const TextStyle(fontSize: 12.5,fontWeight: FontWeight.w700,color: Colors.black87),
                           backgroundColor: Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
+                              tagsList[index]['color'].substring(6, 16))),
                         ),
                       );
                     }).toList(),
