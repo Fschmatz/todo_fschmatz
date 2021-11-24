@@ -215,8 +215,7 @@ class _TaskCardState extends State<TaskCard> {
               padding: const EdgeInsets.fromLTRB(0, 8, 0, 10),
               child: Text(widget.task.title,
                     style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16
                     )),
             ),
             Visibility(
@@ -225,8 +224,9 @@ class _TaskCardState extends State<TaskCard> {
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Text(
                     widget.task.note,
-                    style: const TextStyle(
-                      fontSize: 15,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.headline1!.color,
+                      fontSize: 14,
                     ),
                   ),
               ),
@@ -250,7 +250,7 @@ class _TaskCardState extends State<TaskCard> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             label: Text(tagsList[index]['name']),
-                              labelStyle: const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Colors.black87),
+                              labelStyle: const TextStyle(fontSize: 12,color: Colors.black87),
                             backgroundColor: Color(int.parse(
                                 tagsList[index]['color'].substring(6, 16))),
                           ),

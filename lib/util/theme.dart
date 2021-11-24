@@ -64,16 +64,16 @@ ThemeData light = ThemeData(
 
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: const Color(0xFF1D1D1F),//0xFF111113
-    scaffoldBackgroundColor: const Color(0xFF1D1D1F),
+    primaryColor: const Color(0xFF202022),
+    scaffoldBackgroundColor: const Color(0xFF202022),
     colorScheme: const ColorScheme.dark(
-        background: Color(0xFF1D1D1F),
+        background: Color(0xFF202022),
         primary:  Color(0xFF66BF72),
         secondary: Color(0xFF66BF72),
         secondaryVariant: Color(0xFF66BF72)
     ),
     appBarTheme: const AppBarTheme(
-        color: Color(0xFF1D1D1F),
+        color: Color(0xFF202022),
         elevation: 0,
         titleTextStyle: TextStyle(
             fontSize: 20,
@@ -115,9 +115,10 @@ ThemeData dark = ThemeData(
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF66BF72),
     ),
+    dividerColor: const Color(0x1FFFFFFF),
     bottomAppBarColor: const Color(0xFF151517),
     bottomSheetTheme:
-    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1D1D1F)));
+    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF202022)));
 
 class ThemeNotifier extends ChangeNotifier {
   final String key = 'valorTema';
