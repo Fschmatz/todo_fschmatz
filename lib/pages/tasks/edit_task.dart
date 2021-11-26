@@ -26,19 +26,33 @@ class _EditTaskState extends State<EditTask> {
   bool loadingTags = true;
   List<Map<String, dynamic>> tagsList = [];
   List<int> selectedTags = [];
+  List<int> tagsFromDbTask = [];
 
   @override
   void initState() {
     super.initState();
     customControllerTitle.text = widget.task.title;
     customControllerNote.text = widget.task.note;
-    getTags();
+    getAllTags().then((value) => getTagsFromTask());
   }
 
-  Future<void> getTags() async {
+  Future<void> getAllTags() async {
     var resp = await tags.queryAllRows();
     setState(() {
       tagsList = resp;
+      //loadingTags = false;
+    });
+  }
+
+  Future<void> getTagsFromTask() async {
+    var resp = await tasksTags.queryTagsFromTaskId(widget.task.id);
+    for(int i = 0; i < resp.length;i++){
+      tagsFromDbTask.add(resp[i]['id_tag']);
+    }
+    print("veio do DB->"+tagsFromDbTask.toString());
+
+    setState(() {
+      selectedTags = tagsFromDbTask;
       loadingTags = false;
     });
   }
@@ -51,10 +65,20 @@ class _EditTaskState extends State<EditTask> {
     };
     final update = await tasks.update(row);
 
+    print("Antes"+selectedTags.toString());
+    print("tags from DB"+tagsFromDbTask.toString());
+    if(tagsFromDbTask.isNotEmpty) {
+      var set1 = Set.from(selectedTags);
+      var set2 = Set.from(tagsFromDbTask);
+      selectedTags = List.from(set1.difference(set2));
+    }
+    print("Antes "+selectedTags.toString());
+    print("depois "+selectedTags.toString());
+
     if (selectedTags.isNotEmpty) {
       for (int i = 0; i < selectedTags.length; i++){
         Map<String, dynamic> rowsTaskTags = {
-          TasksTagsDao.columnIdTask: update,
+          TasksTagsDao.columnIdTask:  widget.task.id,
           TasksTagsDao.columnIdTag: selectedTags[i],
         };
         final idsTaskTags = await tasksTags.insert(rowsTaskTags);
@@ -182,13 +206,15 @@ class _EditTaskState extends State<EditTask> {
                         child: ChoiceChip(
                           key: UniqueKey(),
                           selected: false,
-                          onSelected: (bool selected) {
+                          avatar: selectedTags.contains(tagsList[index]['id_tag']) ? const Icon(Icons.done,color: Colors.black,size: 18,) : null,
+                          onSelected: (bool _selected) {
                             if(selectedTags.contains(tagsList[index]['id_tag'])){
                               selectedTags.remove(tagsList[index]['id_tag']);
                             }
                             else {
                               selectedTags.add(tagsList[index]['id_tag']);
                             }
+                            setState(() {});
                             print(tagsList[index]['id_tag'].toString());
                             print(selectedTags.toString());
                           },
@@ -196,9 +222,12 @@ class _EditTaskState extends State<EditTask> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           label: Text(tagsList[index]['name']),
-                          labelStyle: const TextStyle(fontSize: 12.5,fontWeight: FontWeight.w700,color: Colors.black87),
-                          backgroundColor: Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))),
+                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
+                          backgroundColor:
+                          selectedTags.contains(tagsList[index]['id_tag']) ?
+                          Color(int.parse(
+                              tagsList[index]['color'].substring(6, 16))) :  Color(int.parse(
+                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.8),
                         ),
                       );
                     }).toList(),

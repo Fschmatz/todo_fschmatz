@@ -250,7 +250,7 @@ class _TaskCardState extends State<TaskCard> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             label: Text(tagsList[index]['name']),
-                              labelStyle: const TextStyle(fontSize: 12,color: Colors.black87),
+                              labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
                             backgroundColor: Color(int.parse(
                                 tagsList[index]['color'].substring(6, 16))),
                           ),

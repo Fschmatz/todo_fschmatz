@@ -40,7 +40,7 @@ class _TaskListState extends State<TaskList> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 600),
+        duration: const Duration(milliseconds: 800),
         child: loading
             ? const Center(child: SizedBox.shrink())
             : tasksList.isEmpty

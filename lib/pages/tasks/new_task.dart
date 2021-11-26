@@ -28,10 +28,10 @@ class _NewTaskState extends State<NewTask> {
   @override
   void initState() {
     super.initState();
-    getTags();
+    getAllTags();
   }
 
-  Future<void> getTags() async {
+  Future<void> getAllTags() async {
     var resp = await tags.queryAllRows();
       setState(() {
         tagsList = resp;
@@ -178,13 +178,15 @@ class _NewTaskState extends State<NewTask> {
                         child: ChoiceChip(
                           key: UniqueKey(),
                           selected: false,
-                          onSelected: (bool selected) {
+                          avatar: selectedTags.contains(tagsList[index]['id_tag']) ? const Icon(Icons.done,color: Colors.black,size: 18,) : null,
+                          onSelected: (bool _selected) {
                             if(selectedTags.contains(tagsList[index]['id_tag'])){
                               selectedTags.remove(tagsList[index]['id_tag']);
                             }
                             else {
                               selectedTags.add(tagsList[index]['id_tag']);
                             }
+                            setState(() {});
                             print(tagsList[index]['id_tag'].toString());
                             print(selectedTags.toString());
                           },
@@ -192,9 +194,12 @@ class _NewTaskState extends State<NewTask> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           label: Text(tagsList[index]['name']),
-                          labelStyle: const TextStyle(fontSize: 12.5,fontWeight: FontWeight.w700,color: Colors.black87),
-                          backgroundColor: Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))),
+                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
+                          backgroundColor:
+                          selectedTags.contains(tagsList[index]['id_tag']) ?
+                          Color(int.parse(
+                              tagsList[index]['color'].substring(6, 16))) :  Color(int.parse(
+                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.5),
                         ),
                       );
                     }).toList(),
