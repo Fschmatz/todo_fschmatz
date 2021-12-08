@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColor: const Color(0xFFFFFFFF),//0xFFFFFFFF
+    canvasColor: const Color(0xFFFFFFFF),
     colorScheme: ColorScheme.light(
       background: const Color(0xFFFFFFFF),
+
       primary: Colors.green.shade800,
       secondary: Colors.green.shade600,
       secondaryVariant: Colors.green.shade600,
@@ -66,6 +68,7 @@ ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColor: const Color(0xFF202022),
     scaffoldBackgroundColor: const Color(0xFF202022),
+    canvasColor: const Color(0xFF202022),
     colorScheme: const ColorScheme.dark(
         background: Color(0xFF202022),
         primary:  Color(0xFF66BF72),

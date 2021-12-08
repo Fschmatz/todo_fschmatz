@@ -8,7 +8,8 @@ import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 class NewTask extends StatefulWidget {
 
   int state;
-  NewTask({Key? key, required this.state}) : super(key: key);
+  Function() refresh;
+  NewTask({Key? key, required this.state,required this.refresh}) : super(key: key);
 
   @override
   _NewTaskState createState() => _NewTaskState();
@@ -56,6 +57,7 @@ class _NewTaskState extends State<NewTask> {
         final idsTaskTags = await tasksTags.insert(rowsTaskTags);
       }
     }
+    print(selectedTags);
   }
 
   String checkForErrors() {
@@ -81,6 +83,7 @@ class _NewTaskState extends State<NewTask> {
                   String errors = checkForErrors();
                   if (errors.isEmpty) {
                     _saveTask();
+                    widget.refresh();
                     Navigator.of(context).pop();
                   } else {
                     showDialog(
@@ -194,12 +197,13 @@ class _NewTaskState extends State<NewTask> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           label: Text(tagsList[index]['name']),
-                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
+                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black,
+                              fontWeight: FontWeight.w400),
                           backgroundColor:
                           selectedTags.contains(tagsList[index]['id_tag']) ?
                           Color(int.parse(
                               tagsList[index]['color'].substring(6, 16))) :  Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.5),
+                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
                         ),
                       );
                     }).toList(),

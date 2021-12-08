@@ -10,7 +10,8 @@ class EditTask extends StatefulWidget {
 
   Task task;
   Function() refreshHome;
-  EditTask({Key? key, required this.task,required this.refreshHome}) : super(key: key);
+  Function() refreshTags;
+  EditTask({Key? key, required this.task,required this.refreshHome,required this.refreshTags}) : super(key: key);
 
   @override
   _EditTaskState createState() => _EditTaskState();
@@ -57,6 +58,7 @@ class _EditTaskState extends State<EditTask> {
     });
   }
 
+  //QUANDO REMOVE PRECISO DELETAR DO DB
   void _updateTask() async {
     Map<String, dynamic> row = {
       TaskDao.columnId: widget.task.id,
@@ -67,11 +69,11 @@ class _EditTaskState extends State<EditTask> {
 
     print("Antes"+selectedTags.toString());
     print("tags from DB"+tagsFromDbTask.toString());
-    if(tagsFromDbTask.isNotEmpty) {
+   /* if(tagsFromDbTask.isNotEmpty) {
       var set1 = Set.from(selectedTags);
       var set2 = Set.from(tagsFromDbTask);
       selectedTags = List.from(set1.difference(set2));
-    }
+    }*/
     print("Antes "+selectedTags.toString());
     print("depois "+selectedTags.toString());
 
@@ -110,6 +112,7 @@ class _EditTaskState extends State<EditTask> {
                   if (errors.isEmpty) {
                     _updateTask();
                     widget.refreshHome();
+                    widget.refreshTags();
                     Navigator.of(context).pop();
                   } else {
                     showDialog(
@@ -222,12 +225,13 @@ class _EditTaskState extends State<EditTask> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           label: Text(tagsList[index]['name']),
-                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
+                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black,
+                              fontWeight: FontWeight.w400),
                           backgroundColor:
                           selectedTags.contains(tagsList[index]['id_tag']) ?
                           Color(int.parse(
                               tagsList[index]['color'].substring(6, 16))) :  Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.8),
+                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
                         ),
                       );
                     }).toList(),

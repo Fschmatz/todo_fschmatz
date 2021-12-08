@@ -40,7 +40,7 @@ class _TaskListState extends State<TaskList> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(milliseconds: 500),
         child: loading
             ? const Center(child: SizedBox.shrink())
             : tasksList.isEmpty
@@ -81,9 +81,10 @@ class _TaskListState extends State<TaskList> {
               MaterialPageRoute<void>(
                 builder: (BuildContext context) => NewTask(
                   state: widget.state,
+                  refresh: getAllByState,
                 ),
                 fullscreenDialog: true,
-              )).then((value) => getAllByState());
+              ));
         },
         child: const Icon(
           Icons.add,

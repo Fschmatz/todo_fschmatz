@@ -64,7 +64,6 @@ class _TaskCardState extends State<TaskCard> {
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Wrap(
                 children: <Widget>[
-
                   Visibility(
                     visible: widget.task.state != 0,
                     child: ListTile(
@@ -137,7 +136,11 @@ class _TaskCardState extends State<TaskCard> {
                       Navigator.push(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) => EditTask(task: widget.task, refreshHome: widget.refreshHome,),
+                            builder: (BuildContext context) => EditTask(
+                              task: widget.task,
+                              refreshHome: widget.refreshHome,
+                              refreshTags: getTags,
+                            ),
                             fullscreenDialog: true,
                           ));
                     },
@@ -213,51 +216,50 @@ class _TaskCardState extends State<TaskCard> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 0, 10),
-              child: Text(widget.task.title,
-                    style: const TextStyle(
-                      fontSize: 16
-                    )),
+              child:
+                  Text(widget.task.title, style: const TextStyle(fontSize: 16)),
             ),
             Visibility(
               visible: widget.task.note.isNotEmpty,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: Text(
-                    widget.task.note,
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.headline1!.color,
-                      fontSize: 14,
-                    ),
+                  widget.task.note,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.headline1!.color,
+                    fontSize: 14,
                   ),
+                ),
               ),
-
             ),
             tagsList.isEmpty
                 ? const SizedBox.shrink()
                 : Align(
-              alignment: Alignment.topLeft,
-              child: Wrap(
+                    alignment: Alignment.topLeft,
+                    child: Wrap(
                       spacing: 0.0,
                       runSpacing: 0.0,
-                      alignment:  WrapAlignment.start,
-                      children: List<Widget>.generate(
-                          tagsList.length,
-                          (int index) {
+                      alignment: WrapAlignment.start,
+                      children:
+                          List<Widget>.generate(tagsList.length, (int index) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 0,right: 16),
+                          padding: const EdgeInsets.only(left: 0, right: 16),
                           child: Chip(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                             label: Text(tagsList[index]['name']),
-                              labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
+                            labelStyle: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                             backgroundColor: Color(int.parse(
                                 tagsList[index]['color'].substring(6, 16))),
                           ),
                         );
                       }).toList(),
                     ),
-                ),
+                  ),
             const SizedBox(height: 8)
           ],
         ),
