@@ -45,7 +45,6 @@ class _EditTaskState extends State<EditTask> {
     var resp = await tags.queryAllRows();
     setState(() {
       tagsList = resp;
-      //loadingTags = false;
     });
   }
 
@@ -61,7 +60,6 @@ class _EditTaskState extends State<EditTask> {
     });
   }
 
-  //QUANDO REMOVE PRECISO DELETAR DO DB
   void _updateTask() async {
     final deletedTaskTag = await tasksTags.delete(widget.task.id);
 
