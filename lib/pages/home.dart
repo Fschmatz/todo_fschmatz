@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_fschmatz/pages/tags/select_tag_page.dart';
 import 'package:todo_fschmatz/pages/tasks/task_list.dart';
 import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
 import 'configs/settings_page.dart';
@@ -38,24 +37,6 @@ class _HomeState extends State<Home> {
           'Todo Fschmatz',
         ),
         actions: [
-          /*IconButton(
-              icon: Icon(
-                Icons.bug_report,
-                size: 28,
-                color: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .color!
-                    .withOpacity(0.8),
-              ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const SelectTagPage();
-                    });
-              }),
-          const SizedBox(width: 10,),*/
           IconButton(
               icon: const Icon(
                 Icons.label_outline_rounded,
@@ -121,7 +102,6 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-
     );
   }
 }

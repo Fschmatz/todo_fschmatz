@@ -27,7 +27,7 @@ class _TaskCardState extends State<TaskCard> {
     getTags();
   }
 
-  Future<void> getTags() async {
+  void getTags() async {
     var resp = await tags.getTags(widget.task.id);
     if (mounted) {
       setState(() {
@@ -37,14 +37,14 @@ class _TaskCardState extends State<TaskCard> {
     }
   }
 
-  Future<void> _delete() async {
+  void _delete() async {
     final tasks = TaskDao.instance;
     final tasksTags = TasksTagsDao.instance;
     final deleted = await tasks.delete(widget.task.id);
     final deletedTaskTag = await tasksTags.delete(widget.task.id);
   }
 
-  Future<void> _changeTaskState(int state) async {
+  void _changeTaskState(int state) async {
     final tasks = TaskDao.instance;
     Map<String, dynamic> row = {
       TaskDao.columnId: widget.task.id,
@@ -141,11 +141,12 @@ class _TaskCardState extends State<TaskCard> {
                           MaterialPageRoute<void>(
                             builder: (BuildContext context) => EditTask(
                               task: widget.task,
-                              refreshHome: widget.refreshHome,
+                              getAllTasksByState: widget.refreshHome,
                               refreshTags: getTags,
                             ),
                             fullscreenDialog: true,
-                          ));
+                          )
+                      );
                     },
                   ),
                   const Divider(),
@@ -250,13 +251,14 @@ class _TaskCardState extends State<TaskCard> {
                         return Padding(
                           padding: const EdgeInsets.only(left: 0, right: 16),
                           child: Chip(
+                            key: UniqueKey(),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             label: Text(tagsList[index]['name']),
                             labelStyle: const TextStyle(
                                 fontSize: 12,
-                                color: Colors.black,
+                                color: Colors.black87,
                                 fontWeight: FontWeight.w500),
                             backgroundColor: Color(int.parse(
                                 tagsList[index]['color'].substring(6, 16))),

@@ -52,16 +52,16 @@ ThemeData light = ThemeData(
               color: Colors.grey.shade700,
             ),
             borderRadius: BorderRadius.circular(12.0))),
-    bottomAppBarColor: const Color(0xFFE1E0E0),
+    bottomAppBarColor: const Color(0xFFE4E5E5),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Colors.green.shade700),
       selectedLabelStyle: TextStyle(color: Colors.green.shade700),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: const Color(0xFFE1E0E0),
+      backgroundColor: const Color(0xFFE4E5E5),
     ),
     navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: const Color(0xFFE1E0E0),
+        backgroundColor: const Color(0xFFE4E5E5),
         indicatorColor:  Colors.green.shade700,
         iconTheme: MaterialStateProperty.all(
             const IconThemeData(color: Color(0xFF050505),)

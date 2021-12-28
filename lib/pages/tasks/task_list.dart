@@ -6,6 +6,7 @@ import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
 
 class TaskList extends StatefulWidget {
+
   int state;
 
   TaskList({Key? key, required this.state}) : super(key: key);
@@ -15,24 +16,24 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
+
   List<Map<String, dynamic>> tasksList = [];
-  final tasks = TaskDao.instance;
   bool loading = true;
 
   @override
   void initState() {
     super.initState();
-    getAllByState();
+    getAllTasksByState();
   }
 
-  void getAllByState() async {
+  void getAllTasksByState() async {
+    tasksList = [];
+    final tasks = TaskDao.instance;
     var resp = await tasks.queryAllByStateDesc(widget.state);
-    if(mounted){
-      setState(() {
-        tasksList = resp;
-        loading = false;
-      });
-    }
+    setState(() {
+      tasksList = resp;
+      loading = false;
+    });
   }
 
   @override
@@ -44,12 +45,20 @@ class _TaskListState extends State<TaskList> {
         child: loading
             ? const Center(child: SizedBox.shrink())
             : tasksList.isEmpty
-                ? const Center(child: Text("Nothing in here...\nit's good?",textAlign: TextAlign.center,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
+                ? const Center(
+                    child: Text(
+                    "Nothing in here...\nit's good?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ))
                 : ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
                         ListView.separated(
-                          separatorBuilder: (BuildContext context, int index) => const Divider(height: 0,),
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(
+                            height: 0,
+                          ),
                           physics: const ScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: tasksList.length,
@@ -62,7 +71,7 @@ class _TaskListState extends State<TaskList> {
                                 tasksList[index]['note'],
                                 tasksList[index]['state'],
                               ),
-                              refreshHome: getAllByState,
+                              refreshHome: getAllTasksByState,
                             );
                           },
                         ),
@@ -81,7 +90,7 @@ class _TaskListState extends State<TaskList> {
               MaterialPageRoute<void>(
                 builder: (BuildContext context) => NewTask(
                   state: widget.state,
-                  refresh: getAllByState,
+                  getAllTasksByState: getAllTasksByState,
                 ),
                 fullscreenDialog: true,
               ));

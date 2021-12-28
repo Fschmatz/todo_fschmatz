@@ -6,17 +6,17 @@ import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 
 class NewTask extends StatefulWidget {
-
   int state;
-  Function() refresh;
-  NewTask({Key? key, required this.state,required this.refresh}) : super(key: key);
+  Function() getAllTasksByState;
+
+  NewTask({Key? key, required this.state, required this.getAllTasksByState})
+      : super(key: key);
 
   @override
   _NewTaskState createState() => _NewTaskState();
 }
 
 class _NewTaskState extends State<NewTask> {
-
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
   final tasks = TaskDao.instance;
@@ -34,13 +34,13 @@ class _NewTaskState extends State<NewTask> {
 
   Future<void> getAllTags() async {
     var resp = await tags.queryAllRows();
-      setState(() {
-        tagsList = resp;
-        loadingTags = false;
-      });
+    setState(() {
+      tagsList = resp;
+      loadingTags = false;
+    });
   }
 
-  void _saveTask() async {
+  Future<void> _saveTask() async {
     Map<String, dynamic> row = {
       TaskDao.columnTitle: customControllerTitle.text,
       TaskDao.columnNote: customControllerNote.text,
@@ -49,7 +49,7 @@ class _NewTaskState extends State<NewTask> {
     final idTask = await tasks.insert(row);
 
     if (selectedTags.isNotEmpty) {
-      for (int i = 0; i < selectedTags.length; i++){
+      for (int i = 0; i < selectedTags.length; i++) {
         Map<String, dynamic> rowsTaskTags = {
           TasksTagsDao.columnIdTask: idTask,
           TasksTagsDao.columnIdTag: selectedTags[i],
@@ -57,7 +57,6 @@ class _NewTaskState extends State<NewTask> {
         final idsTaskTags = await tasksTags.insert(rowsTaskTags);
       }
     }
-    print(selectedTags);
   }
 
   String checkForErrors() {
@@ -82,14 +81,14 @@ class _NewTaskState extends State<NewTask> {
                 onPressed: () {
                   String errors = checkForErrors();
                   if (errors.isEmpty) {
-                    _saveTask();
-                    widget.refresh();
-                    Navigator.of(context).pop();
+                    _saveTask()
+                        .then((value) => widget.getAllTasksByState())
+                        .then((value) => Navigator.of(context).pop());
                   } else {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return  dialogAlertErrors(errors,context);
+                        return dialogAlertErrors(errors, context);
                       },
                     );
                   }
@@ -138,7 +137,7 @@ class _NewTaskState extends State<NewTask> {
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            leading:const Icon(Icons.article_outlined),
+            leading: const Icon(Icons.article_outlined),
             title: TextField(
               minLines: 1,
               maxLines: 12,
@@ -168,47 +167,55 @@ class _NewTaskState extends State<NewTask> {
             child: tagsList.isEmpty
                 ? const SizedBox.shrink()
                 : Align(
-              alignment: Alignment.topLeft,
-              child: Wrap(
-                spacing: 0.0,
-                runSpacing: 0.0,
-                alignment:  WrapAlignment.start,
-                children: List<Widget>.generate(
-                    tagsList.length,
-                        (int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 16,right: 10),
-                        child: ChoiceChip(
-                          key: UniqueKey(),
-                          selected: false,
-                          avatar: selectedTags.contains(tagsList[index]['id_tag']) ? const Icon(Icons.done,color: Colors.black,size: 18,) : null,
-                          onSelected: (bool _selected) {
-                            if(selectedTags.contains(tagsList[index]['id_tag'])){
-                              selectedTags.remove(tagsList[index]['id_tag']);
-                            }
-                            else {
-                              selectedTags.add(tagsList[index]['id_tag']);
-                            }
-                            setState(() {});
-                            print(tagsList[index]['id_tag'].toString());
-                            print(selectedTags.toString());
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                    alignment: Alignment.topLeft,
+                    child: Wrap(
+                      spacing: 0.0,
+                      runSpacing: 0.0,
+                      alignment: WrapAlignment.start,
+                      children:
+                          List<Widget>.generate(tagsList.length, (int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 10),
+                          child: ChoiceChip(
+                            key: UniqueKey(),
+                            selected: false,
+                            avatar:
+                                selectedTags.contains(tagsList[index]['id_tag'])
+                                    ? const Icon(
+                                        Icons.done,
+                                        color: Colors.black,
+                                        size: 18,
+                                      )
+                                    : null,
+                            onSelected: (bool _selected) {
+                              if (selectedTags
+                                  .contains(tagsList[index]['id_tag'])) {
+                                selectedTags.remove(tagsList[index]['id_tag']);
+                              } else {
+                                selectedTags.add(tagsList[index]['id_tag']);
+                              }
+                              setState(() {});
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            label: Text(tagsList[index]['name']),
+                            labelStyle: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w500),
+                            backgroundColor: selectedTags
+                                    .contains(tagsList[index]['id_tag'])
+                                ? Color(int.parse(
+                                    tagsList[index]['color'].substring(6, 16)))
+                                : Color(int.parse(tagsList[index]['color']
+                                        .substring(6, 16)))
+                                    .withOpacity(0.9),
                           ),
-                          label: Text(tagsList[index]['name']),
-                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black,
-                              fontWeight: FontWeight.w400),
-                          backgroundColor:
-                          selectedTags.contains(tagsList[index]['id_tag']) ?
-                          Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))) :  Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
-                        ),
-                      );
-                    }).toList(),
-              ),
-            ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
           ),
         ]));
   }

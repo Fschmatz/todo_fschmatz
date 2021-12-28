@@ -8,13 +8,13 @@ import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 
 class EditTask extends StatefulWidget {
   Task task;
-  Function() refreshHome;
+  Function() getAllTasksByState;
   Function() refreshTags;
 
   EditTask(
       {Key? key,
       required this.task,
-      required this.refreshHome,
+      required this.getAllTasksByState,
       required this.refreshTags})
       : super(key: key);
 
@@ -48,7 +48,7 @@ class _EditTaskState extends State<EditTask> {
     });
   }
 
-  Future<void> getTagsFromTask() async {
+  void getTagsFromTask() async {
     var resp = await tasksTags.queryTagsFromTaskId(widget.task.id);
     for (int i = 0; i < resp.length; i++) {
       tagsFromDbTask.add(resp[i]['id_tag']);
@@ -60,7 +60,8 @@ class _EditTaskState extends State<EditTask> {
     });
   }
 
-  void _updateTask() async {
+  Future<void> _updateTask() async {
+    //delete all to add later again
     final deletedTaskTag = await tasksTags.delete(widget.task.id);
 
     Map<String, dynamic> row = {
@@ -103,10 +104,12 @@ class _EditTaskState extends State<EditTask> {
                 onPressed: () {
                   String errors = checkForErrors();
                   if (errors.isEmpty) {
-                    _updateTask();
-                    widget.refreshHome();
-                    widget.refreshTags();
-                    Navigator.of(context).pop();
+                    _updateTask()
+                        .then((value) => {
+                              widget.getAllTasksByState(),
+                              widget.refreshTags(),
+                            })
+                        .then((value) => Navigator.of(context).pop());
                   } else {
                     showDialog(
                       context: context,
@@ -219,13 +222,13 @@ class _EditTaskState extends State<EditTask> {
                               setState(() {});
                             },
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             label: Text(tagsList[index]['name']),
                             labelStyle: const TextStyle(
                                 fontSize: 12,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400),
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w500),
                             backgroundColor: selectedTags
                                     .contains(tagsList[index]['id_tag'])
                                 ? Color(int.parse(
