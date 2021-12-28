@@ -8,7 +8,7 @@ ThemeData light = ThemeData(
     canvasColor: const Color(0xFFFFFFFF),
     colorScheme: ColorScheme.light(
       background: const Color(0xFFFFFFFF),
-      primary: Colors.green.shade800,
+      primary: Colors.green.shade700,
       secondary: Colors.green.shade600,
       secondaryVariant: Colors.green.shade600,
     ),
@@ -34,35 +34,35 @@ ThemeData light = ThemeData(
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFFFFFF),
-        focusColor: Colors.green.shade800,
+        focusColor: Colors.green.shade700,
         contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.green.shade800,
+            color: Colors.green.shade700,
           ),
           borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.shade800,
+              color: Colors.grey.shade700,
             ),
             borderRadius: BorderRadius.circular(12.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.shade800,
+              color: Colors.grey.shade700,
             ),
             borderRadius: BorderRadius.circular(12.0))),
     bottomAppBarColor: const Color(0xFFE1E0E0),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedIconTheme: IconThemeData(color: Colors.green.shade800),
-      selectedLabelStyle: TextStyle(color: Colors.green.shade800),
+      selectedIconTheme: IconThemeData(color: Colors.green.shade700),
+      selectedLabelStyle: TextStyle(color: Colors.green.shade700),
       showSelectedLabels: true,
       showUnselectedLabels: false,
       backgroundColor: const Color(0xFFE1E0E0),
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFFE1E0E0),
-        indicatorColor:  Colors.green.shade800,
+        indicatorColor:  Colors.green.shade700,
         iconTheme: MaterialStateProperty.all(
             const IconThemeData(color: Color(0xFF050505),)
         ),
@@ -110,12 +110,12 @@ ThemeData dark = ThemeData(
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.shade800,
+              color: Colors.grey.shade700,
             ),
             borderRadius: BorderRadius.circular(12.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.shade800,
+              color: Colors.grey.shade700,
             ),
             borderRadius: BorderRadius.circular(12.0))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -130,7 +130,7 @@ ThemeData dark = ThemeData(
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFF131314),
-        indicatorColor: const Color(0xFF5ed16e),
+        indicatorColor: const Color(0xFF66BF72),
         iconTheme: MaterialStateProperty.all(
             const IconThemeData(color: Color(0xFFCACACA),)
         ),

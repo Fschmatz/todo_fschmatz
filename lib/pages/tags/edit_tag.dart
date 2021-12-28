@@ -18,7 +18,6 @@ class _EditTagState extends State<EditTag> {
 
   final tags = TagDao.instance;
   TextEditingController customControllerName = TextEditingController();
-  //String corAtual = "Color(0xFFFF5252)";
   Color pickerColor = const Color(0xFFFF5252);
   Color currentColor = const Color(0xFFFF5252);
 
@@ -26,7 +25,6 @@ class _EditTagState extends State<EditTag> {
   void initState() {
     super.initState();
     customControllerName.text = widget.tag.name;
-    //corAtual = widget.tag.color;
     currentColor = Color(int.parse(widget.tag.color.substring(6, 16)));
     pickerColor = Color(int.parse(widget.tag.color.substring(6, 16)));
   }
@@ -67,10 +65,12 @@ class _EditTagState extends State<EditTag> {
     );
 
     AlertDialog alert = AlertDialog(
-      elevation: 3.0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
       title: const Text(
         "Select Color : ", //
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       content: SingleChildScrollView(
           child: BlockPicker(

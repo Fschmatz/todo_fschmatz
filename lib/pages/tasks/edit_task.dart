@@ -60,6 +60,9 @@ class _EditTaskState extends State<EditTask> {
 
   //QUANDO REMOVE PRECISO DELETAR DO DB
   void _updateTask() async {
+
+    final deletedTaskTag = await tasksTags.delete(widget.task.id);
+
     Map<String, dynamic> row = {
       TaskDao.columnId: widget.task.id,
       TaskDao.columnTitle: customControllerTitle.text,
@@ -67,15 +70,16 @@ class _EditTaskState extends State<EditTask> {
     };
     final update = await tasks.update(row);
 
-    print("Antes"+selectedTags.toString());
+    /*print("Antes"+selectedTags.toString());
     print("tags from DB"+tagsFromDbTask.toString());
-   /* if(tagsFromDbTask.isNotEmpty) {
+    if(tagsFromDbTask.isNotEmpty) {
       var set1 = Set.from(selectedTags);
       var set2 = Set.from(tagsFromDbTask);
       selectedTags = List.from(set1.difference(set2));
-    }*/
+    }
     print("Antes "+selectedTags.toString());
     print("depois "+selectedTags.toString());
+    */
 
     if (selectedTags.isNotEmpty) {
       for (int i = 0; i < selectedTags.length; i++){

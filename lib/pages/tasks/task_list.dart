@@ -44,7 +44,7 @@ class _TaskListState extends State<TaskList> {
         child: loading
             ? const Center(child: SizedBox.shrink())
             : tasksList.isEmpty
-                ? const Center(child: Text('Higher!\nFurther!\nFaster than anyone!',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
+                ? const Center(child: Text("Nothing in here...\nit's good?",textAlign: TextAlign.center,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),))
                 : ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [

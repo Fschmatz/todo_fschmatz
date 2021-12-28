@@ -38,7 +38,7 @@ class _DialogTagsListState extends State<DialogTagsList> {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
       contentPadding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.fromLTRB(16, 25, 0, 24),

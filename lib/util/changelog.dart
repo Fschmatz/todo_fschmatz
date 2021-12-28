@@ -7,6 +7,7 @@ class Changelog{
 0.9.4
 - Bug Fixes
 - Theme Changes
+- Delete from TaskTagDB
 - Material 3 NavBar
 ''';
 
