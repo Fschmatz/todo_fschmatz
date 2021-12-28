@@ -7,18 +7,22 @@ import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 
 class EditTask extends StatefulWidget {
-
   Task task;
   Function() refreshHome;
   Function() refreshTags;
-  EditTask({Key? key, required this.task,required this.refreshHome,required this.refreshTags}) : super(key: key);
+
+  EditTask(
+      {Key? key,
+      required this.task,
+      required this.refreshHome,
+      required this.refreshTags})
+      : super(key: key);
 
   @override
   _EditTaskState createState() => _EditTaskState();
 }
 
 class _EditTaskState extends State<EditTask> {
-
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
   final tasks = TaskDao.instance;
@@ -47,10 +51,9 @@ class _EditTaskState extends State<EditTask> {
 
   Future<void> getTagsFromTask() async {
     var resp = await tasksTags.queryTagsFromTaskId(widget.task.id);
-    for(int i = 0; i < resp.length;i++){
+    for (int i = 0; i < resp.length; i++) {
       tagsFromDbTask.add(resp[i]['id_tag']);
     }
-    print("veio do DB->"+tagsFromDbTask.toString());
 
     setState(() {
       selectedTags = tagsFromDbTask;
@@ -60,7 +63,6 @@ class _EditTaskState extends State<EditTask> {
 
   //QUANDO REMOVE PRECISO DELETAR DO DB
   void _updateTask() async {
-
     final deletedTaskTag = await tasksTags.delete(widget.task.id);
 
     Map<String, dynamic> row = {
@@ -70,21 +72,10 @@ class _EditTaskState extends State<EditTask> {
     };
     final update = await tasks.update(row);
 
-    /*print("Antes"+selectedTags.toString());
-    print("tags from DB"+tagsFromDbTask.toString());
-    if(tagsFromDbTask.isNotEmpty) {
-      var set1 = Set.from(selectedTags);
-      var set2 = Set.from(tagsFromDbTask);
-      selectedTags = List.from(set1.difference(set2));
-    }
-    print("Antes "+selectedTags.toString());
-    print("depois "+selectedTags.toString());
-    */
-
     if (selectedTags.isNotEmpty) {
-      for (int i = 0; i < selectedTags.length; i++){
+      for (int i = 0; i < selectedTags.length; i++) {
         Map<String, dynamic> rowsTaskTags = {
-          TasksTagsDao.columnIdTask:  widget.task.id,
+          TasksTagsDao.columnIdTask: widget.task.id,
           TasksTagsDao.columnIdTag: selectedTags[i],
         };
         final idsTaskTags = await tasksTags.insert(rowsTaskTags);
@@ -122,7 +113,7 @@ class _EditTaskState extends State<EditTask> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return  dialogAlertErrors(errors,context);
+                        return dialogAlertErrors(errors, context);
                       },
                     );
                   }
@@ -170,7 +161,7 @@ class _EditTaskState extends State<EditTask> {
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            leading:const Icon(Icons.article_outlined),
+            leading: const Icon(Icons.article_outlined),
             title: TextField(
               minLines: 1,
               maxLines: 12,
@@ -200,47 +191,55 @@ class _EditTaskState extends State<EditTask> {
             child: tagsList.isEmpty
                 ? const SizedBox.shrink()
                 : Align(
-              alignment: Alignment.topLeft,
-              child: Wrap(
-                spacing: 0.0,
-                runSpacing: 0.0,
-                alignment:  WrapAlignment.start,
-                children: List<Widget>.generate(
-                    tagsList.length,
-                        (int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 16,right: 10),
-                        child: ChoiceChip(
-                          key: UniqueKey(),
-                          selected: false,
-                          avatar: selectedTags.contains(tagsList[index]['id_tag']) ? const Icon(Icons.done,color: Colors.black,size: 18,) : null,
-                          onSelected: (bool _selected) {
-                            if(selectedTags.contains(tagsList[index]['id_tag'])){
-                              selectedTags.remove(tagsList[index]['id_tag']);
-                            }
-                            else {
-                              selectedTags.add(tagsList[index]['id_tag']);
-                            }
-                            setState(() {});
-                            print(tagsList[index]['id_tag'].toString());
-                            print(selectedTags.toString());
-                          },
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                    alignment: Alignment.topLeft,
+                    child: Wrap(
+                      spacing: 0.0,
+                      runSpacing: 0.0,
+                      alignment: WrapAlignment.start,
+                      children:
+                          List<Widget>.generate(tagsList.length, (int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 10),
+                          child: ChoiceChip(
+                            key: UniqueKey(),
+                            selected: false,
+                            avatar:
+                                selectedTags.contains(tagsList[index]['id_tag'])
+                                    ? const Icon(
+                                        Icons.done,
+                                        color: Colors.black,
+                                        size: 18,
+                                      )
+                                    : null,
+                            onSelected: (bool _selected) {
+                              if (selectedTags
+                                  .contains(tagsList[index]['id_tag'])) {
+                                selectedTags.remove(tagsList[index]['id_tag']);
+                              } else {
+                                selectedTags.add(tagsList[index]['id_tag']);
+                              }
+                              setState(() {});
+                            },
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            label: Text(tagsList[index]['name']),
+                            labelStyle: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400),
+                            backgroundColor: selectedTags
+                                    .contains(tagsList[index]['id_tag'])
+                                ? Color(int.parse(
+                                    tagsList[index]['color'].substring(6, 16)))
+                                : Color(int.parse(tagsList[index]['color']
+                                        .substring(6, 16)))
+                                    .withOpacity(0.9),
                           ),
-                          label: Text(tagsList[index]['name']),
-                          labelStyle: const TextStyle(fontSize: 12,color: Colors.black,
-                              fontWeight: FontWeight.w400),
-                          backgroundColor:
-                          selectedTags.contains(tagsList[index]['id_tag']) ?
-                          Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))) :  Color(int.parse(
-                              tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
-                        ),
-                      );
-                    }).toList(),
-              ),
-            ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
           ),
         ]));
   }
