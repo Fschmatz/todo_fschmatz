@@ -12,19 +12,25 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home>{
-
+class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _tabs = [
-    TaskList(key: UniqueKey(),state: 0,),
-    TaskList(key: UniqueKey(),state: 1,),
-    TaskList(key: UniqueKey(),state: 2,),
+    TaskList(
+      key: UniqueKey(),
+      state: 0,
+    ),
+    TaskList(
+      key: UniqueKey(),
+      state: 1,
+    ),
+    TaskList(
+      key: UniqueKey(),
+      state: 2,
+    ),
   ];
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -51,14 +57,9 @@ class _HomeState extends State<Home>{
               }),
           const SizedBox(width: 10,),*/
           IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.label_outline_rounded,
                 size: 28,
-                color: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .color!
-                    .withOpacity(0.8),
               ),
               onPressed: () {
                 showDialog(
@@ -67,54 +68,60 @@ class _HomeState extends State<Home>{
                       return const DialogTagsList();
                     });
               }),
-          const SizedBox(width: 10,),
+          const SizedBox(
+            width: 10,
+          ),
           IconButton(
-            icon: Icon(
-              Icons.settings_outlined,
-              color: Theme.of(context)
-                  .textTheme
-                  .headline6!
-                  .color!
-                  .withOpacity(0.8),
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const SettingsPage(),
-                    fullscreenDialog: true,
-                  ));
-            }),
+              icon: const Icon(
+                Icons.settings_outlined,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const SettingsPage(),
+                      fullscreenDialog: true,
+                    ));
+              }),
         ],
       ),
-
       body: _tabs[_currentIndex],
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
+      bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        selectedIndex: _currentIndex,
+        onDestinationSelected: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.list_outlined),
-              activeIcon: Icon(Icons.list),
-              label: "Todo",
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.list_outlined),
+            selectedIcon: Icon(
+              Icons.list,
+              color: Colors.black87,
+            ),
+            label: 'Todo',
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.construction_outlined),
-              activeIcon: Icon(Icons.construction),
-              label: "Doing"
+          NavigationDestination(
+            icon: Icon(Icons.construction_outlined),
+            selectedIcon: Icon(
+              Icons.construction,
+              color: Colors.black87,
+            ),
+            label: 'Doing',
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.checklist_outlined),
-              activeIcon: Icon(Icons.checklist),
-              label: "Done"
+          NavigationDestination(
+            icon: Icon(Icons.checklist_outlined),
+            selectedIcon: Icon(
+              Icons.checklist,
+              color: Colors.black87,
+            ),
+            label: 'Done',
           ),
         ],
       ),
+
     );
   }
 }

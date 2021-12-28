@@ -24,7 +24,6 @@ class _SettingsPageState extends State<SettingsPage> {
         body: ListView(
       children: <Widget>[
         Card(
-          elevation: 1,
           margin: const EdgeInsets.fromLTRB(16, 20, 16, 25),
           color: Theme.of(context).colorScheme.secondary,
           shape: const RoundedRectangleBorder(

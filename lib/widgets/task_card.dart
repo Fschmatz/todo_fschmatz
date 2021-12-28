@@ -169,7 +169,7 @@ class _TaskCardState extends State<TaskCard> {
       child: Text(
         "Yes",
         style: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Theme.of(context).colorScheme.secondary),
       ),
@@ -182,15 +182,17 @@ class _TaskCardState extends State<TaskCard> {
     );
 
     AlertDialog alert = AlertDialog(
-      elevation: 3.0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
       title: const Text(
         "Confirm", //
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       content: const Text(
         "\nDelete ?",
         style: TextStyle(
-          fontSize: 18,
+          fontSize: 16,
         ),
       ),
       actions: [

@@ -1,13 +1,13 @@
 class Changelog{
 
-  static String appVersion = "0.9.3";
+  static String appVersion = "0.9.4";
   static String appName = "Todo Fschmatz";
 
   static String changelogCurrent = '''
-0.9.3
+0.9.4
 - Bug Fixes
 - Theme Changes
-- Hamburger Menu
+- Material 3 NavBar
 ''';
 
   static String changelogsOld = '''

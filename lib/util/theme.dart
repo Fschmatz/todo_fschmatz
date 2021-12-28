@@ -3,11 +3,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeData light = ThemeData(
     brightness: Brightness.light,
+    primaryColorBrightness: Brightness.dark,
     primaryColor: const Color(0xFFFFFFFF),//0xFFFFFFFF
     canvasColor: const Color(0xFFFFFFFF),
     colorScheme: ColorScheme.light(
       background: const Color(0xFFFFFFFF),
-
       primary: Colors.green.shade800,
       secondary: Colors.green.shade600,
       secondaryVariant: Colors.green.shade600,
@@ -16,7 +16,7 @@ ThemeData light = ThemeData(
         color: Color(0xFFFFFFFF),
         elevation: 0,
         iconTheme: IconThemeData(
-            color: Color(0xFF000000)
+            color: Color(0xFF050505)
         ),
         titleTextStyle: TextStyle(
             fontSize: 20,
@@ -52,41 +52,51 @@ ThemeData light = ThemeData(
               color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(12.0))),
-    bottomAppBarColor: const Color(0xFFDADFDF),
+    bottomAppBarColor: const Color(0xFFE1E0E0),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Colors.green.shade800),
       selectedLabelStyle: TextStyle(color: Colors.green.shade800),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: const Color(0xFFDADFDF),
+      backgroundColor: const Color(0xFFE1E0E0),
     ),
+    navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: const Color(0xFFE1E0E0),
+        indicatorColor:  Colors.green.shade800,
+        iconTheme: MaterialStateProperty.all(
+            const IconThemeData(color: Color(0xFF050505),)
+        ),
+        labelTextStyle: MaterialStateProperty.all(const TextStyle(
+            color: Color(0xFF050505), fontWeight: FontWeight.w500))),
     bottomSheetTheme:
     const BottomSheetThemeData(modalBackgroundColor: Color(0xFFFFFFFF)));
 
 
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: const Color(0xFF202022),
-    scaffoldBackgroundColor: const Color(0xFF202022),
-    canvasColor: const Color(0xFF202022),
+    primaryColorBrightness: Brightness.light,
+    primaryColor: const Color(0xFF1C1C1D),
+    scaffoldBackgroundColor: const Color(0xFF1C1C1D),
+    canvasColor: const Color(0xFF1C1C1D),
     colorScheme: const ColorScheme.dark(
-        background: Color(0xFF202022),
+        background: Color(0xFF1C1C1D),
         primary:  Color(0xFF66BF72),
         secondary: Color(0xFF66BF72),
         secondaryVariant: Color(0xFF66BF72)
     ),
     appBarTheme: const AppBarTheme(
-        color: Color(0xFF202022),
+        color: Color(0xFF1C1C1D),
         elevation: 0,
+        iconTheme: IconThemeData(color: Color(0xFFCACACA)),
         titleTextStyle: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
-        color: Color(0xFF262628),
+        color: Color(0xFF2C2C2D),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF272729),
+      backgroundColor: Color(0xFF1C1C1D),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
@@ -113,15 +123,23 @@ ThemeData dark = ThemeData(
       selectedLabelStyle: TextStyle(color: Color(0xFF66BF72)),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: Color(0xFF151517),
+      backgroundColor: Color(0xFF131314),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF66BF72),
     ),
+    navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: const Color(0xFF131314),
+        indicatorColor: const Color(0xFF5ed16e),
+        iconTheme: MaterialStateProperty.all(
+            const IconThemeData(color: Color(0xFFCACACA),)
+        ),
+        labelTextStyle: MaterialStateProperty.all(const TextStyle(
+            color: Color(0xFFCACACA), fontWeight: FontWeight.w500))),
     dividerColor: const Color(0x2FFFFFFF),
-    bottomAppBarColor: const Color(0xFF151517),
+    bottomAppBarColor: const Color(0xFF131314),
     bottomSheetTheme:
-    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF202022)));
+    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1C1C1D)));
 
 class ThemeNotifier extends ChangeNotifier {
   final String key = 'valorTema';

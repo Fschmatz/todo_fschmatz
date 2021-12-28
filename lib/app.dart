@@ -20,12 +20,18 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
 
     final Color bottomOverlayColor = Theme.of(context).bottomNavigationBarTheme.backgroundColor!;
+    final Color topOverlayColor = Theme.of(context).appBarTheme.backgroundColor!;
+    final Brightness iconBrightness = Theme.of(context).primaryColorBrightness;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light.copyWith(
+        value: SystemUiOverlayStyle(
+          statusBarIconBrightness: iconBrightness,
           systemNavigationBarColor: bottomOverlayColor,
+          statusBarColor: topOverlayColor,
+          systemStatusBarContrastEnforced: false,
+          systemNavigationBarIconBrightness: iconBrightness,
         ),
-        child: const Home()
+        child: const SafeArea(child: Home())
     );
   }
 }
