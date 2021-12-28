@@ -25,7 +25,7 @@ class _TaskListState extends State<TaskList> {
     getAllByState();
   }
 
-  Future<void> getAllByState() async {
+  void getAllByState() async {
     var resp = await tasks.queryAllByStateDesc(widget.state);
     if(mounted){
       setState(() {
@@ -40,7 +40,7 @@ class _TaskListState extends State<TaskList> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 350),
         child: loading
             ? const Center(child: SizedBox.shrink())
             : tasksList.isEmpty

@@ -63,7 +63,7 @@ class _NewTaskState extends State<NewTask> {
   String checkForErrors() {
     String errors = "";
     if (customControllerTitle.text.isEmpty) {
-      errors += "Note is empty\n";
+      errors += "Task title is empty\n";
     }
     return errors;
   }
