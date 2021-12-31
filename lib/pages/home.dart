@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
       ),
       body: _tabs[_currentIndex],
       bottomNavigationBar: NavigationBar(
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        //labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: _currentIndex,
         onDestinationSelected: (index) {
           setState(() {

@@ -213,64 +213,69 @@ class _TaskCardState extends State<TaskCard> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: openBottomMenu,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 8, 0, 10),
-              child:
-                  Text(widget.task.title, style: const TextStyle(fontSize: 16)),
-            ),
-            Visibility(
-              visible: widget.task.note.isNotEmpty,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: Text(
-                  widget.task.note,
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.headline1!.color,
-                    fontSize: 14,
+    return Card(
+      margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
+      child: InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        onTap: openBottomMenu,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 8, 0, 10),
+                child:
+                Text(widget.task.title, style: const TextStyle(fontSize: 16)),
+              ),
+              Visibility(
+                visible: widget.task.note.isNotEmpty,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: Text(
+                    widget.task.note,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.headline1!.color,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ),
-            ),
-            tagsList.isEmpty
-                ? const SizedBox.shrink()
-                : Align(
-                    alignment: Alignment.topLeft,
-                    child: Wrap(
-                      spacing: 0.0,
-                      runSpacing: 0.0,
-                      alignment: WrapAlignment.start,
-                      children:
-                          List<Widget>.generate(tagsList.length, (int index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 0, right: 16),
-                          child: Chip(
-                            key: UniqueKey(),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            label: Text(tagsList[index]['name']),
-                            labelStyle: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.w500),
-                            backgroundColor: Color(int.parse(
-                                tagsList[index]['color'].substring(6, 16))),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-            const SizedBox(height: 8)
-          ],
+              tagsList.isEmpty
+                  ? const SizedBox.shrink()
+                  : Align(
+                alignment: Alignment.topLeft,
+                child: Wrap(
+                  spacing: 0.0,
+                  runSpacing: 0.0,
+                  alignment: WrapAlignment.start,
+                  children:
+                  List<Widget>.generate(tagsList.length, (int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 0, right: 16),
+                      child: Chip(
+                        key: UniqueKey(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        label: Text(tagsList[index]['name']),
+                        labelStyle: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w500),
+                        backgroundColor: Color(int.parse(
+                            tagsList[index]['color'].substring(6, 16))),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 8)
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
