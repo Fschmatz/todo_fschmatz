@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/pages/tasks/task_list.dart';
 import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
+import 'package:todo_fschmatz/widgets/dialog_todos_list.dart';
 import 'configs/settings_page.dart';
 
 class Home extends StatefulWidget {
@@ -37,7 +38,41 @@ class _HomeState extends State<Home> {
           'Todo Fschmatz',
         ),
         actions: [
-          IconButton(
+          PopupMenuButton<int>(
+              itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+                const PopupMenuItem<int>(
+                    value: 0, child: Text('Todos')),
+                const PopupMenuItem<int>(
+                    value: 1, child: Text('Tags')),
+                const PopupMenuItem<int>(
+                    value: 2, child: Text('Settings')),
+              ],
+              onSelected: (int value) {
+                //setState(() { value = value; });
+                if(value == 0){
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const DialogTodosList();
+                      });
+                }
+                if(value == 1){
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const DialogTagsList();
+                      });
+                }
+                if(value == 2){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const SettingsPage(),
+                        fullscreenDialog: true,
+                      ));
+                }
+              })
+          /*IconButton(
               icon: const Icon(
                 Icons.label_outline_rounded,
                 size: 28,
@@ -63,7 +98,7 @@ class _HomeState extends State<Home> {
                       builder: (BuildContext context) => const SettingsPage(),
                       fullscreenDialog: true,
                     ));
-              }),
+              }),*/
         ],
       ),
       body: _tabs[_currentIndex],

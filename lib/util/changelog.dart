@@ -6,9 +6,10 @@ class Changelog{
   static String changelogCurrent = '''
 1.0.1
 - Edit Tasks with Tags OK
+- AppBar Popup Menu
 - Bug Fixes
 - Logic Changes
-- UI Changes
+- Theme Changes
 ''';
 
   static String changelogsOld = '''

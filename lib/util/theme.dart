@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ThemeData light = ThemeData(
     brightness: Brightness.light,
     primaryColorBrightness: Brightness.dark,
-    primaryColor: const Color(0xFFF2F4F4),//0xFFFFFFFF
+    primaryColor: const Color(0xFFF2F4F4),
     canvasColor: const Color(0xFFF2F4F4),
     scaffoldBackgroundColor: const Color(0xFFF2F4F4),
     colorScheme: ColorScheme.light(
@@ -12,6 +12,12 @@ ThemeData light = ThemeData(
       primary: Colors.green.shade600,
       secondary: Colors.green.shade600,
       secondaryVariant: Colors.green.shade600,
+    ),
+    popupMenuTheme: const PopupMenuThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      color: Color(0xFFF5F7F7),
     ),
     appBarTheme: const AppBarTheme(
         color: Color(0xFFF2F4F4),
@@ -31,7 +37,7 @@ ThemeData light = ThemeData(
       color: Color(0xFFFDFFFF),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFFFEFFFF),
+      backgroundColor: Color(0xFFFDFFFF),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.green.shade500,
@@ -88,6 +94,12 @@ ThemeData dark = ThemeData(
         secondary: Color(0xFF66BF72),
         secondaryVariant: Color(0xFF66BF72)
     ),
+    popupMenuTheme: const PopupMenuThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      color: Color(0xFF2A2A2C),
+    ),
     appBarTheme: const AppBarTheme(
         color: Color(0xFF171718),
         elevation: 0,
@@ -104,7 +116,7 @@ ThemeData dark = ThemeData(
       color: Color(0xFF282829),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF171718),
+      backgroundColor: Color(0xFF282829),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
