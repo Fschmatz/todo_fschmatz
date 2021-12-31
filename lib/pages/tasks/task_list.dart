@@ -54,6 +54,12 @@ class _TaskListState extends State<TaskList> {
                 : ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
+                      ListTile(
+                        onTap: (){},
+                        leading: const Icon(Icons.filter_list_outlined),
+                        title: const Text("Last Added"),
+                        trailing: Text(tasksList.length != 1 ? tasksList.length.toString() + " Tasks" : tasksList.length.toString() + " Task"),
+                      ),
                         ListView.separated(
                           separatorBuilder: (BuildContext context, int index) =>
                               //const Divider(height: 0,),
