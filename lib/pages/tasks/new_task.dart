@@ -115,6 +115,7 @@ class _NewTaskState extends State<NewTask> {
               minLines: 1,
               maxLines: 2,
               maxLength: 200,
+              textCapitalization: TextCapitalization.sentences,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerTitle,
               decoration: InputDecoration(
@@ -143,6 +144,7 @@ class _NewTaskState extends State<NewTask> {
               maxLines: 12,
               maxLength: 500,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              textCapitalization: TextCapitalization.sentences,
               controller: customControllerNote,
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.secondary,

@@ -141,6 +141,7 @@ class _EditTagState extends State<EditTag> {
               maxLength: 30,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerName,
+              textCapitalization: TextCapitalization.sentences,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 counterText: "",

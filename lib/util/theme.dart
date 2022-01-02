@@ -116,7 +116,7 @@ ThemeData dark = ThemeData(
       color: Color(0xFF2C2C2D),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF2C2C2D),
+      backgroundColor: Color(0xFF343435),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),

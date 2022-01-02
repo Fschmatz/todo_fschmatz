@@ -141,6 +141,7 @@ class _EditTaskState extends State<EditTask> {
               maxLines: 2,
               maxLength: 200,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              textCapitalization: TextCapitalization.sentences,
               controller: customControllerTitle,
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.secondary,
@@ -168,6 +169,7 @@ class _EditTaskState extends State<EditTask> {
               maxLines: 12,
               maxLength: 500,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              textCapitalization: TextCapitalization.sentences,
               controller: customControllerNote,
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.secondary,

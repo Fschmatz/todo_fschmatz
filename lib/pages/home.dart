@@ -13,7 +13,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   int _currentIndex = 0;
+
   final List<Widget> _tabs = [
     TaskList(
       key: UniqueKey(),
@@ -32,76 +34,56 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: const Text(
-          'Todo Fschmatz',
-        ),
-        actions: [
-          PopupMenuButton<int>(
-              itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-                const PopupMenuItem<int>(
-                    value: 0, child: Text('Todos')),
-                const PopupMenuItem<int>(
-                    value: 1, child: Text('Tags')),
-                const PopupMenuItem<int>(
-                    value: 2, child: Text('Settings')),
-              ],
-              onSelected: (int value) {
-                //setState(() { value = value; });
-                if(value == 0){
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const DialogTodosList();
-                      });
-                }
-                if(value == 1){
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const DialogTagsList();
-                      });
-                }
-                if(value == 2){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const SettingsPage(),
-                        fullscreenDialog: true,
-                      ));
-                }
-              })
-          /*IconButton(
-              icon: const Icon(
-                Icons.label_outline_rounded,
-                size: 28,
+      body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                title: const Text('Todo Fschmatz'),
+                pinned: false,
+                floating: true,
+                snap: true,
+                //forceElevated: innerBoxIsScrolled,
+                actions: [
+                  PopupMenuButton<int>(
+                      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+                        const PopupMenuItem<int>(
+                            value: 0, child: Text('Todos')),
+                        const PopupMenuItem<int>(
+                            value: 1, child: Text('Tags')),
+                        const PopupMenuItem<int>(
+                            value: 2, child: Text('Settings')),
+                      ],
+                      onSelected: (int value) {
+                        //setState(() { value = value; });
+                        if(value == 0){
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const DialogTodosList();
+                              });
+                        }
+                        if(value == 1){
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const DialogTagsList();
+                              });
+                        }
+                        if(value == 2){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) => const SettingsPage(),
+                                fullscreenDialog: true,
+                              ));
+                        }
+                      })
+                ],
               ),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const DialogTagsList();
-                    });
-              }),
-          const SizedBox(
-            width: 10,
-          ),
-          IconButton(
-              icon: const Icon(
-                Icons.settings_outlined,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const SettingsPage(),
-                      fullscreenDialog: true,
-                    ));
-              }),*/
-        ],
+            ];
+          },
+          body: _tabs[_currentIndex]
       ),
-      body: _tabs[_currentIndex],
       bottomNavigationBar: NavigationBar(
         //labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         selectedIndex: _currentIndex,
