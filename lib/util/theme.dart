@@ -33,7 +33,7 @@ ThemeData light = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      elevation: 0,
+      elevation: 1,
       color: Color(0xFFFDFFFF),
     ),
     dialogTheme: const DialogTheme(
@@ -85,11 +85,11 @@ ThemeData light = ThemeData(
 ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     primaryColorBrightness: Brightness.light,
-    primaryColor: const Color(0xFF171718),
-    scaffoldBackgroundColor: const Color(0xFF171718),
-    canvasColor: const Color(0xFF171718),
+    primaryColor: const Color(0xFF1C1C1D),
+    scaffoldBackgroundColor: const Color(0xFF1C1C1D),
+    canvasColor: const Color(0xFF1C1C1D),
     colorScheme: const ColorScheme.dark(
-        background: Color(0xFF171718),
+        background: Color(0xFF1C1C1D),
         primary:  Color(0xFF66BF72),
         secondary: Color(0xFF66BF72),
         secondaryVariant: Color(0xFF66BF72)
@@ -101,9 +101,9 @@ ThemeData dark = ThemeData(
       color: Color(0xFF2A2A2C),
     ),
     appBarTheme: const AppBarTheme(
-        color: Color(0xFF171718),
+        color: Color(0xFF1C1C1D),
         elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFFCACACA)),
+        iconTheme: IconThemeData(color: Color(0xFFEAEAEA)),
         titleTextStyle: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -112,11 +112,11 @@ ThemeData dark = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      elevation: 0,
-      color: Color(0xFF282829),
+      elevation: 1,
+      color: Color(0xFF2C2C2D),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF282829),
+      backgroundColor: Color(0xFF2C2C2D),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
@@ -143,23 +143,23 @@ ThemeData dark = ThemeData(
       selectedLabelStyle: TextStyle(color: Color(0xFF66BF72)),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: Color(0xFF171718),
+      backgroundColor: Color(0xFF1C1C1D),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF66BF72),
     ),
     navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: const Color(0xFF171718),
+        backgroundColor: const Color(0xFF1C1C1D),
         indicatorColor: const Color(0xFF66BF72),
         iconTheme: MaterialStateProperty.all(
             const IconThemeData(color: Color(0xFFCACACA),)
         ),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
             color: Color(0xFFCACACA), fontWeight: FontWeight.w500))),
-    dividerColor: const Color(0x2FFFFFFF),
-    bottomAppBarColor: const Color(0xFF171718),
+    //dividerColor: const Color(0x2FFFFFFF),
+    bottomAppBarColor: const Color(0xFF1C1C1D),
     bottomSheetTheme:
-    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF171718)));
+    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1C1C1D)));
 
 class ThemeNotifier extends ChangeNotifier {
   final String key = 'valorTema';
