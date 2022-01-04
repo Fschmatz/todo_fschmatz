@@ -63,16 +63,16 @@ ThemeData light = ThemeData(
             ),
             borderRadius: BorderRadius.circular(12.0))),
     bottomAppBarColor: const Color(0xFFF0F2F2),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      selectedIconTheme: IconThemeData(color: Colors.green.shade600),
-      selectedLabelStyle: TextStyle(color: Colors.green.shade600),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      selectedIconTheme: IconThemeData(color: Colors.green),
+      selectedLabelStyle: TextStyle(color: Colors.green),
       showSelectedLabels: true,
       showUnselectedLabels: false,
-      backgroundColor: const Color(0xFFF0F2F2),
+      backgroundColor: Color(0xFFF0F2F2),
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFFF0F2F2),
-        indicatorColor:  Colors.green.shade600,
+        indicatorColor:  Colors.green,
         iconTheme: MaterialStateProperty.all(
             const IconThemeData(color: Color(0xFF050505),)
         ),
@@ -98,12 +98,12 @@ ThemeData dark = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      color: Color(0xFF2A2A2C),
+      color: Color(0xFF343435),
     ),
     appBarTheme: const AppBarTheme(
         color: Color(0xFF1C1C1D),
         elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFFEAEAEA)),
+        iconTheme: IconThemeData(color: Color(0xFFF5F5F5)),
         titleTextStyle: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -116,7 +116,7 @@ ThemeData dark = ThemeData(
       color: Color(0xFF2C2C2D),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF343435),
+      backgroundColor: Color(0xFF2C2C2D),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
@@ -152,10 +152,10 @@ ThemeData dark = ThemeData(
         backgroundColor: const Color(0xFF1C1C1D),
         indicatorColor: const Color(0xFF66BF72),
         iconTheme: MaterialStateProperty.all(
-            const IconThemeData(color: Color(0xFFCACACA),)
+            const IconThemeData(color: Color(0xFFEAEAEA),)
         ),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
-            color: Color(0xFFCACACA), fontWeight: FontWeight.w500))),
+            color: Color(0xFFEAEAEA), fontWeight: FontWeight.w500))),
     //dividerColor: const Color(0x2FFFFFFF),
     bottomAppBarColor: const Color(0xFF1C1C1D),
     bottomSheetTheme:

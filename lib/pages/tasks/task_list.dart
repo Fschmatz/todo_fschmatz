@@ -1,8 +1,10 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
+import 'package:todo_fschmatz/pages/configs/settings_page.dart';
+import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
+import 'package:todo_fschmatz/widgets/dialog_todos_list.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
 
@@ -31,7 +33,6 @@ class _TaskListState extends State<TaskList> with TickerProviderStateMixin<TaskL
   }
 
   void getAllTasksByState() async {
-    tasksList = [];
     final tasks = TaskDao.instance;
     var resp = await tasks.queryAllByStateDesc(widget.state);
     setState(() {
@@ -74,54 +75,104 @@ class _TaskListState extends State<TaskList> with TickerProviderStateMixin<TaskL
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NotificationListener<ScrollNotification>(
-        onNotification: _handleScrollNotification,
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 350),
-          child: loading
-              ? const Center(child: SizedBox.shrink())
-              : tasksList.isEmpty
+      body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                title: const Text('Todo Fschmatz'),
+                pinned: false,
+                floating: true,
+                snap: true,
+                actions: [
+                  PopupMenuButton<int>(
+                      itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+                        const PopupMenuItem<int>(
+                            value: 0, child: Text('Todos')),
+                        const PopupMenuItem<int>(
+                            value: 1, child: Text('Tags')),
+                        const PopupMenuItem<int>(
+                            value: 2, child: Text('Settings')),
+                      ],
+                      onSelected: (int value) {
+                        if(value == 0){
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const DialogTodosList();
+                              });
+                        }
+                        else if(value == 1){
+                         showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const DialogTagsList();
+                              });
+                        }
+                        else if(value == 2){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (BuildContext context) => const SettingsPage(),
+                                fullscreenDialog: true,
+                              ));
+                        }
+                      })
+                ],
+              ),
+            ];
+          },
+          body:  NotificationListener<ScrollNotification>(
+            onNotification: _handleScrollNotification,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 350),
+              child: loading
+                  ? const Center(child: SizedBox.shrink())
+                  : tasksList.isEmpty
                   ? const Center(
-                      child: Text(
-                      "Nothing in here...\nit's good?",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ))
+                  child: Text(
+                    "Nothing in here...\nit's good?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ))
                   : ListView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      children: [
-                        ListTile(
-                          onTap: (){},
-                          leading: const Icon(Icons.filter_list_outlined),
-                          title: const Text("Last Added"),
-                          trailing: Text(tasksList.length != 1 ? tasksList.length.toString() + " Tasks" : tasksList.length.toString() + " Task"),
-                        ),
-                          ListView.separated(
-                            separatorBuilder: (BuildContext context, int index) =>
-                                //const Divider(height: 0,),
-                                const SizedBox(height: 5,),
-                            physics: const ScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: tasksList.length,
-                            itemBuilder: (context, index) {
-                              return TaskCard(
-                                key: UniqueKey(),
-                                task: Task(
-                                  tasksList[index]['id_task'],
-                                  tasksList[index]['title'],
-                                  tasksList[index]['note'],
-                                  tasksList[index]['state'],
-                                ),
-                                refreshHome: getAllTasksByState,
-                              );
-                            },
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  children: [
+                    ListTile(
+                      onTap: (){},
+                      leading: const Icon(Icons.filter_list_outlined),
+                      title: const Text("Last Added"),
+                      trailing: Text(tasksList.length != 1 ? tasksList.length.toString() + " Tasks" : tasksList.length.toString() + " Task"),
+                    ),
+                    ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) =>
+                      //const Divider(height: 0,),
+                      const SizedBox(height: 5,),
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: tasksList.length,
+                      itemBuilder: (context, index) {
+                        return TaskCard(
+                          key: UniqueKey(),
+                          task: Task(
+                            tasksList[index]['id_task'],
+                            tasksList[index]['title'],
+                            tasksList[index]['note'],
+                            tasksList[index]['state'],
                           ),
-                          const SizedBox(
-                            height: 100,
-                          ),
-                        ]),
-        ),
+                          refreshHome: getAllTasksByState,
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      height: 100,
+                    ),
+                  ]),
+            ),
+          ),
       ),
+
+
+
       floatingActionButton: ScaleTransition(
         scale: _hideFabAnimation,
         child: FloatingActionButton(
