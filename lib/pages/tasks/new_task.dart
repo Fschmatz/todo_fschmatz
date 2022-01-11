@@ -6,10 +6,12 @@ import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 
 class NewTask extends StatefulWidget {
+
   int state;
+  int currentTodoId;
   Function() getAllTasksByState;
 
-  NewTask({Key? key, required this.state, required this.getAllTasksByState})
+  NewTask({Key? key, required this.state, required this.getAllTasksByState, required this.currentTodoId})
       : super(key: key);
 
   @override
@@ -44,7 +46,8 @@ class _NewTaskState extends State<NewTask> {
     Map<String, dynamic> row = {
       TaskDao.columnTitle: customControllerTitle.text,
       TaskDao.columnNote: customControllerNote.text,
-      TaskDao.columnState: widget.state
+      TaskDao.columnState: widget.state,
+      TaskDao.columnIdTodo: widget.currentTodoId
     };
     final idTask = await tasks.insert(row);
 
@@ -113,7 +116,7 @@ class _NewTaskState extends State<NewTask> {
             title: TextField(
               autofocus: true,
               minLines: 1,
-              maxLines: 2,
+              maxLines: 5,
               maxLength: 200,
               textCapitalization: TextCapitalization.sentences,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -141,7 +144,7 @@ class _NewTaskState extends State<NewTask> {
             leading: const Icon(Icons.article_outlined),
             title: TextField(
               minLines: 1,
-              maxLines: 12,
+              maxLines: 10,
               maxLength: 500,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               textCapitalization: TextCapitalization.sentences,

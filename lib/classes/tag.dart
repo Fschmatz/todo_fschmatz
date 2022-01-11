@@ -5,6 +5,4 @@ class Tag{
   String color;
 
   Tag(this.id, this.name, this.color);
-
-
 }

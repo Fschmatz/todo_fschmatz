@@ -124,7 +124,7 @@ class _NewTagState extends State<NewTag> {
               Icons.notes_outlined,
             ),
             title: TextField(
-              autofocus: false,
+              autofocus: true,
               minLines: 1,
               maxLength: 30,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,

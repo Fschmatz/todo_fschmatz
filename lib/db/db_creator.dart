@@ -25,11 +25,19 @@ class DbCreator {
   Future _onCreate(Database db, int version) async {
 
     await db.execute('''    
+           CREATE TABLE todos (
+             id_todo INTEGER PRIMARY KEY,
+             name TEXT NOT NULL           
+          )          
+          ''');
+
+    await db.execute('''    
            CREATE TABLE tasks (
              id_task INTEGER PRIMARY KEY,
              title TEXT NOT NULL,
              note TEXT,
-             state INTEGER NOT NULL
+             state INTEGER NOT NULL,
+             id_todo INTEGER NOT NULL
           )          
           ''');
 
@@ -51,32 +59,41 @@ class DbCreator {
     //direct inserts for tests
     Batch batch = db.batch();
 
+    batch.insert('todos', {
+      'id_todo': 1,
+      'name': 'My Todo'
+    });
+
     batch.insert('tasks', {
       'id_task': 1,
       'title': 'Korolev',
       'note': 'Higher! Faster than anyone!!!',
-      'state': 0
+      'state': 0,
+      'id_todo': 1
     });
 
     batch.insert('tasks', {
       'id_task': 2,
       'title': 'Sem nota',
       'note': '',
-      'state': 0
+      'state': 0,
+      'id_todo': 1
     });
 
     batch.insert('tasks', {
       'id_task': 3,
       'title': 'Sem nota 2',
       'note': '',
-      'state': 0
+      'state': 0,
+      'id_todo': 1
     });
 
     batch.insert('tasks', {
       'id_task': 4,
       'title': 'outro Estado',
       'note': '',
-      'state': 1
+      'state': 1,
+      'id_todo': 1
     });
 
     batch.insert('tags', {

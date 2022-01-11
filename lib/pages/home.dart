@@ -11,21 +11,32 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   int _currentIndex = 0;
+  final int _currentTodoId = 1;
+  List<Widget> _tabs = [];
 
-  final List<Widget> _tabs = [
-    TaskList(
-      key: UniqueKey(),
-      state: 0,
-    ),
-    TaskList(
-      key: UniqueKey(),
-      state: 1,
-    ),
-    TaskList(
-      key: UniqueKey(),
-      state: 2,
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _tabs = [
+      TaskList(
+        key: UniqueKey(),
+        state: 0,
+        currentTodoId: _currentTodoId,
+      ),
+      TaskList(
+        key: UniqueKey(),
+        state: 1,
+        currentTodoId: _currentTodoId,
+      ),
+      TaskList(
+        key: UniqueKey(),
+        state: 2,
+        currentTodoId: _currentTodoId,
+      ),
+    ];
+  }
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -138,7 +138,7 @@ class _EditTaskState extends State<EditTask> {
             leading: const Icon(Icons.notes_outlined),
             title: TextField(
               minLines: 1,
-              maxLines: 2,
+              maxLines: 5,
               maxLength: 200,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               textCapitalization: TextCapitalization.sentences,
@@ -166,7 +166,7 @@ class _EditTaskState extends State<EditTask> {
             leading: const Icon(Icons.article_outlined),
             title: TextField(
               minLines: 1,
-              maxLines: 12,
+              maxLines: 10,
               maxLength: 500,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               textCapitalization: TextCapitalization.sentences,
