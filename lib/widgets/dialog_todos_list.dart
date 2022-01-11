@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:todo_fschmatz/classes/tag.dart';
 import 'package:todo_fschmatz/classes/todo.dart';
-import 'package:todo_fschmatz/db/tag_dao.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
-import 'package:todo_fschmatz/pages/tags/edit_tag.dart';
-import 'package:todo_fschmatz/pages/tags/new_tag.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 
 class DialogTodosList extends StatefulWidget {
-  const DialogTodosList({Key? key}) : super(key: key);
+
+  Function() changeCurrentTodo;
+
+  DialogTodosList({Key? key, required this.changeCurrentTodo}) : super(key: key);
 
   @override
   _DialogTodosListState createState() => _DialogTodosListState();
@@ -84,6 +83,9 @@ class _DialogTodosListState extends State<DialogTodosList> {
             return ListTile(
               contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
               title: Text(_todoList[index]['name']),
+              onTap: ()  {
+                widget.changeCurrentTodo();
+              },
               trailing:
               Row(
                 mainAxisSize: MainAxisSize.min,

@@ -9,44 +9,63 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-  int _currentIndex = 0;
-  final int _currentTodoId = 1;
+  int _currentTabIndex = 0;
+  late int _currentTodoId;
   List<Widget> _tabs = [];
+
+  Future<void> changeCurrentTodo() async {
+    print("oi");
+
+    if (_currentTodoId == 1) {
+      setState(() {
+        _currentTodoId = 2;
+        print(_currentTodoId.toString());
+        _tabs;
+      });
+    } else {
+      setState(() {
+        _currentTodoId = 1;
+        print(_currentTodoId.toString());
+        _tabs;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _currentTodoId = 1;
     _tabs = [
       TaskList(
         key: UniqueKey(),
         state: 0,
         currentTodoId: _currentTodoId,
+        changeCurrentTodo: changeCurrentTodo,
       ),
       TaskList(
         key: UniqueKey(),
         state: 1,
         currentTodoId: _currentTodoId,
+        changeCurrentTodo: changeCurrentTodo,
       ),
       TaskList(
         key: UniqueKey(),
         state: 2,
         currentTodoId: _currentTodoId,
+        changeCurrentTodo: changeCurrentTodo,
       ),
     ];
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabs[_currentIndex],
+      body: _tabs[_currentTabIndex],
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex,
+        selectedIndex: _currentTabIndex,
         onDestinationSelected: (index) {
           setState(() {
-            _currentIndex = index;
+            _currentTabIndex = index;
           });
         },
         destinations: const [

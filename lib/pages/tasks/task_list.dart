@@ -10,10 +10,12 @@ import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
 
 class TaskList extends StatefulWidget {
+
   int state;
   int currentTodoId;
+  Function() changeCurrentTodo;
 
-  TaskList({Key? key, required this.state, required this.currentTodoId})
+  TaskList({Key? key, required this.state, required this.currentTodoId, required this.changeCurrentTodo})
       : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class _TaskListState extends State<TaskList>
     _hideFabAnimation =
         AnimationController(vsync: this, duration: kThemeAnimationDuration);
     _hideFabAnimation.forward();
-    getTodoName().then((value) => getAllTasksByState());
+    getTodoName().then((value) => getAllTasksByTodoAndState());
   }
 
   Future<void> getTodoName() async {
@@ -44,9 +46,9 @@ class _TaskListState extends State<TaskList>
     });
   }
 
-  void getAllTasksByState() async {
+  Future<void> getAllTasksByTodoAndState() async {
     final tasks = TaskDao.instance;
-    var resp = await tasks.queryAllByStateDesc(widget.state);
+    var resp = await tasks.queryAllByTodoAndStateDesc(widget.state,widget.currentTodoId);
     setState(() {
       tasksList = resp;
       loading = false;
@@ -59,6 +61,7 @@ class _TaskListState extends State<TaskList>
     super.dispose();
   }
 
+  //Hide FAB
   bool _handleScrollNotification(ScrollNotification notification) {
     if (notification.depth == 0) {
       if (notification is UserScrollNotification) {
@@ -113,7 +116,9 @@ class _TaskListState extends State<TaskList>
                         showDialog(
                             context: context,
                             builder: (BuildContext context) {
-                              return const DialogTodosList();
+                              return DialogTodosList(
+                                changeCurrentTodo: widget.changeCurrentTodo,
+                              );
                             });
                       } else if (value == 1) {
                         showDialog(
@@ -180,7 +185,7 @@ class _TaskListState extends State<TaskList>
                                     tasksList[index]['state'],
                                     tasksList[index]['id_todo'],
                                   ),
-                                  refreshHome: getAllTasksByState,
+                                  refreshHome: getAllTasksByTodoAndState,
                                 );
                               },
                             ),
@@ -203,7 +208,7 @@ class _TaskListState extends State<TaskList>
                 MaterialPageRoute<void>(
                   builder: (BuildContext context) => NewTask(
                     state: widget.state,
-                    getAllTasksByState: getAllTasksByState,
+                    getAllTasksByState: getAllTasksByTodoAndState,
                     currentTodoId: widget.currentTodoId,
                   ),
                   fullscreenDialog: true,
