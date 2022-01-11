@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/todo.dart';
+import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 
 class DialogTodosList extends StatefulWidget {
 
-  Function() changeCurrentTodo;
+  Function(int) changeCurrentTodo;
 
   DialogTodosList({Key? key, required this.changeCurrentTodo}) : super(key: key);
 
@@ -18,6 +19,7 @@ class _DialogTodosListState extends State<DialogTodosList> {
 
   bool loadingTodos = true;
   final todos = TodoDao.instance;
+  final tasks = TaskDao.instance;
   List<Map<String, dynamic>> _todoList = [];
 
   @override
@@ -28,6 +30,7 @@ class _DialogTodosListState extends State<DialogTodosList> {
 
   Future<void> _delete(int idTodo) async {
     final deleted = await todos.delete(idTodo);
+    final del = await tasks.deleteAllTasksFromTodo(idTodo);
   }
 
   Future<void> getTodos() async {
@@ -36,6 +39,8 @@ class _DialogTodosListState extends State<DialogTodosList> {
       _todoList = resp;
       loadingTodos = false;
     });
+
+    _todoList.toString();
   }
 
   @override
@@ -81,10 +86,14 @@ class _DialogTodosListState extends State<DialogTodosList> {
           itemCount: _todoList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
+              key: UniqueKey(),
               contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
               title: Text(_todoList[index]['name']),
               onTap: ()  {
-                widget.changeCurrentTodo();
+                widget.changeCurrentTodo(_todoList[index]['id_todo']);
+                Future.delayed(const Duration(milliseconds: 300), () {
+                  Navigator.of(context).pop();
+                });
               },
               trailing:
               Row(
@@ -128,7 +137,6 @@ class _DialogTodosListState extends State<DialogTodosList> {
                 ],
               ),
             );
-            // const Icon(Icons.edit_outlined));
           },
         ),
       ),

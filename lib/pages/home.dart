@@ -10,48 +10,59 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentTabIndex = 0;
-  late int _currentTodoId;
+  late int _currentIdTodo;
   List<Widget> _tabs = [];
 
-  Future<void> changeCurrentTodo() async {
-    print("oi");
+  Future<void> changeCurrentTodo(int idTodo) async {
 
-    if (_currentTodoId == 1) {
-      setState(() {
-        _currentTodoId = 2;
-        print(_currentTodoId.toString());
-        _tabs;
-      });
-    } else {
-      setState(() {
-        _currentTodoId = 1;
-        print(_currentTodoId.toString());
-        _tabs;
-      });
-    }
+    _currentIdTodo = idTodo;
+    print(_currentIdTodo.toString());
+
+    setState(() {
+      _tabs = [
+        TaskList(
+          key: UniqueKey(),
+          state: 0,
+          currentIdTodo: _currentIdTodo,
+          changeCurrentTodo: changeCurrentTodo,
+        ),
+        TaskList(
+          key: UniqueKey(),
+          state: 1,
+          currentIdTodo: _currentIdTodo,
+          changeCurrentTodo: changeCurrentTodo,
+        ),
+        TaskList(
+          key: UniqueKey(),
+          state: 2,
+          currentIdTodo: _currentIdTodo,
+          changeCurrentTodo: changeCurrentTodo,
+        ),
+      ];
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    _currentTodoId = 1;
+    _currentIdTodo = 1;
     _tabs = [
       TaskList(
         key: UniqueKey(),
         state: 0,
-        currentTodoId: _currentTodoId,
+        currentIdTodo: _currentIdTodo,
         changeCurrentTodo: changeCurrentTodo,
       ),
       TaskList(
         key: UniqueKey(),
         state: 1,
-        currentTodoId: _currentTodoId,
+        currentIdTodo: _currentIdTodo,
         changeCurrentTodo: changeCurrentTodo,
       ),
       TaskList(
         key: UniqueKey(),
         state: 2,
-        currentTodoId: _currentTodoId,
+        currentIdTodo: _currentIdTodo,
         changeCurrentTodo: changeCurrentTodo,
       ),
     ];

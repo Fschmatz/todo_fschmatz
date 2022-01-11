@@ -12,10 +12,10 @@ import 'new_task.dart';
 class TaskList extends StatefulWidget {
 
   int state;
-  int currentTodoId;
-  Function() changeCurrentTodo;
+  int currentIdTodo;
+  Function(int) changeCurrentTodo;
 
-  TaskList({Key? key, required this.state, required this.currentTodoId, required this.changeCurrentTodo})
+  TaskList({Key? key, required this.state, required this.currentIdTodo, required this.changeCurrentTodo})
       : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class _TaskListState extends State<TaskList>
 
   Future<void> getTodoName() async {
     final tasks = TodoDao.instance;
-    var resp = await tasks.getTodoName(widget.currentTodoId);
+    var resp = await tasks.getTodoName(widget.currentIdTodo);
     setState(() {
       todoName = resp[0]['name'];
     });
@@ -48,7 +48,7 @@ class _TaskListState extends State<TaskList>
 
   Future<void> getAllTasksByTodoAndState() async {
     final tasks = TaskDao.instance;
-    var resp = await tasks.queryAllByTodoAndStateDesc(widget.state,widget.currentTodoId);
+    var resp = await tasks.queryAllByTodoAndStateDesc(widget.state,widget.currentIdTodo);
     setState(() {
       tasksList = resp;
       loading = false;
@@ -209,7 +209,7 @@ class _TaskListState extends State<TaskList>
                   builder: (BuildContext context) => NewTask(
                     state: widget.state,
                     getAllTasksByState: getAllTasksByTodoAndState,
-                    currentTodoId: widget.currentTodoId,
+                    currentIdTodo: widget.currentIdTodo,
                   ),
                   fullscreenDialog: true,
                 ));

@@ -8,10 +8,10 @@ import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 class NewTask extends StatefulWidget {
 
   int state;
-  int currentTodoId;
+  int currentIdTodo;
   Function() getAllTasksByState;
 
-  NewTask({Key? key, required this.state, required this.getAllTasksByState, required this.currentTodoId})
+  NewTask({Key? key, required this.state, required this.getAllTasksByState, required this.currentIdTodo})
       : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class _NewTaskState extends State<NewTask> {
       TaskDao.columnTitle: customControllerTitle.text,
       TaskDao.columnNote: customControllerNote.text,
       TaskDao.columnState: widget.state,
-      TaskDao.columnIdTodo: widget.currentTodoId
+      TaskDao.columnIdTodo: widget.currentIdTodo
     };
     final idTask = await tasks.insert(row);
 

@@ -70,4 +70,8 @@ class TaskDao {
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  Future<int> deleteAllTasksFromTodo(int idTodo) async {
+    Database db = await instance.database;
+    return await db.delete(table, where: '$columnIdTodo = ?', whereArgs: [idTodo]);
+  }
 }
