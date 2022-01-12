@@ -15,8 +15,8 @@ class _NewTagState extends State<NewTag> {
 
   final tags = TagDao.instance;
   TextEditingController customControllerName = TextEditingController();
-  Color pickerColor = const Color(0xFFFF5252);
-  Color currentColor = const Color(0xFFFF5252);
+  Color pickerColor = const Color(0xFFe35b5b);
+  Color currentColor = const Color(0xFFe35b5b);
 
   void _saveTag() async {
     Map<String, dynamic> row = {
@@ -54,7 +54,9 @@ class _NewTagState extends State<NewTag> {
     );
 
     AlertDialog alert = AlertDialog(
-      elevation: 3.0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
       title: const Text(
         "Select Color : ", //
         style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),

@@ -99,7 +99,7 @@ class _DialogTodosListState extends State<DialogTodosList> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(
+                  /*IconButton(
                       icon: Icon(
                         Icons.delete_outlined,
                         color: Theme.of(context)
@@ -110,7 +110,7 @@ class _DialogTodosListState extends State<DialogTodosList> {
                       ),
                       onPressed: () {
                         _delete(_todoList[index]['id_todo']).then((value) => getTodos());
-                      }),
+                      }),*/
                   const SizedBox(width: 5,),
                   IconButton(
                       icon: Icon(

@@ -18,8 +18,8 @@ class _EditTagState extends State<EditTag> {
 
   final tags = TagDao.instance;
   TextEditingController customControllerName = TextEditingController();
-  Color pickerColor = const Color(0xFFFF5252);
-  Color currentColor = const Color(0xFFFF5252);
+  Color pickerColor = const Color(0xFFe35b5b);
+  Color currentColor = const Color(0xFFe35b5b);
 
   @override
   void initState() {

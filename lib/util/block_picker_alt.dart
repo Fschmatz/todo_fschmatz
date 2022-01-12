@@ -7,18 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/src/utils.dart';
 
 const List<Color> _defaultColors = [
-  Color(0xFFe35b5b),
+  Color(0xffe35b5b),
   Color(0xFFdb6e8e),
-  Color(0xFFa28bc9),
-  Color(0xFFf2825e),
-  Color(0xFFf5ba67),
-  Color(0xFFedd353),
-  Color(0xFF8dd15a),
-  Color(0xFF55c985),
-  Color(0xFF54c4a4),
-  Color(0xFF64c4de),
+  Color(0xFFB08EFD),
+  Color(0xffa28bc9),
+  Color(0xFF8D9EFE),
   Color(0xFF67a0e0),
+  Color(0xFF64c4de),
+  Color(0xff5dcbab),
+  Color(0xFF55c985),
+  Color(0xFF67C263),
+  Color(0xff8ccb5d),
+  Color(0xFFedd353),
+  Color(0xFFf5ba67),
+  Color(0xFFf2825e),
   Color(0xFF6d848f),
+  Color(0xFF847272),
 ];
 
 typedef PickerLayoutBuilder = Widget Function(
@@ -48,7 +52,7 @@ class BlockPicker extends StatefulWidget {
 
     return SizedBox(
       width: orientation == Orientation.portrait ? 300.0 : 300.0,
-      height: orientation == Orientation.portrait ? 220.0 : 200.0,
+      height: orientation == Orientation.portrait ? 300.0 : 280.0,
       child: GridView.count(
         crossAxisCount: orientation == Orientation.portrait ? 4 : 6,
         crossAxisSpacing: 5.0,
@@ -65,13 +69,6 @@ class BlockPicker extends StatefulWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
         color: color,
-       /* boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.8),
-            offset: const Offset(1.0, 2.0),
-            blurRadius: 3.0,
-          ),
-        ],*/
       ),
       child: Material(
         color: Colors.transparent,

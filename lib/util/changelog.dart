@@ -1,9 +1,18 @@
 class Changelog{
 
-  static String appVersion = "1.1.2";
+  static String appVersion = "2.0.0";
   static String appName = "Todo Fschmatz";
 
   static String changelogCurrent = '''
+2.0.0
+- Create Todos
+- Bug Fixes
+- UI Changes
+- DB Changes
+- More Tag Colors
+''';
+
+  static String changelogsOld = '''
 1.1.2
 - AppBar Popup Menu
 - Bug Fixes
@@ -12,9 +21,7 @@ class Changelog{
 - Task Count
 - Hide FAB
 - Hide AppBar
-''';
 
-  static String changelogsOld = '''
 1.0.0
 - Edit Tasks with Tags OK
 - Logic Changes
