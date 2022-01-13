@@ -208,9 +208,10 @@ class _EditTaskState extends State<EditTask> {
                             selected: false,
                             avatar:
                                 selectedTags.contains(tagsList[index]['id_tag'])
-                                    ? const Icon(
+                                    ? Icon(
                                         Icons.done,
-                                        color: Colors.black,
+                                        color: Color(int.parse(
+                                            tagsList[index]['color'].substring(6, 16))),
                                         size: 18,
                                       )
                                     : null,
@@ -227,17 +228,18 @@ class _EditTaskState extends State<EditTask> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             label: Text(tagsList[index]['name']),
-                            labelStyle: const TextStyle(
+                            labelStyle: TextStyle(
                                 fontSize: 12,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.w500),
+                                color: Color(int.parse(
+                                    tagsList[index]['color'].substring(6, 16))),
+                                fontWeight: FontWeight.w600),
                             backgroundColor: selectedTags
                                     .contains(tagsList[index]['id_tag'])
                                 ? Color(int.parse(
-                                    tagsList[index]['color'].substring(6, 16)))
+                                    tagsList[index]['color'].substring(6, 16))).withOpacity(0.2)
                                 : Color(int.parse(tagsList[index]['color']
                                         .substring(6, 16)))
-                                    .withOpacity(0.9),
+                                    .withOpacity(0.2),
                           ),
                         );
                       }).toList(),

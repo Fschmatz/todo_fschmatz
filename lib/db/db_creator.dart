@@ -75,58 +75,16 @@ class DbCreator {
       'id_todo': 1
     });
 
-    batch.insert('tasks', {
-      'id_task': 2,
-      'title': 'Sem nota',
-      'note': '',
-      'state': 0,
-      'id_todo': 1
-    });
-
-    batch.insert('tasks', {
-      'id_task': 3,
-      'title': 'Sem nota 2',
-      'note': '',
-      'state': 0,
-      'id_todo': 1
-    });
-
-    batch.insert('tasks', {
-      'id_task': 4,
-      'title': 'outro Estado',
-      'note': '',
-      'state': 1,
-      'id_todo': 1
-    });
-
     batch.insert('tags', {
       'id_tag': 1,
-      'name': 'Teste',
-      'color': 'Color(0xFF64CC17)'
+      'name': 'Test',
+      'color': 'Color(0xFFedd353)'
     });
 
     batch.insert('tags', {
       'id_tag': 2,
-      'name': 'Melindres',
-      'color': 'Color(0xFF3792fa)'
-    });
-
-    batch.insert('tags', {
-      'id_tag': 3,
-      'name': 'Cavalo',
-      'color': 'Color(0xFFFF6E40)'
-    });
-
-    batch.insert('tags', {
-      'id_tag': 4,
-      'name': 'Teste 2',
-      'color': 'Color(0xFFFF5252)'
-    });
-
-    batch.insert('tags', {
-      'id_tag': 5,
-      'name': 'Trambiques',
-      'color': 'Color(0xFFDD5C82)'
+      'name': 'Bug',
+      'color': 'Color(0xffe35b5b)'
     });
 
     batch.insert('tasks_tags', {
@@ -139,20 +97,6 @@ class DbCreator {
       'id_tag': 1
     });
 
-    batch.insert('tasks_tags', {
-      'id_task': 1,
-      'id_tag': 3
-    });
-
-    batch.insert('tasks_tags', {
-      'id_task': 2,
-      'id_tag': 4
-    });
-
-    batch.insert('tasks_tags', {
-      'id_task': 1,
-      'id_tag': 5
-    });
 
     await batch.commit(noResult: true);
 
