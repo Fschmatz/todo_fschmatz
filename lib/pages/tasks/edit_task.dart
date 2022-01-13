@@ -42,7 +42,7 @@ class _EditTaskState extends State<EditTask> {
   }
 
   Future<void> getAllTags() async {
-    var resp = await tags.queryAllRows();
+    var resp = await tags.queryAllRowsByName();
     setState(() {
       tagsList = resp;
     });

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:todo_fschmatz/db/current_todo.dart';
 
 class DbCreator {
 
@@ -23,6 +24,8 @@ class DbCreator {
   }
 
   Future _onCreate(Database db, int version) async {
+
+    CurrentTodo().saveToPrefs(1);
 
     await db.execute('''    
            CREATE TABLE todos (

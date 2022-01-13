@@ -37,6 +37,11 @@ class TagDao {
     return await db.query(table);
   }
 
+  Future<List<Map<String, dynamic>>> queryAllRowsByName() async {
+    Database db = await instance.database;
+    return await db.rawQuery('SELECT * FROM $table ORDER BY $columnName');
+  }
+
   Future<List<Map<String, dynamic>>> queryAllRowsDesc() async {
     Database db = await instance.database;
     return await db.rawQuery('SELECT * FROM $table ORDER BY id DESC');
@@ -56,7 +61,19 @@ class TagDao {
   Future<List<Map<String, dynamic>>> getTags(int idTask) async {
     Database db = await instance.database;
     return await db.rawQuery('''    
-          SELECT tg.id_tag, tg.name, tg.color FROM tags tg,tasks_tags tt WHERE tt.id_task = $idTask AND tg.id_tag=tt.id_tag GROUP BY tg.id_tag     
+          SELECT tg.id_tag, tg.name, tg.color FROM tags tg,tasks_tags tt 
+          WHERE tt.id_task = $idTask AND tg.id_tag=tt.id_tag 
+          GROUP BY tg.id_tag     
+        ''');
+  }
+
+  Future<List<Map<String, dynamic>>> getTagsByName(int idTask) async {
+    Database db = await instance.database;
+    return await db.rawQuery('''    
+          SELECT tg.id_tag, tg.name, tg.color FROM tags tg,tasks_tags tt 
+          WHERE tt.id_task = $idTask AND tg.id_tag=tt.id_tag 
+          GROUP BY tg.id_tag    
+          ORDER BY tg.name 
         ''');
   }
 

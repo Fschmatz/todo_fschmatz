@@ -28,7 +28,7 @@ class _TaskCardState extends State<TaskCard> {
   }
 
   void getTags() async {
-    var resp = await tags.getTags(widget.task.id);
+    var resp = await tags.getTagsByName(widget.task.id);
     if (mounted) {
       setState(() {
         tagsList = resp;
@@ -264,7 +264,7 @@ class _TaskCardState extends State<TaskCard> {
                             color: Colors.black87,
                             fontWeight: FontWeight.w500),
                         backgroundColor: Color(int.parse(
-                            tagsList[index]['color'].substring(6, 16))),
+                            tagsList[index]['color'].substring(6, 16))).withOpacity(0.9),
                       ),
                     );
                   }).toList(),

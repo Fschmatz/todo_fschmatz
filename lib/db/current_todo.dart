@@ -11,13 +11,10 @@ class CurrentTodo  {
 
   Future<int> loadFromPrefs() async {
     await _initPrefs();
-    return prefs.getInt(key) ?? 0;
+    return prefs.getInt(key) ?? 1;
   }
 
   saveToPrefs(int idTodo) async {
-
-    print(idTodo.toString());
-
     await _initPrefs();
     prefs.setInt(key, idTodo);
   }

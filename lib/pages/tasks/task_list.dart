@@ -95,8 +95,8 @@ class _TaskListState extends State<TaskList>
           return <Widget>[
             SliverAppBar(
               title: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  child: todoName.isEmpty ? const Text(" ") : Text(todoName)
+                  duration: const Duration(milliseconds: 600),
+                  child: loading ? const Text(" ") : Text(todoName)
               ),
               pinned: false,
               floating: true,
@@ -143,7 +143,7 @@ class _TaskListState extends State<TaskList>
         body: NotificationListener<ScrollNotification>(
           onNotification: _handleScrollNotification,
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 600),
             child: loading
                 ? const Center(child: SizedBox.shrink())
                 : tasksList.isEmpty

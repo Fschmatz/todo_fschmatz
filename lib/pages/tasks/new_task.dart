@@ -35,7 +35,7 @@ class _NewTaskState extends State<NewTask> {
   }
 
   Future<void> getAllTags() async {
-    var resp = await tags.queryAllRows();
+    var resp = await tags.queryAllRowsByName();
     setState(() {
       tagsList = resp;
       loadingTags = false;

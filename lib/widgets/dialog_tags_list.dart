@@ -14,7 +14,7 @@ class DialogTagsList extends StatefulWidget {
 class _DialogTagsListState extends State<DialogTagsList> {
   bool loadingTags = true;
   final tags = TagDao.instance;
-  List<Map<String, dynamic>> tagsList = [];
+  List<Map<String, dynamic>> _tagsList = [];
 
   @override
   void initState() {
@@ -29,9 +29,50 @@ class _DialogTagsListState extends State<DialogTagsList> {
   Future<void> getTags() async {
     var resp = await tags.queryAllRows();
     setState(() {
-      tagsList = resp;
+      _tagsList = resp;
       loadingTags = false;
     });
+  }
+
+  showAlertDialogOkDelete(BuildContext context,idTag) {
+    Widget okButton = TextButton(
+      child: Text(
+        "Yes",
+        style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.secondary),
+      ),
+      onPressed: () {
+        _delete(idTag).then((value) => getTags());
+        Navigator.of(context).pop();
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      title: const Text(
+        "Confirm", //
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      content: const Text(
+        "\nDelete ?",
+        style: TextStyle(
+          fontSize: 16,
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override
@@ -74,19 +115,19 @@ class _DialogTagsListState extends State<DialogTagsList> {
         width: 350.0,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: tagsList.length,
+          itemCount: _tagsList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
                 leading: Icon(Icons.circle,
                     color: Color(
-                        int.parse(tagsList[index]['color'].substring(6, 16)))),
-                title: Text(tagsList[index]['name']),
+                        int.parse(_tagsList[index]['color'].substring(6, 16)))),
+                title: Text(_tagsList[index]['name']),
                 trailing:
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IconButton(
+                    _tagsList.length > 1 ? IconButton(
                         icon: Icon(
                           Icons.delete_outlined,
                           color: Theme.of(context)
@@ -96,8 +137,8 @@ class _DialogTagsListState extends State<DialogTagsList> {
                               .withOpacity(0.8),
                         ),
                         onPressed: () {
-                          _delete(tagsList[index]['id_tag']).then((value) => getTags());
-                        }),
+                          showAlertDialogOkDelete(context,_tagsList[index]['id_tag']);
+                        }) : const SizedBox.shrink(),
                     const SizedBox(width: 5,),
                     IconButton(
                         icon: Icon(
@@ -114,9 +155,9 @@ class _DialogTagsListState extends State<DialogTagsList> {
                               MaterialPageRoute<void>(
                                 builder: (BuildContext context) => EditTag(
                                   tag: Tag(
-                                      tagsList[index]['id_tag'],
-                                      tagsList[index]['name'],
-                                      tagsList[index]['color'],
+                                      _tagsList[index]['id_tag'],
+                                      _tagsList[index]['name'],
+                                      _tagsList[index]['color'],
                                   ),
                                 ),
                                 fullscreenDialog: true,
@@ -125,9 +166,6 @@ class _DialogTagsListState extends State<DialogTagsList> {
                   ],
                 ),
             );
-
-
-           // const Icon(Icons.edit_outlined));
           },
         ),
       ),

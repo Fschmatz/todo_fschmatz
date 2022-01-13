@@ -79,12 +79,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: _currentIdTodo != 0
           ? _tabs[_currentTabIndex]
-          : const Center(
-              child: Text(
-              "Please Create a Todo",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            )),
+          : const SizedBox.shrink(),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentTabIndex,
         onDestinationSelected: (index) {

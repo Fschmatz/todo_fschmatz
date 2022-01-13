@@ -43,6 +43,47 @@ class _DialogTodosListState extends State<DialogTodosList> {
     _todoList.toString();
   }
 
+  showAlertDialogOkDelete(BuildContext context,idTodo) {
+    Widget okButton = TextButton(
+      child: Text(
+        "Yes",
+        style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.secondary),
+      ),
+      onPressed: () {
+        _delete(idTodo).then((value) => getTodos());
+        Navigator.of(context).pop();
+      },
+    );
+
+    AlertDialog alert = AlertDialog(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      title: const Text(
+        "Confirm", //
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      content: const Text(
+        "\nDelete ?",
+        style: TextStyle(
+          fontSize: 16,
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -99,7 +140,7 @@ class _DialogTodosListState extends State<DialogTodosList> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  /*IconButton(
+                  _todoList.length > 1 ? IconButton(
                       icon: Icon(
                         Icons.delete_outlined,
                         color: Theme.of(context)
@@ -109,8 +150,8 @@ class _DialogTodosListState extends State<DialogTodosList> {
                             .withOpacity(0.8),
                       ),
                       onPressed: () {
-                        _delete(_todoList[index]['id_todo']).then((value) => getTodos());
-                      }),*/
+                        showAlertDialogOkDelete(context,_todoList[index]['id_todo']);
+                      }) : const SizedBox.shrink(),
                   const SizedBox(width: 5,),
                   IconButton(
                       icon: Icon(
