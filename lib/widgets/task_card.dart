@@ -267,7 +267,7 @@ class _TaskCardState extends State<TaskCard> {
                               backgroundColor: Color(int.parse(tagsList[index]
                                           ['color']
                                       .substring(6, 16)))
-                                  .withOpacity(0.2),
+                                  .withOpacity(0.3),
                             ),
                           );
                         }).toList(),

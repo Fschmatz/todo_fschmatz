@@ -214,10 +214,10 @@ class _NewTaskState extends State<NewTask> {
                             backgroundColor: selectedTags
                                     .contains(tagsList[index]['id_tag'])
                                 ? Color(int.parse(
-                                    tagsList[index]['color'].substring(6, 16))).withOpacity(0.2)
+                                    tagsList[index]['color'].substring(6, 16))).withOpacity(0.3)
                                 : Color(int.parse(tagsList[index]['color']
                                         .substring(6, 16)))
-                                    .withOpacity(0.2),
+                                    .withOpacity(0.3),
                           ),
                         );
                       }).toList(),

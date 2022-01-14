@@ -22,7 +22,7 @@ const List<Color> _defaultColors = [
   Color(0xfff5a967),
   Color(0xFFf2825e),
   Color(0xFF6d848f),
-  Color(0xFF927878),
+  Color(0xFF8E6D6D),
 ];
 
 typedef PickerLayoutBuilder = Widget Function(

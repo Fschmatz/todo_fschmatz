@@ -4,18 +4,22 @@ import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/configs/settings_page.dart';
+import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
-import 'package:todo_fschmatz/widgets/dialog_todos_list.dart';
+import 'package:todo_fschmatz/widgets/todos_list.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
 
 class TaskList extends StatefulWidget {
-
   int state;
   int currentIdTodo;
   Function(int) changeCurrentTodo;
 
-  TaskList({Key? key, required this.state, required this.currentIdTodo, required this.changeCurrentTodo})
+  TaskList(
+      {Key? key,
+      required this.state,
+      required this.currentIdTodo,
+      required this.changeCurrentTodo})
       : super(key: key);
 
   @override
@@ -25,7 +29,8 @@ class TaskList extends StatefulWidget {
 class _TaskListState extends State<TaskList>
     with TickerProviderStateMixin<TaskList> {
   List<Map<String, dynamic>> tasksList = [];
-  bool loading = true;
+  bool loadingName = true;
+  bool loadingBody = true;
   late AnimationController _hideFabAnimation;
   String todoName = "";
 
@@ -43,15 +48,17 @@ class _TaskListState extends State<TaskList>
     var resp = await tasks.getTodoName(widget.currentIdTodo);
     setState(() {
       todoName = resp[0]['name'];
+      loadingName = false;
     });
   }
 
   Future<void> getAllTasksByTodoAndState() async {
     final tasks = TaskDao.instance;
-    var resp = await tasks.queryAllByTodoAndStateDesc(widget.state,widget.currentIdTodo);
+    var resp = await tasks.queryAllByTodoAndStateDesc(
+        widget.state, widget.currentIdTodo);
     setState(() {
       tasksList = resp;
-      loading = false;
+      loadingBody = false;
     });
   }
 
@@ -90,61 +97,94 @@ class _TaskListState extends State<TaskList>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: SizedBox(
+        width: 360,
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const ListTile(
+                contentPadding: EdgeInsets.fromLTRB(28, 0, 28, 16),
+                title: Text(
+                  'Todo Fschmatz',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+              TodosList(
+                changeCurrentTodo: widget.changeCurrentTodo,
+                currentIdTodo: widget.currentIdTodo,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(),
+              ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(28, 16, 28, 0),
+                title: const Text('New Todo'),
+                leading: const Icon(
+                  Icons.add_outlined,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const NewTodo(),
+                        fullscreenDialog: true,
+                      ));
+                },
+              ),
+              ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
+                leading: const Icon(
+                  Icons.label_outline_rounded,
+                ),
+                title: const Text('Manage Tags'),
+                onTap: () {
+                  Navigator.pop(context);
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const DialogTagsList();
+                      });
+                },
+              ),
+              ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
+                leading: const Icon(
+                  Icons.settings_outlined,
+                ),
+                title: const Text('Settings'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const SettingsPage(),
+                        fullscreenDialog: true,
+                      ));
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              title: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 600),
-                  child: loading ? const Text(" ") : Text(todoName)
-              ),
+              title: loadingName ? const Text(" ") : Text(todoName),
               pinned: false,
               floating: true,
               snap: true,
-              actions: [
-                PopupMenuButton<int>(
-                    itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-                          const PopupMenuItem<int>(
-                              value: 0, child: Text('Todos')),
-                          const PopupMenuItem<int>(
-                              value: 1, child: Text('Tags')),
-                          const PopupMenuItem<int>(
-                              value: 2, child: Text('Settings')),
-                        ],
-                    onSelected: (int value) {
-                      if (value == 0) {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return DialogTodosList(
-                                changeCurrentTodo: widget.changeCurrentTodo,
-                              );
-                            });
-                      } else if (value == 1) {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const DialogTagsList();
-                            });
-                      } else if (value == 2) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) =>
-                                  const SettingsPage(),
-                              fullscreenDialog: true,
-                            ));
-                      }
-                    })
-              ],
             ),
           ];
         },
         body: NotificationListener<ScrollNotification>(
           onNotification: _handleScrollNotification,
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 600),
-            child: loading
+            duration: const Duration(milliseconds: 650),
+            child: loadingBody
                 ? const Center(child: SizedBox.shrink())
                 : tasksList.isEmpty
                     ? const Center(
