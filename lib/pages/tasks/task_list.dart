@@ -5,6 +5,7 @@ import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/configs/settings_page.dart';
 import 'package:todo_fschmatz/pages/todos/new_todo.dart';
+import 'package:todo_fschmatz/widgets/dialog_manage_todos.dart';
 import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
 import 'package:todo_fschmatz/widgets/todos_list.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
@@ -97,76 +98,94 @@ class _TaskListState extends State<TaskList>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SizedBox(
-        width: 360,
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const ListTile(
-                contentPadding: EdgeInsets.fromLTRB(28, 0, 28, 16),
-                title: Text(
-                  'Todo Fschmatz',
-                  style: TextStyle(fontSize: 16),
-                ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const ListTile(
+              contentPadding: EdgeInsets.fromLTRB(28, 0, 28, 0),
+              title: Text(
+                'Todo Fschmatz',
+                style: TextStyle(fontSize: 16),
               ),
-              TodosList(
-                changeCurrentTodo: widget.changeCurrentTodo,
-                currentIdTodo: widget.currentIdTodo,
+            ),
+            const Divider(),
+            ListTile(
+              contentPadding: const EdgeInsets.fromLTRB(28, 0, 16, 0),
+              title: const Text(
+                'My Todos',
+                style: TextStyle(fontSize: 16),
               ),
-              const SizedBox(
-                height: 10,
+              trailing: IconButton(
+                  icon: const Icon(
+                    Icons.edit_outlined,
+                    size: 20,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return DialogManageTodos();
+                        });
+                  }),
+            ),
+            TodosList(
+              changeCurrentTodo: widget.changeCurrentTodo,
+              currentIdTodo: widget.currentIdTodo,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ListTile(
+              contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
+              title: const Text('New Todo'),
+              leading: const Icon(
+                Icons.add_outlined,
               ),
-              const Divider(),
-              ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(28, 16, 28, 0),
-                title: const Text('New Todo'),
-                leading: const Icon(
-                  Icons.add_outlined,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const NewTodo(),
-                        fullscreenDialog: true,
-                      ));
-                },
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const NewTodo(),
+                      fullscreenDialog: true,
+                    ));
+              },
+            ),
+            const Divider(),
+            ListTile(
+              contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
+              leading: const Icon(
+                Icons.label_outline_rounded,
               ),
-              ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
-                leading: const Icon(
-                  Icons.label_outline_rounded,
-                ),
-                title: const Text('Manage Tags'),
-                onTap: () {
-                  Navigator.pop(context);
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const DialogTagsList();
-                      });
-                },
+              title: const Text('Manage Tags'),
+              onTap: () {
+                Navigator.pop(context);
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const DialogTagsList();
+                    });
+              },
+            ),
+            ListTile(
+              contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
+              leading: const Icon(
+                Icons.settings_outlined,
               ),
-              ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
-                leading: const Icon(
-                  Icons.settings_outlined,
-                ),
-                title: const Text('Settings'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => const SettingsPage(),
-                        fullscreenDialog: true,
-                      ));
-                },
-              ),
-            ],
-          ),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => const SettingsPage(),
+                      fullscreenDialog: true,
+                    ));
+              },
+            ),
+          ],
         ),
       ),
       body: NestedScrollView(

@@ -101,7 +101,7 @@ class _TodosListState extends State<TodosList> {
             borderRadius: BorderRadius.all(Radius.circular(50)),
           ),
           key: UniqueKey(),
-          contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
+          contentPadding: const EdgeInsets.fromLTRB(12, 0, 5, 0),
           title: Text(_todoList[index]['name'],
                style: _todoList[index]['id_todo'] == widget.currentIdTodo
                    ? TextStyle(color: Theme.of(context).colorScheme.primary)
@@ -113,47 +113,6 @@ class _TodosListState extends State<TodosList> {
               Navigator.of(context).pop();
             });
           },
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _todoList.length > 1
-                  ? IconButton(
-                      icon: Icon(
-                        Icons.delete_outlined,
-                        color:  _todoList[index]['id_todo'] == widget.currentIdTodo
-                            ? Theme.of(context).colorScheme.primary
-                            : null
-                      ),
-                      onPressed: () {
-                        showAlertDialogOkDelete(
-                            context, _todoList[index]['id_todo']);
-                      })
-                  : const SizedBox.shrink(),
-              const SizedBox(
-                width: 5,
-              ),
-              IconButton(
-                  icon: Icon(
-                    Icons.edit_outlined,
-                      color:  _todoList[index]['id_todo'] == widget.currentIdTodo
-                          ? Theme.of(context).colorScheme.primary
-                          : null
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (BuildContext context) => EditTodo(
-                            todo: Todo(
-                              _todoList[index]['id_todo'],
-                              _todoList[index]['name'],
-                            ),
-                          ),
-                          fullscreenDialog: true,
-                        )).then((value) => getTodos());
-                  }),
-            ],
-          ),
         );
       },
     );
