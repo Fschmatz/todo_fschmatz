@@ -103,42 +103,21 @@ class _TaskListState extends State<TaskList>
           padding: EdgeInsets.zero,
           children: [
             const ListTile(
-              contentPadding: EdgeInsets.fromLTRB(28, 0, 28, 0),
               title: Text(
                 'Todo Fschmatz',
                 style: TextStyle(fontSize: 16),
               ),
             ),
             const Divider(),
-            ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(28, 0, 16, 0),
-              title: const Text(
-                'My Todos',
-                style: TextStyle(fontSize: 16),
-              ),
-              trailing: IconButton(
-                  icon: const Icon(
-                    Icons.edit_outlined,
-                    size: 20,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return DialogManageTodos();
-                        });
-                  }),
-            ),
+
             TodosList(
               changeCurrentTodo: widget.changeCurrentTodo,
               currentIdTodo: widget.currentIdTodo,
             ),
-            const SizedBox(
+           /* const SizedBox(
               height: 10,
             ),
             ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
               title: const Text('New Todo'),
               leading: const Icon(
                 Icons.add_outlined,
@@ -152,10 +131,24 @@ class _TaskListState extends State<TaskList>
                       fullscreenDialog: true,
                     ));
               },
-            ),
+            ),*/
             const Divider(),
             ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
+                leading: const Icon(
+                  Icons.done_all_outlined,
+                ),
+                title: const Text(
+                  'Manage Todos',
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return DialogManageTodos();
+                      });
+                }),
+            ListTile(
               leading: const Icon(
                 Icons.label_outline_rounded,
               ),
@@ -170,7 +163,6 @@ class _TaskListState extends State<TaskList>
               },
             ),
             ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
               leading: const Icon(
                 Icons.settings_outlined,
               ),

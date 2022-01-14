@@ -3,6 +3,7 @@ import 'package:todo_fschmatz/classes/todo.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
+import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 
 class DialogManageTodos extends StatefulWidget {
 
@@ -90,8 +91,23 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
       contentPadding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.fromLTRB(16, 25, 0, 24),
       title: const Text('Manage Todos'),
-      actionsAlignment: MainAxisAlignment.end,
+      actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
+        TextButton(
+          child: const Text(
+            "New Todo",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const NewTodo(),
+                  fullscreenDialog: true,
+                )).then((value) => getTodos());
+          },
+        ),
         TextButton(
           child: const Text(
             "Close",

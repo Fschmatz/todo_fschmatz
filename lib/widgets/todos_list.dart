@@ -86,25 +86,17 @@ class _TodosListState extends State<TodosList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      separatorBuilder:  (BuildContext context, int index) => const SizedBox(height: 10,),
-      padding : const EdgeInsets.fromLTRB(16, 0, 16, 0),
+    return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: _todoList.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          tileColor: _todoList[index]['id_todo'] == widget.currentIdTodo
-              ? Theme.of(context).cardTheme.color
-              : Colors.transparent,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-          ),
           key: UniqueKey(),
-          contentPadding: const EdgeInsets.fromLTRB(12, 0, 5, 0),
+          //leading: const SizedBox.shrink(),
           title: Text(_todoList[index]['name'],
                style: _todoList[index]['id_todo'] == widget.currentIdTodo
-                   ? TextStyle(color: Theme.of(context).colorScheme.primary)
+                   ? TextStyle(color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w600)
                    : null
           ),
           onTap: () {
