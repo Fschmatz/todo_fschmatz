@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/db/current_todo.dart';
+import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/tasks/task_list.dart';
 
 class Home extends StatefulWidget {
@@ -12,31 +13,50 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentTabIndex = 0;
   int _currentIdTodo = 0;
-  List<Widget> _tabs = [];
+  List<Widget> _tabs = [const SizedBox()];
+  String todoName = ' ';
+  bool loading = true;
 
   @override
   void initState() {
     super.initState();
-    loadCurrentTodo().then((value) => _tabs = [
-          TaskList(
-            key: UniqueKey(),
-            state: 0,
-            currentIdTodo: _currentIdTodo,
-            changeCurrentTodo: changeCurrentTodo,
-          ),
-          TaskList(
-            key: UniqueKey(),
-            state: 1,
-            currentIdTodo: _currentIdTodo,
-            changeCurrentTodo: changeCurrentTodo,
-          ),
-          TaskList(
-            key: UniqueKey(),
-            state: 2,
-            currentIdTodo: _currentIdTodo,
-            changeCurrentTodo: changeCurrentTodo,
-          ),
-        ]);
+    appStartFunctions();
+  }
+
+  void appStartFunctions() async {
+    await loadCurrentTodo();
+    await getTodoName();
+    _tabs = [
+      TaskList(
+        key: UniqueKey(),
+        state: 0,
+        currentIdTodo: _currentIdTodo,
+        changeCurrentTodo: changeCurrentTodo,
+        todoName: todoName,
+      ),
+      TaskList(
+        key: UniqueKey(),
+        state: 1,
+        currentIdTodo: _currentIdTodo,
+        changeCurrentTodo: changeCurrentTodo,
+        todoName: todoName,
+      ),
+      TaskList(
+        key: UniqueKey(),
+        state: 2,
+        currentIdTodo: _currentIdTodo,
+        changeCurrentTodo: changeCurrentTodo,
+        todoName: todoName,
+      ),
+    ];
+  }
+
+  Future<void> getTodoName() async {
+    final tasks = TodoDao.instance;
+    var resp = await tasks.getTodoName(_currentIdTodo);
+    setState(() {
+      todoName = resp[0]['name'];
+    });
   }
 
   Future<void> loadCurrentTodo() async {
@@ -49,6 +69,7 @@ class _HomeState extends State<Home> {
   Future<void> changeCurrentTodo(int idTodo) async {
     CurrentTodo().saveToPrefs(idTodo);
     _currentIdTodo = idTodo;
+    await getTodoName();
 
     setState(() {
       _tabs = [
@@ -57,18 +78,21 @@ class _HomeState extends State<Home> {
           state: 0,
           currentIdTodo: _currentIdTodo,
           changeCurrentTodo: changeCurrentTodo,
+          todoName: todoName,
         ),
         TaskList(
           key: UniqueKey(),
           state: 1,
           currentIdTodo: _currentIdTodo,
           changeCurrentTodo: changeCurrentTodo,
+          todoName: todoName,
         ),
         TaskList(
           key: UniqueKey(),
           state: 2,
           currentIdTodo: _currentIdTodo,
           changeCurrentTodo: changeCurrentTodo,
+          todoName: todoName,
         ),
       ];
     });

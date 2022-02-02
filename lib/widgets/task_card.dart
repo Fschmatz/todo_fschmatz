@@ -70,8 +70,7 @@ class _TaskCardState extends State<TaskCard> {
                   Visibility(
                     visible: widget.task.state != 0,
                     child: ListTile(
-                      leading: Icon(Icons.list_outlined,
-                          color: Theme.of(context).hintColor),
+                      leading: const Icon(Icons.list_outlined),
                       title: const Text(
                         "Mark as todo",
                         style: TextStyle(fontSize: 16),
@@ -90,8 +89,7 @@ class _TaskCardState extends State<TaskCard> {
                   Visibility(
                     visible: widget.task.state != 1,
                     child: ListTile(
-                      leading: Icon(Icons.construction_outlined,
-                          color: Theme.of(context).hintColor),
+                      leading: const Icon(Icons.construction_outlined),
                       title: const Text(
                         "Mark as doing",
                         style: TextStyle(fontSize: 16),
@@ -110,8 +108,7 @@ class _TaskCardState extends State<TaskCard> {
                   Visibility(
                     visible: widget.task.state != 2,
                     child: ListTile(
-                      leading: Icon(Icons.checklist_outlined,
-                          color: Theme.of(context).hintColor),
+                      leading: const Icon(Icons.checklist_outlined),
                       title: const Text(
                         "Mark as done",
                         style: TextStyle(fontSize: 16),
@@ -128,8 +125,7 @@ class _TaskCardState extends State<TaskCard> {
                     child: const Divider(),
                   ),
                   ListTile(
-                    leading: Icon(Icons.edit_outlined,
-                        color: Theme.of(context).hintColor),
+                    leading: const Icon(Icons.edit_outlined),
                     title: const Text(
                       "Edit",
                       style: TextStyle(fontSize: 16),
@@ -150,8 +146,7 @@ class _TaskCardState extends State<TaskCard> {
                   ),
                   const Divider(),
                   ListTile(
-                    leading: Icon(Icons.delete_outline_outlined,
-                        color: Theme.of(context).hintColor),
+                    leading: const Icon(Icons.delete_outline_outlined),
                     title: const Text(
                       "Delete",
                       style: TextStyle(fontSize: 16),

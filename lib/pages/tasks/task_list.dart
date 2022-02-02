@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:todo_fschmatz/classes/filter.dart';
 import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
-import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/configs/settings_page.dart';
-import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 import 'package:todo_fschmatz/widgets/dialog_manage_todos.dart';
 import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
 import 'package:todo_fschmatz/widgets/todos_list.dart';
@@ -15,10 +14,12 @@ class TaskList extends StatefulWidget {
   int state;
   int currentIdTodo;
   Function(int) changeCurrentTodo;
+  String todoName;
 
   TaskList(
       {Key? key,
       required this.state,
+      required this.todoName,
       required this.currentIdTodo,
       required this.changeCurrentTodo})
       : super(key: key);
@@ -33,7 +34,13 @@ class _TaskListState extends State<TaskList>
   bool loadingName = true;
   bool loadingBody = true;
   late AnimationController _hideFabAnimation;
-  String todoName = "";
+
+  final List<Filter> _filtersList = [
+    Filter('Newest', 'id_task DESC'),
+    Filter('Oldest', 'id_task ASC'),
+    Filter('Title', 'title ASC'),
+  ];
+  int selectedFilter = 0;
 
   @override
   void initState() {
@@ -41,19 +48,20 @@ class _TaskListState extends State<TaskList>
     _hideFabAnimation =
         AnimationController(vsync: this, duration: kThemeAnimationDuration);
     _hideFabAnimation.forward();
-    getTodoName().then((value) => getAllTasksByTodoAndState());
+    getAllTasksByTodoStateFilter();
   }
 
-  Future<void> getTodoName() async {
-    final tasks = TodoDao.instance;
-    var resp = await tasks.getTodoName(widget.currentIdTodo);
+  Future<void> getAllTasksByTodoStateFilter() async {
+    final tasks = TaskDao.instance;
+    var resp = await tasks.queryAllByTodoStateFilter(widget.state,
+        widget.currentIdTodo, _filtersList[selectedFilter].dbName);
     setState(() {
-      todoName = resp[0]['name'];
-      loadingName = false;
+      tasksList = resp;
+      loadingBody = false;
     });
   }
 
-  Future<void> getAllTasksByTodoAndState() async {
+  /*Future<void> getAllTasksByTodoAndState() async {
     final tasks = TaskDao.instance;
     var resp = await tasks.queryAllByTodoAndStateDesc(
         widget.state, widget.currentIdTodo);
@@ -61,7 +69,7 @@ class _TaskListState extends State<TaskList>
       tasksList = resp;
       loadingBody = false;
     });
-  }
+  }*/
 
   @override
   void dispose() {
@@ -95,6 +103,86 @@ class _TaskListState extends State<TaskList>
     return false;
   }
 
+  void openFilterMenu() {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+        ),
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: Wrap(
+                children: <Widget>[
+                  const ListTile(
+                    leading: Icon(Icons.filter_list_outlined),
+                    title: Text(
+                      "Order By",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const SizedBox.shrink(),
+                    title: Text(
+                      _filtersList[0].name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: selectedFilter == 0
+                            ? Theme.of(context).colorScheme.primary
+                            : null,
+                      ),
+                    ),
+                    onTap: () {
+                      selectedFilter = 0;
+                      getAllTasksByTodoStateFilter();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                    leading: const SizedBox.shrink(),
+                    title: Text(
+                      _filtersList[1].name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: selectedFilter == 1
+                            ? Theme.of(context).colorScheme.primary
+                            : null,
+                      ),
+                    ),
+                    onTap: () {
+                      selectedFilter = 1;
+                      getAllTasksByTodoStateFilter();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                    leading: const SizedBox.shrink(),
+                    title: Text(
+                      _filtersList[2].name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: selectedFilter == 2
+                            ? Theme.of(context).colorScheme.primary
+                            : null,
+                      ),
+                    ),
+                    onTap: () {
+                      selectedFilter = 2;
+                      getAllTasksByTodoStateFilter();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,29 +197,10 @@ class _TaskListState extends State<TaskList>
               ),
             ),
             const Divider(),
-
             TodosList(
               changeCurrentTodo: widget.changeCurrentTodo,
               currentIdTodo: widget.currentIdTodo,
             ),
-           /* const SizedBox(
-              height: 10,
-            ),
-            ListTile(
-              title: const Text('New Todo'),
-              leading: const Icon(
-                Icons.add_outlined,
-              ),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const NewTodo(),
-                      fullscreenDialog: true,
-                    ));
-              },
-            ),*/
             const Divider(),
             ListTile(
                 leading: const Icon(
@@ -184,7 +253,8 @@ class _TaskListState extends State<TaskList>
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              title: loadingName ? const Text(" ") : Text(todoName),
+              //title: loadingName ? const Text(" ") : Text(todoName),
+              title: Text(widget.todoName),
               pinned: false,
               floating: true,
               snap: true,
@@ -209,9 +279,9 @@ class _TaskListState extends State<TaskList>
                         physics: const AlwaysScrollableScrollPhysics(),
                         children: [
                             ListTile(
-                              onTap: () {},
+                              onTap: openFilterMenu,
                               leading: const Icon(Icons.filter_list_outlined),
-                              title: const Text("Last Added"),
+                              title: Text(_filtersList[selectedFilter].name),
                               trailing: Text(tasksList.length != 1
                                   ? tasksList.length.toString() + " Tasks"
                                   : tasksList.length.toString() + " Task"),
@@ -219,7 +289,6 @@ class _TaskListState extends State<TaskList>
                             ListView.separated(
                               separatorBuilder:
                                   (BuildContext context, int index) =>
-                                      //const Divider(height: 0,),
                                       const SizedBox(
                                 height: 5,
                               ),
@@ -236,7 +305,7 @@ class _TaskListState extends State<TaskList>
                                     tasksList[index]['state'],
                                     tasksList[index]['id_todo'],
                                   ),
-                                  refreshHome: getAllTasksByTodoAndState,
+                                  refreshHome: getAllTasksByTodoStateFilter,
                                 );
                               },
                             ),
@@ -259,7 +328,7 @@ class _TaskListState extends State<TaskList>
                 MaterialPageRoute<void>(
                   builder: (BuildContext context) => NewTask(
                     state: widget.state,
-                    getAllTasksByState: getAllTasksByTodoAndState,
+                    getAllTasksByState: getAllTasksByTodoStateFilter,
                     currentIdTodo: widget.currentIdTodo,
                   ),
                   fullscreenDialog: true,
