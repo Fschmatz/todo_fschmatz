@@ -1,11 +1,12 @@
 class Changelog{
 
-  static String appVersion = "2.2.0";
+  static String appVersion = "2.2.1";
   static String appName = "Todo Fschmatz";
 
   static String changelogCurrent = '''
-2.2.0
+2.2.1
 - Filters
+- Added System Theme
 - Bug Fixes
 ''';
 
