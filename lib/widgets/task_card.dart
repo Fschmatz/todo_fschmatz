@@ -209,6 +209,9 @@ class _TaskCardState extends State<TaskCard> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Brightness _tagTextBrightness = Theme.of(context).brightness;
+
     return Card(
       margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
       child: InkWell(
@@ -257,8 +260,11 @@ class _TaskCardState extends State<TaskCard> {
                               label: Text(tagsList[index]['name']),
                               labelStyle: TextStyle(
                                   fontSize: 12,
-                                  color: parseColorFromDb(
-                                      tagsList[index]['color']),
+                                  color: _tagTextBrightness == Brightness.dark ?
+                                  lightenColor(parseColorFromDb(
+                                      tagsList[index]['color']),40)
+                                      : darkenColor(parseColorFromDb(
+                                      tagsList[index]['color']),50),
                                   fontWeight: FontWeight.w600),
                               backgroundColor:
                                   parseColorFromDb(tagsList[index]['color'])

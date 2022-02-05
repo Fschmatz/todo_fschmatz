@@ -6,8 +6,9 @@ import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 
 class DialogManageTodos extends StatefulWidget {
+  int currentIdTodo;
 
-  DialogManageTodos({Key? key}) : super(key: key);
+  DialogManageTodos({Key? key,required this.currentIdTodo}) : super(key: key);
 
   @override
   _DialogManageTodosState createState() => _DialogManageTodosState();
@@ -134,7 +135,7 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _todoList.length > 1 ? IconButton(
+                  _todoList.length > 1 && _todoList[index]['id_todo'] != widget.currentIdTodo ? IconButton(
                       icon: Icon(
                         Icons.delete_outlined,
                         color: Theme.of(context)

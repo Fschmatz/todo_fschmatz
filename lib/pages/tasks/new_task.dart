@@ -74,6 +74,9 @@ class _NewTaskState extends State<NewTask> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Brightness _tagTextBrightness = Theme.of(context).brightness;
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("New Task"),
@@ -190,8 +193,11 @@ class _NewTaskState extends State<NewTask> {
                                 selectedTags.contains(tagsList[index]['id_tag'])
                                     ? Icon(
                                         Icons.done,
-                                        color: parseColorFromDb(
-                                            tagsList[index]['color']),
+                                  color: _tagTextBrightness == Brightness.dark ?
+                                  lightenColor(parseColorFromDb(
+                                      tagsList[index]['color']),40)
+                                      : darkenColor(parseColorFromDb(
+                                      tagsList[index]['color']),50),
                                         size: 18,
                                       )
                                     : null,
@@ -210,8 +216,11 @@ class _NewTaskState extends State<NewTask> {
                             label: Text(tagsList[index]['name']),
                             labelStyle: TextStyle(
                                 fontSize: 12,
-                                color: parseColorFromDb(
-                                    tagsList[index]['color']),
+                                color: _tagTextBrightness == Brightness.dark ?
+                                lightenColor(parseColorFromDb(
+                                    tagsList[index]['color']),40)
+                                    : darkenColor(parseColorFromDb(
+                                    tagsList[index]['color']),50),
                                 fontWeight: FontWeight.w600),
                             backgroundColor: selectedTags
                                     .contains(tagsList[index]['id_tag'])

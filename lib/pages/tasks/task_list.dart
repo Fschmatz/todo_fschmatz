@@ -61,15 +61,6 @@ class _TaskListState extends State<TaskList>
     });
   }
 
-  /*Future<void> getAllTasksByTodoAndState() async {
-    final tasks = TaskDao.instance;
-    var resp = await tasks.queryAllByTodoAndStateDesc(
-        widget.state, widget.currentIdTodo);
-    setState(() {
-      tasksList = resp;
-      loadingBody = false;
-    });
-  }*/
 
   @override
   void dispose() {
@@ -214,7 +205,9 @@ class _TaskListState extends State<TaskList>
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return DialogManageTodos();
+                        return DialogManageTodos(
+                          currentIdTodo: widget.currentIdTodo,
+                        );
                       });
                 }),
             ListTile(
