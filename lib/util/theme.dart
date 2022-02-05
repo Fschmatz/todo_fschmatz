@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 ThemeData light = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
-    primaryColorBrightness: Brightness.dark,
     primaryColor: const Color(0xFFF0F2F2),
     canvasColor: const Color(0xFFF0F2F2),
     scaffoldBackgroundColor: const Color(0xFFF0F2F2),
     colorScheme: ColorScheme.light(
       background: const Color(0xFFF0F2F2),
       primary: Colors.green.shade600,
-      secondary: Colors.green.shade600,
-      secondaryVariant: Colors.green.shade600,
+      secondary: Colors.green.shade600
     ),
     popupMenuTheme: const PopupMenuThemeData(
       shape: RoundedRectangleBorder(
@@ -27,7 +26,7 @@ ThemeData light = ThemeData(
         titleTextStyle: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF000000))),    
+            color: Color(0xFF000000))),
     cardTheme: const CardTheme(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -82,16 +81,15 @@ ThemeData light = ThemeData(
 
 
 ThemeData dark = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.dark,
-    primaryColorBrightness: Brightness.light,
     primaryColor: const Color(0xFF1C1C1D),
     scaffoldBackgroundColor: const Color(0xFF1C1C1D),
     canvasColor: const Color(0xFF1C1C1D),
     colorScheme: const ColorScheme.dark(
         background: Color(0xFF1C1C1D),
         primary:  Color(0xFF66BF72),
-        secondary: Color(0xFF66BF72),
-        secondaryVariant: Color(0xFF66BF72)
+        secondary: Color(0xFF66BF72)
     ),
     popupMenuTheme: const PopupMenuThemeData(
       shape: RoundedRectangleBorder(

@@ -2,6 +2,7 @@ import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/util/changelog.dart';
 import 'package:todo_fschmatz/util/dialog_select_theme.dart';
+import '../../util/utils_functions.dart';
 import 'app_info_page.dart';
 import 'changelog_page.dart';
 
@@ -17,7 +18,7 @@ class _SettingsPageState extends State<SettingsPage> {
   String getThemeStringFormatted(){
     String theme =  EasyDynamicTheme.of(context).themeMode.toString().replaceAll('ThemeMode.', '');
     if(theme == 'system'){theme = 'system default';}
-    return theme.replaceFirst(theme[0], theme[0].toUpperCase());
+    return capitalizeFirstLetterString(theme);
   }
 
   @override

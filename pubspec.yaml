@@ -35,7 +35,7 @@ dependencies:
   provider:
   url_launcher:
   flutter_colorpicker:
-  easy_dynamic_theme: ^2.2.0
+  easy_dynamic_theme:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons classes for iOS style icons.

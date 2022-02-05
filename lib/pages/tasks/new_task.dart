@@ -5,6 +5,8 @@ import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 
+import '../../util/utils_functions.dart';
+
 class NewTask extends StatefulWidget {
 
   int state;
@@ -188,8 +190,8 @@ class _NewTaskState extends State<NewTask> {
                                 selectedTags.contains(tagsList[index]['id_tag'])
                                     ? Icon(
                                         Icons.done,
-                                        color: Color(int.parse(
-                                            tagsList[index]['color'].substring(6, 16))),
+                                        color: parseColorFromDb(
+                                            tagsList[index]['color']),
                                         size: 18,
                                       )
                                     : null,
@@ -208,15 +210,15 @@ class _NewTaskState extends State<NewTask> {
                             label: Text(tagsList[index]['name']),
                             labelStyle: TextStyle(
                                 fontSize: 12,
-                                color: Color(int.parse(
-                                    tagsList[index]['color'].substring(6, 16))),
+                                color: parseColorFromDb(
+                                    tagsList[index]['color']),
                                 fontWeight: FontWeight.w600),
                             backgroundColor: selectedTags
                                     .contains(tagsList[index]['id_tag'])
-                                ? Color(int.parse(
-                                    tagsList[index]['color'].substring(6, 16))).withOpacity(0.3)
-                                : Color(int.parse(tagsList[index]['color']
-                                        .substring(6, 16)))
+                                ? parseColorFromDb(
+                                tagsList[index]['color']).withOpacity(0.3)
+                                : parseColorFromDb(
+                                tagsList[index]['color'])
                                     .withOpacity(0.3),
                           ),
                         );

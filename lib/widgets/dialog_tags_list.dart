@@ -4,6 +4,8 @@ import 'package:todo_fschmatz/db/tag_dao.dart';
 import 'package:todo_fschmatz/pages/tags/edit_tag.dart';
 import 'package:todo_fschmatz/pages/tags/new_tag.dart';
 
+import '../util/utils_functions.dart';
+
 class DialogTagsList extends StatefulWidget {
   const DialogTagsList({Key? key}) : super(key: key);
 
@@ -34,7 +36,7 @@ class _DialogTagsListState extends State<DialogTagsList> {
     });
   }
 
-  showAlertDialogOkDelete(BuildContext context,idTag) {
+  showAlertDialogOkDelete(BuildContext context, idTag) {
     Widget okButton = TextButton(
       child: Text(
         "Yes",
@@ -119,52 +121,55 @@ class _DialogTagsListState extends State<DialogTagsList> {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
-                leading: Icon(Icons.circle,
-                    color: Color(
-                        int.parse(_tagsList[index]['color'].substring(6, 16)))),
-                title: Text(_tagsList[index]['name']),
-                trailing:
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _tagsList.length > 1 ? IconButton(
-                        icon: Icon(
-                          Icons.delete_outlined,
-                          color: Theme.of(context)
-                              .textTheme
-                              .headline6!
-                              .color!
-                              .withOpacity(0.8),
-                        ),
-                        onPressed: () {
-                          showAlertDialogOkDelete(context,_tagsList[index]['id_tag']);
-                        }) : const SizedBox.shrink(),
-                    const SizedBox(width: 5,),
-                    IconButton(
-                        icon: Icon(
-                          Icons.edit_outlined,
-                          color: Theme.of(context)
-                              .textTheme
-                              .headline6!
-                              .color!
-                              .withOpacity(0.8),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) => EditTag(
-                                  tag: Tag(
-                                      _tagsList[index]['id_tag'],
-                                      _tagsList[index]['name'],
-                                      _tagsList[index]['color'],
-                                  ),
+              leading: Icon(Icons.circle,
+                  color: parseColorFromDb(_tagsList[index]['color'])),
+              title: Text(_tagsList[index]['name']),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _tagsList.length > 1
+                      ? IconButton(
+                          icon: Icon(
+                            Icons.delete_outlined,
+                            color: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .color!
+                                .withOpacity(0.8),
+                          ),
+                          onPressed: () {
+                            showAlertDialogOkDelete(
+                                context, _tagsList[index]['id_tag']);
+                          })
+                      : const SizedBox.shrink(),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.edit_outlined,
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline6!
+                            .color!
+                            .withOpacity(0.8),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => EditTag(
+                                tag: Tag(
+                                  _tagsList[index]['id_tag'],
+                                  _tagsList[index]['name'],
+                                  _tagsList[index]['color'],
                                 ),
-                                fullscreenDialog: true,
-                              )).then((value) => getTags());
-                        }),
-                  ],
-                ),
+                              ),
+                              fullscreenDialog: true,
+                            )).then((value) => getTags());
+                      }),
+                ],
+              ),
             );
           },
         ),

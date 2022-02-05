@@ -4,6 +4,7 @@ import 'package:todo_fschmatz/classes/tag.dart';
 import 'package:todo_fschmatz/db/tag_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../util/block_picker_alt.dart';
+import '../../util/utils_functions.dart';
 
 class EditTag extends StatefulWidget {
 
@@ -25,8 +26,8 @@ class _EditTagState extends State<EditTag> {
   void initState() {
     super.initState();
     customControllerName.text = widget.tag.name;
-    currentColor = Color(int.parse(widget.tag.color.substring(6, 16)));
-    pickerColor = Color(int.parse(widget.tag.color.substring(6, 16)));
+    currentColor = parseColorFromDb(widget.tag.color);
+    pickerColor = parseColorFromDb(widget.tag.color);
   }
 
   void _updateTag() async {

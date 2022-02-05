@@ -13,13 +13,13 @@ void main() async {
 
   runApp(
     EasyDynamicThemeWidget(
-      child: const MyApp(),
+      child: const StartAppTheme(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class StartAppTheme extends StatelessWidget {
+  const StartAppTheme({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

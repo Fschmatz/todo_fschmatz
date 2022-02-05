@@ -5,6 +5,8 @@ import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/pages/tasks/edit_task.dart';
 
+import '../util/utils_functions.dart';
+
 class TaskCard extends StatefulWidget {
   @override
   _TaskCardState createState() => _TaskCardState();
@@ -255,14 +257,12 @@ class _TaskCardState extends State<TaskCard> {
                               label: Text(tagsList[index]['name']),
                               labelStyle: TextStyle(
                                   fontSize: 12,
-                                  color: Color(int.parse(tagsList[index]
-                                          ['color']
-                                      .substring(6, 16))),
+                                  color: parseColorFromDb(
+                                      tagsList[index]['color']),
                                   fontWeight: FontWeight.w600),
-                              backgroundColor: Color(int.parse(tagsList[index]
-                                          ['color']
-                                      .substring(6, 16)))
-                                  .withOpacity(0.3),
+                              backgroundColor:
+                                  parseColorFromDb(tagsList[index]['color'])
+                                      .withOpacity(0.3),
                             ),
                           );
                         }).toList(),
