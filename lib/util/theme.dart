@@ -31,7 +31,6 @@ ThemeData light = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      elevation: 1,
       color: Color(0xFFFDFFFF),
     ),
     dialogTheme: const DialogTheme(
@@ -109,7 +108,6 @@ ThemeData dark = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
-      elevation: 1,
       color: Color(0xFF2C2C2D),
     ),
     dialogTheme: const DialogTheme(

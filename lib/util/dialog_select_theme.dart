@@ -57,7 +57,7 @@ class _DialogSelectThemeState extends State<DialogSelectTheme> {
               key: UniqueKey(),
               value: 2,
               groupValue: currentTheme.toString() == _themes[2] ? 2 : null,
-              title: const Text('System'),
+              title: const Text('System default'),
               onChanged : (v) => {
                 EasyDynamicTheme.of(context).changeTheme(dynamic: true)
               },
