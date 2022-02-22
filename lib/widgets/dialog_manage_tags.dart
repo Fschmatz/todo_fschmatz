@@ -24,12 +24,12 @@ class _DialogTagsListState extends State<DialogTagsList> {
     getTags();
   }
 
-  Future<void> _delete(int id_tag) async {
-    final deleted = await tags.delete(id_tag);
+  Future<void> _delete(int idTag) async {
+    final deleted = await tags.delete(idTag);
   }
 
   Future<void> getTags() async {
-    var resp = await tags.queryAllRows();
+    var resp = await tags.queryAllRowsByName();
     setState(() {
       _tagsList = resp;
       loadingTags = false;
@@ -38,12 +38,8 @@ class _DialogTagsListState extends State<DialogTagsList> {
 
   showAlertDialogOkDelete(BuildContext context, idTag) {
     Widget okButton = TextButton(
-      child: Text(
+      child: const Text(
         "Yes",
-        style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.secondary),
       ),
       onPressed: () {
         _delete(idTag).then((value) => getTags());
@@ -56,14 +52,10 @@ class _DialogTagsListState extends State<DialogTagsList> {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       title: const Text(
-        "Confirm", //
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        "Confirm",
       ),
       content: const Text(
-        "\nDelete ?",
-        style: TextStyle(
-          fontSize: 16,
-        ),
+        "Delete ?",
       ),
       actions: [
         okButton,
@@ -91,7 +83,6 @@ class _DialogTagsListState extends State<DialogTagsList> {
         TextButton(
           child: const Text(
             "New Tag",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           onPressed: () {
             Navigator.push(
@@ -105,7 +96,6 @@ class _DialogTagsListState extends State<DialogTagsList> {
         TextButton(
           child: const Text(
             "Close",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           onPressed: () {
             Navigator.of(context).pop();

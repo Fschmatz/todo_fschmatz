@@ -57,4 +57,9 @@ class TodoDao {
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  Future<List<Map<String, dynamic>>> queryAllRowsByName() async {
+    Database db = await instance.database;
+    return await db.rawQuery('SELECT * FROM $table ORDER BY $columnName COLLATE NOCASE');
+  }
+
 }

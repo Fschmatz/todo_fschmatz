@@ -5,7 +5,7 @@ import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/pages/configs/settings_page.dart';
 import 'package:todo_fschmatz/widgets/dialog_manage_todos.dart';
-import 'package:todo_fschmatz/widgets/dialog_tags_list.dart';
+import 'package:todo_fschmatz/widgets/dialog_manage_tags.dart';
 import 'package:todo_fschmatz/widgets/todos_list.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
@@ -246,7 +246,6 @@ class _TaskListState extends State<TaskList>
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              //title: loadingName ? const Text(" ") : Text(todoName),
               title: Text(widget.todoName),
               pinned: false,
               floating: true,

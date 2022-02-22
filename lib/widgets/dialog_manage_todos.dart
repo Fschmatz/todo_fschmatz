@@ -33,7 +33,7 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
   }
 
   Future<void> getTodos() async {
-    var resp = await todos.queryAllRows();
+    var resp = await todos.queryAllRowsByName();
     setState(() {
       _todoList = resp;
       loadingTodos = false;
@@ -44,12 +44,8 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
 
   showAlertDialogOkDelete(BuildContext context,idTodo) {
     Widget okButton = TextButton(
-      child: Text(
+      child: const Text(
         "Yes",
-        style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.secondary),
       ),
       onPressed: () {
         _delete(idTodo).then((value) => getTodos());
@@ -62,14 +58,10 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       title: const Text(
-        "Confirm", //
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        "Confirm",
       ),
       content: const Text(
-        "\nDelete ?",
-        style: TextStyle(
-          fontSize: 16,
-        ),
+        "Delete ?",
       ),
       actions: [
         okButton,
@@ -97,7 +89,6 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
         TextButton(
           child: const Text(
             "New Todo",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -112,7 +103,6 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
         TextButton(
           child: const Text(
             "Close",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -130,7 +120,6 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
               key: UniqueKey(),
               contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
               title: Text(_todoList[index]['name']),
-              onTap: ()  { },
               trailing:
               Row(
                 mainAxisSize: MainAxisSize.min,

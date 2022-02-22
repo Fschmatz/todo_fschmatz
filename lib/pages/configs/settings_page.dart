@@ -45,7 +45,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
-
             const Divider(),
             ListTile(
               leading: const SizedBox(
@@ -99,9 +98,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       fullscreenDialog: true,
                     ));
               },
-            ),
-            const SizedBox(
-              height: 10.0,
             ),
             ListTile(
               leading: const Icon(

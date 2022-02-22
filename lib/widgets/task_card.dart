@@ -154,6 +154,7 @@ class _TaskCardState extends State<TaskCard> {
                       style: TextStyle(fontSize: 16),
                     ),
                     onTap: () {
+                      Navigator.of(context).pop();
                       showAlertDialogOkDelete(context);
                     },
                   ),
@@ -166,17 +167,12 @@ class _TaskCardState extends State<TaskCard> {
 
   showAlertDialogOkDelete(BuildContext context) {
     Widget okButton = TextButton(
-      child: Text(
+      child: const Text(
         "Yes",
-        style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.secondary),
       ),
       onPressed: () {
         _delete();
         widget.refreshHome();
-        Navigator.of(context).pop();
         Navigator.of(context).pop();
       },
     );
@@ -186,14 +182,10 @@ class _TaskCardState extends State<TaskCard> {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       title: const Text(
-        "Confirm", //
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        "Confirm",
       ),
       content: const Text(
-        "\nDelete ?",
-        style: TextStyle(
-          fontSize: 16,
-        ),
+        "Delete ?",
       ),
       actions: [
         okButton,

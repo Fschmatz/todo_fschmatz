@@ -34,7 +34,6 @@ class _NewTagState extends State<NewTag> {
     return errors;
   }
 
-
   //COLORS
   void changeColor(Color color) {
     setState(() => pickerColor = color);
@@ -44,7 +43,6 @@ class _NewTagState extends State<NewTag> {
     Widget okButton = TextButton(
       child: const Text(
         "Ok",
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
       ),
       onPressed: () {
         setState(() =>
@@ -58,8 +56,7 @@ class _NewTagState extends State<NewTag> {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       title: const Text(
-        "Select Color : ", //
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        "Select Color : ",
       ),
       content: SingleChildScrollView(
           child: BlockPicker(

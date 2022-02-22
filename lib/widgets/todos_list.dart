@@ -28,61 +28,15 @@ class _TodosListState extends State<TodosList> {
     getTodos();
   }
 
-  Future<void> _delete(int idTodo) async {
-    final deleted = await todos.delete(idTodo);
-    final del = await tasks.deleteAllTasksFromTodo(idTodo);
-  }
-
   Future<void> getTodos() async {
-    var resp = await todos.queryAllRows();
+    var resp = await todos.queryAllRowsByName();
     setState(() {
       _todoList = resp;
       loadingTodos = false;
     });
-
     _todoList.toString();
   }
 
-  showAlertDialogOkDelete(BuildContext context, idTodo) {
-    Widget okButton = TextButton(
-      child: Text(
-        "Yes",
-        style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.secondary),
-      ),
-      onPressed: () {
-        _delete(idTodo).then((value) => getTodos());
-        Navigator.of(context).pop();
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
-      title: const Text(
-        "Confirm", //
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-      content: const Text(
-        "\nDelete ?",
-        style: TextStyle(
-          fontSize: 16,
-        ),
-      ),
-      actions: [
-        okButton,
-      ],
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

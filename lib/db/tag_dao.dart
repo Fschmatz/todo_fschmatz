@@ -39,7 +39,7 @@ class TagDao {
 
   Future<List<Map<String, dynamic>>> queryAllRowsByName() async {
     Database db = await instance.database;
-    return await db.rawQuery('SELECT * FROM $table ORDER BY $columnName');
+    return await db.rawQuery('SELECT * FROM $table ORDER BY $columnName COLLATE NOCASE');
   }
 
   Future<List<Map<String, dynamic>>> queryAllRowsDesc() async {
