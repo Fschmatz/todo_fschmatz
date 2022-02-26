@@ -7,7 +7,8 @@ import 'package:todo_fschmatz/pages/tags/new_tag.dart';
 import '../util/utils_functions.dart';
 
 class DialogTagsList extends StatefulWidget {
-  const DialogTagsList({Key? key}) : super(key: key);
+
+  DialogTagsList({Key? key}) : super(key: key);
 
   @override
   _DialogTagsListState createState() => _DialogTagsListState();

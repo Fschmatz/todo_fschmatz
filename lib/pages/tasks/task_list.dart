@@ -15,13 +15,15 @@ class TaskList extends StatefulWidget {
   int currentIdTodo;
   Function(int) changeCurrentTodo;
   String todoName;
+  Function() reloadHome;
 
   TaskList(
       {Key? key,
       required this.state,
       required this.todoName,
       required this.currentIdTodo,
-      required this.changeCurrentTodo})
+      required this.changeCurrentTodo,
+      required this.reloadHome})
       : super(key: key);
 
   @override
@@ -60,7 +62,6 @@ class _TaskListState extends State<TaskList>
       loadingBody = false;
     });
   }
-
 
   @override
   void dispose() {
@@ -184,7 +185,7 @@ class _TaskListState extends State<TaskList>
             const ListTile(
               title: Text(
                 'Todo Fschmatz',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
             const Divider(),
@@ -199,6 +200,7 @@ class _TaskListState extends State<TaskList>
                 ),
                 title: const Text(
                   'Manage Todos',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -208,27 +210,30 @@ class _TaskListState extends State<TaskList>
                         return DialogManageTodos(
                           currentIdTodo: widget.currentIdTodo,
                         );
-                      });
+                      }).then((value) => widget.reloadHome());
                 }),
             ListTile(
               leading: const Icon(
                 Icons.label_outline_rounded,
               ),
-              title: const Text('Manage Tags'),
+              title: const Text('Manage Tags',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return const DialogTagsList();
-                    });
+                      return DialogTagsList();
+                    }).then((value) => widget.reloadHome());
               },
             ),
             ListTile(
               leading: const Icon(
                 Icons.settings_outlined,
               ),
-              title: const Text('Settings'),
+              title: const Text('Settings',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(

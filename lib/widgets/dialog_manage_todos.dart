@@ -7,6 +7,7 @@ import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 
 class DialogManageTodos extends StatefulWidget {
   int currentIdTodo;
+  //Function() reloadHome;
 
   DialogManageTodos({Key? key,required this.currentIdTodo}) : super(key: key);
 

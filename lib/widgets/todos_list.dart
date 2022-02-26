@@ -50,14 +50,12 @@ class _TodosListState extends State<TodosList> {
           //leading: const SizedBox.shrink(),
           title: Text(_todoList[index]['name'],
                style: _todoList[index]['id_todo'] == widget.currentIdTodo
-                   ? TextStyle(color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w600)
-                   : null
+                   ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w500)
+                   : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
-          onTap: () {
-            widget.changeCurrentTodo(_todoList[index]['id_todo']);
-            Future.delayed(const Duration(milliseconds: 300), () {
-              Navigator.of(context).pop();
-            });
+          onTap: () async{
+            await widget.changeCurrentTodo(_todoList[index]['id_todo']);
+            Navigator.of(context).pop();
           },
         );
       },

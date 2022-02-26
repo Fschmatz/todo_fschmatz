@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
         currentIdTodo: _currentIdTodo,
         changeCurrentTodo: changeCurrentTodo,
         todoName: todoName,
+        reloadHome: appStartFunctions,
       ),
       TaskList(
         key: UniqueKey(),
@@ -40,6 +41,7 @@ class _HomeState extends State<Home> {
         currentIdTodo: _currentIdTodo,
         changeCurrentTodo: changeCurrentTodo,
         todoName: todoName,
+        reloadHome: appStartFunctions,
       ),
       TaskList(
         key: UniqueKey(),
@@ -47,6 +49,7 @@ class _HomeState extends State<Home> {
         currentIdTodo: _currentIdTodo,
         changeCurrentTodo: changeCurrentTodo,
         todoName: todoName,
+        reloadHome: appStartFunctions,
       ),
     ];
   }
@@ -79,6 +82,7 @@ class _HomeState extends State<Home> {
           currentIdTodo: _currentIdTodo,
           changeCurrentTodo: changeCurrentTodo,
           todoName: todoName,
+          reloadHome: appStartFunctions,
         ),
         TaskList(
           key: UniqueKey(),
@@ -86,6 +90,7 @@ class _HomeState extends State<Home> {
           currentIdTodo: _currentIdTodo,
           changeCurrentTodo: changeCurrentTodo,
           todoName: todoName,
+          reloadHome: appStartFunctions,
         ),
         TaskList(
           key: UniqueKey(),
@@ -93,6 +98,7 @@ class _HomeState extends State<Home> {
           currentIdTodo: _currentIdTodo,
           changeCurrentTodo: changeCurrentTodo,
           todoName: todoName,
+          reloadHome: appStartFunctions,
         ),
       ];
     });
