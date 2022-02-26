@@ -21,11 +21,11 @@ ThemeData light = ThemeData(
         color: Color(0xFFF0F2F2),
         elevation: 0,
         iconTheme: IconThemeData(
-            color: Color(0xFF050505)
+            color: Color(0xFF000000)
         ),
         titleTextStyle: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
             color: Color(0xFF000000))),
     cardTheme: const CardTheme(
       shape: RoundedRectangleBorder(
@@ -99,10 +99,10 @@ ThemeData dark = ThemeData(
     appBarTheme: const AppBarTheme(
         color: Color(0xFF1C1C1D),
         elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFFF5F5F5)),
+        iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
         titleTextStyle: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
             color: Color(0xFFFFFFFF))),
     cardTheme: const CardTheme(
       shape: RoundedRectangleBorder(

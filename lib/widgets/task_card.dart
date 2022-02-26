@@ -237,31 +237,28 @@ class _TaskCardState extends State<TaskCard> {
                   : Align(
                       alignment: Alignment.topLeft,
                       child: Wrap(
-                        spacing: 0.0,
-                        runSpacing: 0.0,
+                        spacing: 16.0,
+                        runSpacing: 10.0,
                         alignment: WrapAlignment.start,
                         children:
                             List<Widget>.generate(tagsList.length, (int index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(left: 0, right: 16),
-                            child: Chip(
-                              key: UniqueKey(),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              label: Text(tagsList[index]['name']),
-                              labelStyle: TextStyle(
-                                  fontSize: 12,
-                                  color: _tagTextBrightness == Brightness.dark ?
-                                  lightenColor(parseColorFromDb(
-                                      tagsList[index]['color']),40)
-                                      : darkenColor(parseColorFromDb(
-                                      tagsList[index]['color']),50),
-                                  fontWeight: FontWeight.w600),
-                              backgroundColor:
-                                  parseColorFromDb(tagsList[index]['color'])
-                                      .withOpacity(0.3),
+                          return Chip(
+                            key: UniqueKey(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
+                            label: Text(tagsList[index]['name']),
+                            labelStyle: TextStyle(
+                                fontSize: 12,
+                                color: _tagTextBrightness == Brightness.dark ?
+                                lightenColor(parseColorFromDb(
+                                    tagsList[index]['color']),40)
+                                    : darkenColor(parseColorFromDb(
+                                    tagsList[index]['color']),50),
+                                fontWeight: FontWeight.w600),
+                            backgroundColor:
+                                parseColorFromDb(tagsList[index]['color'])
+                                    .withOpacity(0.3),
                           );
                         }).toList(),
                       ),
