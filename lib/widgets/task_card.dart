@@ -176,7 +176,6 @@ class _TaskCardState extends State<TaskCard> {
         Navigator.of(context).pop();
       },
     );
-
     AlertDialog alert = AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -238,7 +237,6 @@ class _TaskCardState extends State<TaskCard> {
                       alignment: Alignment.topLeft,
                       child: Wrap(
                         spacing: 16.0,
-                        runSpacing: 10.0,
                         alignment: WrapAlignment.start,
                         children:
                             List<Widget>.generate(tagsList.length, (int index) {
@@ -249,13 +247,14 @@ class _TaskCardState extends State<TaskCard> {
                             ),
                             label: Text(tagsList[index]['name']),
                             labelStyle: TextStyle(
-                                fontSize: 12,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
                                 color: _tagTextBrightness == Brightness.dark ?
                                 lightenColor(parseColorFromDb(
                                     tagsList[index]['color']),40)
                                     : darkenColor(parseColorFromDb(
                                     tagsList[index]['color']),50),
-                                fontWeight: FontWeight.w600),
+                                ),
                             backgroundColor:
                                 parseColorFromDb(tagsList[index]['color'])
                                     .withOpacity(0.3),

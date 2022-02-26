@@ -182,7 +182,6 @@ class _NewTaskState extends State<NewTask> {
                     alignment: Alignment.topLeft,
                     child: Wrap(
                       spacing: 16.0,
-                      runSpacing: 10.0,
                       alignment: WrapAlignment.start,
                       children:
                           List<Widget>.generate(tagsList.length, (int index) {
@@ -215,20 +214,21 @@ class _NewTaskState extends State<NewTask> {
                           ),
                           label: Text(tagsList[index]['name']),
                           labelStyle: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
                               color: _tagTextBrightness == Brightness.dark ?
                               lightenColor(parseColorFromDb(
                                   tagsList[index]['color']),40)
                                   : darkenColor(parseColorFromDb(
                                   tagsList[index]['color']),50),
-                              fontWeight: FontWeight.w600),
+                             ),
                           backgroundColor: selectedTags
                                   .contains(tagsList[index]['id_tag'])
                               ? parseColorFromDb(
                               tagsList[index]['color']).withOpacity(0.3)
                               : parseColorFromDb(
                               tagsList[index]['color'])
-                                  .withOpacity(0.3),
+                                  .withOpacity(0.2),
                         );
                       }).toList(),
                     ),
