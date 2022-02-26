@@ -236,7 +236,7 @@ class _EditTaskState extends State<EditTask> {
                           ),
                           label: Text(tagsList[index]['name']),
                           labelStyle: TextStyle(
-                              fontSize: 14,
+                              fontSize: 13,
                               fontWeight: FontWeight.w500,
                               color: _tagTextBrightness == Brightness.dark ?
                               lightenColor(parseColorFromDb(
@@ -247,7 +247,7 @@ class _EditTaskState extends State<EditTask> {
                           backgroundColor: selectedTags
                                   .contains(tagsList[index]['id_tag'])
                               ? parseColorFromDb(
-                              tagsList[index]['color']).withOpacity(0.3)
+                              tagsList[index]['color']).withOpacity(0.4)
                               : parseColorFromDb(
                               tagsList[index]['color'])
                                   .withOpacity(0.2),

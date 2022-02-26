@@ -47,7 +47,6 @@ class _TodosListState extends State<TodosList> {
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           key: UniqueKey(),
-          //leading: const SizedBox.shrink(),
           title: Text(_todoList[index]['name'],
                style: _todoList[index]['id_todo'] == widget.currentIdTodo
                    ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w500)

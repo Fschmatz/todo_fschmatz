@@ -247,7 +247,7 @@ class _TaskCardState extends State<TaskCard> {
                             ),
                             label: Text(tagsList[index]['name']),
                             labelStyle: TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: _tagTextBrightness == Brightness.dark ?
                                 lightenColor(parseColorFromDb(

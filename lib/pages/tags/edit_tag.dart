@@ -56,7 +56,6 @@ class _EditTagState extends State<EditTag> {
     Widget okButton = TextButton(
       child: const Text(
         "Ok",
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
       ),
       onPressed: () {
         setState(() =>
@@ -70,8 +69,7 @@ class _EditTagState extends State<EditTag> {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       title: const Text(
-        "Select Color : ", //
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        "Select Color : ",
       ),
       content: SingleChildScrollView(
           child: BlockPicker(
