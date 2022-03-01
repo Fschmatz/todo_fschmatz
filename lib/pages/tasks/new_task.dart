@@ -130,9 +130,6 @@ class _NewTaskState extends State<NewTask> {
                 focusColor: Theme.of(context).colorScheme.secondary,
                 helperText: "* Required",
               ),
-              style: const TextStyle(
-                fontSize: 17,
-              ),
             ),
           ),
           ListTile(
@@ -156,9 +153,6 @@ class _NewTaskState extends State<NewTask> {
               controller: customControllerNote,
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.secondary,
-              ),
-              style: const TextStyle(
-                fontSize: 17,
               ),
             ),
           ),

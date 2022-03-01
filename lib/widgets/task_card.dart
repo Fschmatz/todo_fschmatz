@@ -257,7 +257,7 @@ class _TaskCardState extends State<TaskCard> {
                                 ),
                             backgroundColor:
                                 parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.3),
+                                    .withOpacity(0.4),
                           );
                         }).toList(),
                       ),

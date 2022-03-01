@@ -120,13 +120,8 @@ class _DialogTagsListState extends State<DialogTagsList> {
                 children: [
                   _tagsList.length > 1
                       ? IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.delete_outlined,
-                            color: Theme.of(context)
-                                .textTheme
-                                .headline6!
-                                .color!
-                                .withOpacity(0.8),
                           ),
                           onPressed: () {
                             showAlertDialogOkDelete(
@@ -137,13 +132,8 @@ class _DialogTagsListState extends State<DialogTagsList> {
                     width: 5,
                   ),
                   IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.edit_outlined,
-                        color: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .color!
-                            .withOpacity(0.8),
                       ),
                       onPressed: () {
                         Navigator.push(

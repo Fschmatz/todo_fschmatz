@@ -100,12 +100,8 @@ class _EditTodoState extends State<EditTodo> {
                 counterText: "",
                 helperText: "* Required",
               ),
-              style: const TextStyle(
-                fontSize: 16,
-              ),
             ),
           )
-
         ],
       ),
     );

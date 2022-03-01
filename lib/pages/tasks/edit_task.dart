@@ -152,9 +152,6 @@ class _EditTaskState extends State<EditTask> {
                 focusColor: Theme.of(context).colorScheme.secondary,
                 helperText: "* Required",
               ),
-              style: const TextStyle(
-                fontSize: 17,
-              ),
             ),
           ),
           ListTile(
@@ -178,9 +175,6 @@ class _EditTaskState extends State<EditTask> {
               controller: customControllerNote,
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.secondary,
-              ),
-              style: const TextStyle(
-                fontSize: 17,
               ),
             ),
           ),

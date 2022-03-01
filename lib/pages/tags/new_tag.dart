@@ -56,7 +56,7 @@ class _NewTagState extends State<NewTag> {
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       title: const Text(
-        "Select Color : ",
+        "Select Color:",
       ),
       content: SingleChildScrollView(
           child: BlockPicker(
@@ -133,9 +133,6 @@ class _NewTagState extends State<NewTag> {
                 border: InputBorder.none,
                 counterText: "",
                 helperText: "* Required",
-              ),
-              style: const TextStyle(
-                fontSize: 16,
               ),
             ),
           ),

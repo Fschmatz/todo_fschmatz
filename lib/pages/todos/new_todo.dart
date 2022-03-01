@@ -89,12 +89,8 @@ class _NewTodoState extends State<NewTodo> {
                 counterText: "",
                 helperText: "* Required",
               ),
-              style: const TextStyle(
-                fontSize: 16,
-              ),
             ),
           )
-
         ],
       ),
     );

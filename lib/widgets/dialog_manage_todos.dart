@@ -126,26 +126,16 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   _todoList.length > 1 && _todoList[index]['id_todo'] != widget.currentIdTodo ? IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.delete_outlined,
-                        color: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .color!
-                            .withOpacity(0.8),
                       ),
                       onPressed: () {
                         showAlertDialogOkDelete(context,_todoList[index]['id_todo']);
                       }) : const SizedBox.shrink(),
                   const SizedBox(width: 5,),
                   IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.edit_outlined,
-                        color: Theme.of(context)
-                            .textTheme
-                            .headline6!
-                            .color!
-                            .withOpacity(0.8),
                       ),
                       onPressed: () {
                         Navigator.push(
