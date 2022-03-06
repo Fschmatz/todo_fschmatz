@@ -166,38 +166,35 @@ class _TaskCardState extends State<TaskCard> {
   }
 
   showAlertDialogOkDelete(BuildContext context) {
-    Widget okButton = TextButton(
-      child: const Text(
-        "Yes",
-      ),
-      onPressed: () {
-        _delete();
-        widget.refreshHome();
-        Navigator.of(context).pop();
-      },
-    );
-    AlertDialog alert = AlertDialog(
-      title: const Text(
-        "Confirm",
-      ),
-      content: const Text(
-        "Delete ?",
-      ),
-      actions: [
-        okButton,
-      ],
-    );
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return AlertDialog(
+          title: const Text(
+            "Confirm",
+          ),
+          content: const Text(
+            "Delete ?",
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                "Yes",
+              ),
+              onPressed: () {
+                _delete();
+                widget.refreshHome();
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     final Brightness _tagTextBrightness = Theme.of(context).brightness;
 
     return Card(
@@ -244,14 +241,18 @@ class _TaskCardState extends State<TaskCard> {
                             ),
                             label: Text(tagsList[index]['name']),
                             labelStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: _tagTextBrightness == Brightness.dark ?
-                                lightenColor(parseColorFromDb(
-                                    tagsList[index]['color']),40)
-                                    : darkenColor(parseColorFromDb(
-                                    tagsList[index]['color']),50),
-                                ),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: _tagTextBrightness == Brightness.dark
+                                  ? lightenColor(
+                                      parseColorFromDb(
+                                          tagsList[index]['color']),
+                                      40)
+                                  : darkenColor(
+                                      parseColorFromDb(
+                                          tagsList[index]['color']),
+                                      50),
+                            ),
                             backgroundColor:
                                 parseColorFromDb(tagsList[index]['color'])
                                     .withOpacity(0.4),

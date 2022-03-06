@@ -4,8 +4,8 @@ import 'package:todo_fschmatz/classes/filter.dart';
 import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/pages/configs/settings_page.dart';
-import 'package:todo_fschmatz/widgets/dialog_manage_todos.dart';
-import 'package:todo_fschmatz/widgets/dialog_manage_tags.dart';
+import 'package:todo_fschmatz/pages/manager/tags_manager.dart';
+import 'package:todo_fschmatz/pages/manager/todos_manager.dart';
 import 'package:todo_fschmatz/widgets/todos_list.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
@@ -204,36 +204,40 @@ class _TaskListState extends State<TaskList>
                 ),
                 onTap: () {
                   Navigator.pop(context);
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return DialogManageTodos(
-                          currentIdTodo: widget.currentIdTodo,
-                        );
-                      }).then((value) => widget.reloadHome());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            TodosManager(currentIdTodo: widget.currentIdTodo),
+                        fullscreenDialog: true,
+                      )).then((value) => widget.reloadHome());
                 }),
             ListTile(
               leading: const Icon(
                 Icons.label_outline_rounded,
               ),
-              title: const Text('Manage Tags',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              title: const Text(
+                'Manage Tags',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
               onTap: () {
                 Navigator.pop(context);
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return DialogTagsList();
-                    }).then((value) => widget.reloadHome());
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => TagsManager(),
+                      fullscreenDialog: true,
+                    )).then((value) => widget.reloadHome());
               },
             ),
             ListTile(
               leading: const Icon(
                 Icons.settings_outlined,
               ),
-              title: const Text('Settings',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),),
+              title: const Text(
+                'Settings',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(

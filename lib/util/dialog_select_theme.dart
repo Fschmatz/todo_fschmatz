@@ -21,13 +21,11 @@ class _DialogSelectThemeState extends State<DialogSelectTheme> {
     Color appAccent = Theme.of(context).colorScheme.primary;
 
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(24),
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 24),
       title: const Text('Select Theme'),
       content: SizedBox(
-          height: 180.0,
           width: 350.0,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               RadioListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 0),
