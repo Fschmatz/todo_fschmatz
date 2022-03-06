@@ -21,49 +21,49 @@ class _DialogSelectThemeState extends State<DialogSelectTheme> {
     Color appAccent = Theme.of(context).colorScheme.primary;
 
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      contentPadding: const EdgeInsets.all(0),
-      titlePadding: const EdgeInsets.fromLTRB(16, 25, 0, 24),
+      contentPadding: const EdgeInsets.all(24),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 24),
       title: const Text('Select Theme'),
       content: SizedBox(
-        height: 180.0,
-        width: 350.0,
-        child: Column(
-          children: [
-            RadioListTile(
-              activeColor: appAccent,
-              key: UniqueKey(),
-              value: 0,
-              groupValue: currentTheme.toString() == _themes[0] ? 0 : null,
-              title: const Text('Light'),
-              onChanged : (v) => {
-                EasyDynamicTheme.of(context).changeTheme(dark: false)
-              },
-            ),
-            RadioListTile(
-              activeColor: appAccent,
-              key: UniqueKey(),
-              value: 1,
-              groupValue: currentTheme.toString() == _themes[1] ? 1 : null,
-               title: const Text('Dark'),
-              onChanged : (v) => {
-                EasyDynamicTheme.of(context).changeTheme(dark: true)
-              },
-            ),
-            RadioListTile(
-              activeColor: appAccent,
-              key: UniqueKey(),
-              value: 2,
-              groupValue: currentTheme.toString() == _themes[2] ? 2 : null,
-              title: const Text('System default'),
-              onChanged : (v) => {
-                EasyDynamicTheme.of(context).changeTheme(dynamic: true)
-              },
-            ),
-          ],
-        )
+          height: 180.0,
+          width: 350.0,
+          child: Column(
+            children: [
+              RadioListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                activeColor: appAccent,
+                key: UniqueKey(),
+                value: 0,
+                groupValue: currentTheme.toString() == _themes[0] ? 0 : null,
+                title: const Text('Light'),
+                onChanged : (v) => {
+                  EasyDynamicTheme.of(context).changeTheme(dark: false)
+                },
+              ),
+              RadioListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                activeColor: appAccent,
+                key: UniqueKey(),
+                value: 1,
+                groupValue: currentTheme.toString() == _themes[1] ? 1 : null,
+                title: const Text('Dark'),
+                onChanged : (v) => {
+                  EasyDynamicTheme.of(context).changeTheme(dark: true)
+                },
+              ),
+              RadioListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                activeColor: appAccent,
+                key: UniqueKey(),
+                value: 2,
+                groupValue: currentTheme.toString() == _themes[2] ? 2 : null,
+                title: const Text('System default'),
+                onChanged : (v) => {
+                  EasyDynamicTheme.of(context).changeTheme(dynamic: true)
+                },
+              ),
+            ],
+          )
       ),
     );
   }

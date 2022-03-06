@@ -55,9 +55,6 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
     );
 
     AlertDialog alert = AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
       title: const Text(
         "Confirm",
       ),
@@ -79,14 +76,18 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      contentPadding: const EdgeInsets.all(0),
-      titlePadding: const EdgeInsets.fromLTRB(16, 25, 0, 24),
+      contentPadding: const EdgeInsets.all(24),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 24),
       title: const Text('Manage Todos'),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
+        TextButton(
+          child: const Text(
+            "Close",
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         TextButton(
           child: const Text(
             "New Todo",
@@ -101,14 +102,6 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
                 )).then((value) => getTodos());
           },
         ),
-        TextButton(
-          child: const Text(
-            "Close",
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        )
       ],
       content: SizedBox(
         height: 330.0,
@@ -119,7 +112,7 @@ class _DialogManageTodosState extends State<DialogManageTodos> {
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
               key: UniqueKey(),
-              contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 0),
               title: Text(_todoList[index]['name']),
               trailing:
               Row(

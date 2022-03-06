@@ -1,10 +1,11 @@
-class Changelog{
+class AppDetails{
 
-  static String appVersion = "2.2.5";
+  static String appVersion = "2.2.6";
   static String appName = "Todo Fschmatz";
+  static String repositoryLink = "https://github.com/Fschmatz/todo_fschmatz";
 
   static String changelogCurrent = '''
-2.2.5
+2.2.6
 - Filters
 - Added System Theme
 - Changed Tag Text Color

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_fschmatz/util/changelog.dart';
+import 'package:todo_fschmatz/util/app_details.dart';
 
 class ChangelogPage extends StatelessWidget {
   const ChangelogPage({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class ChangelogPage extends StatelessWidget {
               Icons.article_outlined,
             ),
             title: Text(
-              Changelog.changelogCurrent,
+              AppDetails.changelogCurrent,
               style: const TextStyle(fontSize: 16),
             ),
           ),
@@ -49,7 +49,7 @@ class ChangelogPage extends StatelessWidget {
               Icons.article_outlined,
             ),
             title: Text(
-              Changelog.changelogsOld,
+              AppDetails.changelogsOld,
               style: const TextStyle(fontSize: 16),
             ),
           ),

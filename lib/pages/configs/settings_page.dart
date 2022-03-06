@@ -1,6 +1,6 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_fschmatz/util/changelog.dart';
+import 'package:todo_fschmatz/util/app_details.dart';
 import 'package:todo_fschmatz/util/dialog_select_theme.dart';
 import '../../util/utils_functions.dart';
 import 'app_info_page.dart';
@@ -39,7 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               child: ListTile(
                 title: Text(
-                  Changelog.appName + " " + Changelog.appVersion,
+                  AppDetails.appName + " " + AppDetails.appVersion,
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 17.5),
                 ),

@@ -49,9 +49,6 @@ class _DialogTagsListState extends State<DialogTagsList> {
     );
 
     AlertDialog alert = AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
       title: const Text(
         "Confirm",
       ),
@@ -73,14 +70,18 @@ class _DialogTagsListState extends State<DialogTagsList> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      contentPadding: const EdgeInsets.all(0),
-      titlePadding: const EdgeInsets.fromLTRB(16, 25, 0, 24),
+      contentPadding: const EdgeInsets.all(24),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 24),
       title: const Text('Tags'),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
+        TextButton(
+          child: const Text(
+            "Close",
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         TextButton(
           child: const Text(
             "New Tag",
@@ -94,14 +95,6 @@ class _DialogTagsListState extends State<DialogTagsList> {
                 )).then((value) => getTags());
           },
         ),
-        TextButton(
-          child: const Text(
-            "Close",
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        )
       ],
       content: SizedBox(
         height: 330.0,
@@ -111,7 +104,7 @@ class _DialogTagsListState extends State<DialogTagsList> {
           itemCount: _tagsList.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(16, 0, 5, 0),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 0),
               leading: Icon(Icons.circle,
                   color: parseColorFromDb(_tagsList[index]['color'])),
               title: Text(_tagsList[index]['name']),

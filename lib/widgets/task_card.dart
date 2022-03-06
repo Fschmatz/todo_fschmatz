@@ -177,9 +177,6 @@ class _TaskCardState extends State<TaskCard> {
       },
     );
     AlertDialog alert = AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
       title: const Text(
         "Confirm",
       ),
