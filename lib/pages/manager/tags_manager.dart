@@ -93,46 +93,48 @@ class _TagsManagerState extends State<TagsManager> {
         shrinkWrap: true,
         itemCount: _tagsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-            leading: Icon(Icons.circle,
-                color: parseColorFromDb(_tagsList[index]['color'])),
-            title: Text(_tagsList[index]['name']),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _tagsList.length > 1
-                    ? IconButton(
-                        icon: const Icon(
-                          Icons.delete_outlined,
-                        ),
-                        onPressed: () {
-                          showAlertDialogOkDelete(
-                              context, _tagsList[index]['id_tag']);
-                        })
-                    : const SizedBox.shrink(),
-                const SizedBox(
-                  width: 10,
-                ),
-                IconButton(
-                    icon: const Icon(
-                      Icons.edit_outlined,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => EditTag(
-                              tag: Tag(
-                                _tagsList[index]['id_tag'],
-                                _tagsList[index]['name'],
-                                _tagsList[index]['color'],
+          return Card(
+            margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
+            child: ListTile(
+              leading: Icon(Icons.circle,
+                  color: parseColorFromDb(_tagsList[index]['color'])),
+              title: Text(_tagsList[index]['name']),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _tagsList.length > 1
+                      ? IconButton(
+                          icon: const Icon(
+                            Icons.delete_outlined,
+                          ),
+                          onPressed: () {
+                            showAlertDialogOkDelete(
+                                context, _tagsList[index]['id_tag']);
+                          })
+                      : const SizedBox.shrink(),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  IconButton(
+                      icon: const Icon(
+                        Icons.edit_outlined,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => EditTag(
+                                tag: Tag(
+                                  _tagsList[index]['id_tag'],
+                                  _tagsList[index]['name'],
+                                  _tagsList[index]['color'],
+                                ),
                               ),
-                            ),
-                            fullscreenDialog: true,
-                          )).then((value) => getTags());
-                    }),
-              ],
+                              fullscreenDialog: true,
+                            )).then((value) => getTags());
+                      }),
+                ],
+              ),
             ),
           );
         },

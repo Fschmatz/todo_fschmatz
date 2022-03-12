@@ -97,54 +97,56 @@ class _TodosManagerState extends State<TodosManager> {
         shrinkWrap: true,
         itemCount: _todoList.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            key: UniqueKey(),
-            contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-            title: Text(_todoList[index]['name'],
-              style: TextStyle(
-                color: _todoList[index]['id_todo'] == widget.currentIdTodo
-                    ? Theme.of(context).colorScheme.primary
-                    : null,
-                fontWeight: _todoList[index]['id_todo'] == widget.currentIdTodo
-                    ? FontWeight.w600
-                    : null
-              ),
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _todoList.length > 1 &&
-                        _todoList[index]['id_todo'] != widget.currentIdTodo
-                    ? IconButton(
-                        icon: const Icon(
-                          Icons.delete_outlined,
-                        ),
-                        onPressed: () {
-                          showAlertDialogOkDelete(
-                              context, _todoList[index]['id_todo']);
-                        })
-                    : const SizedBox.shrink(),
-                const SizedBox(
-                  width: 10,
+          return Card(
+            margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
+            child: ListTile(
+              key: UniqueKey(),
+              title: Text(_todoList[index]['name'],
+                style: TextStyle(
+                  color: _todoList[index]['id_todo'] == widget.currentIdTodo
+                      ? Theme.of(context).colorScheme.primary
+                      : null,
+                  fontWeight: _todoList[index]['id_todo'] == widget.currentIdTodo
+                      ? FontWeight.w600
+                      : null
                 ),
-                IconButton(
-                    icon: const Icon(
-                      Icons.edit_outlined,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute<void>(
-                            builder: (BuildContext context) => EditTodo(
-                              todo: Todo(
-                                _todoList[index]['id_todo'],
-                                _todoList[index]['name'],
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _todoList.length > 1 &&
+                          _todoList[index]['id_todo'] != widget.currentIdTodo
+                      ? IconButton(
+                          icon: const Icon(
+                            Icons.delete_outlined,
+                          ),
+                          onPressed: () {
+                            showAlertDialogOkDelete(
+                                context, _todoList[index]['id_todo']);
+                          })
+                      : const SizedBox.shrink(),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  IconButton(
+                      icon: const Icon(
+                        Icons.edit_outlined,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => EditTodo(
+                                todo: Todo(
+                                  _todoList[index]['id_todo'],
+                                  _todoList[index]['name'],
+                                ),
                               ),
-                            ),
-                            fullscreenDialog: true,
-                          )).then((value) => getTodos());
-                    }),
-              ],
+                              fullscreenDialog: true,
+                            )).then((value) => getTodos());
+                      }),
+                ],
+              ),
             ),
           );
         },

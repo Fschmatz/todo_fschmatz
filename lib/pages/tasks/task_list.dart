@@ -185,7 +185,7 @@ class _TaskListState extends State<TaskList>
             const ListTile(
               title: Text(
                 'Todo Fschmatz',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
               ),
             ),
             const Divider(),
@@ -196,7 +196,7 @@ class _TaskListState extends State<TaskList>
             const Divider(),
             ListTile(
                 leading: const Icon(
-                  Icons.done_all_outlined,
+                  Icons.checklist_outlined,
                 ),
                 title: const Text(
                   'Manage Todos',

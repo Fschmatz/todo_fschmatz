@@ -182,18 +182,7 @@ class _NewTaskState extends State<NewTask> {
                         return ChoiceChip(
                           key: UniqueKey(),
                           selected: false,
-                          avatar:
-                              selectedTags.contains(tagsList[index]['id_tag'])
-                                  ? Icon(
-                                      Icons.done,
-                                color: _tagTextBrightness == Brightness.dark ?
-                                lightenColor(parseColorFromDb(
-                                    tagsList[index]['color']),40)
-                                    : darkenColor(parseColorFromDb(
-                                    tagsList[index]['color']),50),
-                                      size: 18,
-                                    )
-                                  : null,
+                          padding: const EdgeInsets.all(12),
                           onSelected: (bool _selected) {
                             if (selectedTags
                                 .contains(tagsList[index]['id_tag'])) {
@@ -219,10 +208,10 @@ class _NewTaskState extends State<NewTask> {
                           backgroundColor: selectedTags
                                   .contains(tagsList[index]['id_tag'])
                               ? parseColorFromDb(
-                              tagsList[index]['color']).withOpacity(0.4)
+                              tagsList[index]['color']).withOpacity(0.6)
                               : parseColorFromDb(
                               tagsList[index]['color'])
-                                  .withOpacity(0.2),
+                                  .withOpacity(0.1),
                         );
                       }).toList(),
                     ),

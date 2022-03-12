@@ -46,6 +46,9 @@ class _TodosListState extends State<TodosList> {
       itemCount: _todoList.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
+          leading: const Icon(
+            Icons.done_all_outlined,
+          ),
           key: UniqueKey(),
           title: Text(_todoList[index]['name'],
                style: _todoList[index]['id_todo'] == widget.currentIdTodo
