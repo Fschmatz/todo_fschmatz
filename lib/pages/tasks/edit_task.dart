@@ -198,6 +198,7 @@ class _EditTaskState extends State<EditTask> {
                     alignment: Alignment.topLeft,
                     child: Wrap(
                       spacing: 16.0,
+                      runSpacing: 10.0,
                       alignment: WrapAlignment.start,
                       children:
                           List<Widget>.generate(tagsList.length, (int index) {
@@ -230,7 +231,7 @@ class _EditTaskState extends State<EditTask> {
                           backgroundColor: selectedTags
                                   .contains(tagsList[index]['id_tag'])
                               ? parseColorFromDb(
-                              tagsList[index]['color']).withOpacity(0.6)
+                              tagsList[index]['color']).withOpacity(0.5)
                               : parseColorFromDb(
                               tagsList[index]['color'])
                                   .withOpacity(0.1),

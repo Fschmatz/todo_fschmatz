@@ -96,6 +96,7 @@ class _TagsManagerState extends State<TagsManager> {
           return Card(
             margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
             child: ListTile(
+              contentPadding: const EdgeInsets.fromLTRB(16, 3, 16, 3),
               leading: Icon(Icons.circle,
                   color: parseColorFromDb(_tagsList[index]['color'])),
               title: Text(_tagsList[index]['name']),
