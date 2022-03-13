@@ -101,46 +101,39 @@ class _EditTaskState extends State<EditTask> {
         appBar: AppBar(
           title: const Text("Edit Task"),
           actions: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-              child: IconButton(
-                icon: const Icon(Icons.save_outlined),
-                tooltip: 'Save',
-                onPressed: () {
-                  String errors = checkForErrors();
-                  if (errors.isEmpty) {
-                    _updateTask()
-                        .then((value) => {
-                              widget.getAllTasksByState(),
-                              widget.refreshTags(),
-                            })
-                        .then((value) => Navigator.of(context).pop());
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return dialogAlertErrors(errors, context);
-                      },
-                    );
-                  }
-                },
-              ),
+            IconButton(
+              icon: const Icon(Icons.save_outlined),
+              tooltip: 'Save',
+              onPressed: () {
+                String errors = checkForErrors();
+                if (errors.isEmpty) {
+                  _updateTask()
+                      .then((value) => {
+                            widget.getAllTasksByState(),
+                            widget.refreshTags(),
+                          })
+                      .then((value) => Navigator.of(context).pop());
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return dialogAlertErrors(errors, context);
+                    },
+                  );
+                }
+              },
             ),
           ],
         ),
         body: ListView(children: [
           ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Title".toUpperCase(),
+            title: Text("Title",
                 style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            leading: const Icon(Icons.notes_outlined),
             title: TextField(
               minLines: 1,
               maxLines: 5,
@@ -151,21 +144,18 @@ class _EditTaskState extends State<EditTask> {
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.secondary,
                 helperText: "* Required",
+                prefixIcon: const Icon(Icons.notes_outlined),
               ),
             ),
           ),
           ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Note".toUpperCase(),
+            title: Text("Note",
                 style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            leading: const Icon(Icons.article_outlined),
             title: TextField(
               minLines: 1,
               maxLines: 10,
@@ -175,23 +165,18 @@ class _EditTaskState extends State<EditTask> {
               controller: customControllerNote,
               decoration: InputDecoration(
                 focusColor: Theme.of(context).colorScheme.secondary,
+                prefixIcon:  const Icon(Icons.article_outlined),
               ),
             ),
           ),
           ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Tags".toUpperCase(),
+            title: Text("Tags",
                 style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            leading: const Icon(
-              Icons.label_outline_rounded,
-            ),
             title : tagsList.isEmpty
                 ? const SizedBox.shrink()
                 : Align(
@@ -220,7 +205,7 @@ class _EditTaskState extends State<EditTask> {
                           ),
                           label: Text(tagsList[index]['name']),
                           labelStyle: TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               fontWeight: FontWeight.w500,
                               color: _tagTextBrightness == Brightness.dark ?
                               lightenColor(parseColorFromDb(
@@ -240,6 +225,7 @@ class _EditTaskState extends State<EditTask> {
                     ),
                   ),
           ),
+          const SizedBox(height: 50,)
         ]));
   }
 }

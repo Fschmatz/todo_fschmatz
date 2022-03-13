@@ -45,15 +45,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
-            const Divider(),
             ListTile(
-              leading: const SizedBox(
-                height: 0.1,
-              ),
-              title: Text("General".toUpperCase(),
+
+              title: Text("General",
                   style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                       color: themeColorApp)),
             ),
             ListTile(
@@ -71,15 +68,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 getThemeStringFormatted(),
               ),
             ),
-            const Divider(),
             ListTile(
-              leading: const SizedBox(
-                height: 0.1,
-              ),
-              title: Text("About".toUpperCase(),
+              title: Text("About",
                   style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                       color: themeColorApp)),
             ),
             ListTile(

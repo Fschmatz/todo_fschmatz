@@ -53,13 +53,13 @@ ThemeData light = ThemeData(
           borderRadius: BorderRadius.circular(12.0),
         ),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade600,
+            borderSide: const BorderSide(
+              color: Colors.grey,
             ),
             borderRadius: BorderRadius.circular(12.0)),
         border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade600,
+            borderSide: const BorderSide(
+              color: Colors.grey,
             ),
             borderRadius: BorderRadius.circular(12.0))),
     bottomAppBarColor: const Color(0xFFF0F2F2),

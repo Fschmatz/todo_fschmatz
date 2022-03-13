@@ -33,20 +33,16 @@ class AppInfoPage extends StatelessWidget {
           Center(
             child: Text(AppDetails.appName +" "+ AppDetails.appVersion,
                 style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
                     color: themeColorApp)),
           ),
           const SizedBox(height: 15),
-          const Divider(),
           ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Dev".toUpperCase(),
+            title: Text("Dev",
                 style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: themeColorApp)),
           ),
           const ListTile(
@@ -58,15 +54,11 @@ class AppInfoPage extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(),
           ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Source Code".toUpperCase(),
+            title: Text("Source Code",
                 style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: themeColorApp)),
           ),
           ListTile(
@@ -77,15 +69,13 @@ class AppInfoPage extends StatelessWidget {
                     decoration: TextDecoration.underline,
                     color: Colors.blue)),
           ),
-          const Divider(),
+
           ListTile(
-            leading: const SizedBox(
-              height: 0.1,
-            ),
-            title: Text("Quote".toUpperCase(),
+
+            title: Text("Quote",
                 style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: themeColorApp)),
           ),
           const ListTile(
