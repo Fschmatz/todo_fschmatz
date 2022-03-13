@@ -220,10 +220,10 @@ class _EditTaskState extends State<EditTask> {
                             //size: 20,
                           ),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           label: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 12, 10, 12),
+                            padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                             child: Text(tagsList[index]['name']),
                           ),
                           labelStyle: TextStyle(
