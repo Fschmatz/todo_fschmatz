@@ -265,7 +265,9 @@ class _TaskListState extends State<TaskList>
         body: NotificationListener<ScrollNotification>(
           onNotification: _handleScrollNotification,
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 800),
+            switchInCurve: Curves.easeIn,
+            switchOutCurve: Curves.easeOut,
+            duration: const Duration(milliseconds: 600),
             child: loadingBody
                 ? const Center(child: SizedBox.shrink())
                 : tasksList.isEmpty
