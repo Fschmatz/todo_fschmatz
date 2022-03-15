@@ -96,7 +96,7 @@ class _TagsManagerState extends State<TagsManager> {
           return Card(
             margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
             child: ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(16, 3, 5, 3),
+              contentPadding: const EdgeInsets.fromLTRB(16, 3, 10, 3),
               leading: Icon(Icons.circle,
                   color: parseColorFromDb(_tagsList[index]['color'])),
               title: Text(_tagsList[index]['name']),
@@ -114,7 +114,7 @@ class _TagsManagerState extends State<TagsManager> {
                           })
                       : const SizedBox.shrink(),
                   const SizedBox(
-                    width: 10,
+                    width: 12,
                   ),
                   IconButton(
                       icon: const Icon(
