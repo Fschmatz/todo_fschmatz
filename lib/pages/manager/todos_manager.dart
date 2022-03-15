@@ -100,7 +100,7 @@ class _TodosManagerState extends State<TodosManager> {
           return Card(
             margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
             child: ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(16, 3, 16, 3),
+              contentPadding: const EdgeInsets.fromLTRB(16, 3, 5, 3),
               key: UniqueKey(),
               title: Text(_todoList[index]['name'],
                 style: TextStyle(

@@ -227,39 +227,35 @@ class _TaskCardState extends State<TaskCard> {
               ),
               tagsList.isEmpty
                   ? const SizedBox.shrink()
-                  : Align(
-                      alignment: Alignment.topLeft,
-                      child: Wrap(
-                        spacing: 16.0,
-                        alignment: WrapAlignment.start,
-                        children:
-                            List<Widget>.generate(tagsList.length, (int index) {
-                          return Chip(
-                            key: UniqueKey(),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            label: Text(tagsList[index]['name']),
-                            labelStyle: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: _tagTextBrightness == Brightness.dark
-                                  ? lightenColor(
-                                      parseColorFromDb(
-                                          tagsList[index]['color']),
-                                      40)
-                                  : darkenColor(
-                                      parseColorFromDb(
-                                          tagsList[index]['color']),
-                                      50),
-                            ),
-                            backgroundColor:
-                                parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.35),
-                          );
-                        }).toList(),
-                      ),
-                    ),
+                  : Wrap(
+                    spacing: 16.0,
+                    children:
+                        List<Widget>.generate(tagsList.length, (int index) {
+                      return Chip(
+                        key: UniqueKey(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        label: Text(tagsList[index]['name']),
+                        labelStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: _tagTextBrightness == Brightness.dark
+                              ? lightenColor(
+                                  parseColorFromDb(
+                                      tagsList[index]['color']),
+                                  40)
+                              : darkenColor(
+                                  parseColorFromDb(
+                                      tagsList[index]['color']),
+                                  50),
+                        ),
+                        backgroundColor:
+                            parseColorFromDb(tagsList[index]['color'])
+                                .withOpacity(0.35),
+                      );
+                    }).toList(),
+                  ),
               const SizedBox(height: 8)
             ],
           ),
