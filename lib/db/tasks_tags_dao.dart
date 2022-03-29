@@ -46,4 +46,9 @@ class TasksTagsDao {
     return await db.delete('$table WHERE $columnIdTask = $idTask');
   }
 
+  Future<int> deleteWithTagId(int idTag) async {
+    Database db = await instance.database;
+    return await db.delete('$table WHERE $columnIdTag = $idTag');
+  }
+
 }

@@ -173,7 +173,7 @@ class _NewTaskState extends State<NewTask> {
               title: tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Wrap(
-                    spacing: 16.0,
+                    spacing: 12.0,
                     runSpacing: 12.0,
                     children:
                         List<Widget>.generate(tagsList.length, (int index) {
@@ -213,7 +213,7 @@ class _NewTaskState extends State<NewTask> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         label: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          padding: const EdgeInsets.fromLTRB(0, 10, 5, 10),
                           child: Text(tagsList[index]['name']),
                         ),
                         labelStyle: TextStyle(

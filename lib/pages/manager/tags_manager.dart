@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/tag.dart';
 import 'package:todo_fschmatz/db/tag_dao.dart';
+import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/pages/tags/edit_tag.dart';
 import 'package:todo_fschmatz/pages/tags/new_tag.dart';
 
@@ -16,6 +17,7 @@ class TagsManager extends StatefulWidget {
 class _TagsManagerState extends State<TagsManager> {
   bool loadingTags = true;
   final tags = TagDao.instance;
+  final tasksTags = TasksTagsDao.instance;
   List<Map<String, dynamic>> _tagsList = [];
 
   @override
@@ -26,6 +28,7 @@ class _TagsManagerState extends State<TagsManager> {
 
   Future<void> _delete(int idTag) async {
     final deleted = await tags.delete(idTag);
+    final deletedTaskTag = await tasksTags.deleteWithTagId(idTag);
   }
 
   Future<void> getTags() async {

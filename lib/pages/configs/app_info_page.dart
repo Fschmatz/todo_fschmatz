@@ -5,14 +5,13 @@ import 'package:url_launcher/url_launcher.dart';
 class AppInfoPage extends StatelessWidget {
   const AppInfoPage({Key? key}) : super(key: key);
 
-  _launchGithub()  {
+  _launchGithub() {
     String url = AppDetails.repositoryLink;
     launch(url);
   }
 
   @override
   Widget build(BuildContext context) {
-
     Color? themeColorApp = Theme.of(context).colorScheme.secondary;
 
     return Scaffold(
@@ -31,7 +30,7 @@ class AppInfoPage extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Center(
-            child: Text(AppDetails.appName +" "+ AppDetails.appVersion,
+            child: Text(AppDetails.appName + " " + AppDetails.appVersion,
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -46,12 +45,9 @@ class AppInfoPage extends StatelessWidget {
                     color: themeColorApp)),
           ),
           const ListTile(
-            leading: Icon( Icons.info_outline),
+            leading: Icon(Icons.info_outline),
             title: Text(
               "Application created using Flutter and the Dart language, used for testing and learning.",
-              style: TextStyle(
-                fontSize: 16,
-              ),
             ),
           ),
           ListTile(
@@ -62,16 +58,15 @@ class AppInfoPage extends StatelessWidget {
                     color: themeColorApp)),
           ),
           ListTile(
-            onTap: () {_launchGithub();},
+            onTap: () {
+              _launchGithub();
+            },
             leading: const Icon(Icons.open_in_new_outlined),
             title: const Text("View on GitHub",
                 style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Colors.blue)),
+                    decoration: TextDecoration.underline, color: Colors.blue)),
           ),
-
           ListTile(
-
             title: Text("Quote",
                 style: TextStyle(
                     fontSize: 14,
@@ -82,7 +77,6 @@ class AppInfoPage extends StatelessWidget {
             leading: Icon(Icons.messenger_outline),
             title: Text(
               'For every minute spent organizing, an hour is earned.',
-              style: TextStyle(fontSize: 16),
             ),
           ),
         ]));
