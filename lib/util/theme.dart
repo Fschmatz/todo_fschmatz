@@ -9,6 +9,7 @@ ThemeData light = ThemeData(
     colorScheme: ColorScheme.light(
       background: const Color(0xFFF0F2F2),
       primary: Colors.green.shade600,
+      onPrimary:  const Color(0xFFFFFFFF),
       secondary: Colors.green.shade600
     ),
     popupMenuTheme: const PopupMenuThemeData(
@@ -41,6 +42,9 @@ ThemeData light = ThemeData(
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.green.shade500,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFEFFFF),
@@ -91,6 +95,7 @@ ThemeData dark = ThemeData(
     colorScheme: const ColorScheme.dark(
         background: Color(0xFF1C1C1D),
         primary:  Color(0xFF66BF72),
+        onPrimary:  Color(0xFF003910),
         secondary: Color(0xFF66BF72)
     ),
     popupMenuTheme: const PopupMenuThemeData(
@@ -148,6 +153,9 @@ ThemeData dark = ThemeData(
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF66BF72),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFF1C1C1D),

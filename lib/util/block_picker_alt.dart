@@ -19,7 +19,7 @@ const List<Color> _defaultColors = [
   Color(0xFF67C263),
   Color(0xff8ccb5d),
   Color(0xFFedd353),
-  Color(0xfff5a967),
+  Color(0xfff6a45d),
   Color(0xFFf2825e),
   Color(0xFF6d848f),
   Color(0xFF8E6D6D),

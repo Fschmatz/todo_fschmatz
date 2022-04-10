@@ -6,7 +6,7 @@ import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/pages/configs/settings_page.dart';
 import 'package:todo_fschmatz/pages/manager/tags_manager.dart';
 import 'package:todo_fschmatz/pages/manager/todos_manager.dart';
-import 'package:todo_fschmatz/widgets/todos_list.dart';
+import 'package:todo_fschmatz/widgets/drawer_todo_list.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
 
@@ -189,7 +189,7 @@ class _TaskListState extends State<TaskList>
               ),
             ),
             const Divider(),
-            TodosList(
+            DrawerTodoList(
               changeCurrentTodo: widget.changeCurrentTodo,
               currentIdTodo: widget.currentIdTodo,
             ),
@@ -200,7 +200,7 @@ class _TaskListState extends State<TaskList>
                 ),
                 title: const Text(
                   'Manage Todos',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -218,7 +218,7 @@ class _TaskListState extends State<TaskList>
               ),
               title: const Text(
                 'Manage Tags',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
               onTap: () {
                 Navigator.pop(context);
@@ -236,7 +236,7 @@ class _TaskListState extends State<TaskList>
               ),
               title: const Text(
                 'Settings',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
               onTap: () {
                 Navigator.pop(context);
@@ -322,9 +322,6 @@ class _TaskListState extends State<TaskList>
       floatingActionButton: ScaleTransition(
         scale: _hideFabAnimation,
         child: FloatingActionButton(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
           onPressed: () {
             Navigator.push(
                 context,
@@ -337,9 +334,9 @@ class _TaskListState extends State<TaskList>
                   fullscreenDialog: true,
                 ));
           },
-          child: const Icon(
-            Icons.add,
-            color: Colors.black87,
+          child: Icon(
+            Icons.add_outlined,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
       ),

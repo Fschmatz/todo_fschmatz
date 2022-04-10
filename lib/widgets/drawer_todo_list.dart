@@ -4,19 +4,19 @@ import 'package:todo_fschmatz/db/task_dao.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 
-class TodosList extends StatefulWidget {
+class DrawerTodoList extends StatefulWidget {
   Function(int) changeCurrentTodo;
   int currentIdTodo;
 
-  TodosList(
+  DrawerTodoList(
       {Key? key, required this.changeCurrentTodo, required this.currentIdTodo})
       : super(key: key);
 
   @override
-  _TodosListState createState() => _TodosListState();
+  _DrawerTodoListState createState() => _DrawerTodoListState();
 }
 
-class _TodosListState extends State<TodosList> {
+class _DrawerTodoListState extends State<DrawerTodoList> {
   bool loadingTodos = true;
   final todos = TodoDao.instance;
   final tasks = TaskDao.instance;
@@ -55,8 +55,8 @@ class _TodosListState extends State<TodosList> {
           key: UniqueKey(),
           title: Text(_todoList[index]['name'],
                style: _todoList[index]['id_todo'] == widget.currentIdTodo
-                   ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w500)
-                   : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                   ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w400)
+                   : const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
           ),
           onTap: () async{
             await widget.changeCurrentTodo(_todoList[index]['id_todo']);
