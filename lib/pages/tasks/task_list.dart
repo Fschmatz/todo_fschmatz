@@ -200,7 +200,7 @@ class _TaskListState extends State<TaskList>
                 ),
                 title: const Text(
                   'Manage Todos',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -218,7 +218,7 @@ class _TaskListState extends State<TaskList>
               ),
               title: const Text(
                 'Manage Tags',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
               onTap: () {
                 Navigator.pop(context);
@@ -236,7 +236,7 @@ class _TaskListState extends State<TaskList>
               ),
               title: const Text(
                 'Settings',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
               onTap: () {
                 Navigator.pop(context);
