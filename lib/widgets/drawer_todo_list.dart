@@ -45,23 +45,39 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
       shrinkWrap: true,
       itemCount: _todoList.length,
       itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          leading: Icon(
-            Icons.done_all_outlined,
-            color: _todoList[index]['id_todo'] == widget.currentIdTodo
-                ? Theme.of(context).colorScheme.primary
-                : null,
+        return Card(
+          margin: const EdgeInsets.only(right: 12),
+          elevation: 0,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(50.0),
+              bottomRight: Radius.circular(50.0),
+            ),
           ),
-          key: UniqueKey(),
-          title: Text(_todoList[index]['name'],
-               style: _todoList[index]['id_todo'] == widget.currentIdTodo
-                   ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w500)
-                   : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          color: _todoList[index]['id_todo'] == widget.currentIdTodo
+              ? Theme.of(context).colorScheme.secondaryContainer
+              : Colors.transparent,
+          child: ListTile(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(50)),
+            ),
+            leading: Icon(
+              Icons.done_all_outlined,
+              color: _todoList[index]['id_todo'] == widget.currentIdTodo
+                  ? Theme.of(context).colorScheme.onSecondaryContainer
+                  : null,
+            ),
+            key: UniqueKey(),
+            title: Text(_todoList[index]['name'],
+                 style: _todoList[index]['id_todo'] == widget.currentIdTodo
+                     ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.onSecondaryContainer,fontWeight: FontWeight.w500)
+                     : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+            onTap: () async{
+              await widget.changeCurrentTodo(_todoList[index]['id_todo']);
+              Navigator.of(context).pop();
+            },
           ),
-          onTap: () async{
-            await widget.changeCurrentTodo(_todoList[index]['id_todo']);
-            Navigator.of(context).pop();
-          },
         );
       },
     );

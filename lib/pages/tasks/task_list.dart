@@ -178,28 +178,48 @@ class _TaskListState extends State<TaskList>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const ListTile(
-              title: Text(
-                'Todo Fschmatz',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+      drawer: SizedBox(
+        width: 360,
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const ListTile(
+                title: Text(
+                  'Todo Fschmatz',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+                ),
               ),
-            ),
-            const Divider(),
-            DrawerTodoList(
-              changeCurrentTodo: widget.changeCurrentTodo,
-              currentIdTodo: widget.currentIdTodo,
-            ),
-            const Divider(),
-            ListTile(
+              const Divider(),
+              DrawerTodoList(
+                changeCurrentTodo: widget.changeCurrentTodo,
+                currentIdTodo: widget.currentIdTodo,
+              ),
+              const Divider(),
+              ListTile(
+                  leading: const Icon(
+                    Icons.checklist_outlined,
+                  ),
+                  title: const Text(
+                    'Manage Todos',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              TodosManager(currentIdTodo: widget.currentIdTodo),
+                          fullscreenDialog: true,
+                        )).then((value) => widget.reloadHome());
+                  }),
+              ListTile(
                 leading: const Icon(
-                  Icons.checklist_outlined,
+                  Icons.label_outline_rounded,
                 ),
                 title: const Text(
-                  'Manage Todos',
+                  'Manage Tags',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 onTap: () {
@@ -207,48 +227,31 @@ class _TaskListState extends State<TaskList>
                   Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (BuildContext context) =>
-                            TodosManager(currentIdTodo: widget.currentIdTodo),
+                        builder: (BuildContext context) => TagsManager(),
                         fullscreenDialog: true,
                       )).then((value) => widget.reloadHome());
-                }),
-            ListTile(
-              leading: const Icon(
-                Icons.label_outline_rounded,
+                },
               ),
-              title: const Text(
-                'Manage Tags',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ListTile(
+                leading: const Icon(
+                  Icons.settings_outlined,
+                ),
+                title: const Text(
+                  'Settings',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const SettingsPage(),
+                        fullscreenDialog: true,
+                      ));
+                },
               ),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => TagsManager(),
-                      fullscreenDialog: true,
-                    )).then((value) => widget.reloadHome());
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.settings_outlined,
-              ),
-              title: const Text(
-                'Settings',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const SettingsPage(),
-                      fullscreenDialog: true,
-                    ));
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       body: NestedScrollView(

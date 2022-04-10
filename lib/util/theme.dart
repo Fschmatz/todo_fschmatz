@@ -7,11 +7,14 @@ ThemeData light = ThemeData(
     canvasColor: const Color(0xFFF0F2F2),
     scaffoldBackgroundColor: const Color(0xFFF0F2F2),
     colorScheme: ColorScheme.light(
-      background: const Color(0xFFF0F2F2),
-      primary: Colors.green.shade600,
-      onPrimary:  const Color(0xFFFFFFFF),
-      secondary: Colors.green.shade600
-    ),
+        background: const Color(0xFFF0F2F2),
+        primary: Colors.green.shade600,
+        onPrimary: const Color(0xFFFFFFFF),
+        primaryContainer: const Color(0xFFB2F2B4),
+        onPrimaryContainer: const Color(0xFF002106),
+        secondaryContainer: const Color(0xFFD4E8D0),
+        onSecondaryContainer: const Color(0xFF101F11),
+        secondary: Colors.green.shade600),
     popupMenuTheme: const PopupMenuThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -21,9 +24,7 @@ ThemeData light = ThemeData(
     appBarTheme: const AppBarTheme(
         color: Color(0xFFF0F2F2),
         elevation: 0,
-        iconTheme: IconThemeData(
-            color: Color(0xFF000000)
-        ),
+        iconTheme: IconThemeData(color: Color(0xFF000000)),
         titleTextStyle: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w400,
@@ -49,7 +50,8 @@ ThemeData light = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFEFFFF),
         focusColor: Colors.green.shade600,
-        contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.green.shade600,
@@ -76,15 +78,14 @@ ThemeData light = ThemeData(
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFFF0F2F2),
-        indicatorColor:  Colors.green,
-        iconTheme: MaterialStateProperty.all(
-            const IconThemeData(color: Color(0xFF050505),)
-        ),
+        indicatorColor: Colors.green,
+        iconTheme: MaterialStateProperty.all(const IconThemeData(
+          color: Color(0xFF050505),
+        )),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
             color: Color(0xFF050505), fontWeight: FontWeight.w500))),
     bottomSheetTheme:
-    const BottomSheetThemeData(modalBackgroundColor: Color(0xFFF0F2F2)));
-
+        const BottomSheetThemeData(modalBackgroundColor: Color(0xFFF0F2F2)));
 
 ThemeData dark = ThemeData(
     useMaterial3: true,
@@ -94,10 +95,13 @@ ThemeData dark = ThemeData(
     canvasColor: const Color(0xFF1C1C1D),
     colorScheme: const ColorScheme.dark(
         background: Color(0xFF1C1C1D),
-        primary:  Color(0xFF66BF72),
-        onPrimary:  Color(0xFF003910),
-        secondary: Color(0xFF66BF72)
-    ),
+        primary: Color(0xFF66BF72),
+        onPrimary: Color(0xFF003910),
+        primaryContainer: Color(0xFF235232),
+        onPrimaryContainer: Color(0xFFB2F2B4),
+        secondaryContainer: Color(0xFF3A4B3A),
+        onSecondaryContainer: Color(0xFFD4E8D0),
+        secondary: Color(0xFF66BF72)),
     popupMenuTheme: const PopupMenuThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -127,7 +131,8 @@ ThemeData dark = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
         focusColor: const Color(0xFF66BF72),
-        contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color(0xFF66BF72),
@@ -160,12 +165,12 @@ ThemeData dark = ThemeData(
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFF1C1C1D),
         indicatorColor: const Color(0xFF66BF72),
-        iconTheme: MaterialStateProperty.all(
-            const IconThemeData(color: Color(0xFFEAEAEA),)
-        ),
+        iconTheme: MaterialStateProperty.all(const IconThemeData(
+          color: Color(0xFFEAEAEA),
+        )),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
             color: Color(0xFFEAEAEA), fontWeight: FontWeight.w500))),
     //dividerColor: const Color(0x2FFFFFFF),
     bottomAppBarColor: const Color(0xFF1C1C1D),
     bottomSheetTheme:
-    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1C1C1D)));
+        const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1C1C1D)));
