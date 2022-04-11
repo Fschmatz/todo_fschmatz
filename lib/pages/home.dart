@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/db/current_todo.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/tasks/task_list.dart';
+import '../widgets/drawer_todo_list.dart';
+import 'configs/settings_page.dart';
+import 'manager/tags_manager.dart';
+import 'manager/todos_manager.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -31,25 +35,16 @@ class _HomeState extends State<Home> {
         key: UniqueKey(),
         state: 0,
         currentIdTodo: _currentIdTodo,
-        changeCurrentTodo: changeCurrentTodo,
-        todoName: todoName,
-        reloadHome: appStartFunctions,
       ),
       TaskList(
         key: UniqueKey(),
         state: 1,
         currentIdTodo: _currentIdTodo,
-        changeCurrentTodo: changeCurrentTodo,
-        todoName: todoName,
-        reloadHome: appStartFunctions,
       ),
       TaskList(
         key: UniqueKey(),
         state: 2,
         currentIdTodo: _currentIdTodo,
-        changeCurrentTodo: changeCurrentTodo,
-        todoName: todoName,
-        reloadHome: appStartFunctions,
       ),
     ];
   }
@@ -80,25 +75,16 @@ class _HomeState extends State<Home> {
           key: UniqueKey(),
           state: 0,
           currentIdTodo: _currentIdTodo,
-          changeCurrentTodo: changeCurrentTodo,
-          todoName: todoName,
-          reloadHome: appStartFunctions,
         ),
         TaskList(
           key: UniqueKey(),
           state: 1,
           currentIdTodo: _currentIdTodo,
-          changeCurrentTodo: changeCurrentTodo,
-          todoName: todoName,
-          reloadHome: appStartFunctions,
         ),
         TaskList(
           key: UniqueKey(),
           state: 2,
           currentIdTodo: _currentIdTodo,
-          changeCurrentTodo: changeCurrentTodo,
-          todoName: todoName,
-          reloadHome: appStartFunctions,
         ),
       ];
     });
@@ -107,9 +93,97 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _currentIdTodo != 0
-          ? _tabs[_currentTabIndex]
-          : const SizedBox.shrink(),
+      drawer: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.80,
+        child: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const ListTile(
+                title: Text(
+                  'Todo Fschmatz',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+                ),
+              ),
+              const Divider(),
+              DrawerTodoList(
+                changeCurrentTodo: changeCurrentTodo,
+                currentIdTodo: _currentIdTodo,
+              ),
+              const Divider(),
+              ListTile(
+                  leading: const Icon(
+                    Icons.checklist_outlined,
+                  ),
+                  title: const Text(
+                    'Manage Todos',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              TodosManager(currentIdTodo: _currentIdTodo),
+                          fullscreenDialog: true,
+                        )).then((value) => appStartFunctions());
+                  }),
+              ListTile(
+                leading: const Icon(
+                  Icons.label_outline_rounded,
+                ),
+                title: const Text(
+                  'Manage Tags',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => TagsManager(),
+                        fullscreenDialog: true,
+                      )).then((value) => appStartFunctions());
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.settings_outlined,
+                ),
+                title: const Text(
+                  'Settings',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const SettingsPage(),
+                        fullscreenDialog: true,
+                      ));
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              title: Text(todoName),
+              pinned: false,
+              floating: true,
+              snap: true,
+            ),
+          ];
+        },
+        body: _currentIdTodo != 0
+            ? _tabs[_currentTabIndex]
+            : const SizedBox.shrink(),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentTabIndex,
         onDestinationSelected: (index) {

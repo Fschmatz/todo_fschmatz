@@ -6,7 +6,8 @@ class AppDetails{
 
   static String changelogCurrent = '''
 2.3.5
-- Todo and Tag Manager Full Screen
+- Todo and Tag Manager using Full Screen
+- Updated Drawer Style
 - UI Changes
 - Bug Fixes
 ''';
