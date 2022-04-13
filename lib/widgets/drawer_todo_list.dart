@@ -59,7 +59,10 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
               : Colors.transparent,
           child: ListTile(
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(50.0),
+                bottomRight: Radius.circular(50.0),
+              ),
             ),
             leading: Icon(
               Icons.done_all_outlined,
