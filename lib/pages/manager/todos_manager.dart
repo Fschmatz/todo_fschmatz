@@ -5,6 +5,8 @@ import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 import 'package:todo_fschmatz/pages/todos/new_todo.dart';
 
+import '../../widgets/dialog_print_todo.dart';
+
 class TodosManager extends StatefulWidget {
   int currentIdTodo;
 
@@ -127,7 +129,24 @@ class _TodosManagerState extends State<TodosManager> {
                           })
                       : const SizedBox.shrink(),
                   const SizedBox(
-                    width: 12,
+                    width: 8,
+                  ),
+                  IconButton(
+                      icon: const Icon(
+                        Icons.print_outlined,
+                      ),
+                      onPressed: () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return DialogPrintTodo(
+                              todoName: _todoList[index]['name'],
+                                todoId: _todoList[index]['id_todo']
+                            );
+                          }),
+                  )
+                     ,
+                  const SizedBox(
+                    width: 8,
                   ),
                   IconButton(
                       icon: const Icon(
@@ -152,27 +171,6 @@ class _TodosManagerState extends State<TodosManager> {
           );
         },
       ),
-
-      /* AlertDialog(
-      contentPadding: const EdgeInsets.all(24),
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 24),
-      title: const Text('Manage Todos'),
-      actions: [
-        TextButton(
-          child: const Text(
-            "Close",
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-
-      ],
-      content: SizedBox(
-        height: 330.0,
-        width: 350.0,
-        child:
-      ),*/
     );
   }
 }

@@ -59,6 +59,11 @@ class TaskDao {
     return await db.rawQuery('SELECT * FROM $table WHERE $columnState = $state AND $columnIdTodo = $todoId ORDER BY id_task DESC');
   }
 
+  Future<List<Map<String, dynamic>>> queryAllByTodo(int todoId) async {
+    Database db = await instance.database;
+    return await db.rawQuery('SELECT * FROM $table WHERE $columnIdTodo = $todoId ORDER BY id_task DESC');
+  }
+
   Future<List<Map<String, dynamic>>> queryAllByTodoStateFilter(int state, int todoId, String order) async {
     Database db = await instance.database;
     return await db.rawQuery('SELECT * FROM $table WHERE $columnState = $state AND $columnIdTodo = $todoId ORDER BY $order');

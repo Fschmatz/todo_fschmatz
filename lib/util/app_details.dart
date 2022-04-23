@@ -1,13 +1,14 @@
 class AppDetails{
 
-  static String appVersion = "2.3.6";
+  static String appVersion = "2.3.7";
   static String appName = "Todo Fschmatz";
   static String repositoryLink = "https://github.com/Fschmatz/todo_fschmatz";
 
   static String changelogCurrent = '''
-2.3.6
+2.3.7
 - Full Screen Todo and Tag Manager
 - Updated Drawer Style
+- Print Todo
 - UI Changes
 - Bug Fixes
 ''';
