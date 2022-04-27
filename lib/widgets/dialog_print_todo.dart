@@ -38,7 +38,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
     for (int i = 0; i < _listTasksTodo.length; i++) {
       if(_listTasksTodo[i]['note'].toString().isNotEmpty) {
         formattedList += "\n• " + _listTasksTodo[i]['title']+"\n";
-        formattedList += "  " + _listTasksTodo[i]['note'];
+        formattedList += _listTasksTodo[i]['note'];
       } else {
         formattedList += "\n• " + _listTasksTodo[i]['title'];
       }
@@ -48,7 +48,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
     for (int i = 0; i < _listTasksDoing.length; i++) {
       if(_listTasksDoing[i]['note'].toString().isNotEmpty) {
         formattedList += "\n• " + _listTasksDoing[i]['title']+"\n";
-        formattedList += "  " + _listTasksDoing[i]['note'];
+        formattedList += _listTasksDoing[i]['note'];
       } else {
         formattedList += "\n• " + _listTasksDoing[i]['title'];
       }
@@ -58,7 +58,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
     for (int i = 0; i < _listTasksDone.length; i++) {
       if(_listTasksDone[i]['note'].toString().isNotEmpty) {
         formattedList += "\n• " + _listTasksDone[i]['title']+"\n";
-        formattedList += "  " + _listTasksDone[i]['note'];
+        formattedList += _listTasksDone[i]['note'];
       } else {
         formattedList += "\n• " + _listTasksDone[i]['title'];
       }
