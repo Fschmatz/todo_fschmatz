@@ -82,18 +82,15 @@ class _TodosManagerState extends State<TodosManager> {
             onPressed: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute<void>(
+                  MaterialPageRoute(
                     builder: (BuildContext context) => const NewTodo(),
-                    fullscreenDialog: true,
                   )).then((value) => getTodos());
             },
           ),
         ],
       ),
       body: ListView.separated(
-        separatorBuilder:
-            (BuildContext context, int index) =>
-        const SizedBox(
+        separatorBuilder: (BuildContext context, int index) => const SizedBox(
           height: 5,
         ),
         shrinkWrap: true,
@@ -104,15 +101,16 @@ class _TodosManagerState extends State<TodosManager> {
             child: ListTile(
               contentPadding: const EdgeInsets.fromLTRB(16, 3, 10, 3),
               key: UniqueKey(),
-              title: Text(_todoList[index]['name'],
+              title: Text(
+                _todoList[index]['name'],
                 style: TextStyle(
-                  color: _todoList[index]['id_todo'] == widget.currentIdTodo
-                      ? Theme.of(context).colorScheme.primary
-                      : null,
-                  fontWeight: _todoList[index]['id_todo'] == widget.currentIdTodo
-                      ? FontWeight.w600
-                      : null
-                ),
+                    color: _todoList[index]['id_todo'] == widget.currentIdTodo
+                        ? Theme.of(context).colorScheme.primary
+                        : null,
+                    fontWeight:
+                        _todoList[index]['id_todo'] == widget.currentIdTodo
+                            ? FontWeight.w600
+                            : null),
               ),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -135,16 +133,17 @@ class _TodosManagerState extends State<TodosManager> {
                       icon: const Icon(
                         Icons.print_outlined,
                       ),
-                      onPressed: () => showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return DialogPrintTodo(
-                              todoName: _todoList[index]['name'],
-                                todoId: _todoList[index]['id_todo']
-                            );
-                          }),
-                  )
-                     ,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  DialogPrintTodo(
+                                      todoName: _todoList[index]['name'],
+                                      todoId: _todoList[index]['id_todo']),
+                              fullscreenDialog: true,
+                            ));
+                      }),
                   const SizedBox(
                     width: 8,
                   ),
@@ -155,14 +154,13 @@ class _TodosManagerState extends State<TodosManager> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute<void>(
+                            MaterialPageRoute(
                               builder: (BuildContext context) => EditTodo(
                                 todo: Todo(
                                   _todoList[index]['id_todo'],
                                   _todoList[index]['name'],
                                 ),
                               ),
-                              fullscreenDialog: true,
                             )).then((value) => getTodos());
                       }),
                 ],

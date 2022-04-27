@@ -227,13 +227,12 @@ class _TaskListState extends State<TaskList>
           onPressed: () {
             Navigator.push(
                 context,
-                MaterialPageRoute<void>(
+                MaterialPageRoute(
                   builder: (BuildContext context) => NewTask(
                     state: widget.state,
                     getAllTasksByState: getAllTasksByTodoStateFilter,
                     currentIdTodo: widget.currentIdTodo,
                   ),
-                  fullscreenDialog: true,
                 ));
           },
           child: Icon(

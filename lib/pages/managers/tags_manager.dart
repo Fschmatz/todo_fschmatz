@@ -79,9 +79,8 @@ class _TagsManagerState extends State<TagsManager> {
             onPressed: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute<void>(
+                  MaterialPageRoute(
                     builder: (BuildContext context) => const NewTag(),
-                    fullscreenDialog: true,
                   )).then((value) => getTags());
             },
           ),
@@ -126,7 +125,7 @@ class _TagsManagerState extends State<TagsManager> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute<void>(
+                            MaterialPageRoute(
                               builder: (BuildContext context) => EditTag(
                                 tag: Tag(
                                   _tagsList[index]['id_tag'],
@@ -134,7 +133,6 @@ class _TagsManagerState extends State<TagsManager> {
                                   _tagsList[index]['color'],
                                 ),
                               ),
-                              fullscreenDialog: true,
                             )).then((value) => getTags());
                       }),
                 ],

@@ -136,13 +136,12 @@ class _TaskCardState extends State<TaskCard> {
                       Navigator.of(context).pop();
                       Navigator.push(
                           context,
-                          MaterialPageRoute<void>(
+                          MaterialPageRoute(
                             builder: (BuildContext context) => EditTask(
                               task: widget.task,
                               getAllTasksByState: widget.refreshHome,
                               refreshTags: getTags,
                             ),
-                            fullscreenDialog: true,
                           ));
                     },
                   ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/db/current_todo.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
+import 'package:todo_fschmatz/pages/managers/todos_manager.dart';
 import 'package:todo_fschmatz/pages/tasks/task_list.dart';
 import '../widgets/drawer_todo_list.dart';
 import 'configs/settings_page.dart';
-import 'manager/tags_manager.dart';
-import 'manager/todos_manager.dart';
+import 'managers/tags_manager.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -123,10 +123,9 @@ class _HomeState extends State<Home> {
                     Navigator.pop(context);
                     Navigator.push(
                         context,
-                        MaterialPageRoute<void>(
+                        MaterialPageRoute(
                           builder: (BuildContext context) =>
                               TodosManager(currentIdTodo: _currentIdTodo),
-                          fullscreenDialog: true,
                         )).then((value) => appStartFunctions());
                   }),
               ListTile(
@@ -141,9 +140,8 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute<void>(
+                      MaterialPageRoute(
                         builder: (BuildContext context) => TagsManager(),
-                        fullscreenDialog: true,
                       )).then((value) => appStartFunctions());
                 },
               ),
@@ -159,9 +157,8 @@ class _HomeState extends State<Home> {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute<void>(
+                      MaterialPageRoute(
                         builder: (BuildContext context) => const SettingsPage(),
-                        fullscreenDialog: true,
                       ));
                 },
               ),
