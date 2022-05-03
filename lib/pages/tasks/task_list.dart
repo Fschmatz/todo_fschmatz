@@ -37,10 +37,15 @@ class _TaskListState extends State<TaskList>
     _hideFabAnimation =
         AnimationController(vsync: this, duration: kThemeAnimationDuration);
     _hideFabAnimation.forward();
-    getAllTasksByTodoStateFilter();
+    getAllTasksByTodoStateFilter(false);
   }
 
-  Future<void> getAllTasksByTodoStateFilter() async {
+  Future<void> getAllTasksByTodoStateFilter([bool refresh = true]) async {
+    if (refresh) {
+      setState(() {
+        loadingBody = true;
+      });
+    }
     final tasks = TaskDao.instance;
     var resp = await tasks.queryAllByTodoStateFilter(widget.state,
         widget.currentIdTodo, _filtersList[selectedFilter].dbName);
@@ -168,9 +173,9 @@ class _TaskListState extends State<TaskList>
       body: NotificationListener<ScrollNotification>(
         onNotification: _handleScrollNotification,
         child: AnimatedSwitcher(
-          switchInCurve: Curves.easeIn,
-          switchOutCurve: Curves.easeOut,
-          duration: const Duration(milliseconds: 650),
+          //switchInCurve: Curves.easeIn,
+          //switchOutCurve: Curves.easeOut,
+          duration: const Duration(milliseconds: 600),
           child: loadingBody
               ? const Center(child: SizedBox.shrink())
               : tasksList.isEmpty

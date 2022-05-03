@@ -90,81 +90,79 @@ class _TodosManagerState extends State<TodosManager> {
         ],
       ),
       body: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => const SizedBox(
-          height: 5,
-        ),
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
         shrinkWrap: true,
         itemCount: _todoList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
-            child: ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(16, 3, 10, 3),
-              key: UniqueKey(),
-              title: Text(
-                _todoList[index]['name'],
-                style: TextStyle(
-                    color: _todoList[index]['id_todo'] == widget.currentIdTodo
-                        ? Theme.of(context).colorScheme.primary
-                        : null,
-                    fontWeight:
-                        _todoList[index]['id_todo'] == widget.currentIdTodo
-                            ? FontWeight.w600
-                            : null),
-              ),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _todoList.length > 1 &&
-                          _todoList[index]['id_todo'] != widget.currentIdTodo
-                      ? IconButton(
-                          icon: const Icon(
-                            Icons.delete_outlined,
-                          ),
-                          onPressed: () {
-                            showAlertDialogOkDelete(
-                                context, _todoList[index]['id_todo']);
-                          })
-                      : const SizedBox.shrink(),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  IconButton(
-                      icon: const Icon(
-                        Icons.print_outlined,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  DialogPrintTodo(
-                                      todoName: _todoList[index]['name'],
-                                      todoId: _todoList[index]['id_todo']),
-                              fullscreenDialog: true,
-                            ));
-                      }),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  IconButton(
-                      icon: const Icon(
-                        Icons.edit_outlined,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => EditTodo(
-                                todo: Todo(
-                                  _todoList[index]['id_todo'],
-                                  _todoList[index]['name'],
-                                ),
+          return ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+            key: UniqueKey(),
+            title: Text(
+              _todoList[index]['name'],
+              style: TextStyle(
+                  color: _todoList[index]['id_todo'] == widget.currentIdTodo
+                      ? Theme.of(context).colorScheme.primary
+                      : null,
+                  fontWeight:
+                      _todoList[index]['id_todo'] == widget.currentIdTodo
+                          ? FontWeight.w600
+                          : null),
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _todoList.length > 1 &&
+                        _todoList[index]['id_todo'] != widget.currentIdTodo
+                    ? IconButton(
+                        icon: const Icon(
+                          Icons.delete_outlined,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          showAlertDialogOkDelete(
+                              context, _todoList[index]['id_todo']);
+                        })
+                    : const SizedBox.shrink(),
+                const SizedBox(
+                  width: 8,
+                ),
+                IconButton(
+                    icon: const Icon(
+                      Icons.print_outlined,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                DialogPrintTodo(
+                                    todoName: _todoList[index]['name'],
+                                    todoId: _todoList[index]['id_todo']),
+                            fullscreenDialog: true,
+                          ));
+                    }),
+                const SizedBox(
+                  width: 8,
+                ),
+                IconButton(
+                    icon: const Icon(
+                      Icons.edit_outlined,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => EditTodo(
+                              todo: Todo(
+                                _todoList[index]['id_todo'],
+                                _todoList[index]['name'],
                               ),
-                            )).then((value) => getTodos());
-                      }),
-                ],
-              ),
+                            ),
+                          )).then((value) => getTodos());
+                    }),
+              ],
             ),
           );
         },
