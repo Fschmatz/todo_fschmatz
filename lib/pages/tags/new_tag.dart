@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_fschmatz/db/tag_dao.dart';
+import 'package:todo_fschmatz/db/db_crud.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
+import '../../classes/tag.dart';
 import '../../util/block_picker_alt.dart';
 
 class NewTag extends StatefulWidget {
@@ -12,17 +13,17 @@ class NewTag extends StatefulWidget {
 }
 
 class _NewTagState extends State<NewTag> {
-  final tags = TagDao.instance;
+
   TextEditingController customControllerName = TextEditingController();
   Color pickerColor = const Color(0xFFe35b5b);
   Color currentColor = const Color(0xFFe35b5b);
 
-  void _saveTag() async {
-    Map<String, dynamic> row = {
-      TagDao.columnName: customControllerName.text,
-      TagDao.columnColor: currentColor.toString(),
-    };
-    final id = await tags.insert(row);
+  Future<void> _saveTag() async {
+    saveTag(Tag(
+        null,
+        customControllerName.text,
+        currentColor.toString(),
+    ));
   }
 
   String checkForErrors() {

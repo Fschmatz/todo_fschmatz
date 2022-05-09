@@ -1,6 +1,6 @@
 class Tag{
 
-  int id;
+  int? id;
   String name;
   String color;
 

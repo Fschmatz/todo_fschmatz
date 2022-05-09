@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/classes/tag.dart';
-import 'package:todo_fschmatz/db/tag_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
+import '../../db/db_crud.dart';
 import '../../util/block_picker_alt.dart';
 import '../../util/utils_functions.dart';
 
 class EditTag extends StatefulWidget {
-
   @override
   _EditTagState createState() => _EditTagState();
 
   Tag tag;
-  EditTag({Key? key,required this.tag}) : super(key: key);
+
+  EditTag({Key? key, required this.tag}) : super(key: key);
 }
 
 class _EditTagState extends State<EditTag> {
 
-  final tags = TagDao.instance;
   TextEditingController customControllerName = TextEditingController();
   Color pickerColor = const Color(0xFFe35b5b);
   Color currentColor = const Color(0xFFe35b5b);
@@ -30,13 +29,12 @@ class _EditTagState extends State<EditTag> {
     pickerColor = parseColorFromDb(widget.tag.color);
   }
 
-  void _updateTag() async {
-    Map<String, dynamic> row = {
-      TagDao.columnId: widget.tag.id,
-      TagDao.columnName: customControllerName.text,
-      TagDao.columnColor: currentColor.toString(),
-    };
-    final update = await tags.update(row);
+  Future<void> _updateTag() async {
+    updateTag(Tag(
+      widget.tag.id,
+      customControllerName.text,
+      currentColor.toString(),
+    ));
   }
 
   String checkForErrors() {
@@ -58,8 +56,7 @@ class _EditTagState extends State<EditTag> {
         "Ok",
       ),
       onPressed: () {
-        setState(() =>
-        {currentColor = pickerColor});
+        setState(() => {currentColor = pickerColor});
         Navigator.of(context).pop();
       },
     );
@@ -70,9 +67,9 @@ class _EditTagState extends State<EditTag> {
       ),
       content: SingleChildScrollView(
           child: BlockPicker(
-            pickerColor: currentColor,
-            onColorChanged: changeColor,
-          )),
+        pickerColor: currentColor,
+        onColorChanged: changeColor,
+      )),
       actions: [
         okButton,
       ],
@@ -104,7 +101,7 @@ class _EditTagState extends State<EditTag> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return  dialogAlertErrors(errors,context);
+                    return dialogAlertErrors(errors, context);
                   },
                 );
               }
@@ -123,7 +120,6 @@ class _EditTagState extends State<EditTag> {
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-
             title: TextField(
               minLines: 1,
               maxLength: 30,

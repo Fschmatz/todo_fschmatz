@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/todo.dart';
-import 'package:todo_fschmatz/db/task_dao.dart';
+import 'package:todo_fschmatz/db/db_crud.dart';
 import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 import 'package:todo_fschmatz/pages/todos/new_todo.dart';
@@ -19,7 +19,6 @@ class TodosManager extends StatefulWidget {
 class _TodosManagerState extends State<TodosManager> {
   bool loadingTodos = true;
   final todos = TodoDao.instance;
-  final tasks = TaskDao.instance;
   List<Map<String, dynamic>> _todoList = [];
 
   @override
@@ -29,8 +28,7 @@ class _TodosManagerState extends State<TodosManager> {
   }
 
   Future<void> _delete(int idTodo) async {
-    final deleted = await todos.delete(idTodo);
-    final del = await tasks.deleteAllTasksFromTodo(idTodo);
+    deleteTodo(idTodo);
   }
 
   Future<void> getTodos() async {
@@ -39,7 +37,6 @@ class _TodosManagerState extends State<TodosManager> {
       _todoList = resp;
       loadingTodos = false;
     });
-    _todoList.toString();
   }
 
   showAlertDialogOkDelete(BuildContext context, idTodo) {

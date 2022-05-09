@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_fschmatz/db/todo_dao.dart';
+import 'package:todo_fschmatz/db/db_crud.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
+import '../../classes/todo.dart';
 
 class NewTodo extends StatefulWidget {
   @override
@@ -12,14 +13,10 @@ class NewTodo extends StatefulWidget {
 
 class _NewTodoState extends State<NewTodo> {
 
-  final todos = TodoDao.instance;
   TextEditingController customControllerName = TextEditingController();
 
-  void _saveTodo() async {
-    Map<String, dynamic> row = {
-      TodoDao.columnName: customControllerName.text,
-    };
-    final id = await todos.insert(row);
+  Future<void> _save() async {
+    saveTodo(Todo(null, customControllerName.text));
   }
 
   String checkForErrors() {
@@ -43,13 +40,13 @@ class _NewTodoState extends State<NewTodo> {
             onPressed: () async {
               String errors = checkForErrors();
               if (errors.isEmpty) {
-                _saveTodo();
+                _save();
                 Navigator.of(context).pop();
               } else {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return  dialogAlertErrors(errors,context);
+                    return dialogAlertErrors(errors, context);
                   },
                 );
               }
