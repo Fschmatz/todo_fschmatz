@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/tag.dart';
-import 'package:todo_fschmatz/db/db_crud.dart';
-import 'package:todo_fschmatz/db/tag_dao.dart';
+import 'package:todo_fschmatz/db/tags/tag_dao.dart';
 import 'package:todo_fschmatz/pages/tags/edit_tag.dart';
 import 'package:todo_fschmatz/pages/tags/new_tag.dart';
 
+import '../../db/tags/tag_controller.dart';
 import '../../util/utils_functions.dart';
 
 class TagsManager extends StatefulWidget {

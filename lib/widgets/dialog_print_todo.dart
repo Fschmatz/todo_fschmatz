@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_fschmatz/db/task_dao.dart';
+import 'package:todo_fschmatz/db/tasks/task_dao.dart';
 
 class DialogPrintTodo extends StatefulWidget {
   int todoId;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/todo.dart';
-import 'package:todo_fschmatz/db/task_dao.dart';
-import 'package:todo_fschmatz/db/todo_dao.dart';
+import 'package:todo_fschmatz/db/tasks/task_dao.dart';
+import 'package:todo_fschmatz/db/todos/todo_dao.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 
 class DrawerTodoList extends StatefulWidget {
@@ -29,7 +29,7 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
   }
 
   Future<void> getTodos() async {
-    var resp = await todos.queryAllRowsByName();
+    var resp = await todos.queryAllByName();
     setState(() {
       _todoList = resp;
       loadingTodos = false;

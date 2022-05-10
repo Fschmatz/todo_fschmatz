@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/db/current_todo.dart';
-import 'package:todo_fschmatz/db/todo_dao.dart';
+import 'package:todo_fschmatz/db/todos/todo_dao.dart';
 import 'package:todo_fschmatz/pages/managers/todos_manager.dart';
 import 'package:todo_fschmatz/pages/tasks/task_list.dart';
 import '../widgets/drawer_todo_list.dart';

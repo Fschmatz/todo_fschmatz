@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/task.dart';
-import 'package:todo_fschmatz/db/tag_dao.dart';
-import 'package:todo_fschmatz/db/task_dao.dart';
-import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
+import 'package:todo_fschmatz/db/tags/tag_dao.dart';
 import 'package:todo_fschmatz/pages/tasks/edit_task.dart';
 
+import '../db/tasks/task_controller.dart';
 import '../util/utils_functions.dart';
 
 class TaskCard extends StatefulWidget {
@@ -39,20 +38,12 @@ class _TaskCardState extends State<TaskCard> {
     }
   }
 
-  void _delete() async {
-    final tasks = TaskDao.instance;
-    final tasksTags = TasksTagsDao.instance;
-    final deleted = await tasks.delete(widget.task.id);
-    final deletedTaskTag = await tasksTags.delete(widget.task.id);
+  Future<void> _delete() async {
+    deleteTask(widget.task.id);
   }
 
   void _changeTaskState(int state) async {
-    final tasks = TaskDao.instance;
-    Map<String, dynamic> row = {
-      TaskDao.columnId: widget.task.id,
-      TaskDao.columnState: state,
-    };
-    final update = await tasks.update(row);
+    changeTaskState(widget.task.id, state);
   }
 
   void openBottomMenu() {

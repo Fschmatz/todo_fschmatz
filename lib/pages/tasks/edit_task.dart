@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/classes/task.dart';
-import 'package:todo_fschmatz/db/tag_dao.dart';
-import 'package:todo_fschmatz/db/task_dao.dart';
-import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
+import 'package:todo_fschmatz/db/tags/tag_dao.dart';
+import 'package:todo_fschmatz/db/tasks_tags/tasks_tags_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
-
+import '../../db/tasks/task_controller.dart';
+import '../../db/tasks_tags/tasks_tags_controller.dart';
 import '../../util/utils_functions.dart';
 
 class EditTask extends StatefulWidget {
@@ -27,7 +27,7 @@ class EditTask extends StatefulWidget {
 class _EditTaskState extends State<EditTask> {
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
-  final tasks = TaskDao.instance;
+ // final tasks = TaskDao.instance;
   final tags = TagDao.instance;
   final tasksTags = TasksTagsDao.instance;
   bool loadingTags = true;
@@ -55,7 +55,6 @@ class _EditTaskState extends State<EditTask> {
     for (int i = 0; i < resp.length; i++) {
       tagsFromDbTask.add(resp[i]['id_tag']);
     }
-
     setState(() {
       selectedTags = tagsFromDbTask;
       loadingTags = false;
@@ -63,23 +62,20 @@ class _EditTaskState extends State<EditTask> {
   }
 
   Future<void> _updateTask() async {
-    //delete all to add later again
-    final deletedTaskTag = await tasksTags.delete(widget.task.id);
 
-    Map<String, dynamic> row = {
-      TaskDao.columnId: widget.task.id,
-      TaskDao.columnTitle: customControllerTitle.text,
-      TaskDao.columnNote: customControllerNote.text,
-    };
-    final update = await tasks.update(row);
+    await tasksTags.deleteWithTaskId(widget.task.id);
+
+    updateTask(Task(
+        widget.task.id,
+        customControllerTitle.text,
+        customControllerNote.text,
+        0,
+        0
+    ));
 
     if (selectedTags.isNotEmpty) {
       for (int i = 0; i < selectedTags.length; i++) {
-        Map<String, dynamic> rowsTaskTags = {
-          TasksTagsDao.columnIdTask: widget.task.id,
-          TasksTagsDao.columnIdTag: selectedTags[i],
-        };
-        final idsTaskTags = await tasksTags.insert(rowsTaskTags);
+        saveTaskTag(widget.task.id, selectedTags[i]);
       }
     }
   }

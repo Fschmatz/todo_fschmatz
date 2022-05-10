@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/classes/todo.dart';
-import 'package:todo_fschmatz/db/todo_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
-
-import '../../db/db_crud.dart';
+import '../../db/todos/todo_controller.dart';
 
 class EditTodo extends StatefulWidget {
   Todo todo;

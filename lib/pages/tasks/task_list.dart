@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:todo_fschmatz/classes/filter.dart';
 import 'package:todo_fschmatz/classes/task.dart';
-import 'package:todo_fschmatz/db/task_dao.dart';
+import 'package:todo_fschmatz/db/tasks/task_dao.dart';
 import 'package:todo_fschmatz/widgets/task_card.dart';
 import 'new_task.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_fschmatz/db/db_crud.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../classes/todo.dart';
+import '../../db/todos/todo_controller.dart';
 
 class NewTodo extends StatefulWidget {
   @override

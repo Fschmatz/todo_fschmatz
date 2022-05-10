@@ -31,12 +31,12 @@ class TodoDao {
     return await db.insert(table, row);
   }
 
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
+  Future<List<Map<String, dynamic>>> queryAll() async {
     Database db = await instance.database;
     return await db.query(table);
   }
 
-  Future<List<Map<String, dynamic>>> queryAllRowsDesc() async {
+  Future<List<Map<String, dynamic>>> queryAllDesc() async {
     Database db = await instance.database;
     return await db.rawQuery('SELECT * FROM $table ORDER BY id DESC');
   }
@@ -57,7 +57,7 @@ class TodoDao {
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
 
-  Future<List<Map<String, dynamic>>> queryAllRowsByName() async {
+  Future<List<Map<String, dynamic>>> queryAllByName() async {
     Database db = await instance.database;
     return await db.rawQuery('SELECT * FROM $table ORDER BY $columnName COLLATE NOCASE');
   }

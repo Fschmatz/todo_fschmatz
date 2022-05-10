@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_fschmatz/db/db_crud.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../classes/tag.dart';
+import '../../db/tags/tag_controller.dart';
 import '../../util/block_picker_alt.dart';
 
 class NewTag extends StatefulWidget {

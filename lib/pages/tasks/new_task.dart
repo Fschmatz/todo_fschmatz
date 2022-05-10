@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_fschmatz/db/tag_dao.dart';
-import 'package:todo_fschmatz/db/task_dao.dart';
-import 'package:todo_fschmatz/db/tasks_tags_dao.dart';
+import 'package:todo_fschmatz/db/tags/tag_dao.dart';
 import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
-
+import '../../classes/task.dart';
+import '../../db/tasks/task_controller.dart';
+import '../../db/tasks_tags/tasks_tags_controller.dart';
 import '../../util/utils_functions.dart';
 
 class NewTask extends StatefulWidget {
@@ -26,9 +26,8 @@ class NewTask extends StatefulWidget {
 class _NewTaskState extends State<NewTask> {
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
-  final tasks = TaskDao.instance;
   final tags = TagDao.instance;
-  final tasksTags = TasksTagsDao.instance;
+
   bool loadingTags = true;
   List<Map<String, dynamic>> tagsList = [];
   List<int> selectedTags = [];
@@ -48,21 +47,12 @@ class _NewTaskState extends State<NewTask> {
   }
 
   Future<void> _saveTask() async {
-    Map<String, dynamic> row = {
-      TaskDao.columnTitle: customControllerTitle.text,
-      TaskDao.columnNote: customControllerNote.text,
-      TaskDao.columnState: widget.state,
-      TaskDao.columnIdTodo: widget.currentIdTodo
-    };
-    final idTask = await tasks.insert(row);
+    int idNewTask = await saveTask(Task(0, customControllerTitle.text,
+        customControllerNote.text, widget.state, widget.currentIdTodo));
 
     if (selectedTags.isNotEmpty) {
       for (int i = 0; i < selectedTags.length; i++) {
-        Map<String, dynamic> rowsTaskTags = {
-          TasksTagsDao.columnIdTask: idTask,
-          TasksTagsDao.columnIdTag: selectedTags[i],
-        };
-        final idsTaskTags = await tasksTags.insert(rowsTaskTags);
+        saveTaskTag(idNewTask, selectedTags[i]);
       }
     }
   }
@@ -173,71 +163,69 @@ class _NewTaskState extends State<NewTask> {
               title: tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Wrap(
-                    spacing: 12.0,
-                    runSpacing: 12.0,
-                    children:
-                        List<Widget>.generate(tagsList.length, (int index) {
-                      return ChoiceChip(
-                        key: UniqueKey(),
-                        selected: false,
-                        onSelected: (bool _selected) {
-                          if (selectedTags
-                              .contains(tagsList[index]['id_tag'])) {
-                            selectedTags.remove(tagsList[index]['id_tag']);
-                          } else {
-                            selectedTags.add(tagsList[index]['id_tag']);
-                          }
-                          setState(() {});
-                        },
-                        avatar: selectedTags
-                                .contains(tagsList[index]['id_tag'])
-                            ? Icon(
-                                Icons.check_box_outlined,
-                                color: _tagTextBrightness == Brightness.dark
-                                    ? lightenColor(
-                                        parseColorFromDb(
-                                            tagsList[index]['color']),
-                                        40)
-                                    : darkenColor(
-                                        parseColorFromDb(
-                                            tagsList[index]['color']),
-                                        50),
-                              )
-                            : Icon(
-                                Icons.check_box_outline_blank_outlined,
-                                color: parseColorFromDb(
-                                        tagsList[index]['color'])
-                                    .withOpacity(0.2),
-                              ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        label: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 10, 5, 10),
-                          child: Text(tagsList[index]['name']),
-                        ),
-                        labelStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: _tagTextBrightness == Brightness.dark
-                              ? lightenColor(
-                                  parseColorFromDb(
-                                      tagsList[index]['color']),
-                                  40)
-                              : darkenColor(
-                                  parseColorFromDb(
-                                      tagsList[index]['color']),
-                                  50),
-                        ),
-                        backgroundColor:
-                            selectedTags.contains(tagsList[index]['id_tag'])
-                                ? parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.4)
-                                : parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.15),
-                      );
-                    }).toList(),
-                  ),
+                      spacing: 12.0,
+                      runSpacing: 12.0,
+                      children:
+                          List<Widget>.generate(tagsList.length, (int index) {
+                        return ChoiceChip(
+                          key: UniqueKey(),
+                          selected: false,
+                          onSelected: (bool _selected) {
+                            if (selectedTags
+                                .contains(tagsList[index]['id_tag'])) {
+                              selectedTags.remove(tagsList[index]['id_tag']);
+                            } else {
+                              selectedTags.add(tagsList[index]['id_tag']);
+                            }
+                            setState(() {});
+                          },
+                          avatar: selectedTags
+                                  .contains(tagsList[index]['id_tag'])
+                              ? Icon(
+                                  Icons.check_box_outlined,
+                                  color: _tagTextBrightness == Brightness.dark
+                                      ? lightenColor(
+                                          parseColorFromDb(
+                                              tagsList[index]['color']),
+                                          40)
+                                      : darkenColor(
+                                          parseColorFromDb(
+                                              tagsList[index]['color']),
+                                          50),
+                                )
+                              : Icon(
+                                  Icons.check_box_outline_blank_outlined,
+                                  color:
+                                      parseColorFromDb(tagsList[index]['color'])
+                                          .withOpacity(0.2),
+                                ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          label: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 10, 5, 10),
+                            child: Text(tagsList[index]['name']),
+                          ),
+                          labelStyle: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: _tagTextBrightness == Brightness.dark
+                                ? lightenColor(
+                                    parseColorFromDb(tagsList[index]['color']),
+                                    40)
+                                : darkenColor(
+                                    parseColorFromDb(tagsList[index]['color']),
+                                    50),
+                          ),
+                          backgroundColor:
+                              selectedTags.contains(tagsList[index]['id_tag'])
+                                  ? parseColorFromDb(tagsList[index]['color'])
+                                      .withOpacity(0.4)
+                                  : parseColorFromDb(tagsList[index]['color'])
+                                      .withOpacity(0.15),
+                        );
+                      }).toList(),
+                    ),
             ),
             const SizedBox(
               height: 50,

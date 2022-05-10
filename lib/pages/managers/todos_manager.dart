@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/classes/todo.dart';
-import 'package:todo_fschmatz/db/db_crud.dart';
-import 'package:todo_fschmatz/db/todo_dao.dart';
+import 'package:todo_fschmatz/db/todos/todo_dao.dart';
 import 'package:todo_fschmatz/pages/todos/edit_todo.dart';
 import 'package:todo_fschmatz/pages/todos/new_todo.dart';
-
+import '../../db/todos/todo_controller.dart';
 import '../../widgets/dialog_print_todo.dart';
 
 class TodosManager extends StatefulWidget {
@@ -32,7 +31,7 @@ class _TodosManagerState extends State<TodosManager> {
   }
 
   Future<void> getTodos() async {
-    var resp = await todos.queryAllRowsByName();
+    var resp = await todos.queryAllByName();
     setState(() {
       _todoList = resp;
       loadingTodos = false;
