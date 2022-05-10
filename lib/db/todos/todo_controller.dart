@@ -28,7 +28,7 @@ void deleteTodo(int idTodo) async {
   await todos.delete(idTodo);
   List<Map<String, dynamic>> tasksList = await tasks.queryAllByTodo(idTodo);
   for (int i = 0; i < tasksList.length; i++) {
-    tasksTags.deleteWithTaskId(tasksList[i]['id_task']);
+    await tasksTags.deleteWithTaskId(tasksList[i]['id_task']);
   }
   await tasks.deleteAllTasksFromTodo(idTodo);
 }

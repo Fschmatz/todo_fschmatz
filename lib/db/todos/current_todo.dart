@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CurrentTodo  {
   final String key = 'currentIdTodo';
   late SharedPreferences prefs;
-  //late int _currentIdTodo;
 
   _initPrefs() async {
     prefs = await SharedPreferences.getInstance();
