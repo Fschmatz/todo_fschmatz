@@ -30,10 +30,10 @@ void deleteTodo(int idTodo) async {
   final todos = TodoDao.instance;
   final tasks = TaskDao.instance;
   final tasksTags = TasksTagsDao.instance;
-  final deleted = await todos.delete(idTodo);
-  final del = await tasks.deleteAllTasksFromTodo(idTodo);
+  final delTodos = await todos.delete(idTodo);
+  final delTask = await tasks.deleteAllTasksFromTodo(idTodo);
   //PRECISO AJEITAR PARA DELETAR DO TASKS_TAGS
-  //final deletedTaskTag = await tasksTags.deleteWithTagId(idTag);
+  //final delTasksTags = await tasksTags.deleteWithTagId(idTag);
 }
 
 //TAGS
@@ -59,8 +59,8 @@ void updateTag(Tag tag) async {
 void deleteTag(int idTag) async {
   final tags = TagDao.instance;
   final tasksTags = TasksTagsDao.instance;
-  final deleted = await tags.delete(idTag);
-  final deletedTaskTag = await tasksTags.deleteWithTagId(idTag);
+  final delTags = await tags.delete(idTag);
+  final delTasksTags = await tasksTags.deleteWithTagId(idTag);
 }
 
 //TASKS
