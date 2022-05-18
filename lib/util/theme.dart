@@ -164,12 +164,12 @@ ThemeData dark = ThemeData(
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFF1C1C1D),
-        indicatorColor: const Color(0xFF00531C),//0xFF6BBD76
+        indicatorColor: const Color(0xFF456E51),
         iconTheme: MaterialStateProperty.all(const IconThemeData(
-          color: Color(0xfff1f3f0),
+          color: Color(0xffe3e3e2),
         )),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
-            color: Color(0xfff1f3f0), fontWeight: FontWeight.w500))),
+            color: Color(0xffe3e3e2), fontWeight: FontWeight.w500))),
     //dividerColor: const Color(0x2FFFFFFF),
     bottomAppBarColor: const Color(0xFF1C1C1D),
     bottomSheetTheme:

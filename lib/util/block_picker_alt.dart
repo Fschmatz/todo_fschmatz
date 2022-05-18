@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/src/utils.dart';
 
 const List<Color> _defaultColors = [
-  Color(0xffe53d3d),
-  Color(0xffe03f6e),
+  Color(0xfffc5252),
+  Color(0xfff85585),
   Color(0xffd660f1),
   Color(0xFF9B70FC),
   Color(0xFF5A73FD),
@@ -19,8 +19,8 @@ const List<Color> _defaultColors = [
   Color(0xFF4CCC46),
   Color(0xff82da3f),
   Color(0xffecce39),
-  Color(0xfff6811c),
-  Color(0xfff86231),
+  Color(0xfffc8a28),
+  Color(0xffff7340),
   Color(0xff719cb0),
   Color(0xFFB28181),
 ];
