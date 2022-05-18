@@ -7,6 +7,7 @@ class AppDetails{
   static String changelogCurrent = '''
 2.5.1
 - Internal DB Changes
+- Small UI Changes
 - Bug Fixes
 ''';
 
