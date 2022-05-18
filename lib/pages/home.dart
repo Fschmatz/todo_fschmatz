@@ -193,7 +193,6 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.list_outlined),
             selectedIcon: Icon(
               Icons.list,
-              color: Colors.black87,
             ),
             label: 'Todo',
           ),
@@ -201,7 +200,6 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.construction_outlined),
             selectedIcon: Icon(
               Icons.construction,
-              color: Colors.black87,
             ),
             label: 'Doing',
           ),
@@ -209,7 +207,6 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.checklist_outlined),
             selectedIcon: Icon(
               Icons.checklist,
-              color: Colors.black87,
             ),
             label: 'Done',
           ),
