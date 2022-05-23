@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/classes/todo.dart';
-import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../db/todos/todo_controller.dart';
 
 class EditTodo extends StatefulWidget {
@@ -15,10 +14,7 @@ class EditTodo extends StatefulWidget {
 
 class _EditTodoState extends State<EditTodo> {
   TextEditingController customControllerName = TextEditingController();
-
-  Future<void> _updateTodo() async {
-    updateTodo(Todo(widget.todo.id, customControllerName.text));
-  }
+  bool _validName = true;
 
   @override
   void initState() {
@@ -26,12 +22,17 @@ class _EditTodoState extends State<EditTodo> {
     customControllerName.text = widget.todo.name;
   }
 
-  String checkForErrors() {
+  Future<void> _updateTodo() async {
+    updateTodo(Todo(widget.todo.id, customControllerName.text));
+  }
+
+  bool validateTextFields() {
     String errors = "";
     if (customControllerName.text.isEmpty) {
-      errors += "Name is empty\n";
+      errors += "Name";
+      _validName = false;
     }
-    return errors;
+    return errors.isEmpty ? true : false;
   }
 
   @override
@@ -45,17 +46,13 @@ class _EditTodoState extends State<EditTodo> {
               Icons.save_outlined,
             ),
             onPressed: () async {
-              String errors = checkForErrors();
-              if (errors.isEmpty) {
+              if (validateTextFields()) {
                 _updateTodo();
                 Navigator.of(context).pop();
               } else {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return dialogAlertErrors(errors, context);
-                  },
-                );
+                setState(() {
+                  _validName;
+                });
               }
             },
           )
@@ -64,15 +61,8 @@ class _EditTodoState extends State<EditTodo> {
       ),
       body: ListView(
         children: [
-          ListTile(
-            title: Text("Name",
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary)),
-          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: TextField(
               autofocus: false,
               minLines: 1,
@@ -80,14 +70,11 @@ class _EditTodoState extends State<EditTodo> {
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerName,
               textCapitalization: TextCapitalization.sentences,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                counterText: "",
-                helperText: "* Required",
-                prefixIcon: Icon(
-                  Icons.notes_outlined,
-                ),
-              ),
+              decoration: InputDecoration(
+                  labelText: "Name",
+                  counterText: "",
+                  helperText: "* Required",
+                  errorText: _validName ? null : "Name is empty"),
             ),
           ),
         ],

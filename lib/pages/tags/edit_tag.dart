@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/classes/tag.dart';
-import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../db/tags/tag_controller.dart';
 import '../../util/block_picker_alt.dart';
 import '../../util/utils_functions.dart';
@@ -19,6 +18,7 @@ class _EditTagState extends State<EditTag> {
   TextEditingController customControllerName = TextEditingController();
   Color pickerColor = const Color(0xFFe35b5b);
   Color currentColor = const Color(0xFFe35b5b);
+  bool _validName = true;
 
   @override
   void initState() {
@@ -36,12 +36,13 @@ class _EditTagState extends State<EditTag> {
     ));
   }
 
-  String checkForErrors() {
+  bool validateTextFields() {
     String errors = "";
     if (customControllerName.text.isEmpty) {
-      errors += "Name is empty\n";
+      errors += "Name";
+      _validName = false;
     }
-    return errors;
+    return errors.isEmpty ? true : false;
   }
 
   //COLORS
@@ -92,56 +93,44 @@ class _EditTagState extends State<EditTag> {
               Icons.save_outlined,
             ),
             onPressed: () async {
-              String errors = checkForErrors();
-              if (errors.isEmpty) {
+              if (validateTextFields()) {
                 _updateTag();
                 Navigator.of(context).pop();
               } else {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return dialogAlertErrors(errors, context);
-                  },
-                );
+                setState(() {
+                  _validName;
+                });
               }
             },
           )
         ],
-        title: const Text('New Tag'),
+        title: const Text('Edit Tag'),
       ),
       body: ListView(
         children: [
-          ListTile(
-            title: Text("Name",
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary)),
-          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: TextField(
               minLines: 1,
               maxLength: 30,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerName,
               textCapitalization: TextCapitalization.sentences,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                counterText: "",
-                helperText: "* Required",
-                prefixIcon: Icon(
-                  Icons.notes_outlined,
-                ),
-              ),
+              decoration: InputDecoration(
+                  labelText: "Name",
+                  counterText: "",
+                  helperText: "* Required",
+                  errorText: _validName ? null : "Name is empty"),
             ),
           ),
-          ListTile(
-            title: Text("Color",
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary)),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 16, 5),
+            child: Text('Color',
+              style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).textTheme.headline1!.color
+              ),
+            ),
           ),
           ListTile(
             title: OutlinedButton(
@@ -149,12 +138,12 @@ class _EditTagState extends State<EditTag> {
                   createAlertSelectColor(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(100, 50),
+                  minimumSize: const Size(100, 60),
                   elevation: 0,
                   primary: currentColor,
                   onPrimary: currentColor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
                 child: const SizedBox.shrink()),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../classes/todo.dart';
 import '../../db/todos/todo_controller.dart';
 
@@ -13,17 +12,19 @@ class NewTodo extends StatefulWidget {
 
 class _NewTodoState extends State<NewTodo> {
   TextEditingController customControllerName = TextEditingController();
+  bool _validName = true;
 
   Future<void> _save() async {
     saveTodo(Todo(null, customControllerName.text));
   }
 
-  String checkForErrors() {
+  bool validateTextFields() {
     String errors = "";
     if (customControllerName.text.isEmpty) {
-      errors += "Name is empty\n";
+      errors += "Name";
+      _validName = false;
     }
-    return errors;
+    return errors.isEmpty ? true : false;
   }
 
   @override
@@ -37,17 +38,13 @@ class _NewTodoState extends State<NewTodo> {
               Icons.save_outlined,
             ),
             onPressed: () async {
-              String errors = checkForErrors();
-              if (errors.isEmpty) {
+              if (validateTextFields()) {
                 _save();
                 Navigator.of(context).pop();
               } else {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return dialogAlertErrors(errors, context);
-                  },
-                );
+                setState(() {
+                  _validName;
+                });
               }
             },
           )
@@ -56,15 +53,9 @@ class _NewTodoState extends State<NewTodo> {
       ),
       body: ListView(
         children: [
-          ListTile(
-            title: Text("Name",
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary)),
-          ),
+
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: TextField(
               autofocus: true,
               minLines: 1,
@@ -72,13 +63,11 @@ class _NewTodoState extends State<NewTodo> {
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerName,
               textCapitalization: TextCapitalization.sentences,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
+              decoration: InputDecoration(
+                labelText: "Name",
                 counterText: "",
                 helperText: "* Required",
-                prefixIcon: Icon(
-                  Icons.notes_outlined,
-                ),
+                errorText: _validName ?  null : "Name is empty",
               ),
             ),
           )

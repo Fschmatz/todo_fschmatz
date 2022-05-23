@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData light = ThemeData(
-    //useMaterial3: true,
+  //useMaterial3: true,
     brightness: Brightness.light,
     primaryColor: const Color(0xFFF0F2F2),
     canvasColor: const Color(0xFFF0F2F2),
@@ -85,10 +85,10 @@ ThemeData light = ThemeData(
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
             color: Color(0xFF050505), fontWeight: FontWeight.w500))),
     bottomSheetTheme:
-        const BottomSheetThemeData(modalBackgroundColor: Color(0xFFF0F2F2)));
+    const BottomSheetThemeData(modalBackgroundColor: Color(0xFFF0F2F2)));
 
 ThemeData dark = ThemeData(
-    //useMaterial3: true,
+  //useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: const Color(0xFF1C1C1D),
     scaffoldBackgroundColor: const Color(0xFF1C1C1D),
@@ -131,24 +131,22 @@ ThemeData dark = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
         focusColor: const Color(0xFF66BF72),
-      /*  contentPadding:
-            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),*/
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color(0xFF66BF72),
           ),
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey.shade600,
             ),
-            borderRadius: BorderRadius.circular(12.0)),
+            borderRadius: BorderRadius.circular(8.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.grey.shade600,
             ),
-            borderRadius: BorderRadius.circular(12.0))),
+            borderRadius: BorderRadius.circular(8.0))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Color(0xFF66BF72)),
       selectedLabelStyle: TextStyle(color: Color(0xFF66BF72)),
@@ -173,4 +171,5 @@ ThemeData dark = ThemeData(
     //dividerColor: const Color(0x2FFFFFFF),
     bottomAppBarColor: const Color(0xFF1C1C1D),
     bottomSheetTheme:
-        const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1C1C1D)));
+    const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1C1C1D)));
+

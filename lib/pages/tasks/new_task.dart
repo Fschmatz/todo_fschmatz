@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/db/tags/tag_dao.dart';
-import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../classes/task.dart';
 import '../../db/tasks/task_controller.dart';
 import '../../db/tasks_tags/tasks_tags_controller.dart';
@@ -27,10 +26,10 @@ class _NewTaskState extends State<NewTask> {
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
   final tags = TagDao.instance;
-
   bool loadingTags = true;
   List<Map<String, dynamic>> tagsList = [];
   List<int> selectedTags = [];
+  bool _validTitle = true;
 
   @override
   void initState() {
@@ -57,12 +56,13 @@ class _NewTaskState extends State<NewTask> {
     }
   }
 
-  String checkForErrors() {
+  bool validateTextFields() {
     String errors = "";
     if (customControllerTitle.text.isEmpty) {
-      errors += "Task title is empty\n";
+      errors += "Title";
+      _validTitle = false;
     }
-    return errors;
+    return errors.isEmpty ? true : false;
   }
 
   void _loseFocus() {
@@ -88,33 +88,22 @@ class _NewTaskState extends State<NewTask> {
                 icon: const Icon(Icons.save_outlined),
                 tooltip: 'Save',
                 onPressed: () {
-                  String errors = checkForErrors();
-                  if (errors.isEmpty) {
+                  if (validateTextFields()) {
                     _saveTask()
                         .then((value) => widget.getAllTasksByState())
                         .then((value) => Navigator.of(context).pop());
                   } else {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return dialogAlertErrors(errors, context);
-                      },
-                    );
+                    setState(() {
+                      _validTitle;
+                    });
                   }
                 },
               ),
             ],
           ),
           body: ListView(children: [
-            ListTile(
-              title: Text("Title",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary)),
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.all(16),
               child: TextField(
                 autofocus: true,
                 minLines: 1,
@@ -124,110 +113,106 @@ class _NewTaskState extends State<NewTask> {
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 controller: customControllerTitle,
                 decoration: InputDecoration(
+                  labelText: "Title",
                   focusColor: Theme.of(context).colorScheme.secondary,
                   helperText: "* Required",
-                  prefixIcon: const Icon(Icons.notes_outlined),
+                  errorText: _validTitle ?  null : "Title is empty"
                 ),
               ),
-            ),
-            ListTile(
-              title: Text("Note",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary)),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.all(16),
               child: TextField(
-                minLines: 1,
-                maxLines: 10,
-                maxLength: 500,
-                maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                textCapitalization: TextCapitalization.sentences,
-                controller: customControllerNote,
-                decoration: InputDecoration(
-                  focusColor: Theme.of(context).colorScheme.secondary,
-                  prefixIcon: const Icon(
-                    Icons.article_outlined,
+                  minLines: 1,
+                  maxLines: 10,
+                  maxLength: 500,
+                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                  textCapitalization: TextCapitalization.sentences,
+                  controller: customControllerNote,
+                  decoration: InputDecoration(
+                    labelText: "Note",
+                    focusColor: Theme.of(context).colorScheme.secondary,
                   ),
+                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 16, 5),
+              child: Text('Tags',
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.headline1!.color
                 ),
               ),
             ),
-            ListTile(
-              title: Text("Tags",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary)),
-            ),
-            ListTile(
-              title: tagsList.isEmpty
+            tagsList.isEmpty
                   ? const SizedBox.shrink()
-                  : Wrap(
-                      spacing: 12.0,
-                      runSpacing: 12.0,
-                      children:
-                          List<Widget>.generate(tagsList.length, (int index) {
-                        return ChoiceChip(
-                          key: UniqueKey(),
-                          selected: false,
-                          onSelected: (bool _selected) {
-                            if (selectedTags
-                                .contains(tagsList[index]['id_tag'])) {
-                              selectedTags.remove(tagsList[index]['id_tag']);
-                            } else {
-                              selectedTags.add(tagsList[index]['id_tag']);
-                            }
-                            setState(() {});
-                          },
-                          avatar: selectedTags
-                                  .contains(tagsList[index]['id_tag'])
-                              ? Icon(
-                                  Icons.check_box_outlined,
-                                  color: _tagTextBrightness == Brightness.dark
-                                      ? lightenColor(
-                                          parseColorFromDb(
-                                              tagsList[index]['color']),
-                                          40)
-                                      : darkenColor(
-                                          parseColorFromDb(
-                                              tagsList[index]['color']),
-                                          50),
-                                )
-                              : Icon(
-                                  Icons.check_box_outline_blank_outlined,
-                                  color:
-                                      parseColorFromDb(tagsList[index]['color'])
-                                          .withOpacity(0.2),
-                                ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          label: Text(tagsList[index]['name']),
-                          labelPadding:
-                              const EdgeInsets.fromLTRB(0, 10, 15, 10),
-                          labelStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: _tagTextBrightness == Brightness.dark
-                                ? lightenColor(
-                                    parseColorFromDb(tagsList[index]['color']),
-                                    40)
-                                : darkenColor(
-                                    parseColorFromDb(tagsList[index]['color']),
-                                    50),
-                          ),
-                          backgroundColor:
-                              selectedTags.contains(tagsList[index]['id_tag'])
-                                  ? parseColorFromDb(tagsList[index]['color'])
-                                      .withOpacity(0.4)
-                                  : parseColorFromDb(tagsList[index]['color'])
-                                      .withOpacity(0.15),
-                        );
-                      }).toList(),
-                    ),
-            ),
+                  : Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Wrap(
+                        spacing: 12.0,
+                        runSpacing: 12.0,
+                        children:
+                            List<Widget>.generate(tagsList.length, (int index) {
+                          return ChoiceChip(
+                            key: UniqueKey(),
+                            selected: false,
+                            onSelected: (bool _selected) {
+                              if (selectedTags
+                                  .contains(tagsList[index]['id_tag'])) {
+                                selectedTags.remove(tagsList[index]['id_tag']);
+                              } else {
+                                selectedTags.add(tagsList[index]['id_tag']);
+                              }
+                              setState(() {});
+                            },
+                            avatar: selectedTags
+                                    .contains(tagsList[index]['id_tag'])
+                                ? Icon(
+                                    Icons.check_box_outlined,
+                                    color: _tagTextBrightness == Brightness.dark
+                                        ? lightenColor(
+                                            parseColorFromDb(
+                                                tagsList[index]['color']),
+                                            40)
+                                        : darkenColor(
+                                            parseColorFromDb(
+                                                tagsList[index]['color']),
+                                            50),
+                                  )
+                                : Icon(
+                                    Icons.check_box_outline_blank_outlined,
+                                    color:
+                                        parseColorFromDb(tagsList[index]['color'])
+                                            .withOpacity(0.2),
+                                  ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            label: Text(tagsList[index]['name']),
+                            labelPadding:
+                                const EdgeInsets.fromLTRB(0, 10, 15, 10),
+                            labelStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: _tagTextBrightness == Brightness.dark
+                                  ? lightenColor(
+                                      parseColorFromDb(tagsList[index]['color']),
+                                      40)
+                                  : darkenColor(
+                                      parseColorFromDb(tagsList[index]['color']),
+                                      50),
+                            ),
+                            backgroundColor:
+                                selectedTags.contains(tagsList[index]['id_tag'])
+                                    ? parseColorFromDb(tagsList[index]['color'])
+                                        .withOpacity(0.4)
+                                    : parseColorFromDb(tagsList[index]['color'])
+                                        .withOpacity(0.15),
+                          );
+                        }).toList(),
+                      ),
+                  ),
+
             const SizedBox(
               height: 50,
             )

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:todo_fschmatz/classes/task.dart';
 import 'package:todo_fschmatz/db/tags/tag_dao.dart';
 import 'package:todo_fschmatz/db/tasks_tags/tasks_tags_dao.dart';
-import 'package:todo_fschmatz/widgets/dialog_alert_error.dart';
 import '../../db/tasks/task_controller.dart';
 import '../../db/tasks_tags/tasks_tags_controller.dart';
 import '../../util/utils_functions.dart';
@@ -27,14 +26,13 @@ class EditTask extends StatefulWidget {
 class _EditTaskState extends State<EditTask> {
   TextEditingController customControllerTitle = TextEditingController();
   TextEditingController customControllerNote = TextEditingController();
-
-  // final tasks = TaskDao.instance;
   final tags = TagDao.instance;
   final tasksTags = TasksTagsDao.instance;
   bool loadingTags = true;
   List<Map<String, dynamic>> tagsList = [];
   List<int> selectedTags = [];
   List<int> tagsFromDbTask = [];
+  bool _validTitle = true;
 
   @override
   void initState() {
@@ -75,12 +73,13 @@ class _EditTaskState extends State<EditTask> {
     }
   }
 
-  String checkForErrors() {
+  bool validateTextFields() {
     String errors = "";
     if (customControllerTitle.text.isEmpty) {
-      errors += "Task title is empty\n";
+      errors += "Title";
+      _validTitle = false;
     }
-    return errors;
+    return errors.isEmpty ? true : false;
   }
 
   void _loseFocus() {
@@ -106,8 +105,7 @@ class _EditTaskState extends State<EditTask> {
                 icon: const Icon(Icons.save_outlined),
                 tooltip: 'Save',
                 onPressed: () {
-                  String errors = checkForErrors();
-                  if (errors.isEmpty) {
+                  if (validateTextFields()) {
                     _updateTask()
                         .then((value) => {
                               widget.getAllTasksByState(),
@@ -115,27 +113,17 @@ class _EditTaskState extends State<EditTask> {
                             })
                         .then((value) => Navigator.of(context).pop());
                   } else {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return dialogAlertErrors(errors, context);
-                      },
-                    );
+                    setState(() {
+                      _validTitle;
+                    });
                   }
                 },
               ),
             ],
           ),
           body: ListView(children: [
-            ListTile(
-              title: Text("Title",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary)),
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.all(16),
               child: TextField(
                 minLines: 1,
                 maxLines: 5,
@@ -144,21 +132,14 @@ class _EditTaskState extends State<EditTask> {
                 textCapitalization: TextCapitalization.sentences,
                 controller: customControllerTitle,
                 decoration: InputDecoration(
-                  focusColor: Theme.of(context).colorScheme.secondary,
-                  helperText: "* Required",
-                  prefixIcon: const Icon(Icons.notes_outlined),
-                ),
+                    focusColor: Theme.of(context).colorScheme.secondary,
+                    helperText: "* Required",
+                    labelText: "Title",
+                    errorText: _validTitle ? null : "Title is empty"),
               ),
             ),
-            ListTile(
-              title: Text("Note",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary)),
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.all(16),
               child: TextField(
                 minLines: 1,
                 maxLines: 10,
@@ -167,20 +148,23 @@ class _EditTaskState extends State<EditTask> {
                 textCapitalization: TextCapitalization.sentences,
                 controller: customControllerNote,
                 decoration: InputDecoration(
+                  labelText: "Note",
                   focusColor: Theme.of(context).colorScheme.secondary,
-                  prefixIcon: const Icon(Icons.article_outlined),
                 ),
               ),
             ),
-            ListTile(
-              title: Text("Tags",
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary)),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 16, 5),
+              child: Text('Tags',
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.headline1!.color
+                ),
+              ),
             ),
-            ListTile(
-              title: tagsList.isEmpty
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Wrap(
                       spacing: 12.0,

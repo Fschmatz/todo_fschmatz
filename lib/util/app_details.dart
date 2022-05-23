@@ -1,11 +1,11 @@
 class AppDetails{
 
-  static String appVersion = "2.5.2";
+  static String appVersion = "2.5.3";
   static String appName = "Todo Fschmatz";
   static String repositoryLink = "https://github.com/Fschmatz/todo_fschmatz";
 
   static String changelogCurrent = '''
-2.5.2
+2.5.3
 - Internal DB Changes
 - Small UI Changes
 - Bug Fixes
