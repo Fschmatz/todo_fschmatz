@@ -135,7 +135,6 @@ class _TodosManagerState extends State<TodosManager> {
                                 DialogPrintTodo(
                                     todoName: _todoList[index]['name'],
                                     todoId: _todoList[index]['id_todo']),
-                            fullscreenDialog: true,
                           ));
                     }),
                 const SizedBox(

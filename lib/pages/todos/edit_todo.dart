@@ -71,8 +71,9 @@ class _EditTodoState extends State<EditTodo> {
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.secondary)),
           ),
-          ListTile(
-            title: TextField(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextField(
               autofocus: false,
               minLines: 1,
               maxLength: 30,
@@ -88,7 +89,7 @@ class _EditTodoState extends State<EditTodo> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

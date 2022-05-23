@@ -13,16 +13,15 @@ class NewTag extends StatefulWidget {
 }
 
 class _NewTagState extends State<NewTag> {
-
   TextEditingController customControllerName = TextEditingController();
   Color pickerColor = const Color(0xFFe35b5b);
   Color currentColor = const Color(0xFFe35b5b);
 
   Future<void> _saveTag() async {
     saveTag(Tag(
-        null,
-        customControllerName.text,
-        currentColor.toString(),
+      null,
+      customControllerName.text,
+      currentColor.toString(),
     ));
   }
 
@@ -108,8 +107,9 @@ class _NewTagState extends State<NewTag> {
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.secondary)),
           ),
-          ListTile(
-            title: TextField(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextField(
               autofocus: true,
               minLines: 1,
               maxLength: 30,
@@ -134,7 +134,6 @@ class _NewTagState extends State<NewTag> {
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            //leading: const Icon(Icons.colorize_outlined),
             title: OutlinedButton(
                 onPressed: () {
                   createAlertSelectColor(context);

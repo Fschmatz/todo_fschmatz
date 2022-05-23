@@ -113,8 +113,9 @@ class _NewTaskState extends State<NewTask> {
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).colorScheme.secondary)),
             ),
-            ListTile(
-              title: TextField(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
                 autofocus: true,
                 minLines: 1,
                 maxLines: 5,
@@ -136,8 +137,9 @@ class _NewTaskState extends State<NewTask> {
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).colorScheme.secondary)),
             ),
-            ListTile(
-              title: TextField(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextField(
                 minLines: 1,
                 maxLines: 10,
                 maxLength: 500,
@@ -202,10 +204,9 @@ class _NewTaskState extends State<NewTask> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          label: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 10, 5, 10),
-                            child: Text(tagsList[index]['name']),
-                          ),
+                          label: Text(tagsList[index]['name']),
+                          labelPadding:
+                              const EdgeInsets.fromLTRB(0, 10, 15, 10),
                           labelStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,

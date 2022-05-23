@@ -12,7 +12,6 @@ class NewTodo extends StatefulWidget {
 }
 
 class _NewTodoState extends State<NewTodo> {
-
   TextEditingController customControllerName = TextEditingController();
 
   Future<void> _save() async {
@@ -64,8 +63,9 @@ class _NewTodoState extends State<NewTodo> {
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.secondary)),
           ),
-          ListTile(
-            title: TextField(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextField(
               autofocus: true,
               minLines: 1,
               maxLength: 30,

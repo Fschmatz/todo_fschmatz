@@ -16,7 +16,6 @@ class EditTag extends StatefulWidget {
 }
 
 class _EditTagState extends State<EditTag> {
-
   TextEditingController customControllerName = TextEditingController();
   Color pickerColor = const Color(0xFFe35b5b);
   Color currentColor = const Color(0xFFe35b5b);
@@ -119,8 +118,9 @@ class _EditTagState extends State<EditTag> {
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.secondary)),
           ),
-          ListTile(
-            title: TextField(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TextField(
               minLines: 1,
               maxLength: 30,
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
@@ -144,7 +144,6 @@ class _EditTagState extends State<EditTag> {
                     color: Theme.of(context).colorScheme.secondary)),
           ),
           ListTile(
-            //leading: const Icon(Icons.colorize_outlined),
             title: OutlinedButton(
                 onPressed: () {
                   createAlertSelectColor(context);

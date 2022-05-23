@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData light = ThemeData(
-    useMaterial3: true,
+    //useMaterial3: true,
     brightness: Brightness.light,
     primaryColor: const Color(0xFFF0F2F2),
     canvasColor: const Color(0xFFF0F2F2),
@@ -50,8 +50,8 @@ ThemeData light = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFEFFFF),
         focusColor: Colors.green.shade600,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+        /*contentPadding:
+            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),*/
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.green.shade600,
@@ -88,7 +88,7 @@ ThemeData light = ThemeData(
         const BottomSheetThemeData(modalBackgroundColor: Color(0xFFF0F2F2)));
 
 ThemeData dark = ThemeData(
-    useMaterial3: true,
+    //useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: const Color(0xFF1C1C1D),
     scaffoldBackgroundColor: const Color(0xFF1C1C1D),
@@ -131,8 +131,8 @@ ThemeData dark = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
         focusColor: const Color(0xFF66BF72),
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
+      /*  contentPadding:
+            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),*/
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color(0xFF66BF72),
@@ -164,7 +164,7 @@ ThemeData dark = ThemeData(
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFF1C1C1D),
-        indicatorColor: const Color(0xFF456E51),
+        indicatorColor: const Color(0xFF42754A),
         iconTheme: MaterialStateProperty.all(const IconThemeData(
           color: Color(0xffe3e3e2),
         )),
