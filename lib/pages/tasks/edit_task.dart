@@ -123,47 +123,77 @@ class _EditTaskState extends State<EditTask> {
           ),
           body: ListView(children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: TextField(
                 minLines: 1,
                 maxLines: 5,
-                maxLength: 200,
-                maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                maxLength: 300,
                 textCapitalization: TextCapitalization.sentences,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 controller: customControllerTitle,
                 decoration: InputDecoration(
-                    focusColor: Theme.of(context).colorScheme.secondary,
-                    helperText: "* Required",
-                    labelText: "Title",
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    hintText: "Title",
+                    counterText: "",
                     errorText: _validTitle ? null : "Title is empty"),
               ),
             ),
+            const Divider(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: TextField(
                 minLines: 1,
                 maxLines: 10,
-                maxLength: 500,
+                maxLength: 600,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 textCapitalization: TextCapitalization.sentences,
                 controller: customControllerNote,
-                decoration: InputDecoration(
-                  labelText: "Note",
-                  focusColor: Theme.of(context).colorScheme.secondary,
+                decoration: const InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  counterText: "",
+                  hintText: "Note",
                 ),
               ),
             ),
-          /*  Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 16, 0),
-              child: Text('Tags:',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Theme.of(context).textTheme.headline6!.color!.withOpacity(0.6)
-                ),
-              ),
-            ),*/
+            const Divider(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
+              padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
+              child: Text(
+                'Tags',
+                style:
+                    TextStyle(fontSize: 16, color: Theme.of(context).hintColor),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Wrap(
@@ -207,8 +237,7 @@ class _EditTaskState extends State<EditTask> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           label: Text(tagsList[index]['name']),
-                          labelPadding:
-                              const EdgeInsets.fromLTRB(0, 10, 15, 10),
+                          labelPadding: const EdgeInsets.fromLTRB(0, 7, 15, 7),
                           labelStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -225,7 +254,7 @@ class _EditTaskState extends State<EditTask> {
                                   ? parseColorFromDb(tagsList[index]['color'])
                                       .withOpacity(0.4)
                                   : parseColorFromDb(tagsList[index]['color'])
-                                      .withOpacity(0.15),
+                                      .withOpacity(0.10),
                         );
                       }).toList(),
                     ),

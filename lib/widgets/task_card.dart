@@ -218,7 +218,7 @@ class _TaskCardState extends State<TaskCard> {
               tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Wrap(
-                    spacing: 16.0,
+                    spacing: 12.0,
                     children:
                         List<Widget>.generate(tagsList.length, (int index) {
                       return Chip(

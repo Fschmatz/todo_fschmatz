@@ -103,116 +103,146 @@ class _NewTaskState extends State<NewTask> {
           ),
           body: ListView(children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: TextField(
                 autofocus: true,
                 minLines: 1,
                 maxLines: 5,
-                maxLength: 200,
+                maxLength: 300,
                 textCapitalization: TextCapitalization.sentences,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 controller: customControllerTitle,
                 decoration: InputDecoration(
-                  labelText: "Title",
-                  focusColor: Theme.of(context).colorScheme.secondary,
-                  helperText: "* Required",
-                  errorText: _validTitle ?  null : "Title is empty"
+                    focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    hintText: "Title",
+                    counterText: "",
+                    errorText: _validTitle ? null : "Title is empty"),
+              ),
+            ),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: TextField(
+                minLines: 1,
+                maxLines: 10,
+                maxLength: 600,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                textCapitalization: TextCapitalization.sentences,
+                controller: customControllerNote,
+                decoration: const InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  counterText: "",
+                  hintText: "Note",
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
-              child: TextField(
-                  minLines: 1,
-                  maxLines: 10,
-                  maxLength: 500,
-                  maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                  textCapitalization: TextCapitalization.sentences,
-                  controller: customControllerNote,
-                  decoration: InputDecoration(
-                    labelText: "Note",
-                    focusColor: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-            ),
-          /* Padding(
-              padding: const EdgeInsets.fromLTRB(30, 0, 16, 0),
-              child: Text('Tags:',
+            const Divider(),
+             Padding(
+              padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
+              child: Text('Tags',
                 style: TextStyle(
                     fontSize: 16,
-                    color: Theme.of(context).textTheme.headline6!.color!.withOpacity(0.6)
+                    color: Theme.of(context).hintColor
                 ),
               ),
-            ),*/
+            ),
             tagsList.isEmpty
-                  ? const SizedBox.shrink()
-                  : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
+                ? const SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
                     child: Wrap(
-                        spacing: 12.0,
-                        runSpacing: 12.0,
-                        children:
-                            List<Widget>.generate(tagsList.length, (int index) {
-                          return ChoiceChip(
-                            key: UniqueKey(),
-                            selected: false,
-                            onSelected: (bool _selected) {
-                              if (selectedTags
-                                  .contains(tagsList[index]['id_tag'])) {
-                                selectedTags.remove(tagsList[index]['id_tag']);
-                              } else {
-                                selectedTags.add(tagsList[index]['id_tag']);
-                              }
-                              setState(() {});
-                            },
-                            avatar: selectedTags
-                                    .contains(tagsList[index]['id_tag'])
-                                ? Icon(
-                                    Icons.check_box_outlined,
-                                    color: _tagTextBrightness == Brightness.dark
-                                        ? lightenColor(
-                                            parseColorFromDb(
-                                                tagsList[index]['color']),
-                                            40)
-                                        : darkenColor(
-                                            parseColorFromDb(
-                                                tagsList[index]['color']),
-                                            50),
-                                  )
-                                : Icon(
-                                    Icons.check_box_outline_blank_outlined,
-                                    color:
-                                        parseColorFromDb(tagsList[index]['color'])
-                                            .withOpacity(0.2),
-                                  ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            label: Text(tagsList[index]['name']),
-                            labelPadding:
-                                const EdgeInsets.fromLTRB(0, 10, 15, 10),
-                            labelStyle: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: _tagTextBrightness == Brightness.dark
-                                  ? lightenColor(
-                                      parseColorFromDb(tagsList[index]['color']),
-                                      40)
-                                  : darkenColor(
-                                      parseColorFromDb(tagsList[index]['color']),
-                                      50),
-                            ),
-                            backgroundColor:
-                                selectedTags.contains(tagsList[index]['id_tag'])
-                                    ? parseColorFromDb(tagsList[index]['color'])
-                                        .withOpacity(0.4)
-                                    : parseColorFromDb(tagsList[index]['color'])
-                                        .withOpacity(0.15),
-                          );
-                        }).toList(),
-                      ),
+                      spacing: 12.0,
+                      runSpacing: 12.0,
+                      children:
+                          List<Widget>.generate(tagsList.length, (int index) {
+                        return ChoiceChip(
+                          key: UniqueKey(),
+                          selected: false,
+                          onSelected: (bool selected) {
+                            if (selectedTags
+                                .contains(tagsList[index]['id_tag'])) {
+                              selectedTags.remove(tagsList[index]['id_tag']);
+                            } else {
+                              selectedTags.add(tagsList[index]['id_tag']);
+                            }
+                            setState(() {});
+                          },
+                          avatar: selectedTags
+                                  .contains(tagsList[index]['id_tag'])
+                              ? Icon(
+                                  Icons.check_box_outlined,
+                                  color: _tagTextBrightness == Brightness.dark
+                                      ? lightenColor(
+                                          parseColorFromDb(
+                                              tagsList[index]['color']),
+                                          40)
+                                      : darkenColor(
+                                          parseColorFromDb(
+                                              tagsList[index]['color']),
+                                          50),
+                                )
+                              : Icon(
+                                  Icons.check_box_outline_blank_outlined,
+                                  color:
+                                      parseColorFromDb(tagsList[index]['color'])
+                                          .withOpacity(0.2),
+                                ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          label: Text(tagsList[index]['name']),
+                          labelPadding:
+                              const EdgeInsets.fromLTRB(0, 7, 15, 7),
+                          labelStyle: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: _tagTextBrightness == Brightness.dark
+                                ? lightenColor(
+                                    parseColorFromDb(tagsList[index]['color']),
+                                    40)
+                                : darkenColor(
+                                    parseColorFromDb(tagsList[index]['color']),
+                                    50),
+                          ),
+                          backgroundColor:
+                              selectedTags.contains(tagsList[index]['id_tag'])
+                                  ? parseColorFromDb(tagsList[index]['color'])
+                                      .withOpacity(0.4)
+                                  : parseColorFromDb(tagsList[index]['color'])
+                                      .withOpacity(0.10),
+                        );
+                      }).toList(),
+                    ),
                   ),
-
             const SizedBox(
               height: 50,
             )
