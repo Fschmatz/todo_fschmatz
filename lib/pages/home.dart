@@ -177,7 +177,7 @@ class _HomeState extends State<Home> {
             ),
           ];
         },
-        body: _currentIdTodo != 0
+        body: (_currentIdTodo != 0)
             ? _tabs[_currentTabIndex]
             : const SizedBox.shrink(),
       ),

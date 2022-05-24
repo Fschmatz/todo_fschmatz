@@ -50,24 +50,22 @@ ThemeData light = ThemeData(
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFEFFFF),
         focusColor: Colors.green.shade600,
-        /*contentPadding:
-            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),*/
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.green.shade600,
           ),
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: Colors.grey,
             ),
-            borderRadius: BorderRadius.circular(12.0)),
+            borderRadius: BorderRadius.circular(8.0)),
         border: OutlineInputBorder(
             borderSide: const BorderSide(
               color: Colors.grey,
             ),
-            borderRadius: BorderRadius.circular(12.0))),
+            borderRadius: BorderRadius.circular(8.0))),
     bottomAppBarColor: const Color(0xFFF0F2F2),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedIconTheme: IconThemeData(color: Colors.green),
@@ -139,12 +137,12 @@ ThemeData dark = ThemeData(
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.shade600,
+              color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(8.0)),
         border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Colors.grey.shade600,
+              color: Colors.grey.shade800,
             ),
             borderRadius: BorderRadius.circular(8.0))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
