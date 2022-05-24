@@ -58,12 +58,12 @@ ThemeData light = ThemeData(
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Colors.grey,
+              color: Color(0xFF73796F),
             ),
             borderRadius: BorderRadius.circular(8.0)),
         border: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Colors.grey,
+              color: Color(0xFF73796F),
             ),
             borderRadius: BorderRadius.circular(8.0))),
     bottomAppBarColor: const Color(0xFFF0F2F2),
@@ -136,13 +136,13 @@ ThemeData dark = ThemeData(
           borderRadius: BorderRadius.circular(8.0),
         ),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade800,
+            borderSide: const BorderSide(
+              color:  Color(0xFF8B9389),
             ),
             borderRadius: BorderRadius.circular(8.0)),
         border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.grey.shade800,
+            borderSide: const BorderSide(
+              color:  Color(0xFF8B9389),
             ),
             borderRadius: BorderRadius.circular(8.0))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

@@ -91,7 +91,7 @@ class _EditTaskState extends State<EditTask> {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness _tagTextBrightness = Theme.of(context).brightness;
+    final Brightness tagTextBrightness = Theme.of(context).brightness;
 
     return GestureDetector(
       onTap: () {
@@ -123,7 +123,7 @@ class _EditTaskState extends State<EditTask> {
           ),
           body: ListView(children: [
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
               child: TextField(
                 minLines: 1,
                 maxLines: 5,
@@ -139,7 +139,7 @@ class _EditTaskState extends State<EditTask> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
               child: TextField(
                 minLines: 1,
                 maxLines: 10,
@@ -153,17 +153,17 @@ class _EditTaskState extends State<EditTask> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 16, 5),
-              child: Text('Tags',
+          /*  Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 16, 0),
+              child: Text('Tags:',
                 style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).textTheme.headline1!.color
+                    fontSize: 16,
+                    color: Theme.of(context).textTheme.headline6!.color!.withOpacity(0.6)
                 ),
               ),
-            ),
+            ),*/
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
               child: tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Wrap(
@@ -174,7 +174,7 @@ class _EditTaskState extends State<EditTask> {
                         return ChoiceChip(
                           key: UniqueKey(),
                           selected: false,
-                          onSelected: (bool _selected) {
+                          onSelected: (bool selected) {
                             if (selectedTags
                                 .contains(tagsList[index]['id_tag'])) {
                               selectedTags.remove(tagsList[index]['id_tag']);
@@ -187,7 +187,7 @@ class _EditTaskState extends State<EditTask> {
                                   .contains(tagsList[index]['id_tag'])
                               ? Icon(
                                   Icons.check_box_outlined,
-                                  color: _tagTextBrightness == Brightness.dark
+                                  color: tagTextBrightness == Brightness.dark
                                       ? lightenColor(
                                           parseColorFromDb(
                                               tagsList[index]['color']),
@@ -212,7 +212,7 @@ class _EditTaskState extends State<EditTask> {
                           labelStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: _tagTextBrightness == Brightness.dark
+                            color: tagTextBrightness == Brightness.dark
                                 ? lightenColor(
                                     parseColorFromDb(tagsList[index]['color']),
                                     40)

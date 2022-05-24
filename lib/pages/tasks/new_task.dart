@@ -103,7 +103,7 @@ class _NewTaskState extends State<NewTask> {
           ),
           body: ListView(children: [
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
               child: TextField(
                 autofocus: true,
                 minLines: 1,
@@ -121,7 +121,7 @@ class _NewTaskState extends State<NewTask> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
               child: TextField(
                   minLines: 1,
                   maxLines: 10,
@@ -135,19 +135,19 @@ class _NewTaskState extends State<NewTask> {
                   ),
                 ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 16, 5),
-              child: Text('Tags',
+          /* Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 16, 0),
+              child: Text('Tags:',
                 style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).textTheme.headline1!.color
+                    fontSize: 16,
+                    color: Theme.of(context).textTheme.headline6!.color!.withOpacity(0.6)
                 ),
               ),
-            ),
+            ),*/
             tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Padding(
-                    padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 12),
                     child: Wrap(
                         spacing: 12.0,
                         runSpacing: 12.0,
