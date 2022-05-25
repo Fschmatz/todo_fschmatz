@@ -129,8 +129,10 @@ class _NewTaskState extends State<NewTask> {
                       ),
                     ),
                     hintText: "Title",
+                    hintStyle: const TextStyle(fontSize: 18),
                     counterText: "",
                     errorText: _validTitle ? null : "Title is empty"),
+                style: const TextStyle(fontSize: 18),
               ),
             ),
             const Divider(),
@@ -167,7 +169,7 @@ class _NewTaskState extends State<NewTask> {
             const Divider(),
              Padding(
               padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
-              child: Text('Tags',
+              child: Text('Select tags:',
                 style: TextStyle(
                     fontSize: 16,
                     color: Theme.of(context).hintColor
