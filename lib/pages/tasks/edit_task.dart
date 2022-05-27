@@ -186,18 +186,19 @@ class _EditTaskState extends State<EditTask> {
             const Divider(),
             Padding(
               padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
-              child: Text('Select tags:',
+              child: Text(
+                'Tags:',
                 style:
                     TextStyle(fontSize: 16, color: Theme.of(context).hintColor),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
               child: tagsList.isEmpty
                   ? const SizedBox.shrink()
                   : Wrap(
-                      spacing: 12.0,
-                      runSpacing: 12.0,
+                      spacing: 10.0,
+                      runSpacing: 5.0,
                       children:
                           List<Widget>.generate(tagsList.length, (int index) {
                         return ChoiceChip(
@@ -233,10 +234,10 @@ class _EditTaskState extends State<EditTask> {
                                           .withOpacity(0.2),
                                 ),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           label: Text(tagsList[index]['name']),
-                          labelPadding: const EdgeInsets.fromLTRB(0, 7, 15, 7),
+                          labelPadding: const EdgeInsets.fromLTRB(0, 5, 15, 5),
                           labelStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
