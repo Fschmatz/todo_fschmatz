@@ -37,7 +37,6 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
     _todoList.toString();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -71,12 +70,16 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
                   : null,
             ),
             key: UniqueKey(),
-            title: Text(_todoList[index]['name'],
-                 style: _todoList[index]['id_todo'] == widget.currentIdTodo
-                     ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.onSecondaryContainer)
-                     : const TextStyle(fontSize: 14),
+            title: Text(
+              _todoList[index]['name'],
+              style: _todoList[index]['id_todo'] == widget.currentIdTodo
+                  ? TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
+                      fontWeight: FontWeight.w500)
+                  : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
-            onTap: () async{
+            onTap: () async {
               await widget.changeCurrentTodo(_todoList[index]['id_todo']);
               Navigator.of(context).pop();
             },
