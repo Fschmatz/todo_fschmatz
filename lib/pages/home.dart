@@ -93,77 +93,75 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SizedBox(
+      drawer: Drawer(
         width: MediaQuery.of(context).size.width * 0.80,
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const ListTile(
-                title: Text(
-                  'Todo Fschmatz',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-                ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const ListTile(
+              title: Text(
+                'Todo Fschmatz',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
               ),
-              const Divider(),
-              DrawerTodoList(
-                changeCurrentTodo: changeCurrentTodo,
-                currentIdTodo: _currentIdTodo,
-              ),
-              const Divider(),
-              ListTile(
-                  leading: const Icon(
-                    Icons.checklist_outlined,
-                  ),
-                  title: const Text(
-                    'Manage Todos',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              TodosManager(currentIdTodo: _currentIdTodo),
-                        )).then((value) => appStartFunctions());
-                  }),
-              ListTile(
+            ),
+            const Divider(),
+            DrawerTodoList(
+              changeCurrentTodo: changeCurrentTodo,
+              currentIdTodo: _currentIdTodo,
+            ),
+            const Divider(),
+            ListTile(
                 leading: const Icon(
-                  Icons.label_outline_rounded,
+                  Icons.checklist_outlined,
                 ),
                 title: const Text(
-                  'Manage Tags',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  'Manage Todos',
+                  style: TextStyle(fontSize: 14),
                 ),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => TagsManager(),
+                        builder: (BuildContext context) =>
+                            TodosManager(currentIdTodo: _currentIdTodo),
                       )).then((value) => appStartFunctions());
-                },
+                }),
+            ListTile(
+              leading: const Icon(
+                Icons.label_outline_rounded,
               ),
-              ListTile(
-                leading: const Icon(
-                  Icons.settings_outlined,
-                ),
-                title: const Text(
-                  'Settings',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                ),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const SettingsPage(),
-                      ));
-                },
+              title: const Text(
+                'Manage Tags',
+                style: TextStyle(fontSize: 14),
               ),
-            ],
-          ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => TagsManager(),
+                    )).then((value) => appStartFunctions());
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.settings_outlined,
+              ),
+              title: const Text(
+                'Settings',
+                style: TextStyle(fontSize: 14),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const SettingsPage(),
+                    ));
+              },
+            ),
+          ],
         ),
       ),
       body: NestedScrollView(

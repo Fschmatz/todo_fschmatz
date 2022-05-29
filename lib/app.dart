@@ -29,10 +29,8 @@ class _AppState extends State<App> {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
-          statusBarIconBrightness: iconBrightness,
           systemNavigationBarColor: bottomOverlayColor,
           statusBarColor: topOverlayColor,
-          systemStatusBarContrastEnforced: false,
           systemNavigationBarIconBrightness: iconBrightness,
         ),
         child: const SafeArea(child: Home()));

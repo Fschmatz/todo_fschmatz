@@ -187,7 +187,7 @@ class _EditTaskState extends State<EditTask> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
               child: Text(
-                'Tags:',
+                'Add tags',
                 style:
                     TextStyle(fontSize: 16, color: Theme.of(context).hintColor),
               ),

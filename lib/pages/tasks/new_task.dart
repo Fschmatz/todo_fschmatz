@@ -74,7 +74,7 @@ class _NewTaskState extends State<NewTask> {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness _tagTextBrightness = Theme.of(context).brightness;
+    final Brightness tagTextBrightness = Theme.of(context).brightness;
 
     return GestureDetector(
       onTap: () {
@@ -168,7 +168,7 @@ class _NewTaskState extends State<NewTask> {
             Padding(
               padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
               child: Text(
-                'Tags',
+                'Add tags',
                 style:
                     TextStyle(fontSize: 16, color: Theme.of(context).hintColor),
               ),
@@ -199,7 +199,7 @@ class _NewTaskState extends State<NewTask> {
                                   .contains(tagsList[index]['id_tag'])
                               ? Icon(
                                   Icons.check_box_outlined,
-                                  color: _tagTextBrightness == Brightness.dark
+                                  color: tagTextBrightness == Brightness.dark
                                       ? lightenColor(
                                           parseColorFromDb(
                                               tagsList[index]['color']),
@@ -223,7 +223,7 @@ class _NewTaskState extends State<NewTask> {
                           labelStyle: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: _tagTextBrightness == Brightness.dark
+                            color: tagTextBrightness == Brightness.dark
                                 ? lightenColor(
                                     parseColorFromDb(tagsList[index]['color']),
                                     40)

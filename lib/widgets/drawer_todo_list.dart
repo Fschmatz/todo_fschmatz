@@ -73,8 +73,8 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
             key: UniqueKey(),
             title: Text(_todoList[index]['name'],
                  style: _todoList[index]['id_todo'] == widget.currentIdTodo
-                     ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.onSecondaryContainer,fontWeight: FontWeight.w500)
-                     : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                     ? TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.onSecondaryContainer)
+                     : const TextStyle(fontSize: 14),
             ),
             onTap: () async{
               await widget.changeCurrentTodo(_todoList[index]['id_todo']);
