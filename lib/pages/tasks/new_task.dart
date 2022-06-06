@@ -91,6 +91,16 @@ class _NewTaskState extends State<NewTask> {
         ),
         body: ListView(children: [
           Padding(
+            padding: const EdgeInsets.fromLTRB(18, 0, 16, 0),
+            child: Text(
+              'Title',
+              style:
+              TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).hintColor),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: TextField(
               autofocus: true,
@@ -116,12 +126,22 @@ class _NewTaskState extends State<NewTask> {
                       color: Colors.transparent,
                     ),
                   ),
-                  hintText: "Title",
+                  //hintText: "Title",
                   counterText: "",
                   errorText: _validTitle ? null : "Title is empty"),
             ),
           ),
           const Divider(height: 0,),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 10, 16, 0),
+            child: Text(
+              'Note',
+              style:
+              TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).hintColor),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: TextField(
@@ -148,17 +168,17 @@ class _NewTaskState extends State<NewTask> {
                   ),
                 ),
                 counterText: "",
-                hintText: "Note",
+               // hintText: "Note",
               ),
             ),
           ),
           const Divider(height: 0,),
           Padding(
-            padding: const EdgeInsets.fromLTRB(18, 16, 16, 12),
+            padding: const EdgeInsets.fromLTRB(18, 12, 16, 12),
             child: Text(
               'Add tags',
               style:
-                  TextStyle(fontSize: 16, color: Theme.of(context).hintColor),
+                  TextStyle(fontSize: 14, color: Theme.of(context).hintColor),
             ),
           ),
           tagsList.isEmpty

@@ -116,7 +116,7 @@ class _HomeState extends State<Home> {
                 ),
                 title: const Text(
                   'Manage todos',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -133,7 +133,7 @@ class _HomeState extends State<Home> {
               ),
               title: const Text(
                 'Manage tags',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
               onTap: () {
                 Navigator.pop(context);
@@ -150,7 +150,7 @@ class _HomeState extends State<Home> {
               ),
               title: const Text(
                 'Settings',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
               onTap: () {
                 Navigator.pop(context);

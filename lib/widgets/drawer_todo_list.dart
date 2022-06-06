@@ -76,8 +76,8 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
                   ? TextStyle(
                       fontSize: 14,
                       color: Theme.of(context).colorScheme.onSecondaryContainer,
-                      fontWeight: FontWeight.w500)
-                  : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.w400)
+                  : const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
             ),
             onTap: () async {
               await widget.changeCurrentTodo(_todoList[index]['id_todo']);

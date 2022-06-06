@@ -9,7 +9,6 @@ class AppDetails{
 - Internal DB changes
 - Small UI changes
 - Bug fixes
-- Edit task will save on pop scope
 - Flutter 3
 ''';
 
