@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
                   Icons.checklist_outlined,
                 ),
                 title: const Text(
-                  'Manage Todos',
+                  'Manage todos',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 onTap: () {
@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
                 Icons.label_outline_rounded,
               ),
               title: const Text(
-                'Manage Tags',
+                'Manage tags',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
               onTap: () {

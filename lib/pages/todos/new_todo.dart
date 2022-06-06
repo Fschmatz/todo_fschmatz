@@ -19,12 +19,11 @@ class _NewTodoState extends State<NewTodo> {
   }
 
   bool validateTextFields() {
-    String errors = "";
     if (customControllerName.text.isEmpty) {
-      errors += "Name";
       _validName = false;
+      return false;
     }
-    return errors.isEmpty ? true : false;
+    return true;
   }
 
   @override
@@ -53,7 +52,6 @@ class _NewTodoState extends State<NewTodo> {
       ),
       body: ListView(
         children: [
-
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(

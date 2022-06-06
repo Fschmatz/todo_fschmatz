@@ -1,79 +1,80 @@
 class AppDetails{
 
-  static String appVersion = "2.5.5";
+  static String appVersion = "2.5.6";
   static String appName = "Todo Fschmatz";
   static String repositoryLink = "https://github.com/Fschmatz/todo_fschmatz";
 
   static String changelogCurrent = '''
-2.5.5
-- Internal DB Changes
-- Small UI Changes
-- Bug Fixes
-- Flutter 3 Update
+2.5.6
+- Internal DB changes
+- Small UI changes
+- Bug fixes
+- Edit task will save on pop scope
+- Flutter 3
 ''';
 
   static String changelogsOld = '''
 2.4.1
-- Print Todo
-- UI Changes
-- Bug Fixes
+- Print todo
+- UI changes
+- Bug fixes
 
 2.3.7
-- Full Screen Todo and Tag Manager
-- Updated Drawer Style
-- Bug Fixes
+- Full screen todo and tag manager
+- Updated drawer style
+- Bug fixes
 
 2.2.6
 - Filters
-- Added System Theme
-- Changed Tag Text Color
-- Bug Fixes
+- Added system theme
+- Changed tag text color
+- Bug fixes
 
 2.1.1
-- Hamburger Menu
-- Bug Fixes
-- UI Changes
+- Hamburger menu
+- Bug fixes
+- UI changes
 
 2.0.1
-- Create Todos
-- Bug Fixes
-- UI Changes
-- DB Changes
-- More Tag Colors
+- Create todos
+- Bug fixes
+- UI changes
+- DB changes
+- More tag colors
 
 1.1.2
-- AppBar Popup Menu
-- Bug Fixes
-- Theme Changes
-- Filter Start
-- Task Count
+- AppBar popup menu
+- Bug fixes
+- Theme changes
+- Filter start
+- Task count
 - Hide FAB
 - Hide AppBar
 
 1.0.0
-- Edit Tasks with Tags OK
-- Logic Changes
+- Edit tasks with tags OK
+- Logic changes
 
 0.9.4
-- Bug Fixes
-- Theme Changes
+- Bug fixes
+- Theme changes
 - Delete from TaskTagDB
 - Material 3 NavBar
 
 0.8.2
-- Edit Tags
-- Bug Fixes
+- Edit tags
+- Bug fixes
 
 0.7.3
-- Save Tags
-- Tags Layout
-- Tags on New Task
-- Tags Dialog
-- Edit Task
-- Change Task State
+- Save tags
+- Tags layout
+- Tags on new task
+- Tags dialog
+- Edit task
+- Change task state
 
 0.6.0
-- Show Tags + Colors on Card
+- Show tags + colors on card
 - Fixes
 
 0.5.0
@@ -82,19 +83,19 @@ class AppDetails{
 - Color Picker
 
 0.4.0
-- Save Tasks
-- Delete Tasks
+- Save tasks
+- Delete tasks
 
 0.3.0
 - Pages  
-- New Task
+- New task
 - Database
 
 0.2.0
 - Logic  
 
 0.1.0
-- Project Start
+- Project start
 ''';
 
 }

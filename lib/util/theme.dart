@@ -19,38 +19,21 @@ ThemeData light = ThemeData(
         onSecondaryContainer: const Color(0xFF101F11),
         secondary: Colors.green.shade600),
     popupMenuTheme: const PopupMenuThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
       color: Color(0xFFF5F7F7),
     ),
     appBarTheme: const AppBarTheme(
         surfaceTintColor: Color(0xFFF0F2F2),
         color: Color(0xFFF0F2F2),
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF000000)),
-        titleTextStyle: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w400,
-            color: Color(0xFF000000))),
+    ),
     cardTheme: const CardTheme(
       surfaceTintColor: Color(0xFFFDFFFF),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
       color: Color(0xFFFDFFFF),
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFFFDFFFF),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(28)),
-      ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: Colors.green.shade500,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFFFEFFFF),
@@ -109,32 +92,18 @@ ThemeData dark = ThemeData(
         onSecondaryContainer: Color(0xFFD4E8D0),
         secondary: Color(0xFF66BF72)),
     popupMenuTheme: const PopupMenuThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
       color: Color(0xFF343435),
     ),
     appBarTheme: const AppBarTheme(
         surfaceTintColor: Color(0xFF1C1C1D),
         color: Color(0xFF1C1C1D),
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
-        titleTextStyle: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w400,
-            color: Color(0xFFFFFFFF))),
+    ),
     cardTheme: const CardTheme(
       surfaceTintColor: Color(0xFF2C2C2D),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
       color: Color(0xFF2C2C2D),
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: Color(0xFF2C2C2D),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(28)),
-      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
@@ -164,19 +133,15 @@ ThemeData dark = ThemeData(
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color(0xFF66BF72),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-      ),
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFF1C1C1D),
-        indicatorColor: const Color(0xFF42754A),
+        indicatorColor: const Color(0xFF3F7547),
         iconTheme: MaterialStateProperty.all(const IconThemeData(
           color: Color(0xffe3e3e2),
         )),
         labelTextStyle: MaterialStateProperty.all(const TextStyle(
             color: Color(0xffe3e3e2), fontWeight: FontWeight.w500))),
-    //dividerColor: const Color(0x2FFFFFFF),
     bottomAppBarColor: const Color(0xFF1C1C1D),
     bottomSheetTheme:
     const BottomSheetThemeData(modalBackgroundColor: Color(0xFF1C1C1D)));

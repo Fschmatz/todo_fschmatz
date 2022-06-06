@@ -37,12 +37,11 @@ class _EditTagState extends State<EditTag> {
   }
 
   bool validateTextFields() {
-    String errors = "";
     if (customControllerName.text.isEmpty) {
-      errors += "Name";
       _validName = false;
+      return false;
     }
-    return errors.isEmpty ? true : false;
+    return true;
   }
 
   //COLORS
@@ -60,7 +59,6 @@ class _EditTagState extends State<EditTag> {
         Navigator.of(context).pop();
       },
     );
-
     AlertDialog alert = AlertDialog(
       title: const Text(
         "Select Color:",

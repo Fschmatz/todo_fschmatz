@@ -74,28 +74,32 @@ class _EditTaskState extends State<EditTask> {
   }
 
   bool validateTextFields() {
-    String errors = "";
     if (customControllerTitle.text.isEmpty) {
-      errors += "Title";
       _validTitle = false;
+      return false;
     }
-    return errors.isEmpty ? true : false;
-  }
-
-  void _loseFocus() {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
     final Brightness tagTextBrightness = Theme.of(context).brightness;
 
-    return GestureDetector(
-      onTap: () {
-        _loseFocus();
+    return WillPopScope(
+      onWillPop: () async {
+        if (validateTextFields()) {
+          _updateTask()
+              .then((v) => {
+                    widget.getAllTasksByState(),
+                    widget.refreshTags(),
+                  })
+              .then((v) => Navigator.of(context).pop());
+        } else {
+          setState(() {
+            _validTitle;
+          });
+        }
+        return false;
       },
       child: Scaffold(
           appBar: AppBar(
@@ -107,11 +111,11 @@ class _EditTaskState extends State<EditTask> {
                 onPressed: () {
                   if (validateTextFields()) {
                     _updateTask()
-                        .then((value) => {
+                        .then((v) => {
                               widget.getAllTasksByState(),
                               widget.refreshTags(),
                             })
-                        .then((value) => Navigator.of(context).pop());
+                        .then((v) => Navigator.of(context).pop());
                   } else {
                     setState(() {
                       _validTitle;
@@ -126,8 +130,8 @@ class _EditTaskState extends State<EditTask> {
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: TextField(
                 minLines: 1,
-                maxLines: 5,
-                maxLength: 300,
+                maxLines: null,
+                maxLength: 250,
                 textCapitalization: TextCapitalization.sentences,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 controller: customControllerTitle,
@@ -152,40 +156,43 @@ class _EditTaskState extends State<EditTask> {
                     errorText: _validTitle ? null : "Title is empty"),
               ),
             ),
-            const Divider(),
+            const Divider(
+              height: 0,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: TextField(
                 minLines: 1,
-                maxLines: 10,
+                maxLines: null,
                 maxLength: 600,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 textCapitalization: TextCapitalization.sentences,
                 controller: customControllerNote,
                 decoration: const InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
                     ),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
                     ),
-                  ),
-                  counterText: "",
-                  hintText: "Note",
-                ),
+                    counterText: "",
+                    hintText: "Note"),
               ),
             ),
-            const Divider(),
+            const Divider(
+              height: 0,
+            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
+              padding: const EdgeInsets.fromLTRB(18, 16, 16, 12),
               child: Text(
                 'Add tags',
                 style:

@@ -57,194 +57,181 @@ class _NewTaskState extends State<NewTask> {
   }
 
   bool validateTextFields() {
-    String errors = "";
     if (customControllerTitle.text.isEmpty) {
-      errors += "Title";
       _validTitle = false;
+      return false;
     }
-    return errors.isEmpty ? true : false;
-  }
-
-  void _loseFocus() {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
     final Brightness tagTextBrightness = Theme.of(context).brightness;
 
-    return GestureDetector(
-      onTap: () {
-        _loseFocus();
-      },
-      child: Scaffold(
-          appBar: AppBar(
-            title: const Text("New Task"),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.save_outlined),
-                tooltip: 'Save',
-                onPressed: () {
-                  if (validateTextFields()) {
-                    _saveTask()
-                        .then((value) => widget.getAllTasksByState())
-                        .then((value) => Navigator.of(context).pop());
-                  } else {
-                    setState(() {
-                      _validTitle;
-                    });
-                  }
-                },
-              ),
-            ],
-          ),
-          body: ListView(children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: TextField(
-                autofocus: true,
-                minLines: 1,
-                maxLines: 5,
-                maxLength: 300,
-                textCapitalization: TextCapitalization.sentences,
-                maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                controller: customControllerTitle,
-                decoration: InputDecoration(
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    hintText: "Title",
-                    counterText: "",
-                    errorText: _validTitle ? null : "Title is empty"),
-              ),
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("New Task"),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.save_outlined),
+              tooltip: 'Save',
+              onPressed: () {
+                if (validateTextFields()) {
+                  _saveTask()
+                      .then((v) => widget.getAllTasksByState())
+                      .then((v) => Navigator.of(context).pop());
+                } else {
+                  setState(() {
+                    _validTitle;
+                  });
+                }
+              },
             ),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: TextField(
-                minLines: 1,
-                maxLines: 10,
-                maxLength: 600,
-                maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                textCapitalization: TextCapitalization.sentences,
-                controller: customControllerNote,
-                decoration: const InputDecoration(
-                  focusedBorder: OutlineInputBorder(
+          ],
+        ),
+        body: ListView(children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: TextField(
+              autofocus: true,
+              minLines: 1,
+              maxLines: null,
+              maxLength: 250,
+              textCapitalization: TextCapitalization.sentences,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              controller: customControllerTitle,
+              decoration: InputDecoration(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.transparent,
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.transparent,
                     ),
                   ),
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.transparent,
                     ),
                   ),
+                  hintText: "Title",
                   counterText: "",
-                  hintText: "Note",
-                ),
-              ),
+                  errorText: _validTitle ? null : "Title is empty"),
             ),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(18, 16, 16, 16),
-              child: Text(
-                'Add tags',
-                style:
-                    TextStyle(fontSize: 16, color: Theme.of(context).hintColor),
-              ),
-            ),
-            tagsList.isEmpty
-                ? const SizedBox.shrink()
-                : Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-                    child: Wrap(
-                      spacing: 10.0,
-                      runSpacing: 5.0,
-                      children:
-                          List<Widget>.generate(tagsList.length, (int index) {
-                        return ChoiceChip(
-                          key: UniqueKey(),
-                          selected: false,
-                          onSelected: (bool selected) {
-                            if (selectedTags
-                                .contains(tagsList[index]['id_tag'])) {
-                              selectedTags.remove(tagsList[index]['id_tag']);
-                            } else {
-                              selectedTags.add(tagsList[index]['id_tag']);
-                            }
-                            setState(() {});
-                          },
-                          avatar: selectedTags
-                                  .contains(tagsList[index]['id_tag'])
-                              ? Icon(
-                                  Icons.check_box_outlined,
-                                  color: tagTextBrightness == Brightness.dark
-                                      ? lightenColor(
-                                          parseColorFromDb(
-                                              tagsList[index]['color']),
-                                          40)
-                                      : darkenColor(
-                                          parseColorFromDb(
-                                              tagsList[index]['color']),
-                                          50),
-                                )
-                              : Icon(
-                                  Icons.check_box_outline_blank_outlined,
-                                  color:
-                                      parseColorFromDb(tagsList[index]['color'])
-                                          .withOpacity(0.2),
-                                ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          label: Text(tagsList[index]['name']),
-                          labelPadding: const EdgeInsets.fromLTRB(0, 5, 15, 5),
-                          labelStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: tagTextBrightness == Brightness.dark
-                                ? lightenColor(
-                                    parseColorFromDb(tagsList[index]['color']),
-                                    40)
-                                : darkenColor(
-                                    parseColorFromDb(tagsList[index]['color']),
-                                    50),
-                          ),
-                          backgroundColor:
-                              selectedTags.contains(tagsList[index]['id_tag'])
-                                  ? parseColorFromDb(tagsList[index]['color'])
-                                      .withOpacity(0.4)
-                                  : parseColorFromDb(tagsList[index]['color'])
-                                      .withOpacity(0.10),
-                        );
-                      }).toList(),
-                    ),
+          ),
+          const Divider(height: 0,),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: TextField(
+              minLines: 1,
+              maxLines: null,
+              maxLength: 600,
+              maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              textCapitalization: TextCapitalization.sentences,
+              controller: customControllerNote,
+              decoration: const InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
                   ),
-            const SizedBox(
-              height: 50,
-            )
-          ])),
-    );
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                counterText: "",
+                hintText: "Note",
+              ),
+            ),
+          ),
+          const Divider(height: 0,),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(18, 16, 16, 12),
+            child: Text(
+              'Add tags',
+              style:
+                  TextStyle(fontSize: 16, color: Theme.of(context).hintColor),
+            ),
+          ),
+          tagsList.isEmpty
+              ? const SizedBox.shrink()
+              : Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                  child: Wrap(
+                    spacing: 10.0,
+                    runSpacing: 5.0,
+                    children:
+                        List<Widget>.generate(tagsList.length, (int index) {
+                      return ChoiceChip(
+                        key: UniqueKey(),
+                        selected: false,
+                        onSelected: (bool selected) {
+                          if (selectedTags
+                              .contains(tagsList[index]['id_tag'])) {
+                            selectedTags.remove(tagsList[index]['id_tag']);
+                          } else {
+                            selectedTags.add(tagsList[index]['id_tag']);
+                          }
+                          setState(() {});
+                        },
+                        avatar: selectedTags
+                                .contains(tagsList[index]['id_tag'])
+                            ? Icon(
+                                Icons.check_box_outlined,
+                                color: tagTextBrightness == Brightness.dark
+                                    ? lightenColor(
+                                        parseColorFromDb(
+                                            tagsList[index]['color']),
+                                        40)
+                                    : darkenColor(
+                                        parseColorFromDb(
+                                            tagsList[index]['color']),
+                                        50),
+                              )
+                            : Icon(
+                                Icons.check_box_outline_blank_outlined,
+                                color:
+                                    parseColorFromDb(tagsList[index]['color'])
+                                        .withOpacity(0.2),
+                              ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        label: Text(tagsList[index]['name']),
+                        labelPadding: const EdgeInsets.fromLTRB(0, 5, 15, 5),
+                        labelStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: tagTextBrightness == Brightness.dark
+                              ? lightenColor(
+                                  parseColorFromDb(tagsList[index]['color']),
+                                  40)
+                              : darkenColor(
+                                  parseColorFromDb(tagsList[index]['color']),
+                                  50),
+                        ),
+                        backgroundColor:
+                            selectedTags.contains(tagsList[index]['id_tag'])
+                                ? parseColorFromDb(tagsList[index]['color'])
+                                    .withOpacity(0.4)
+                                : parseColorFromDb(tagsList[index]['color'])
+                                    .withOpacity(0.10),
+                      );
+                    }).toList(),
+                  ),
+                ),
+          const SizedBox(
+            height: 50,
+          )
+        ]));
   }
 }
