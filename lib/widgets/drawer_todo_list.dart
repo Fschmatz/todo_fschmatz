@@ -45,24 +45,14 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
       itemCount: _todoList.length,
       itemBuilder: (BuildContext context, int index) {
         return Card(
-          margin: const EdgeInsets.only(right: 12),
+          margin: const EdgeInsets.symmetric(horizontal: 12),
           elevation: 0,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(50.0),
-              bottomRight: Radius.circular(50.0),
-            ),
-          ),
+          shape: const StadiumBorder(),
           color: _todoList[index]['id_todo'] == widget.currentIdTodo
               ? Theme.of(context).colorScheme.secondaryContainer
               : Colors.transparent,
           child: ListTile(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(50.0),
-                bottomRight: Radius.circular(50.0),
-              ),
-            ),
+            shape: const StadiumBorder(),
             leading: Icon(
               Icons.done_all_outlined,
               color: _todoList[index]['id_todo'] == widget.currentIdTodo
@@ -76,8 +66,8 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
                   ? TextStyle(
                       fontSize: 14,
                       color: Theme.of(context).colorScheme.onSecondaryContainer,
-                      fontWeight: FontWeight.w400)
-                  : const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.w500)
+                  : const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
             onTap: () async {
               await widget.changeCurrentTodo(_todoList[index]['id_todo']);

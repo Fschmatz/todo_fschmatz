@@ -94,72 +94,86 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        width: MediaQuery.of(context).size.width * 0.80,
+        //width: MediaQuery.of(context).size.width * 0.85,
+        width: 360,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             const ListTile(
+              contentPadding: EdgeInsets.fromLTRB(28, 0, 28, 0),
               title: Text(
                 'Todo Fschmatz',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
             ),
-            const Divider(),
+            const Divider(indent: 28,endIndent: 28),
             DrawerTodoList(
               changeCurrentTodo: changeCurrentTodo,
               currentIdTodo: _currentIdTodo,
             ),
-            const Divider(),
-            ListTile(
+            const Divider(indent: 28,endIndent: 28),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListTile(
+                  shape: const StadiumBorder(),
+                  leading: const Icon(
+                    Icons.checklist_outlined,
+                  ),
+                  title: const Text(
+                    'Manage todos',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              TodosManager(currentIdTodo: _currentIdTodo),
+                        )).then((value) => appStartFunctions());
+                  }),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListTile(
+                shape: const StadiumBorder(),
                 leading: const Icon(
-                  Icons.checklist_outlined,
+                  Icons.label_outline_rounded,
                 ),
                 title: const Text(
-                  'Manage todos',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                  'Manage tags',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            TodosManager(currentIdTodo: _currentIdTodo),
+                        builder: (BuildContext context) => TagsManager(),
                       )).then((value) => appStartFunctions());
-                }),
-            ListTile(
-              leading: const Icon(
-                Icons.label_outline_rounded,
+                },
               ),
-              title: const Text(
-                'Manage tags',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => TagsManager(),
-                    )).then((value) => appStartFunctions());
-              },
             ),
-            ListTile(
-              leading: const Icon(
-                Icons.settings_outlined,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListTile(
+                shape: const StadiumBorder(),
+                leading: const Icon(
+                  Icons.settings_outlined,
+                ),
+                title: const Text(
+                  'Settings',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const SettingsPage(),
+                      ));
+                },
               ),
-              title: const Text(
-                'Settings',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const SettingsPage(),
-                    ));
-              },
             ),
           ],
         ),
