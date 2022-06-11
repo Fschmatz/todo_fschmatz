@@ -1,14 +1,15 @@
 class AppDetails{
 
-  static String appVersion = "2.5.6";
+  static String appVersion = "2.5.7";
   static String appName = "Todo Fschmatz";
   static String repositoryLink = "https://github.com/Fschmatz/todo_fschmatz";
 
   static String changelogCurrent = '''
-2.5.6
+2.5.7
 - Internal DB changes
 - Small UI changes
 - Bug fixes
+- Changed page animations
 - Flutter 3
 ''';
 

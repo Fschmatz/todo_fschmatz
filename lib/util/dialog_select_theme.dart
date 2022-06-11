@@ -23,7 +23,7 @@ class _DialogSelectThemeState extends State<DialogSelectTheme> {
     return AlertDialog(
       title: const Text('Select Theme'),
       content: SizedBox(
-          width: 350.0,
+          width: 280.0,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

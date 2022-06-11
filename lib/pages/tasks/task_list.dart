@@ -37,15 +37,10 @@ class _TaskListState extends State<TaskList>
     _hideFabAnimation =
         AnimationController(vsync: this, duration: kThemeAnimationDuration);
     _hideFabAnimation.forward();
-    getAllTasksByTodoStateFilter(false);
+    getAllTasksByTodoStateFilter();
   }
 
-  Future<void> getAllTasksByTodoStateFilter([bool refresh = true]) async {
-    if (refresh) {
-      setState(() {
-        loadingBody = true;
-      });
-    }
+  Future<void> getAllTasksByTodoStateFilter() async {
     final tasks = TaskDao.instance;
     var resp = await tasks.queryAllByTodoStateFilter(widget.state,
         widget.currentIdTodo, _filtersList[selectedFilter].dbName);
@@ -172,61 +167,59 @@ class _TaskListState extends State<TaskList>
     return Scaffold(
       body: NotificationListener<ScrollNotification>(
         onNotification: _handleScrollNotification,
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          child: (loadingBody)
-              ? const Center(child: SizedBox.shrink())
-              : tasksList.isEmpty
-                  ? const Center(
-                      child: Text(
-                      "Nothing in here...\nit's good?",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ))
-                  : ListView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      children: [
-                          ListTile(
-                            onTap: openFilterMenu,
-                            leading: const Icon(Icons.filter_list_outlined),
-                            title: Text(_filtersList[selectedFilter].name),
-                            trailing: Text(tasksList.length != 1
-                                ? tasksList.length.toString() + " Tasks"
-                                : tasksList.length.toString() + " Task"),
+        child: (loadingBody)
+            ? const Center(child: SizedBox.shrink())
+            : tasksList.isEmpty
+                ? const Center(
+                    child: Text(
+                    "Nothing in here...\nit's good?",
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ))
+                : ListView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                        ListTile(
+                          onTap: openFilterMenu,
+                          leading: const Icon(Icons.filter_list_outlined),
+                          title: Text(_filtersList[selectedFilter].name),
+                          trailing: Text(tasksList.length != 1
+                              ? tasksList.length.toString() + " Tasks"
+                              : tasksList.length.toString() + " Task"),
+                        ),
+                        ListView.separated(
+                          separatorBuilder:
+                              (BuildContext context, int index) =>
+                                  const SizedBox(
+                            height: 5,
                           ),
-                          ListView.separated(
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const SizedBox(
-                              height: 5,
-                            ),
-                            physics: const ScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: tasksList.length,
-                            itemBuilder: (context, index) {
-                              return TaskCard(
-                                key: UniqueKey(),
-                                task: Task(
-                                  tasksList[index]['id_task'],
-                                  tasksList[index]['title'],
-                                  tasksList[index]['note'],
-                                  tasksList[index]['state'],
-                                  tasksList[index]['id_todo'],
-                                ),
-                                refreshHome: getAllTasksByTodoStateFilter,
-                              );
-                            },
-                          ),
-                          const SizedBox(
-                            height: 100,
-                          ),
-                        ]),
-        ),
+                          physics: const ScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: tasksList.length,
+                          itemBuilder: (context, index) {
+                            return TaskCard(
+                              key: UniqueKey(),
+                              task: Task(
+                                tasksList[index]['id_task'],
+                                tasksList[index]['title'],
+                                tasksList[index]['note'],
+                                tasksList[index]['state'],
+                                tasksList[index]['id_todo'],
+                              ),
+                              refreshHome: getAllTasksByTodoStateFilter,
+                            );
+                          },
+                        ),
+                        const SizedBox(
+                          height: 100,
+                        ),
+                      ]),
       ),
       floatingActionButton: ScaleTransition(
         scale: _hideFabAnimation,
         child: FloatingActionButton(
+          heroTag: null,
           onPressed: () {
             Navigator.push(
                 context,

@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_fschmatz/db/todos/current_todo.dart';
 import 'package:todo_fschmatz/db/todos/todo_dao.dart';
@@ -106,12 +107,12 @@ class _HomeState extends State<Home> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
             ),
-            const Divider(indent: 28,endIndent: 28),
+            const Divider(indent: 28, endIndent: 28),
             DrawerTodoList(
               changeCurrentTodo: changeCurrentTodo,
               currentIdTodo: _currentIdTodo,
             ),
-            const Divider(indent: 28,endIndent: 28),
+            const Divider(indent: 28, endIndent: 28),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: ListTile(
@@ -189,9 +190,18 @@ class _HomeState extends State<Home> {
             ),
           ];
         },
-        body: (_currentIdTodo != 0)
-            ? _tabs[_currentTabIndex]
-            : const SizedBox.shrink(),
+        body: PageTransitionSwitcher(
+          transitionBuilder: (child, animation, secondaryAnimation) =>
+              FadeThroughTransition(
+            fillColor: Theme.of(context).scaffoldBackgroundColor,
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          ),
+          child: (_currentIdTodo != 0)
+              ? _tabs[_currentTabIndex]
+              : const SizedBox.shrink(),
+        ),
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentTabIndex,

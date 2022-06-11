@@ -50,9 +50,8 @@ class _TaskCardState extends State<TaskCard> {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25.0), topRight: Radius.circular(25.0)),
+              topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
         ),
-        isScrollControlled: true,
         context: context,
         builder: (BuildContext bc) {
           return SafeArea(
@@ -66,7 +65,6 @@ class _TaskCardState extends State<TaskCard> {
                       leading: const Icon(Icons.list_outlined),
                       title: const Text(
                         "Mark as todo",
-                        style: TextStyle(fontSize: 16),
                       ),
                       onTap: () {
                         _changeTaskState(0);
@@ -85,7 +83,6 @@ class _TaskCardState extends State<TaskCard> {
                       leading: const Icon(Icons.construction_outlined),
                       title: const Text(
                         "Mark as doing",
-                        style: TextStyle(fontSize: 16),
                       ),
                       onTap: () {
                         _changeTaskState(1);
@@ -104,7 +101,6 @@ class _TaskCardState extends State<TaskCard> {
                       leading: const Icon(Icons.checklist_outlined),
                       title: const Text(
                         "Mark as done",
-                        style: TextStyle(fontSize: 16),
                       ),
                       onTap: () {
                         _changeTaskState(2);
@@ -121,7 +117,6 @@ class _TaskCardState extends State<TaskCard> {
                     leading: const Icon(Icons.edit_outlined),
                     title: const Text(
                       "Edit",
-                      style: TextStyle(fontSize: 16),
                     ),
                     onTap: () {
                       Navigator.of(context).pop();
@@ -141,7 +136,6 @@ class _TaskCardState extends State<TaskCard> {
                     leading: const Icon(Icons.delete_outline_outlined),
                     title: const Text(
                       "Delete",
-                      style: TextStyle(fontSize: 16),
                     ),
                     onTap: () {
                       Navigator.of(context).pop();
@@ -185,7 +179,7 @@ class _TaskCardState extends State<TaskCard> {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness _tagTextBrightness = Theme.of(context).brightness;
+    final Brightness tagTextBrightness = Theme.of(context).brightness;
 
     return Card(
       margin: const EdgeInsets.fromLTRB(16, 5, 16, 5),
@@ -198,14 +192,14 @@ class _TaskCardState extends State<TaskCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 8, 0, 10),
+                padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                 child: Text(widget.task.title,
                     style: const TextStyle(fontSize: 16)),
               ),
               Visibility(
                 visible: widget.task.note.isNotEmpty,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
                   child: Text(
                     widget.task.note,
                     style: TextStyle(
@@ -215,7 +209,7 @@ class _TaskCardState extends State<TaskCard> {
                   ),
                 ),
               ),
-              tagsList.isEmpty
+              (tagsList.isEmpty)
                   ? const SizedBox.shrink()
                   : Wrap(
                     spacing: 12.0,
@@ -230,7 +224,7 @@ class _TaskCardState extends State<TaskCard> {
                         labelStyle: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
-                          color: _tagTextBrightness == Brightness.dark
+                          color: tagTextBrightness == Brightness.dark
                               ? lightenColor(
                                   parseColorFromDb(
                                       tagsList[index]['color']),
