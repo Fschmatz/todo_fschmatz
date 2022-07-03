@@ -25,43 +25,46 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
   }
 
   void getTasks() async {
-    List<Map<String, dynamic>> _listTasksTodo =
+    List<Map<String, dynamic>> listTasksTodo =
         await dbTask.queryAllByTodoAndStateDesc(0, widget.todoId);
-    List<Map<String, dynamic>> _listTasksDoing =
+    List<Map<String, dynamic>> listTasksDoing =
         await dbTask.queryAllByTodoAndStateDesc(1, widget.todoId);
-    List<Map<String, dynamic>> _listTasksDone =
+    List<Map<String, dynamic>> listTasksDone =
         await dbTask.queryAllByTodoAndStateDesc(2, widget.todoId);
 
     formattedList += widget.todoName + '\n';
 
-    formattedList += '\nTODO - '+_listTasksTodo.length.toString()+' tasks\n';
-    for (int i = 0; i < _listTasksTodo.length; i++) {
-      if(_listTasksTodo[i]['note'].toString().isNotEmpty) {
-        formattedList += "\n• " + _listTasksTodo[i]['title']+"\n";
-        formattedList += _listTasksTodo[i]['note'];
+    formattedList += '\nTODO - '+listTasksTodo.length.toString()+' tasks\n';
+    for (int i = 0; i < listTasksTodo.length; i++) {
+      if(listTasksTodo[i]['note'].toString().isNotEmpty) {
+        formattedList += "\n• " + listTasksTodo[i]['title']+"\n";
+        formattedList += listTasksTodo[i]['note'];
       } else {
-        formattedList += "\n• " + _listTasksTodo[i]['title'];
+        formattedList += "\n• " + listTasksTodo[i]['title'];
       }
+      formattedList += '\n--------------------------------\n';
     }
 
-    formattedList += '\n\nDOING - '+_listTasksDoing.length.toString()+' tasks\n';
-    for (int i = 0; i < _listTasksDoing.length; i++) {
-      if(_listTasksDoing[i]['note'].toString().isNotEmpty) {
-        formattedList += "\n• " + _listTasksDoing[i]['title']+"\n";
-        formattedList += _listTasksDoing[i]['note'];
+    formattedList += '\n\nDOING - '+listTasksDoing.length.toString()+' tasks\n';
+    for (int i = 0; i < listTasksDoing.length; i++) {
+      if(listTasksDoing[i]['note'].toString().isNotEmpty) {
+        formattedList += "\n• " + listTasksDoing[i]['title']+"\n";
+        formattedList += listTasksDoing[i]['note'];
       } else {
-        formattedList += "\n• " + _listTasksDoing[i]['title'];
+        formattedList += "\n• " + listTasksDoing[i]['title'];
       }
+      formattedList += '\n--------------------------------\n';
     }
 
-    formattedList += '\n\nDONE - '+_listTasksDone.length.toString()+' tasks\n';
-    for (int i = 0; i < _listTasksDone.length; i++) {
-      if(_listTasksDone[i]['note'].toString().isNotEmpty) {
-        formattedList += "\n• " + _listTasksDone[i]['title']+"\n";
-        formattedList += _listTasksDone[i]['note'];
+    formattedList += '\n\nDONE - '+listTasksDone.length.toString()+' tasks\n';
+    for (int i = 0; i < listTasksDone.length; i++) {
+      if(listTasksDone[i]['note'].toString().isNotEmpty) {
+        formattedList += "\n• " + listTasksDone[i]['title']+"\n";
+        formattedList += listTasksDone[i]['note'];
       } else {
-        formattedList += "\n• " + _listTasksDone[i]['title'];
+        formattedList += "\n• " + listTasksDone[i]['title'];
       }
+      formattedList += '\n--------------------------------\n';
     }
 
     setState(() {

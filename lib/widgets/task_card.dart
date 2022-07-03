@@ -59,6 +59,14 @@ class _TaskCardState extends State<TaskCard> {
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: Wrap(
                 children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      widget.task.title,
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const Divider(),
                   Visibility(
                     visible: widget.task.state != 0,
                     child: ListTile(
@@ -72,10 +80,6 @@ class _TaskCardState extends State<TaskCard> {
                         Navigator.of(context).pop();
                       },
                     ),
-                  ),
-                  Visibility(
-                    visible: widget.task.state != 0,
-                    child: const Divider(),
                   ),
                   Visibility(
                     visible: widget.task.state != 1,
@@ -92,10 +96,6 @@ class _TaskCardState extends State<TaskCard> {
                     ),
                   ),
                   Visibility(
-                    visible: widget.task.state != 1,
-                    child: const Divider(),
-                  ),
-                  Visibility(
                     visible: widget.task.state != 2,
                     child: ListTile(
                       leading: const Icon(Icons.checklist_outlined),
@@ -108,10 +108,6 @@ class _TaskCardState extends State<TaskCard> {
                         Navigator.of(context).pop();
                       },
                     ),
-                  ),
-                  Visibility(
-                    visible: widget.task.state != 2,
-                    child: const Divider(),
                   ),
                   ListTile(
                     leading: const Icon(Icons.edit_outlined),
@@ -131,7 +127,6 @@ class _TaskCardState extends State<TaskCard> {
                           ));
                     },
                   ),
-                  const Divider(),
                   ListTile(
                     leading: const Icon(Icons.delete_outline_outlined),
                     title: const Text(
@@ -192,14 +187,14 @@ class _TaskCardState extends State<TaskCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                padding: const EdgeInsets.fromLTRB(0, 8, 0, 5),
                 child: Text(widget.task.title,
                     style: const TextStyle(fontSize: 16)),
               ),
               Visibility(
                 visible: widget.task.note.isNotEmpty,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
                   child: Text(
                     widget.task.note,
                     style: TextStyle(
@@ -212,34 +207,32 @@ class _TaskCardState extends State<TaskCard> {
               (tagsList.isEmpty)
                   ? const SizedBox.shrink()
                   : Wrap(
-                    spacing: 12.0,
-                    children:
-                        List<Widget>.generate(tagsList.length, (int index) {
-                      return Chip(
-                        key: UniqueKey(),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        label: Text(tagsList[index]['name']),
-                        labelStyle: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: tagTextBrightness == Brightness.dark
-                              ? lightenColor(
-                                  parseColorFromDb(
-                                      tagsList[index]['color']),
-                                  40)
-                              : darkenColor(
-                                  parseColorFromDb(
-                                      tagsList[index]['color']),
-                                  50),
-                        ),
-                        backgroundColor:
-                            parseColorFromDb(tagsList[index]['color'])
-                                .withOpacity(0.35),
-                      );
-                    }).toList(),
-                  ),
+                      spacing: 8.0,
+                      children:
+                          List<Widget>.generate(tagsList.length, (int index) {
+                        return Chip(
+                          key: UniqueKey(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          label: Text(tagsList[index]['name']),
+                          labelStyle: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: tagTextBrightness == Brightness.dark
+                                ? lightenColor(
+                                    parseColorFromDb(tagsList[index]['color']),
+                                    40)
+                                : darkenColor(
+                                    parseColorFromDb(tagsList[index]['color']),
+                                    50),
+                          ),
+                          backgroundColor:
+                              parseColorFromDb(tagsList[index]['color'])
+                                  .withOpacity(0.35),
+                        );
+                      }).toList(),
+                    ),
               const SizedBox(height: 8)
             ],
           ),

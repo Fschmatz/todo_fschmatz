@@ -212,61 +212,46 @@ class _EditTaskState extends State<EditTask> {
                     runSpacing: 5.0,
                     children:
                         List<Widget>.generate(tagsList.length, (int index) {
-                      return ChoiceChip(
-                        key: UniqueKey(),
-                        selected: false,
-                        onSelected: (bool selected) {
-                          if (selectedTags
-                              .contains(tagsList[index]['id_tag'])) {
-                            selectedTags.remove(tagsList[index]['id_tag']);
-                          } else {
-                            selectedTags.add(tagsList[index]['id_tag']);
-                          }
-                          setState(() {});
-                        },
-                        avatar: selectedTags
-                                .contains(tagsList[index]['id_tag'])
-                            ? Icon(
-                                Icons.check_box_outlined,
-                                color: tagTextBrightness == Brightness.dark
-                                    ? lightenColor(
-                                        parseColorFromDb(
-                                            tagsList[index]['color']),
-                                        40)
-                                    : darkenColor(
-                                        parseColorFromDb(
-                                            tagsList[index]['color']),
-                                        50),
-                              )
-                            : Icon(
-                                Icons.check_box_outline_blank_outlined,
-                                color:
-                                    parseColorFromDb(tagsList[index]['color'])
-                                        .withOpacity(0.2),
-                              ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        label: Text(tagsList[index]['name']),
-                        labelPadding: const EdgeInsets.fromLTRB(0, 5, 15, 5),
-                        labelStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: tagTextBrightness == Brightness.dark
-                              ? lightenColor(
+                          return FilterChip(
+                            key: UniqueKey(),
+                            selected: false,
+                            onSelected: (bool selected) {
+                              if (selectedTags
+                                  .contains(tagsList[index]['id_tag'])) {
+                                selectedTags.remove(tagsList[index]['id_tag']);
+                              } else {
+                                selectedTags.add(tagsList[index]['id_tag']);
+                              }
+                              setState(() {});
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: BorderSide(
+                                    color: selectedTags
+                                        .contains(tagsList[index]['id_tag'])
+                                        ? Theme.of(context).scaffoldBackgroundColor
+                                        : parseColorFromDb(tagsList[index]['color'])
+                                        .withOpacity(0.1))),
+                            label: Text(tagsList[index]['name']),
+                            labelPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 5),
+                            labelStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: tagTextBrightness == Brightness.dark
+                                  ? lightenColor(
                                   parseColorFromDb(tagsList[index]['color']),
                                   40)
-                              : darkenColor(
+                                  : darkenColor(
                                   parseColorFromDb(tagsList[index]['color']),
                                   50),
-                        ),
-                        backgroundColor:
+                            ),
+                            backgroundColor:
                             selectedTags.contains(tagsList[index]['id_tag'])
                                 ? parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.4)
-                                : parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.10),
-                      );
+                                .withOpacity(0.4)
+                                : Theme.of(context).scaffoldBackgroundColor,
+                          );
                     }).toList(),
                   ),
           ),

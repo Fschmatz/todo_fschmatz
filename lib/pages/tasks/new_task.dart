@@ -95,9 +95,7 @@ class _NewTaskState extends State<NewTask> {
             child: Text(
               'Title',
               style:
-              TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).hintColor),
+                  TextStyle(fontSize: 14, color: Theme.of(context).hintColor),
             ),
           ),
           Padding(
@@ -131,15 +129,15 @@ class _NewTaskState extends State<NewTask> {
                   errorText: _validTitle ? null : "Title is empty"),
             ),
           ),
-          const Divider(height: 0,),
+          const Divider(
+            height: 0,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(18, 10, 16, 0),
             child: Text(
               'Note',
               style:
-              TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).hintColor),
+                  TextStyle(fontSize: 14, color: Theme.of(context).hintColor),
             ),
           ),
           Padding(
@@ -168,11 +166,13 @@ class _NewTaskState extends State<NewTask> {
                   ),
                 ),
                 counterText: "",
-               // hintText: "Note",
+                // hintText: "Note",
               ),
             ),
           ),
-          const Divider(height: 0,),
+          const Divider(
+            height: 0,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(18, 12, 16, 12),
             child: Text(
@@ -187,11 +187,11 @@ class _NewTaskState extends State<NewTask> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
                   child: Wrap(
-                    spacing: 10.0,
+                    spacing: 8.0,
                     runSpacing: 5.0,
                     children:
                         List<Widget>.generate(tagsList.length, (int index) {
-                      return ChoiceChip(
+                      return FilterChip(
                         key: UniqueKey(),
                         selected: false,
                         onSelected: (bool selected) {
@@ -203,31 +203,17 @@ class _NewTaskState extends State<NewTask> {
                           }
                           setState(() {});
                         },
-                        avatar: selectedTags
-                                .contains(tagsList[index]['id_tag'])
-                            ? Icon(
-                                Icons.check_box_outlined,
-                                color: tagTextBrightness == Brightness.dark
-                                    ? lightenColor(
-                                        parseColorFromDb(
-                                            tagsList[index]['color']),
-                                        40)
-                                    : darkenColor(
-                                        parseColorFromDb(
-                                            tagsList[index]['color']),
-                                        50),
-                              )
-                            : Icon(
-                                Icons.check_box_outline_blank_outlined,
-                                color:
-                                    parseColorFromDb(tagsList[index]['color'])
-                                        .withOpacity(0.2),
-                              ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                                color: selectedTags
+                                        .contains(tagsList[index]['id_tag'])
+                                    ? Theme.of(context).scaffoldBackgroundColor
+                                    : parseColorFromDb(tagsList[index]['color'])
+                                        .withOpacity(0.1))),
                         label: Text(tagsList[index]['name']),
-                        labelPadding: const EdgeInsets.fromLTRB(0, 5, 15, 5),
+                        labelPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 5),
                         labelStyle: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -243,8 +229,7 @@ class _NewTaskState extends State<NewTask> {
                             selectedTags.contains(tagsList[index]['id_tag'])
                                 ? parseColorFromDb(tagsList[index]['color'])
                                     .withOpacity(0.4)
-                                : parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.10),
+                                : Theme.of(context).scaffoldBackgroundColor,
                       );
                     }).toList(),
                   ),

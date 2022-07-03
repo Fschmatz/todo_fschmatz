@@ -80,7 +80,6 @@ class _NewTagState extends State<NewTag> {
               Icons.save_outlined,
             ),
             onPressed: () async {
-
               if (validateTextFields()) {
                 _saveTag();
                 Navigator.of(context).pop();
