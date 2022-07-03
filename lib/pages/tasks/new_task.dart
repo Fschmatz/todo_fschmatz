@@ -191,46 +191,52 @@ class _NewTaskState extends State<NewTask> {
                     runSpacing: 5.0,
                     children:
                         List<Widget>.generate(tagsList.length, (int index) {
-                      return FilterChip(
-                        key: UniqueKey(),
-                        selected: false,
-                        onSelected: (bool selected) {
-                          if (selectedTags
-                              .contains(tagsList[index]['id_tag'])) {
-                            selectedTags.remove(tagsList[index]['id_tag']);
-                          } else {
-                            selectedTags.add(tagsList[index]['id_tag']);
-                          }
-                          setState(() {});
-                        },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            side: BorderSide(
-                                color: selectedTags
+                          return FilterChip(
+                            key: UniqueKey(),
+                            selected: false,
+                            onSelected: (bool selected) {
+                              if (selectedTags
+                                  .contains(tagsList[index]['id_tag'])) {
+                                selectedTags.remove(tagsList[index]['id_tag']);
+                              } else {
+                                selectedTags.add(tagsList[index]['id_tag']);
+                              }
+                              setState(() {});
+                            },
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: BorderSide(
+                                    color: selectedTags
                                         .contains(tagsList[index]['id_tag'])
-                                    ? Theme.of(context).scaffoldBackgroundColor
-                                    : parseColorFromDb(tagsList[index]['color'])
+                                        ? Theme.of(context).scaffoldBackgroundColor
+                                        : parseColorFromDb(tagsList[index]['color'])
                                         .withOpacity(0.1))),
-                        label: Text(tagsList[index]['name']),
-                        labelPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 5),
-                        labelStyle: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: tagTextBrightness == Brightness.dark
-                              ? lightenColor(
-                                  parseColorFromDb(tagsList[index]['color']),
+                            label: Text(tagsList[index]['name']),
+                            labelPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 5),
+                            labelStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color:
+                              selectedTags.contains(tagsList[index]['id_tag'])
+                                  ? tagTextBrightness == Brightness.dark
+                                  ? lightenColor(
+                                  parseColorFromDb(
+                                      tagsList[index]['color']),
                                   40)
-                              : darkenColor(
-                                  parseColorFromDb(tagsList[index]['color']),
-                                  50),
-                        ),
-                        backgroundColor:
+                                  : darkenColor(
+                                  parseColorFromDb(
+                                      tagsList[index]['color']),
+                                  50)
+                                  : parseColorFromDb(tagsList[index]['color'])
+                                  .withOpacity(0.8),
+                            ),
+                            backgroundColor:
                             selectedTags.contains(tagsList[index]['id_tag'])
                                 ? parseColorFromDb(tagsList[index]['color'])
-                                    .withOpacity(0.4)
+                                .withOpacity(0.4)
                                 : Theme.of(context).scaffoldBackgroundColor,
-                      );
+                          );
                     }).toList(),
                   ),
                 ),

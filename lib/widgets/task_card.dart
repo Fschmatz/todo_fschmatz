@@ -187,14 +187,14 @@ class _TaskCardState extends State<TaskCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 8, 0, 5),
+                padding: const EdgeInsets.fromLTRB(0, 8, 0, 6),
                 child: Text(widget.task.title,
                     style: const TextStyle(fontSize: 16)),
               ),
               Visibility(
                 visible: widget.task.note.isNotEmpty,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                   child: Text(
                     widget.task.note,
                     style: TextStyle(
@@ -208,6 +208,7 @@ class _TaskCardState extends State<TaskCard> {
                   ? const SizedBox.shrink()
                   : Wrap(
                       spacing: 8.0,
+                      runSpacing: -5,
                       children:
                           List<Widget>.generate(tagsList.length, (int index) {
                         return Chip(
@@ -229,7 +230,7 @@ class _TaskCardState extends State<TaskCard> {
                           ),
                           backgroundColor:
                               parseColorFromDb(tagsList[index]['color'])
-                                  .withOpacity(0.35),
+                                  .withOpacity(0.4),
                         );
                       }).toList(),
                     ),
