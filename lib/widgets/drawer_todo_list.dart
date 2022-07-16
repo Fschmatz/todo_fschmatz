@@ -39,6 +39,7 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
 
   @override
   Widget build(BuildContext context) {
+
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -53,6 +54,7 @@ class _DrawerTodoListState extends State<DrawerTodoList> {
               : Colors.transparent,
           child: ListTile(
             shape: const StadiumBorder(),
+            minLeadingWidth: 12,
             leading: Icon(
               Icons.done_all_outlined,
               color: _todoList[index]['id_todo'] == widget.currentIdTodo

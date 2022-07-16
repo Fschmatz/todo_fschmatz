@@ -42,7 +42,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
       } else {
         formattedList += "\n• " + listTasksTodo[i]['title'];
       }
-      formattedList += '\n\n--------------------------------\n';
+      formattedList += '\n\n****************************\n';
     }
 
     formattedList += '\n\nDOING - '+listTasksDoing.length.toString()+' tasks\n';
@@ -53,7 +53,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
       } else {
         formattedList += "\n• " + listTasksDoing[i]['title'];
       }
-      formattedList += '\n\n--------------------------------\n';
+      formattedList += '\n\n****************************\n';
     }
 
     formattedList += '\n\nDONE - '+listTasksDone.length.toString()+' tasks\n';
@@ -64,7 +64,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
       } else {
         formattedList += "\n• " + listTasksDone[i]['title'];
       }
-      formattedList += '\n\n--------------------------------\n';
+      formattedList += '\n\n****************************\n';
     }
 
     setState(() {

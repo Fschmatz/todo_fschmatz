@@ -252,7 +252,7 @@ class _EditTaskState extends State<EditTask> {
                             selectedTags.contains(tagsList[index]['id_tag'])
                                 ? parseColorFromDb(tagsList[index]['color'])
                                     .withOpacity(0.4)
-                                : Theme.of(context).scaffoldBackgroundColor,
+                                : Theme.of(context).cardTheme.color!.withOpacity(0.5),
                       );
                     }).toList(),
                   ),

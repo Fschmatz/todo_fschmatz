@@ -93,10 +93,11 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       drawer: Drawer(
-        //width: MediaQuery.of(context).size.width * 0.85,
-        width: 360,
+        width: MediaQuery.of(context).size.width * 0.82,
+        //width: 360,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -116,6 +117,7 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: ListTile(
+                  minLeadingWidth: 12,
                   shape: const StadiumBorder(),
                   leading: const Icon(
                     Icons.checklist_outlined,
@@ -138,6 +140,7 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: ListTile(
                 shape: const StadiumBorder(),
+                minLeadingWidth: 12,
                 leading: const Icon(
                   Icons.label_outline_rounded,
                 ),
@@ -159,6 +162,7 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: ListTile(
                 shape: const StadiumBorder(),
+                minLeadingWidth: 12,
                 leading: const Icon(
                   Icons.settings_outlined,
                 ),
