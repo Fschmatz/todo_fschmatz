@@ -237,7 +237,6 @@ class _TaskListState extends State<TaskList>
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

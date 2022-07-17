@@ -97,7 +97,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       drawer: Drawer(
         width: MediaQuery.of(context).size.width * 0.82,
-        //width: 360,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [

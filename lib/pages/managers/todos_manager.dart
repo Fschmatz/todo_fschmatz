@@ -70,20 +70,6 @@ class _TodosManagerState extends State<TodosManager> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Manage Todos"),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.add_outlined,
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const NewTodo(),
-                  )).then((value) => getTodos());
-            },
-          ),
-        ],
       ),
       body: ListView.separated(
         separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -131,10 +117,9 @@ class _TodosManagerState extends State<TodosManager> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                DialogPrintTodo(
-                                    todoName: _todoList[index]['name'],
-                                    todoId: _todoList[index]['id_todo']),
+                            builder: (BuildContext context) => DialogPrintTodo(
+                                todoName: _todoList[index]['name'],
+                                todoId: _todoList[index]['id_todo']),
                           ));
                     }),
                 const SizedBox(
@@ -161,6 +146,20 @@ class _TodosManagerState extends State<TodosManager> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: null,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => const NewTodo(),
+              )).then((value) => getTodos());
+        },
+        child: Icon(
+          Icons.add_outlined,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
       ),
     );
   }

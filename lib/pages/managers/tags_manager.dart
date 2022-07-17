@@ -69,25 +69,9 @@ class _TagsManagerState extends State<TagsManager> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Manage Tags"),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.add_outlined,
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const NewTag(),
-                  )).then((value) => getTags());
-            },
-          ),
-        ],
       ),
       body: ListView.separated(
-        separatorBuilder:
-            (BuildContext context, int index) =>
-        const Divider(),
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
         shrinkWrap: true,
         itemCount: _tagsList.length,
         itemBuilder: (BuildContext context, int index) {
@@ -111,7 +95,7 @@ class _TagsManagerState extends State<TagsManager> {
                         })
                     : const SizedBox.shrink(),
                 const SizedBox(
-                  width: 12,
+                  width: 8,
                 ),
                 IconButton(
                     icon: const Icon(
@@ -135,6 +119,20 @@ class _TagsManagerState extends State<TagsManager> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: null,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => const NewTag(),
+              )).then((value) => getTags());
+        },
+        child: Icon(
+          Icons.add_outlined,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
       ),
     );
   }

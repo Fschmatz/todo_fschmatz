@@ -111,15 +111,7 @@ class _EditTaskState extends State<EditTask> {
         ),
         body: ListView(children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(18, 0, 16, 0),
-            child: Text(
-              'Title',
-              style:
-                  TextStyle(fontSize: 14, color: Theme.of(context).hintColor),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: TextField(
               minLines: 1,
               maxLines: null,
@@ -128,39 +120,13 @@ class _EditTaskState extends State<EditTask> {
               maxLengthEnforcement: MaxLengthEnforcement.enforced,
               controller: customControllerTitle,
               decoration: InputDecoration(
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  //hintText: "Title",
-                  counterText: "",
+                  labelText: "Title",
+                  //counterText: "",
                   errorText: _validTitle ? null : "Title is empty"),
             ),
           ),
-          const Divider(
-            height: 0,
-          ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(18, 10, 16, 0),
-            child: Text(
-              'Note',
-              style:
-                  TextStyle(fontSize: 14, color: Theme.of(context).hintColor),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: TextField(
               minLines: 1,
               maxLines: null,
@@ -169,30 +135,13 @@ class _EditTaskState extends State<EditTask> {
               textCapitalization: TextCapitalization.sentences,
               controller: customControllerNote,
               decoration: const InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                counterText: "",
+                labelText: "Note",
               ),
             ),
           ),
-          const Divider(
-            height: 0,
-          ),
+          const Divider(),
           Padding(
-            padding: const EdgeInsets.fromLTRB(18, 12, 16, 12),
+            padding: const EdgeInsets.fromLTRB(18, 10, 16, 12),
             child: Text(
               'Add tags',
               style:
@@ -204,7 +153,7 @@ class _EditTaskState extends State<EditTask> {
             child: tagsList.isEmpty
                 ? const SizedBox.shrink()
                 : Wrap(
-                    spacing: 10.0,
+                    spacing: 8.0,
                     runSpacing: 5.0,
                     children:
                         List<Widget>.generate(tagsList.length, (int index) {
@@ -223,11 +172,13 @@ class _EditTaskState extends State<EditTask> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                             side: BorderSide(
+                                width: 2,
                                 color: selectedTags
-                                        .contains(tagsList[index]['id_tag'])
-                                    ? Theme.of(context).scaffoldBackgroundColor
+                                    .contains(tagsList[index]['id_tag'])
+                                    ? parseColorFromDb(tagsList[index]['color'])
+                                    .withOpacity(0.1)
                                     : parseColorFromDb(tagsList[index]['color'])
-                                        .withOpacity(0.1))),
+                                    .withOpacity(0.1))),
                         label: Text(tagsList[index]['name']),
                         labelPadding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 5),
@@ -252,7 +203,10 @@ class _EditTaskState extends State<EditTask> {
                             selectedTags.contains(tagsList[index]['id_tag'])
                                 ? parseColorFromDb(tagsList[index]['color'])
                                     .withOpacity(0.4)
-                                : Theme.of(context).cardTheme.color!.withOpacity(0.5),
+                                : Theme.of(context)
+                                    .cardTheme
+                                    .color!
+                                    .withOpacity(0.4),
                       );
                     }).toList(),
                   ),
