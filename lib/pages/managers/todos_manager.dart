@@ -71,81 +71,87 @@ class _TodosManagerState extends State<TodosManager> {
       appBar: AppBar(
         title: const Text("Manage Todos"),
       ),
-      body: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-        shrinkWrap: true,
-        itemCount: _todoList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-            key: UniqueKey(),
-            title: Text(
-              _todoList[index]['name'],
-              style: TextStyle(
-                  color: _todoList[index]['id_todo'] == widget.currentIdTodo
-                      ? Theme.of(context).colorScheme.primary
-                      : null,
-                  fontWeight:
-                      _todoList[index]['id_todo'] == widget.currentIdTodo
-                          ? FontWeight.w600
-                          : null),
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _todoList.length > 1 &&
-                        _todoList[index]['id_todo'] != widget.currentIdTodo
-                    ? IconButton(
+      body:ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: [
+          ListView.separated(
+            separatorBuilder: (BuildContext context, int index) => const Divider(),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _todoList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                key: UniqueKey(),
+                title: Text(
+                  _todoList[index]['name'],
+                  style: TextStyle(
+                      color: _todoList[index]['id_todo'] == widget.currentIdTodo
+                          ? Theme.of(context).colorScheme.primary
+                          : null,
+                      fontWeight:
+                          _todoList[index]['id_todo'] == widget.currentIdTodo
+                              ? FontWeight.w600
+                              : null),
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _todoList.length > 1 &&
+                            _todoList[index]['id_todo'] != widget.currentIdTodo
+                        ? IconButton(
+                            icon: const Icon(
+                              Icons.delete_outlined,
+                            ),
+                            onPressed: () {
+                              showAlertDialogOkDelete(
+                                  context, _todoList[index]['id_todo']);
+                            })
+                        : const SizedBox.shrink(),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    IconButton(
                         icon: const Icon(
-                          Icons.delete_outlined,
-                          size: 20,
+                          Icons.print_outlined,
                         ),
                         onPressed: () {
-                          showAlertDialogOkDelete(
-                              context, _todoList[index]['id_todo']);
-                        })
-                    : const SizedBox.shrink(),
-                const SizedBox(
-                  width: 8,
-                ),
-                IconButton(
-                    icon: const Icon(
-                      Icons.print_outlined,
-                      size: 20,
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => DialogPrintTodo(
+                                    todoName: _todoList[index]['name'],
+                                    todoId: _todoList[index]['id_todo']),
+                              ));
+                        }),
+                    const SizedBox(
+                      width: 10,
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => DialogPrintTodo(
-                                todoName: _todoList[index]['name'],
-                                todoId: _todoList[index]['id_todo']),
-                          ));
-                    }),
-                const SizedBox(
-                  width: 8,
+                    IconButton(
+                        icon: const Icon(
+                          Icons.edit_outlined,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => EditTodo(
+                                  todo: Todo(
+                                    _todoList[index]['id_todo'],
+                                    _todoList[index]['name'],
+                                  ),
+                                ),
+                              )).then((value) => getTodos());
+                        }),
+                  ],
                 ),
-                IconButton(
-                    icon: const Icon(
-                      Icons.edit_outlined,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => EditTodo(
-                              todo: Todo(
-                                _todoList[index]['id_todo'],
-                                _todoList[index]['name'],
-                              ),
-                            ),
-                          )).then((value) => getTodos());
-                    }),
-              ],
-            ),
-          );
-        },
+              );
+            },
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: null,

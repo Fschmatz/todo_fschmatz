@@ -99,11 +99,11 @@ ThemeData dark = ThemeData(
         color: Color(0xFF1B1B1D),
     ),
     cardTheme: const CardTheme(
-      surfaceTintColor: Color(0xFF2B2B2D),
-      color: Color(0xFF2B2B2D),
+      surfaceTintColor: Color(0xFF29292B),
+      color: Color(0xFF29292B),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF2B2B2D),
+      backgroundColor: Color(0xFF29292B),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),

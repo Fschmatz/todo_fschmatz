@@ -70,55 +70,62 @@ class _TagsManagerState extends State<TagsManager> {
       appBar: AppBar(
         title: const Text("Manage Tags"),
       ),
-      body: ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-        shrinkWrap: true,
-        itemCount: _tagsList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-            leading: Icon(Icons.circle,
-                color: parseColorFromDb(_tagsList[index]['color'])),
-            title: Text(_tagsList[index]['name']),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _tagsList.length > 1
-                    ? IconButton(
+      body: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: [
+          ListView.separated(
+            separatorBuilder: (BuildContext context, int index) => const Divider(),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _tagsList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                leading: Icon(Icons.circle,
+                    color: parseColorFromDb(_tagsList[index]['color'])),
+                title: Text(_tagsList[index]['name']),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _tagsList.length > 1
+                        ? IconButton(
+                            icon: const Icon(
+                              Icons.delete_outlined,
+                            ),
+                            onPressed: () {
+                              showAlertDialogOkDelete(
+                                  context, _tagsList[index]['id_tag']);
+                            })
+                        : const SizedBox.shrink(),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    IconButton(
                         icon: const Icon(
-                          Icons.delete_outlined,
-                          size: 20,
+                          Icons.edit_outlined,
                         ),
                         onPressed: () {
-                          showAlertDialogOkDelete(
-                              context, _tagsList[index]['id_tag']);
-                        })
-                    : const SizedBox.shrink(),
-                const SizedBox(
-                  width: 8,
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => EditTag(
+                                  tag: Tag(
+                                    _tagsList[index]['id_tag'],
+                                    _tagsList[index]['name'],
+                                    _tagsList[index]['color'],
+                                  ),
+                                ),
+                              )).then((value) => getTags());
+                        }),
+                  ],
                 ),
-                IconButton(
-                    icon: const Icon(
-                      Icons.edit_outlined,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => EditTag(
-                              tag: Tag(
-                                _tagsList[index]['id_tag'],
-                                _tagsList[index]['name'],
-                                _tagsList[index]['color'],
-                              ),
-                            ),
-                          )).then((value) => getTags());
-                    }),
-              ],
-            ),
-          );
-        },
+              );
+            },
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: null,
