@@ -206,7 +206,7 @@ class _EditTaskState extends State<EditTask> {
                                 : Theme.of(context)
                                     .cardTheme
                                     .color!
-                                    .withOpacity(0.4),
+                                    .withOpacity(0.5),
                       );
                     }).toList(),
                   ),

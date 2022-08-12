@@ -99,11 +99,11 @@ ThemeData dark = ThemeData(
         color: Color(0xFF1B1B1D),
     ),
     cardTheme: const CardTheme(
-      surfaceTintColor: Color(0xFF29292B),
-      color: Color(0xFF29292B),
+      surfaceTintColor: Color(0xFF2A2A2C),
+      color: Color(0xFF2A2A2C),
     ),
     dialogTheme: const DialogTheme(
-      backgroundColor: Color(0xFF29292B),
+      backgroundColor: Color(0xFF2A2A2C),
     ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: const Color(0xFF353537),
@@ -136,7 +136,7 @@ ThemeData dark = ThemeData(
     ),
     navigationBarTheme: NavigationBarThemeData(
         backgroundColor: const Color(0xFF1B1B1D),
-        indicatorColor: const Color(0xFF3F7547),
+        indicatorColor: const Color(0xFF3F6C46),
         iconTheme: MaterialStateProperty.all(const IconThemeData(
           color: Color(0xffe3e3e2),
         )),

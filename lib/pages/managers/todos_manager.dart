@@ -102,6 +102,7 @@ class _TodosManagerState extends State<TodosManager> {
                         ? IconButton(
                             icon: const Icon(
                               Icons.delete_outlined,
+                              size: 20,
                             ),
                             onPressed: () {
                               showAlertDialogOkDelete(
@@ -114,6 +115,7 @@ class _TodosManagerState extends State<TodosManager> {
                     IconButton(
                         icon: const Icon(
                           Icons.print_outlined,
+                          size: 20,
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -130,6 +132,7 @@ class _TodosManagerState extends State<TodosManager> {
                     IconButton(
                         icon: const Icon(
                           Icons.edit_outlined,
+                          size: 20,
                         ),
                         onPressed: () {
                           Navigator.push(

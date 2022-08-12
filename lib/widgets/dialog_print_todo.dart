@@ -34,7 +34,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
 
     formattedList += widget.todoName + '\n';
 
-    formattedList += '\nTODO - '+listTasksTodo.length.toString()+' tasks\n';
+    formattedList += '\nTO DO - '+listTasksTodo.length.toString()+' tasks\n';
     for (int i = 0; i < listTasksTodo.length; i++) {
       if(listTasksTodo[i]['note'].toString().isNotEmpty) {
         formattedList += "\n• " + listTasksTodo[i]['title']+"\n";
@@ -45,7 +45,7 @@ class _DialogPrintTodoState extends State<DialogPrintTodo> {
       formattedList += '\n\n****************************\n';
     }
 
-    formattedList += '\n\nDOING - '+listTasksDoing.length.toString()+' tasks\n';
+    formattedList += '\n\nIN PROGRESS - '+listTasksDoing.length.toString()+' tasks\n';
     for (int i = 0; i < listTasksDoing.length; i++) {
       if(listTasksDoing[i]['note'].toString().isNotEmpty) {
         formattedList += "\n• " + listTasksDoing[i]['title']+"\n";

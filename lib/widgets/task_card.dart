@@ -72,7 +72,7 @@ class _TaskCardState extends State<TaskCard> {
                     child: ListTile(
                       leading: const Icon(Icons.list_outlined),
                       title: const Text(
-                        "Mark as todo",
+                        "Mark as to do",
                       ),
                       onTap: () {
                         _changeTaskState(0);
@@ -86,7 +86,7 @@ class _TaskCardState extends State<TaskCard> {
                     child: ListTile(
                       leading: const Icon(Icons.construction_outlined),
                       title: const Text(
-                        "Mark as doing",
+                        "Mark as in progress",
                       ),
                       onTap: () {
                         _changeTaskState(1);

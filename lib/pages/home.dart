@@ -219,14 +219,14 @@ class _HomeState extends State<Home> {
             selectedIcon: Icon(
               Icons.list,
             ),
-            label: 'Todo',
+            label: 'To do',
           ),
           NavigationDestination(
             icon: Icon(Icons.construction_outlined),
             selectedIcon: Icon(
               Icons.construction,
             ),
-            label: 'Doing',
+            label: 'In progress',
           ),
           NavigationDestination(
             icon: Icon(Icons.checklist_outlined),

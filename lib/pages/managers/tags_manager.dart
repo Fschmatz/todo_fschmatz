@@ -82,6 +82,7 @@ class _TagsManagerState extends State<TagsManager> {
               return ListTile(
                 contentPadding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
                 leading: Icon(Icons.circle,
+                    size: 30,
                     color: parseColorFromDb(_tagsList[index]['color'])),
                 title: Text(_tagsList[index]['name']),
                 trailing: Row(
@@ -91,6 +92,7 @@ class _TagsManagerState extends State<TagsManager> {
                         ? IconButton(
                             icon: const Icon(
                               Icons.delete_outlined,
+                              size: 20,
                             ),
                             onPressed: () {
                               showAlertDialogOkDelete(
@@ -103,6 +105,7 @@ class _TagsManagerState extends State<TagsManager> {
                     IconButton(
                         icon: const Icon(
                           Icons.edit_outlined,
+                          size: 20,
                         ),
                         onPressed: () {
                           Navigator.push(

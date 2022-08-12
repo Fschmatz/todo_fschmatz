@@ -188,7 +188,7 @@ class _NewTaskState extends State<NewTask> {
                                 : Theme.of(context)
                                     .cardTheme
                                     .color!
-                                    .withOpacity(0.4),
+                                    .withOpacity(0.5),
                       );
                     }).toList(),
                   ),
